@@ -1,0 +1,335 @@
+{
+  "_note": "Hand-curated links for the dashboard. `families` entries apply to every model of that family; `models` entries override and extend them. Keys: code, paper, weights, docs, extra [[label, url], ...]. The TACE, Nequix and MatRIS entries were read from the installed packages' dist-info METADATA; the rest are transcribed by hand.",
+  "families": {
+    "MACE": {
+      "code": "https://github.com/ACEsuit/mace",
+      "paper": "https://arxiv.org/abs/2206.07697",
+      "weights": "https://github.com/ACEsuit/mace-foundations",
+      "docs": "https://mace-docs.readthedocs.io",
+      "extra": [
+        [
+          "MACE-MP-0 foundation paper",
+          "https://arxiv.org/abs/2401.00096"
+        ]
+      ]
+    },
+    "CHGNet": {
+      "code": "https://github.com/CederGroupHub/chgnet",
+      "paper": "https://arxiv.org/abs/2302.14231",
+      "docs": "https://chgnet.lbl.gov"
+    },
+    "M3GNet": {
+      "code": "https://github.com/materialsvirtuallab/matgl",
+      "paper": "https://arxiv.org/abs/2202.02450",
+      "weights": "https://huggingface.co/materialyze",
+      "docs": "https://matgl.ai"
+    },
+    "SevenNet": {
+      "code": "https://github.com/MDIL-SNU/SevenNet",
+      "paper": "https://arxiv.org/abs/2402.03789",
+      "weights": "https://github.com/MDIL-SNU/SevenNet/releases"
+    },
+    "ORB": {
+      "code": "https://github.com/orbital-materials/orb-models",
+      "paper": "https://arxiv.org/abs/2504.06231",
+      "weights": "https://huggingface.co/orbital-materials",
+      "extra": [
+        [
+          "ORB-v2 paper",
+          "https://arxiv.org/abs/2410.22570"
+        ]
+      ]
+    },
+    "MatterSim": {
+      "code": "https://github.com/microsoft/mattersim",
+      "paper": "https://arxiv.org/abs/2405.04967",
+      "weights": "https://github.com/microsoft/mattersim/releases"
+    },
+    "GRACE": {
+      "code": "https://github.com/ICAMS/grace-tensorpotential",
+      "paper": "https://arxiv.org/abs/2311.16326",
+      "docs": "https://gracemaker.readthedocs.io"
+    },
+    "NequIP": {
+      "code": "https://github.com/mir-group/nequip",
+      "paper": "https://arxiv.org/abs/2101.03164",
+      "weights": "https://nequip.net",
+      "docs": "https://nequip.readthedocs.io"
+    },
+    "Allegro": {
+      "code": "https://github.com/mir-group/allegro",
+      "paper": "https://arxiv.org/abs/2204.05249",
+      "weights": "https://nequip.net"
+    },
+    "DPA": {
+      "code": "https://github.com/deepmodeling/deepmd-kit",
+      "paper": "https://arxiv.org/abs/2312.15492",
+      "weights": "https://huggingface.co/deepmodelingcommunity",
+      "docs": "https://docs.deepmodeling.com/projects/deepmd"
+    },
+    "DeePMD": {
+      "code": "https://github.com/deepmodeling/deepmd-kit",
+      "docs": "https://docs.deepmodeling.com/projects/deepmd"
+    },
+    "PET": {
+      "code": "https://github.com/metatensor/metatrain",
+      "paper": "https://arxiv.org/abs/2305.19302",
+      "docs": "https://docs.metatensor.org/metatrain"
+    },
+    "NEP": {
+      "code": "https://github.com/brucefan1983/GPUMD",
+      "paper": "https://arxiv.org/abs/2504.21286",
+      "extra": [
+        [
+          "calorine (ASE interface)",
+          "https://gitlab.com/materials-modeling/calorine"
+        ]
+      ]
+    },
+    "MatRIS": {
+      "code": "https://github.com/HPC-AI-Team/MatRIS"
+    },
+    "EquFlash": {
+      "code": "https://github.com/SamsungDS/GGNN"
+    },
+    "EquiformerV3": {
+      "code": "https://github.com/atomicarchitects/equiformer_v3",
+      "weights": "https://huggingface.co/mirror-physics/equiformer_v3"
+    },
+    "fairchem": {
+      "code": "https://github.com/facebookresearch/fairchem",
+      "docs": "https://fair-chem.github.io"
+    },
+    "TACE": {
+      "code": "https://github.com/xvzemin/tace"
+    },
+    "Nequix": {
+      "code": "https://github.com/atomicarchitects/nequix",
+      "paper": "https://arxiv.org/abs/2508.16067",
+      "weights": "https://pypi.org/project/nequix/"
+    }
+  },
+  "models": {
+    "mace-mp-0-small": {
+      "paper": "https://arxiv.org/abs/2401.00096",
+      "weights": "https://github.com/ACEsuit/mace-foundations"
+    },
+    "mace-mp-0-medium": {
+      "paper": "https://arxiv.org/abs/2401.00096",
+      "weights": "https://github.com/ACEsuit/mace-foundations"
+    },
+    "mace-mp-0-large": {
+      "paper": "https://arxiv.org/abs/2401.00096",
+      "weights": "https://github.com/ACEsuit/mace-foundations"
+    },
+    "mace-mpa-0-medium": {
+      "weights": "https://github.com/ACEsuit/mace-foundations",
+      "paper": "https://arxiv.org/abs/2401.00096"
+    },
+    "mace-omat-0-small": {
+      "weights": "https://github.com/ACEsuit/mace-foundations",
+      "extra": [
+        [
+          "OMat24 paper",
+          "https://arxiv.org/abs/2410.12771"
+        ]
+      ]
+    },
+    "mace-omat-0-medium": {
+      "weights": "https://github.com/ACEsuit/mace-foundations",
+      "extra": [
+        [
+          "OMat24 paper",
+          "https://arxiv.org/abs/2410.12771"
+        ]
+      ]
+    },
+    "m3gnet-matpes-pbe": {
+      "extra": [
+        [
+          "MatPES paper",
+          "https://arxiv.org/abs/2503.04070"
+        ]
+      ]
+    },
+    "sevennet-mf-ompa": {
+      "extra": [
+        [
+          "Multi-fidelity SevenNet paper",
+          "https://arxiv.org/abs/2503.02579"
+        ]
+      ]
+    },
+    "orb-v2": {
+      "paper": "https://arxiv.org/abs/2410.22570",
+      "code": "https://github.com/orbital-materials/orb-models"
+    },
+    "dpa-2.4-7m": {
+      "code": "https://github.com/deepmodeling/deepmd-kit",
+      "paper": "https://doi.org/10.1063/5.0155600",
+      "docs": "https://docs.deepmodeling.com/projects/deepmd/",
+      "weights": "https://huggingface.co/deepmodelingcommunity/DPA-2.4-7M"
+    },
+    "dpa-3.1-3m": {
+      "code": "https://github.com/deepmodeling/deepmd-kit",
+      "paper": "https://doi.org/10.1021/acs.jctc.5c00340",
+      "docs": "https://docs.deepmodeling.com/projects/deepmd/",
+      "weights": "https://huggingface.co/deepmodelingcommunity/DPA-3.1-3M"
+    },
+    "pet-mad-s": {
+      "code": "https://github.com/lab-cosmo/upet",
+      "paper": "https://arxiv.org/abs/2503.14118",
+      "extra": [
+        [
+          "metatrain",
+          "https://github.com/metatensor/metatrain"
+        ]
+      ]
+    },
+    "pet-oam-xl": {
+      "code": "https://github.com/lab-cosmo/upet",
+      "paper": "https://doi.org/10.1038/s41467-025-65662-7",
+      "extra": [
+        [
+          "metatrain",
+          "https://github.com/metatensor/metatrain"
+        ]
+      ]
+    },
+    "nep89": {
+      "paper": "https://www.nature.com/articles/s43588-026-01009-6"
+    },
+    "eqv2-31m-omat": {
+      "paper": "https://arxiv.org/abs/2306.12059",
+      "weights": "https://huggingface.co/facebook/OMAT24",
+      "extra": [
+        [
+          "OMat24 paper",
+          "https://arxiv.org/abs/2410.12771"
+        ]
+      ]
+    },
+    "eqv2-31m-omat-mp-salex": {
+      "paper": "https://arxiv.org/abs/2306.12059",
+      "weights": "https://huggingface.co/facebook/OMAT24",
+      "extra": [
+        [
+          "OMat24 paper",
+          "https://arxiv.org/abs/2410.12771"
+        ]
+      ]
+    },
+    "esen-30m-mptrj": {
+      "paper": "https://arxiv.org/abs/2502.12147",
+      "weights": "https://huggingface.co/facebook/OMAT24"
+    },
+    "esen-30m-oam": {
+      "paper": "https://arxiv.org/abs/2502.12147",
+      "weights": "https://huggingface.co/facebook/OMAT24"
+    },
+    "esen-30m-omat": {
+      "paper": "https://arxiv.org/abs/2502.12147",
+      "weights": "https://huggingface.co/facebook/OMAT24"
+    },
+    "esen-sm-conserving-omol": {
+      "paper": "https://arxiv.org/abs/2502.12147",
+      "weights": "https://huggingface.co/facebook/OMol25",
+      "extra": [
+        [
+          "OMol25 paper",
+          "https://arxiv.org/abs/2505.08762"
+        ]
+      ]
+    },
+    "esen-sm-direct-omol": {
+      "paper": "https://arxiv.org/abs/2502.12147",
+      "weights": "https://huggingface.co/facebook/OMol25",
+      "extra": [
+        [
+          "OMol25 paper",
+          "https://arxiv.org/abs/2505.08762"
+        ]
+      ]
+    },
+    "esen-md-direct-omol": {
+      "paper": "https://arxiv.org/abs/2502.12147",
+      "weights": "https://huggingface.co/facebook/OMol25",
+      "extra": [
+        [
+          "OMol25 paper",
+          "https://arxiv.org/abs/2505.08762"
+        ]
+      ]
+    },
+    "allscaip-md-conserving-omol": {
+      "paper": "https://arxiv.org/abs/2603.06567",
+      "weights": "https://huggingface.co/facebook/OMol25",
+      "extra": [
+        [
+          "OMol25 paper",
+          "https://arxiv.org/abs/2505.08762"
+        ]
+      ]
+    },
+    "allscaip-md-direct-omol": {
+      "paper": "https://arxiv.org/abs/2603.06567",
+      "weights": "https://huggingface.co/facebook/OMol25",
+      "extra": [
+        [
+          "OMol25 paper",
+          "https://arxiv.org/abs/2505.08762"
+        ]
+      ]
+    },
+    "uma-s1p1": {
+      "paper": "https://arxiv.org/abs/2506.23971",
+      "weights": "https://huggingface.co/facebook/UMA"
+    },
+    "uma-s1p2": {
+      "paper": "https://arxiv.org/abs/2506.23971",
+      "weights": "https://huggingface.co/facebook/UMA"
+    },
+    "uma-m1p1": {
+      "paper": "https://arxiv.org/abs/2506.23971",
+      "weights": "https://huggingface.co/facebook/UMA"
+    },
+    "equiformer-v3-dens-oam": {
+      "code": "https://arxiv.org/abs/2604.09130",
+      "weights": "https://huggingface.co/mirror-physics/equiformer_v3"
+    },
+    "equiformer-v3-direct-omat": {
+      "code": "https://arxiv.org/abs/2604.09130",
+      "weights": "https://huggingface.co/mirror-physics/equiformer_v3"
+    },
+    "nequip-oam-l": {
+      "paper": "https://arxiv.org/abs/2607.28461",
+      "code": "https://github.com/mir-group/nequip",
+      "weights": "https://nequip.net"
+    },
+    "nequip-oam-xl": {
+      "paper": "https://arxiv.org/abs/2607.28461",
+      "code": "https://github.com/mir-group/nequip",
+      "weights": "https://nequip.net"
+    },
+    "allegro-oam-l": {
+      "paper": "https://arxiv.org/abs/2607.28461",
+      "code": "https://github.com/mir-group/allegro",
+      "weights": "https://nequip.net"
+    },
+    "lennard-jones": {
+      "code": "https://gitlab.com/ase/ase",
+      "docs": "https://en.wikipedia.org/wiki/Lennard-Jones_potential"
+    },
+    "nequix-mp-1-pft": {
+      "paper": "https://arxiv.org/abs/2607.28461",
+      "code": "https://github.com/mir-group/nequip",
+      "weights": "https://nequip.net",
+      "extra": [
+        [
+          "Phonon fine-tuning (PFT) paper",
+          "https://arxiv.org/abs/2601.07742"
+        ]
+      ]
+    }
+  }
+}

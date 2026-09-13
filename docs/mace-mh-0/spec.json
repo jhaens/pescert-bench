@@ -1,0 +1,32 @@
+{
+  "slug": "mace-mh-0",
+  "label": "MACE-MH-0",
+  "family": "MACE",
+  "packages": [
+    "mace-torch==0.3.16",
+    "cuequivariance==0.10.0"
+  ],
+  "requirements": [
+    "torch==2.7.1",
+    "ase==3.28.0",
+    "mace-torch==0.3.16",
+    "cuequivariance==0.10.0"
+  ],
+  "calculator": "mace.calculators.mace_mp(model=\"mh-0\", default_dtype=\"float64\", device=\"cuda\", head=\"omat_pbe\")",
+  "imports": [
+    "mace.calculators"
+  ],
+  "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
+  "notes": "MACE multi-head foundation model, rev 0.  Evaluated on the omat_pbe head; the checkpoint also carries matpes_r2scan, mp_pbe_refit_add, spice_wB97M, oc20_usemppbe and omol heads.",
+  "precision": "float64",
+  "python": "3.11",
+  "find_links": [],
+  "n_parameters_hint": null,
+  "packages_no_deps": [],
+  "training_set": [],
+  "training_set_complete": false,
+  "n_training_structures": null,
+  "n_training_materials": null,
+  "datasets": [],
+  "torch_index": "https://download.pytorch.org/whl/cu126"
+}

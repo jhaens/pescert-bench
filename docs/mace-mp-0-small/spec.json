@@ -1,0 +1,43 @@
+{
+  "slug": "mace-mp-0-small",
+  "label": "MACE-MP-0 (small)",
+  "family": "MACE",
+  "packages": [
+    "mace-torch==0.3.16",
+    "cuequivariance==0.10.0"
+  ],
+  "requirements": [
+    "torch==2.7.1",
+    "ase==3.28.0",
+    "mace-torch==0.3.16",
+    "cuequivariance==0.10.0"
+  ],
+  "calculator": "mace.calculators.mace_mp(model=\"small\", default_dtype=\"float64\", device=\"cuda\")",
+  "imports": [
+    "mace.calculators"
+  ],
+  "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
+  "notes": "MACE-MP-0 small (L0, 128 channels).",
+  "precision": "float64",
+  "python": "3.11",
+  "find_links": [],
+  "n_parameters_hint": null,
+  "packages_no_deps": [],
+  "training_set": [
+    "MPtrj"
+  ],
+  "training_set_complete": true,
+  "n_training_structures": 1580395,
+  "n_training_materials": 145923,
+  "datasets": [
+    {
+      "key": "MPtrj",
+      "label": "MPtrj",
+      "n_structures": 1580395,
+      "n_materials": 145923,
+      "url": "https://figshare.com/articles/dataset/23713842",
+      "notes": "Materials Project relaxation trajectories, cleaned and subsampled to about every 10th ionic step; created for CHGNet."
+    }
+  ],
+  "torch_index": "https://download.pytorch.org/whl/cu126"
+}

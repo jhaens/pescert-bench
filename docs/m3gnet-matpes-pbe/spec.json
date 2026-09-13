@@ -1,0 +1,42 @@
+{
+  "slug": "m3gnet-matpes-pbe",
+  "label": "M3GNet (MatPES-PBE)",
+  "family": "M3GNet",
+  "packages": [
+    "matgl==4.0.3"
+  ],
+  "requirements": [
+    "torch==2.7.1",
+    "ase==3.28.0",
+    "matgl==4.0.3"
+  ],
+  "calculator": "matgl.ext.ase.PESCalculator(matgl.load_model(\"M3GNet-PES-MatPES-PBE-2025.2\").to(\"cuda\"), stress_unit=\"eV/A3\")",
+  "imports": [
+    "matgl",
+    "matgl.ext.ase"
+  ],
+  "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
+  "notes": "stress_unit='eV/A3' is required: matgl's PESCalculator reports stress in GPa by default, which is ASE's unit off by 160.2 and shows up as a stress defect of exactly that factor.  .to('cuda') is what puts the run on the GPU: matgl loads the Potential on CPU and Potential.forward migrates the graph to the module's own device, so without it the whole suite runs on CPU.  matgl 4.0.3 no longer ships the 2021 MP checkpoint that Matbench Discovery lists as M3GNet, so this is the current MatPES-PBE PES model and its parameter count will not match theirs.",
+  "precision": "float32",
+  "python": "3.11",
+  "find_links": [],
+  "n_parameters_hint": null,
+  "packages_no_deps": [],
+  "training_set": [
+    "MatPES"
+  ],
+  "training_set_complete": false,
+  "n_training_structures": null,
+  "n_training_materials": null,
+  "datasets": [
+    {
+      "key": "MatPES",
+      "label": "MatPES",
+      "n_structures": 504811,
+      "n_materials": 281572,
+      "url": "https://huggingface.co/datasets/mavrl/matpes",
+      "notes": "Materials Potential Energy Surface dataset (Materials Virtual Lab + Materials Project), single-point PBE and r2SCAN DFT on periodic solids, near-complete periodic-table coverage (all but noble gases and unstable radionuclides).(arXiv:2503.04070) "
+    }
+  ],
+  "torch_index": "https://download.pytorch.org/whl/cu126"
+}

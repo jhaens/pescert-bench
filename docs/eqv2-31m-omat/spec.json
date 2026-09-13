@@ -1,0 +1,47 @@
+{
+  "slug": "eqv2-31m-omat",
+  "label": "EquiformerV2-31M-OMat",
+  "family": "fairchem",
+  "packages": [
+    "fairchem-core[torch-extras]==1.10.0",
+    "scipy<1.17"
+  ],
+  "requirements": [
+    "ase==3.28.0",
+    "fairchem-core[torch-extras]==1.10.0",
+    "scipy<1.17"
+  ],
+  "calculator": "fairchem.core.OCPCalculator(checkpoint_path=\"eqV2_31M_omat.pt\", cpu=False)",
+  "imports": [
+    "fairchem.core"
+  ],
+  "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
+  "notes": "EquiformerV2 31M on OMat24, from the facebook/OMAT24 hub (no GGNN needed).",
+  "precision": "float32",
+  "python": "3.11",
+  "find_links": [
+    "https://data.pyg.org/whl/torch-2.4.1+cu121.html"
+  ],
+  "n_parameters_hint": null,
+  "packages_no_deps": [],
+  "training_set": [
+    "OMat24"
+  ],
+  "training_set_complete": true,
+  "training_set_note": "",
+  "training_heads": [],
+  "evaluated_head": "",
+  "n_training_structures": 100824585,
+  "n_training_materials": 3227606,
+  "datasets": [
+    {
+      "key": "OMat24",
+      "label": "OMat24",
+      "n_structures": 100824585,
+      "n_materials": 3227606,
+      "url": "https://huggingface.co/datasets/fairchem/OMAT24#omat24-dataset",
+      "notes": "Open Materials 2024 (Meta FAIR): >100M structures from perturbing Alexandria structures."
+    }
+  ],
+  "torch_index": "https://download.pytorch.org/whl/cu126"
+}

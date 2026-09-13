@@ -1,0 +1,109 @@
+{
+  "_note": "Documentation for each certification probe and each section.",
+  "sections": {
+    "Symmetry & invariance": "Identities that follow from the symmetry group of space and from the indistinguishability of identical particles. The exact potential energy surface satisfies them for any configuration.",
+    "Self-consistency": "Identities that relate a model's own output heads to each other: forces to the energy gradient, stress to the strain derivative, the Hessian to itself. A model whose heads are trained separately has no structural reason to satisfy them.",
+    "Statistical mechanics": "Equilibrium relations that hold for any conservative potential sampled at temperature T. They probe the dynamics a model generates rather than a single static configuration.",
+    "Regularity": "Smoothness of the fitted surface. Energy jumps, force kinks, spurious minima and tortuosity are properties of the fit rather than of the underlying physics."
+  },
+  "probes": {
+    "equivariance": {
+      "title": "Equivariance",
+      "target": "0",
+      "identity": "E(R x) = E(x) and F(R x) = R F(x) for every rotation R.",
+      "catches": "Rotational invariance of the energy and equivariance of the forces.",
+      "why": "The defect is the residual after rotating the substrate through a set of random rotations. Non-equivariant architectures, neighbour lists truncated to a fixed count, and orientation-dependent preprocessing can all contribute."
+    },
+    "parity": {
+      "title": "Parity",
+      "target": "0",
+      "identity": "The stress is even under improper operations: sigma(P x) = P sigma(x) P^T.",
+      "catches": "Reflection and inversion behaviour of the stress.",
+      "why": "Separates improper symmetry from pure rotation, so a model can pass the rotation test and still show a residual here."
+    },
+    "representation": {
+      "title": "Representation",
+      "target": "0",
+      "identity": "E is extensive, invariant under a change of unit cell describing the same crystal, and invariant under permutation of identical atoms.",
+      "catches": "Extensivity, lattice-gauge and egg-box dependence, permutation sensitivity.",
+      "why": "Supercelling, re-choosing lattice vectors for the same crystal, and relabelling identical atoms should leave the energy per atom unchanged. Grid-based or cutoff-sensitive representations tend to show an egg-box residual."
+    },
+    "trimer": {
+      "title": "Trimer",
+      "target": "0 (two channels)",
+      "identity": "Three-body symmetry of an equilateral trimer, and antisymmetry of the force Jacobian in the transverse channel.",
+      "catches": "Many-body symmetry, three-body coupling at range, transverse non-conservativeness.",
+      "why": "A radial conservativeness scan cannot see a purely transverse (curl) force. The transverse channel here is a matrix-free Jacobian-antisymmetry test covering that direction. The three-body channel needs isolated fragments, which some models decline to evaluate."
+    },
+    "zero_modes": {
+      "title": "Zero modes",
+      "target": "0; and 6 / 5 / 3 modes",
+      "identity": "The Hessian has the zero modes required by translation and rotation, and obeys the acoustic sum rule.",
+      "catches": "Rotational and translational zero-mode residuals, acoustic-sum-rule violation, imaginary modes.",
+      "why": "Rigid translation and rigid rotation cost no energy, so the corresponding Hessian eigenvalues should vanish. A residual shows up in Gamma-point phonons."
+    },
+    "conservativeness": {
+      "title": "Conservativeness",
+      "target": "0",
+      "identity": "F = -dE/ds along a bond coordinate.",
+      "catches": "Agreement between the reported force and the energy gradient.",
+      "why": "A fourth-order finite difference of the energy along a scan, compared against the model's own force. Scope note: a purely transverse force is invisible to a one-dimensional radial scan, which is what the trimer probe covers."
+    },
+    "betti": {
+      "title": "Maxwell-Betti",
+      "target": "0",
+      "identity": "The response of atom i to a displacement of atom j equals the response of j to i, that is, the Hessian is symmetric.",
+      "catches": "Hessian asymmetry.",
+      "why": "A force field derived from an energy has a symmetric Hessian by Clairaut's theorem, so a residual indicates the forces are not a single energy's gradient."
+    },
+    "cross_maxwell": {
+      "title": "Cross-Maxwell",
+      "target": "0",
+      "identity": "The mixed second derivative of E with respect to strain and position is the same whether it is reached through the force head or the stress head.",
+      "catches": "Agreement between the force and stress heads on the internal-strain block.",
+      "why": "The internal-strain coupling enters elastic constants and phonon-strain coupling. Two separately trained heads need not agree on it."
+    },
+    "reversibility": {
+      "title": "Reversibility",
+      "target": "0",
+      "identity": "A velocity-Verlet NVE trajectory run forward and then backward returns to its starting state.",
+      "catches": "Irreversibility from roughness or discontinuity.",
+      "why": "Velocity-Verlet is time-reversible for any smooth position-dependent force, so this measures roughness rather than smooth non-conservativeness. The energy-drift slope is reported separately."
+    },
+    "stress_consistency": {
+      "title": "Stress consistency",
+      "target": "0",
+      "identity": "sigma = (1/V) dE/d(strain).",
+      "catches": "Agreement between the stress head and the energy gradient.",
+      "why": "Also sensitive to unit conventions: a stress reported in GPa rather than eV/A^3 appears as a residual of the conversion factor."
+    },
+    "config_temperature": {
+      "title": "Configurational temperature",
+      "target": "1",
+      "identity": "The configurational temperature <|F|^2> / <div F> equals the kinetic temperature at equilibrium.",
+      "catches": "Conservativeness, measured from the dynamics rather than from a static configuration.",
+      "why": "The identity holds for any conservative potential in equilibrium. The estimator is a finite-sample average, so it does not reach machine precision even for an exact potential."
+    },
+    "equipartition": {
+      "title": "Equipartition",
+      "target": "1 per mode",
+      "identity": "Every quadratic mode carries kT/2 at equilibrium.",
+      "catches": "Agreement between Hessian curvature and the amplitude a mode explores in MD, resolved per mode.",
+      "why": "Because it is mode-resolved, the spread across modes carries as much information as the mean. Soft modes show up here first."
+    },
+    "virial": {
+      "title": "Virial",
+      "target": "1",
+      "identity": "The Clausius virial -<sum r . F> / 2 equals the internal kinetic energy at equilibrium.",
+      "catches": "Equilibrium consistency without using the Hessian.",
+      "why": "A Hessian-free check, so its sensitivity differs from equipartition's. Long-range and boundary handling enter here."
+    },
+    "smoothness": {
+      "title": "Smoothness",
+      "target": "score to 1",
+      "identity": "The exact surface is smooth, so an energy profile along a path has no jumps, force kinks or spurious extrema.",
+      "catches": "Energy jumps, force kinks, spurious minima, tortuosity.",
+      "why": "Scored from the roughness of the path rather than from a single algebraic identity, which is why its target is given as a score."
+    }
+  }
+}

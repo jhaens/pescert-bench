@@ -1,0 +1,42 @@
+{
+  "slug": "mattersim-v1-1m",
+  "label": "MatterSim-v1 (1M)",
+  "family": "MatterSim",
+  "packages": [
+    "mattersim==1.2.5",
+    "setuptools<81"
+  ],
+  "requirements": [
+    "ase==3.28.0",
+    "mattersim==1.2.5",
+    "setuptools<81"
+  ],
+  "calculator": "mattersim.forcefield.MatterSimCalculator(load_path=\"MatterSim-v1.0.0-1M.pth\", device=\"cuda\")",
+  "imports": [
+    "mattersim.forcefield"
+  ],
+  "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
+  "notes": "Microsoft MatterSim v1, 1M-parameter checkpoint.",
+  "precision": "float32",
+  "python": "3.12",
+  "find_links": [],
+  "n_parameters_hint": null,
+  "packages_no_deps": [],
+  "training_set": [
+    "MatterSim"
+  ],
+  "training_set_complete": true,
+  "n_training_structures": 17000000,
+  "n_training_materials": null,
+  "datasets": [
+    {
+      "key": "MatterSim",
+      "label": "MatterSim",
+      "n_structures": 17000000,
+      "n_materials": null,
+      "url": "https://github.com/microsoft/mattersim",
+      "notes": "Microsoft Research corpus spanning a wide temperature and pressure range. Unreleased: the count is from the paper, the data itself is not public."
+    }
+  ],
+  "torch_index": "https://download.pytorch.org/whl/cu126"
+}

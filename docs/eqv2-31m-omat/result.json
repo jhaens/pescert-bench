@@ -1,0 +1,291 @@
+{
+  "schema": "pescert-run/1",
+  "model": {
+    "slug": "eqv2-31m-omat",
+    "label": "EquiformerV2-31M-OMat",
+    "family": "fairchem",
+    "packages": [
+      "fairchem-core[torch-extras]==1.10.0",
+      "scipy<1.17"
+    ],
+    "calculator": "fairchem.core.OCPCalculator(checkpoint_path=\"eqV2_31M_omat.pt\", cpu=False)",
+    "notes": "EquiformerV2 31M on OMat24, from the facebook/OMAT24 hub (no GGNN needed).",
+    "imports": [
+      "fairchem.core"
+    ],
+    "python": "3.11",
+    "precision": "float32",
+    "training_set": [
+      "OMat24"
+    ],
+    "training_set_complete": true,
+    "training_set_note": "",
+    "training_heads": [],
+    "evaluated_head": "",
+    "n_training_structures": 100824585,
+    "n_training_materials": 3227606,
+    "datasets": [
+      {
+        "key": "OMat24",
+        "label": "OMat24",
+        "n_structures": 100824585,
+        "n_materials": 3227606,
+        "url": "https://huggingface.co/datasets/fairchem/OMAT24#omat24-dataset",
+        "notes": "Open Materials 2024 (Meta FAIR): >100M structures from perturbing Alexandria structures."
+      }
+    ],
+    "n_parameters": 31207437,
+    "n_parameters_trainable": 31207434,
+    "n_modules_found": 5,
+    "from_state_dict": true,
+    "n_parameters_source": "runtime"
+  },
+  "run": {
+    "started": "2026-09-11T03:13:03+00:00",
+    "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
+    "seed": 0,
+    "budget_per_eval": null,
+    "agg_method": "arithmetic",
+    "evals": "all",
+    "environment": {
+      "python": "3.11.16",
+      "torch": "2.4.1+cu121",
+      "torch_cuda": "12.1",
+      "cuda_available": true,
+      "ase": "3.28.0",
+      "pescert": "0.1.0",
+      "host": "9895e2fecb09",
+      "gpu": {
+        "name": "NVIDIA RTX A5000",
+        "capability": "8.6",
+        "total_memory_GB": 23.55
+      }
+    },
+    "calculator_class": "OCPCalculator",
+    "load_seconds": 5.5,
+    "suite_seconds": 2085.52,
+    "wall_seconds": 2091.05
+  },
+  "aggregate": {
+    "overall": 0.3978027832827618,
+    "overall_method": "arithmetic",
+    "sub_scores": {
+      "conservativeness": 0.02814139311071174,
+      "equivariance": 0.04992009641072418,
+      "smoothness": 0.8728768417438146,
+      "stress_consistency": 0.00016329556803911985,
+      "parity": 0.07256323188671944,
+      "representation": 0.976879279080084,
+      "cross_maxwell": 0.02126752560099889,
+      "betti": 0.1850367040129039,
+      "zero_modes": 0.038831593003470756,
+      "trimer": null,
+      "reversibility": 0.959426530533446,
+      "config_temperature": 0.9038634992993628,
+      "equipartition": 0.4539273498499554,
+      "virial": 0.6085388425756726
+    },
+    "gates": {
+      "conservativeness": false,
+      "equivariance": false,
+      "stress_consistency": false,
+      "parity": false,
+      "representation": true,
+      "cross_maxwell": false,
+      "betti": false,
+      "zero_modes": false,
+      "reversibility": true
+    },
+    "gates_passed": 2,
+    "gates_total": 9,
+    "n_total_calls": 41215
+  },
+  "metadata": {
+    "elements": [
+      "Li",
+      "Be",
+      "B",
+      "C",
+      "Na",
+      "Mg",
+      "Al",
+      "Si",
+      "P",
+      "S"
+    ],
+    "per_element_overall": {
+      "Li": 0.40136113458981004,
+      "Be": 0.44254570565519025,
+      "B": 0.3205546627011652,
+      "C": 0.28979123734130846,
+      "Na": 0.4778470876951943,
+      "Mg": 0.4650861749731267,
+      "Al": 0.432368155111671,
+      "Si": 0.4405659885074834,
+      "P": 0.3884666919297526,
+      "S": 0.31944099432291584
+    },
+    "mean_of_element_overalls": 0.39780278328276175,
+    "evals": [
+      "conservativeness",
+      "equivariance",
+      "smoothness",
+      "stress_consistency",
+      "parity",
+      "representation",
+      "cross_maxwell",
+      "betti",
+      "zero_modes",
+      "trimer",
+      "reversibility",
+      "config_temperature",
+      "equipartition",
+      "virial"
+    ],
+    "n_total_calls": 41215
+  },
+  "results": [
+    {
+      "name": "conservativeness",
+      "section": "Self-consistency",
+      "target": 0.0,
+      "raw_defect": 0.5975451542804746,
+      "score": 0.02814139311071174,
+      "n_model_calls": 90,
+      "gate": false,
+      "crashed": {}
+    },
+    {
+      "name": "equivariance",
+      "section": "Symmetry & invariance",
+      "target": 0.0,
+      "raw_defect": 3.9652063146633347,
+      "score": 0.04992009641072418,
+      "n_model_calls": 90,
+      "gate": false,
+      "crashed": {}
+    },
+    {
+      "name": "smoothness",
+      "section": "Regularity",
+      "target": 0.0,
+      "raw_defect": 0.20070058322817275,
+      "score": 0.8728768417438146,
+      "n_model_calls": 810,
+      "gate": null,
+      "crashed": {}
+    },
+    {
+      "name": "stress_consistency",
+      "section": "Self-consistency",
+      "target": 0.0,
+      "raw_defect": 0.8507241616841789,
+      "score": 0.00016329556803911985,
+      "n_model_calls": 130,
+      "gate": false,
+      "crashed": {}
+    },
+    {
+      "name": "parity",
+      "section": "Symmetry & invariance",
+      "target": 0.0,
+      "raw_defect": 0.011449816481607079,
+      "score": 0.07256323188671944,
+      "n_model_calls": 20,
+      "gate": false,
+      "crashed": {}
+    },
+    {
+      "name": "representation",
+      "section": "Symmetry & invariance",
+      "target": 0.0,
+      "raw_defect": 0.02374758391955511,
+      "score": 0.976879279080084,
+      "n_model_calls": 200,
+      "gate": true,
+      "crashed": {}
+    },
+    {
+      "name": "cross_maxwell",
+      "section": "Self-consistency",
+      "target": 0.0,
+      "raw_defect": 0.44024781076906716,
+      "score": 0.02126752560099889,
+      "n_model_calls": 7354,
+      "gate": false,
+      "crashed": {}
+    },
+    {
+      "name": "betti",
+      "section": "Self-consistency",
+      "target": 0.0,
+      "raw_defect": 0.05850665364989802,
+      "score": 0.1850367040129039,
+      "n_model_calls": 480,
+      "gate": false,
+      "crashed": {}
+    },
+    {
+      "name": "zero_modes",
+      "section": "Symmetry & invariance",
+      "target": 0.0,
+      "raw_defect": 0.03461265576549102,
+      "score": 0.038831593003470756,
+      "n_model_calls": 2500,
+      "gate": false,
+      "crashed": {}
+    },
+    {
+      "name": "trimer",
+      "section": "Symmetry & invariance",
+      "target": 0.0,
+      "raw_defect": null,
+      "score": null,
+      "n_model_calls": 650,
+      "gate": null,
+      "crashed": {}
+    },
+    {
+      "name": "reversibility",
+      "section": "Self-consistency",
+      "target": 0.0,
+      "raw_defect": 4.691844206459207e-05,
+      "score": 0.959426530533446,
+      "n_model_calls": 2010,
+      "gate": true,
+      "crashed": {}
+    },
+    {
+      "name": "config_temperature",
+      "section": "Statistical mechanics",
+      "target": 1.0,
+      "raw_defect": 0.10265616355120458,
+      "score": 0.9038634992993628,
+      "n_model_calls": 26101,
+      "gate": null,
+      "crashed": {}
+    },
+    {
+      "name": "equipartition",
+      "section": "Statistical mechanics",
+      "target": 1.0,
+      "raw_defect": 2.725427627867467,
+      "score": 0.4539273498499554,
+      "n_model_calls": 780,
+      "gate": null,
+      "crashed": {}
+    },
+    {
+      "name": "virial",
+      "section": "Statistical mechanics",
+      "target": 1.0,
+      "raw_defect": 1.2288377163908653,
+      "score": 0.6085388425756726,
+      "n_model_calls": 0,
+      "gate": null,
+      "crashed": {}
+    }
+  ],
+  "crashes": {},
+  "status": "ok"
+}

@@ -1,0 +1,41 @@
+{
+  "slug": "allscaip-md-conserving-omol",
+  "label": "AllScaIP-md-conserving (OMol)",
+  "family": "fairchem",
+  "packages": [
+    "fairchem-core==2.21.0"
+  ],
+  "requirements": [
+    "torch==2.8.0",
+    "ase==3.28.0",
+    "fairchem-core==2.21.0"
+  ],
+  "calculator": "fairchem.core.FAIRChemCalculator(fairchem.core.pretrained_mlip.get_predict_unit(\"allscaip-md-conserving-all-omol\", device=\"cuda\"), task_name=\"omol\")",
+  "imports": [
+    "fairchem.core"
+  ],
+  "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
+  "notes": "AllScaIP conserving on OMol25; molecular model, as above.",
+  "precision": "float32",
+  "python": "3.11",
+  "find_links": [],
+  "n_parameters_hint": null,
+  "packages_no_deps": [],
+  "training_set": [
+    "OMol25"
+  ],
+  "training_set_complete": true,
+  "n_training_structures": 100000000,
+  "n_training_materials": 83000000,
+  "datasets": [
+    {
+      "key": "OMol25",
+      "label": "OMol25",
+      "n_structures": 100000000,
+      "n_materials": 83000000,
+      "url": "https://huggingface.co/facebook/OMol25",
+      "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms.  Counts are the paper's own rounding -- it states 'more than 100 million' calculations over '~83M unique molecular systems' (arXiv:2505.08762), so treat n_structures as a lower bound."
+    }
+  ],
+  "torch_index": "https://download.pytorch.org/whl/cu126"
+}

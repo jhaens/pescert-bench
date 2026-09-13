@@ -1,0 +1,302 @@
+{
+  "schema": "pescert-run/1",
+  "model": {
+    "slug": "nequip-oam-l",
+    "label": "NequIP-OAM-L",
+    "family": "NequIP",
+    "packages": [
+      "nequip==0.19.1"
+    ],
+    "calculator": "nequip.integrations.ase.NequIPCalculator.from_compiled_model(\"NequIP-OAM-L-0.1.nequip.pth\", device=\"cuda\")",
+    "notes": "Fetched from nequip.net rather than a local file.",
+    "precision": "float32",
+    "training_set": [
+      "OMat24",
+      "sAlex",
+      "MPtrj"
+    ],
+    "training_set_complete": true,
+    "n_training_structures": 112852745,
+    "n_training_materials": 6601135,
+    "datasets": [
+      {
+        "key": "OMat24",
+        "label": "OMat24",
+        "n_structures": 100824585,
+        "n_materials": 3227606,
+        "url": "https://huggingface.co/datasets/fairchem/OMAT24#omat24-dataset",
+        "notes": "Open Materials 2024 (Meta FAIR): >100M structures from perturbing Alexandria structures."
+      },
+      {
+        "key": "sAlex",
+        "label": "sAlex",
+        "n_structures": 10447765,
+        "n_materials": 3227606,
+        "url": "https://huggingface.co/datasets/fairchem/OMAT24#salex-dataset",
+        "notes": "Alexandria subsampled by FAIR, filtered to remove prototype overlap with the Matbench Discovery WBM test set."
+      },
+      {
+        "key": "MPtrj",
+        "label": "MPtrj",
+        "n_structures": 1580395,
+        "n_materials": 145923,
+        "url": "https://figshare.com/articles/dataset/23713842",
+        "notes": "Materials Project relaxation trajectories, cleaned and subsampled to about every 10th ionic step; created for CHGNet."
+      }
+    ],
+    "n_parameters": 9605688,
+    "n_parameters_trainable": null,
+    "n_modules_found": 3,
+    "n_parameters_note": "frozen TorchScript graph; weights inlined as constants",
+    "n_parameters_source": "hint"
+  },
+  "run": {
+    "started": "2026-09-09T21:08:59+00:00",
+    "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
+    "seed": 0,
+    "budget_per_eval": null,
+    "agg_method": "arithmetic",
+    "evals": "all",
+    "environment": {
+      "python": "3.11.16",
+      "torch": "2.7.1+cu126",
+      "torch_cuda": "12.6",
+      "cuda_available": true,
+      "ase": "3.28.0",
+      "pescert": "0.1.0",
+      "host": "6161cb355d6d",
+      "gpu": {
+        "name": "NVIDIA RTX A5000",
+        "capability": "8.6",
+        "total_memory_GB": 23.55
+      }
+    },
+    "calculator_class": "NequIPCalculator",
+    "load_seconds": 13.15,
+    "suite_seconds": 1988.34,
+    "wall_seconds": 2001.5
+  },
+  "aggregate": {
+    "overall": 0.9084573328018062,
+    "overall_method": "arithmetic",
+    "sub_scores": {
+      "conservativeness": 0.9982659992163683,
+      "equivariance": 0.9974252918856724,
+      "smoothness": 0.9914001595286717,
+      "stress_consistency": 0.8204337699424655,
+      "parity": 0.999857873026356,
+      "representation": 0.9981547110182263,
+      "cross_maxwell": 0.6473270359075792,
+      "betti": 0.9973747639957938,
+      "zero_modes": 0.7704235422196604,
+      "trimer": 0.7996105068710733,
+      "reversibility": 0.9995905765881726,
+      "config_temperature": 0.913280600550815,
+      "equipartition": 0.8507493846217699,
+      "virial": 0.9345084438526637
+    },
+    "gates": {
+      "conservativeness": true,
+      "equivariance": true,
+      "stress_consistency": true,
+      "parity": true,
+      "representation": true,
+      "cross_maxwell": true,
+      "betti": true,
+      "zero_modes": false,
+      "trimer": true,
+      "reversibility": true
+    },
+    "gates_passed": 9,
+    "gates_total": 10,
+    "n_total_calls": 34819
+  },
+  "metadata": {
+    "elements": [
+      "Li",
+      "Be",
+      "B",
+      "C",
+      "Na",
+      "Mg",
+      "Al",
+      "Si",
+      "P",
+      "S"
+    ],
+    "per_element_overall": {
+      "Li": 0.9273748517169321,
+      "Be": 0.8413108218496653,
+      "B": 0.9365386672492131,
+      "C": 0.8756379015739869,
+      "Na": 0.9737434988877688,
+      "Mg": 0.9121944553525108,
+      "Al": 0.9272190337536871,
+      "Si": 0.9589247550714018,
+      "P": 0.8769572023988886,
+      "S": 0.8546721401640079
+    },
+    "mean_of_element_overalls": 0.9084573328018062,
+    "evals": [
+      "conservativeness",
+      "equivariance",
+      "smoothness",
+      "stress_consistency",
+      "parity",
+      "representation",
+      "cross_maxwell",
+      "betti",
+      "zero_modes",
+      "trimer",
+      "reversibility",
+      "config_temperature",
+      "equipartition",
+      "virial"
+    ],
+    "n_total_calls": 34819
+  },
+  "results": [
+    {
+      "name": "conservativeness",
+      "section": "Self-consistency",
+      "target": 0.0,
+      "raw_defect": 8.688317697252343e-05,
+      "score": 0.9982659992163683,
+      "n_model_calls": 90,
+      "gate": true,
+      "crashed": {}
+    },
+    {
+      "name": "equivariance",
+      "section": "Symmetry & invariance",
+      "target": 0.0,
+      "raw_defect": 0.0025789618143750503,
+      "score": 0.9974252918856724,
+      "n_model_calls": 90,
+      "gate": true,
+      "crashed": {}
+    },
+    {
+      "name": "smoothness",
+      "section": "Regularity",
+      "target": 0.0,
+      "raw_defect": 0.008790596226612912,
+      "score": 0.9914001595286717,
+      "n_model_calls": 810,
+      "gate": null,
+      "crashed": {}
+    },
+    {
+      "name": "stress_consistency",
+      "section": "Self-consistency",
+      "target": 0.0,
+      "raw_defect": 0.011083999358666618,
+      "score": 0.8204337699424655,
+      "n_model_calls": 130,
+      "gate": true,
+      "crashed": {}
+    },
+    {
+      "name": "parity",
+      "section": "Symmetry & invariance",
+      "target": 0.0,
+      "raw_defect": 1.4214440266277878e-07,
+      "score": 0.999857873026356,
+      "n_model_calls": 20,
+      "gate": true,
+      "crashed": {}
+    },
+    {
+      "name": "representation",
+      "section": "Symmetry & invariance",
+      "target": 0.0,
+      "raw_defect": 0.0018480927396782871,
+      "score": 0.9981547110182263,
+      "n_model_calls": 200,
+      "gate": true,
+      "crashed": {}
+    },
+    {
+      "name": "cross_maxwell",
+      "section": "Self-consistency",
+      "target": 0.0,
+      "raw_defect": 0.02791877038933167,
+      "score": 0.6473270359075792,
+      "n_model_calls": 2440,
+      "gate": true,
+      "crashed": {}
+    },
+    {
+      "name": "betti",
+      "section": "Self-consistency",
+      "target": 0.0,
+      "raw_defect": 5.265954761590671e-05,
+      "score": 0.9973747639957938,
+      "n_model_calls": 480,
+      "gate": true,
+      "crashed": {}
+    },
+    {
+      "name": "zero_modes",
+      "section": "Symmetry & invariance",
+      "target": 0.0,
+      "raw_defect": 1.961117980524937e-05,
+      "score": 0.7704235422196604,
+      "n_model_calls": 1765,
+      "gate": false,
+      "crashed": {}
+    },
+    {
+      "name": "trimer",
+      "section": "Symmetry & invariance",
+      "target": 0.0,
+      "raw_defect": 0.9415094128156427,
+      "score": 0.7996105068710733,
+      "n_model_calls": 1140,
+      "gate": true,
+      "crashed": {}
+    },
+    {
+      "name": "reversibility",
+      "section": "Self-consistency",
+      "target": 0.0,
+      "raw_defect": 4.097454302291575e-07,
+      "score": 0.9995905765881726,
+      "n_model_calls": 2010,
+      "gate": true,
+      "crashed": {}
+    },
+    {
+      "name": "config_temperature",
+      "section": "Statistical mechanics",
+      "target": 1.0,
+      "raw_defect": 0.09148882723579946,
+      "score": 0.913280600550815,
+      "n_model_calls": 24864,
+      "gate": null,
+      "crashed": {}
+    },
+    {
+      "name": "equipartition",
+      "section": "Statistical mechanics",
+      "target": 1.0,
+      "raw_defect": 0.16379944315613756,
+      "score": 0.8507493846217699,
+      "n_model_calls": 780,
+      "gate": null,
+      "crashed": {}
+    },
+    {
+      "name": "virial",
+      "section": "Statistical mechanics",
+      "target": 1.0,
+      "raw_defect": 0.06939431380901337,
+      "score": 0.9345084438526637,
+      "n_model_calls": 0,
+      "gate": null,
+      "crashed": {}
+    }
+  ],
+  "crashes": {},
+  "status": "ok"
+}

@@ -1,0 +1,64 @@
+{
+  "slug": "matris-10m-oam",
+  "label": "MatRIS-10M-OAM",
+  "family": "MatRIS",
+  "packages": [
+    "matris@git+https://github.com/HPC-AI-Team/MatRIS",
+    "numpy>=2.0"
+  ],
+  "requirements": [
+    "torch==2.7.1",
+    "ase==3.28.0",
+    "matris@git+https://github.com/HPC-AI-Team/MatRIS",
+    "numpy>=2.0"
+  ],
+  "calculator": "matris.applications.base.MatRISCalculator(model=\"matris_10m_oam\", task=\"efsm\", device=\"cuda\")",
+  "imports": [
+    "matris.applications.base"
+  ],
+  "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
+  "notes": "MatRIS 10M pretrained on OMat24 and fine-tuned on sAlex+MPtrj.  The checkpoint is staged by hand: matris/model/model.py downloads from a figshare ndownloader URL that now answers 403/202 with an empty body, which is why the first run died in torch.load with EOFError.  figshare's API endpoint still serves it, and the file is kept alongside the other hand-downloaded checkpoints.  MatRIS.load looks only in ~/.cache/matris and HOME is /model-cache in the container, so after a /var/tmp wipe re-stage it: cp download_checkpoints/MatRIS_10M_OAM.pth.tar matris  (re-fetch with curl -L https://api.figshare.com/v2/file/download/59142728).",
+  "precision": "float32",
+  "python": "3.11",
+  "find_links": [],
+  "n_parameters_hint": null,
+  "packages_no_deps": [],
+  "training_set": [
+    "OMat24",
+    "sAlex",
+    "MPtrj"
+  ],
+  "training_set_complete": true,
+  "training_set_note": "",
+  "training_heads": [],
+  "evaluated_head": "",
+  "n_training_structures": 112852745,
+  "n_training_materials": 6601135,
+  "datasets": [
+    {
+      "key": "OMat24",
+      "label": "OMat24",
+      "n_structures": 100824585,
+      "n_materials": 3227606,
+      "url": "https://huggingface.co/datasets/fairchem/OMAT24#omat24-dataset",
+      "notes": "Open Materials 2024 (Meta FAIR): >100M structures from perturbing Alexandria structures."
+    },
+    {
+      "key": "sAlex",
+      "label": "sAlex",
+      "n_structures": 10447765,
+      "n_materials": 3227606,
+      "url": "https://huggingface.co/datasets/fairchem/OMAT24#salex-dataset",
+      "notes": "Alexandria subsampled by FAIR, filtered to remove prototype overlap with the Matbench Discovery WBM test set."
+    },
+    {
+      "key": "MPtrj",
+      "label": "MPtrj",
+      "n_structures": 1580395,
+      "n_materials": 145923,
+      "url": "https://figshare.com/articles/dataset/23713842",
+      "notes": "Materials Project relaxation trajectories, cleaned and subsampled to about every 10th ionic step; created for CHGNet."
+    }
+  ],
+  "torch_index": "https://download.pytorch.org/whl/cu126"
+}

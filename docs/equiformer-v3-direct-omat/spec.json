@@ -1,0 +1,50 @@
+{
+  "slug": "equiformer-v3-direct-omat",
+  "label": "EquiformerV3+DeNS-OMat (direct)",
+  "family": "EquiformerV3",
+  "packages": [
+    "fairchem-core[torch-extras]@git+https://github.com/atomicarchitects/equiformer_v3#subdirectory=packages/fairchem-core",
+    "numpy<2",
+    "scipy<1.15"
+  ],
+  "requirements": [
+    "torch==2.4.0",
+    "ase==3.28.0",
+    "fairchem-core[torch-extras]@git+https://github.com/atomicarchitects/equiformer_v3#subdirectory=packages/fairchem-core",
+    "numpy<2",
+    "scipy<1.15"
+  ],
+  "calculator": "fairchem.core.OCPCalculator(checkpoint_path=\"omat24_direct-uncompiled.pt\", cpu=False)",
+  "imports": [
+    "fairchem.core"
+  ],
+  "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
+  "notes": "Stage-1 checkpoint of the same mirror-physics/equiformer_v3 series: direct pre-training on OMat24 only, before the gradient fine-tuning that produces omat24_gradient.pt and then the OAM omat24-mptrj-salex_gradient.pt.  Forces come from a direct head (use-gate-force-head), not from the energy gradient, so this is the non-conservative member of the family.\n  The published omat24_direct.pt was saved from a torch.compile'd model, so every key carries an '_orig_mod.' prefix.  fairchem's match_state_dict counts the substring 'module' and strips 7 characters per level, which turns '_orig_mod.module.X' into 'od.module.X' and fails the load; the checkpoint used here is the same file with that prefix removed (weights untouched) -- see omat24_direct-uncompiled.pt next to the original download.",
+  "precision": "float32",
+  "python": "3.12",
+  "find_links": [
+    "https://data.pyg.org/whl/torch-2.4.0+cu121.html"
+  ],
+  "n_parameters_hint": null,
+  "packages_no_deps": [],
+  "training_set": [
+    "OMat24"
+  ],
+  "training_set_complete": true,
+  "training_set_note": "",
+  "training_heads": [],
+  "evaluated_head": "",
+  "n_training_structures": 100824585,
+  "n_training_materials": 3227606,
+  "datasets": [
+    {
+      "key": "OMat24",
+      "label": "OMat24",
+      "n_structures": 100824585,
+      "n_materials": 3227606,
+      "url": "https://huggingface.co/datasets/fairchem/OMAT24#omat24-dataset",
+      "notes": "Open Materials 2024 (Meta FAIR): >100M structures from perturbing Alexandria structures."
+    }
+  ],
+  "torch_index": "https://download.pytorch.org/whl/cu121"
+}

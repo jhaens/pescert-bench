@@ -1,0 +1,44 @@
+{
+  "slug": "orb-v3-conservative-20-omat",
+  "label": "ORB-v3 (conservative, 20, OMat)",
+  "family": "ORB",
+  "packages": [
+    "orb-models==0.5.4",
+    "pynanoflann==0.10.0"
+  ],
+  "requirements": [
+    "torch==2.7.1",
+    "ase==3.28.0",
+    "orb-models==0.5.4",
+    "pynanoflann==0.10.0"
+  ],
+  "calculator": "orb_models.forcefield.calculator.ORBCalculator(orb_models.forcefield.pretrained.orb_v3_conservative_20_omat(device=\"cuda\", precision=\"float32-high\"), device=\"cuda\")",
+  "imports": [
+    "orb_models.forcefield.pretrained",
+    "orb_models.forcefield.calculator"
+  ],
+  "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
+  "notes": "The 20-neighbour variant of orb-v3-conservative-inf-omat.  Truncating the neighbour list to a fixed count is orientation-dependent whenever neighbour distances are degenerate, which the icosahedral and close-packed substrates are full of, so the 20/inf pair isolates that effect in the equivariance and null-space probes.",
+  "precision": "float32",
+  "python": "3.11",
+  "find_links": [],
+  "n_parameters_hint": null,
+  "packages_no_deps": [],
+  "training_set": [
+    "OMat24"
+  ],
+  "training_set_complete": true,
+  "n_training_structures": 100824585,
+  "n_training_materials": 3227606,
+  "datasets": [
+    {
+      "key": "OMat24",
+      "label": "OMat24",
+      "n_structures": 100824585,
+      "n_materials": 3227606,
+      "url": "https://huggingface.co/datasets/fairchem/OMAT24#omat24-dataset",
+      "notes": "Open Materials 2024 (Meta FAIR): >100M structures from perturbing Alexandria structures."
+    }
+  ],
+  "torch_index": "https://download.pytorch.org/whl/cu126"
+}

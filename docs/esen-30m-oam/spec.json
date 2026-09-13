@@ -1,0 +1,65 @@
+{
+  "slug": "esen-30m-oam",
+  "label": "eSEN-30M-OAM",
+  "family": "fairchem",
+  "packages": [
+    "fairchem-core[torch-extras]==1.10.0",
+    "numpy<2",
+    "scipy<1.15"
+  ],
+  "requirements": [
+    "torch==2.4.0",
+    "ase==3.28.0",
+    "fairchem-core[torch-extras]==1.10.0",
+    "numpy<2",
+    "scipy<1.15"
+  ],
+  "calculator": "fairchem.core.OCPCalculator(checkpoint_path=\"esen_30m_oam.pt\", cpu=False)",
+  "imports": [
+    "fairchem.core"
+  ],
+  "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
+  "notes": "eSEN 30M on OAM; checkpoint from facebook/OMAT24.  Needs fairchem-core 1.10.0: that is the release registering the 'mlip_trainer' the checkpoint asks for (fairchem/core/models/esen/trainers).",
+  "precision": "float32",
+  "python": "3.12",
+  "find_links": [
+    "https://data.pyg.org/whl/torch-2.4.0+cu121.html"
+  ],
+  "n_parameters_hint": null,
+  "packages_no_deps": [],
+  "training_set": [
+    "OMat24",
+    "sAlex",
+    "MPtrj"
+  ],
+  "training_set_complete": true,
+  "n_training_structures": 112852745,
+  "n_training_materials": 6601135,
+  "datasets": [
+    {
+      "key": "OMat24",
+      "label": "OMat24",
+      "n_structures": 100824585,
+      "n_materials": 3227606,
+      "url": "https://huggingface.co/datasets/fairchem/OMAT24#omat24-dataset",
+      "notes": "Open Materials 2024 (Meta FAIR): >100M structures from perturbing Alexandria structures."
+    },
+    {
+      "key": "sAlex",
+      "label": "sAlex",
+      "n_structures": 10447765,
+      "n_materials": 3227606,
+      "url": "https://huggingface.co/datasets/fairchem/OMAT24#salex-dataset",
+      "notes": "Alexandria subsampled by FAIR, filtered to remove prototype overlap with the Matbench Discovery WBM test set."
+    },
+    {
+      "key": "MPtrj",
+      "label": "MPtrj",
+      "n_structures": 1580395,
+      "n_materials": 145923,
+      "url": "https://figshare.com/articles/dataset/23713842",
+      "notes": "Materials Project relaxation trajectories, cleaned and subsampled to about every 10th ionic step; created for CHGNet."
+    }
+  ],
+  "torch_index": "https://download.pytorch.org/whl/cu121"
+}

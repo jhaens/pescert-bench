@@ -1,0 +1,53 @@
+{
+  "slug": "orb-v2",
+  "label": "ORB-v2",
+  "family": "ORB",
+  "packages": [
+    "orb-models==0.5.4",
+    "pynanoflann==0.10.0"
+  ],
+  "requirements": [
+    "torch==2.7.1",
+    "ase==3.28.0",
+    "orb-models==0.5.4",
+    "pynanoflann==0.10.0"
+  ],
+  "calculator": "orb_models.forcefield.calculator.ORBCalculator(orb_models.forcefield.pretrained.orb_v2(device=\"cuda\", precision=\"float32-high\"), device=\"cuda\")",
+  "imports": [
+    "orb_models.forcefield.pretrained",
+    "orb_models.forcefield.calculator"
+  ],
+  "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
+  "notes": "ORB v2 (Orbital Materials), conservative head.",
+  "precision": "float32",
+  "python": "3.11",
+  "find_links": [],
+  "n_parameters_hint": null,
+  "packages_no_deps": [],
+  "training_set": [
+    "MPtrj",
+    "Alex"
+  ],
+  "training_set_complete": true,
+  "n_training_structures": 32078023,
+  "n_training_materials": 3245923,
+  "datasets": [
+    {
+      "key": "MPtrj",
+      "label": "MPtrj",
+      "n_structures": 1580395,
+      "n_materials": 145923,
+      "url": "https://figshare.com/articles/dataset/23713842",
+      "notes": "Materials Project relaxation trajectories, cleaned and subsampled to about every 10th ionic step; created for CHGNet."
+    },
+    {
+      "key": "Alex",
+      "label": "Alexandria",
+      "n_structures": 30497628,
+      "n_materials": 3100000,
+      "url": "https://alexandria.icams.rub.de",
+      "notes": "DFT relaxation trajectories for ~3M materials (Schmidt et al.)."
+    }
+  ],
+  "torch_index": "https://download.pytorch.org/whl/cu126"
+}

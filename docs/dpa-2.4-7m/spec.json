@@ -1,0 +1,32 @@
+{
+  "slug": "dpa-2.4-7m",
+  "label": "DPA-2.4-7M",
+  "family": "DPA",
+  "packages": [
+    "deepmd-kit[torch]@git+https://github.com/wanghan-iapcm/deepmd-kit@3eb005be526f199f5ef67667edc7a91cd5c77f7c",
+    "e3nn==0.6.0"
+  ],
+  "requirements": [
+    "torch==2.11.0",
+    "ase==3.28.0",
+    "deepmd-kit[torch]@git+https://github.com/wanghan-iapcm/deepmd-kit@3eb005be526f199f5ef67667edc7a91cd5c77f7c",
+    "e3nn==0.6.0"
+  ],
+  "calculator": "deepmd.calculator.DP(model=\"dpa-2.4-7M.pt\", head=\"Omat24\")",
+  "imports": [
+    "deepmd.calculator"
+  ],
+  "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
+  "notes": "DPA-2.4, 7M parameters: the generation before DPA-3 (huggingface.co/deepmodelingcommunity/DPA-2.4-7M), \"Omat24\" head.",
+  "precision": "float64",
+  "python": "3.11",
+  "find_links": [],
+  "n_parameters_hint": null,
+  "packages_no_deps": [],
+  "training_set": [],
+  "training_set_complete": false,
+  "n_training_structures": null,
+  "n_training_materials": null,
+  "datasets": [],
+  "torch_index": "https://download.pytorch.org/whl/cu126"
+}

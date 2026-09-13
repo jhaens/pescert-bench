@@ -1,0 +1,284 @@
+{
+  "schema": "pescert-run/1",
+  "model": {
+    "slug": "m3gnet-matpes-pbe",
+    "label": "M3GNet (MatPES-PBE)",
+    "family": "M3GNet",
+    "packages": [
+      "matgl==4.0.3"
+    ],
+    "calculator": "matgl.ext.ase.PESCalculator(matgl.load_model(\"M3GNet-PES-MatPES-PBE-2025.2\").to(\"cuda\"), stress_unit=\"eV/A3\")",
+    "notes": "stress_unit='eV/A3' is required: matgl's PESCalculator reports stress in GPa by default, which is ASE's unit off by 160.2 and shows up as a stress defect of exactly that factor.  .to('cuda') is what puts the run on the GPU: matgl loads the Potential on CPU and Potential.forward migrates the graph to the module's own device, so without it the whole suite runs on CPU.  matgl 4.0.3 no longer ships the 2021 MP checkpoint that Matbench Discovery lists as M3GNet, so this is the current MatPES-PBE PES model and its parameter count will not match theirs.",
+    "precision": "float32",
+    "training_set": [
+      "MatPES"
+    ],
+    "training_set_complete": false,
+    "n_training_structures": null,
+    "n_training_materials": null,
+    "datasets": [
+      {
+        "key": "MatPES",
+        "label": "MatPES",
+        "n_structures": 504811,
+        "n_materials": 281572,
+        "url": "https://huggingface.co/datasets/mavrl/matpes",
+        "notes": "Materials Potential Energy Surface dataset (Materials Virtual Lab + Materials Project), single-point PBE and r2SCAN DFT on periodic solids, near-complete periodic-table coverage (all but noble gases and unstable radionuclides).(arXiv:2503.04070) "
+      }
+    ],
+    "n_parameters": 288157,
+    "n_parameters_trainable": 288157,
+    "n_modules_found": 1,
+    "from_state_dict": false,
+    "n_parameters_source": "runtime"
+  },
+  "run": {
+    "started": "2026-09-09T16:28:59+00:00",
+    "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
+    "seed": 0,
+    "budget_per_eval": null,
+    "agg_method": "arithmetic",
+    "evals": "all",
+    "environment": {
+      "python": "3.11.16",
+      "torch": "2.7.1+cu126",
+      "torch_cuda": "12.6",
+      "cuda_available": true,
+      "ase": "3.28.0",
+      "pescert": "0.1.0",
+      "host": "6948b634e53b",
+      "gpu": {
+        "name": "NVIDIA RTX A5000",
+        "capability": "8.6",
+        "total_memory_GB": 23.55
+      }
+    },
+    "calculator_class": "PESCalculator",
+    "load_seconds": 4.37,
+    "suite_seconds": 744.24,
+    "wall_seconds": 748.63
+  },
+  "aggregate": {
+    "overall": 0.6721181868358238,
+    "overall_method": "arithmetic",
+    "sub_scores": {
+      "conservativeness": 0.6692246179828321,
+      "equivariance": 0.979752095329607,
+      "smoothness": 0.8169597635142599,
+      "stress_consistency": 0.31708533135962963,
+      "parity": 0.5263933919691234,
+      "representation": 0.29225299329923093,
+      "cross_maxwell": 0.09165534324890767,
+      "betti": 0.6935901770711645,
+      "zero_modes": 0.6975803538516955,
+      "trimer": 0.7485070604872316,
+      "reversibility": 0.9951392959229735,
+      "config_temperature": 0.9242321962560753,
+      "equipartition": 0.7322295526452749,
+      "virial": 0.925052442763528
+    },
+    "gates": {
+      "conservativeness": false,
+      "equivariance": true,
+      "stress_consistency": false,
+      "parity": false,
+      "representation": false,
+      "cross_maxwell": false,
+      "betti": false,
+      "zero_modes": false,
+      "trimer": true,
+      "reversibility": true
+    },
+    "gates_passed": 3,
+    "gates_total": 10,
+    "n_total_calls": 39383
+  },
+  "metadata": {
+    "elements": [
+      "Li",
+      "Be",
+      "B",
+      "C",
+      "Na",
+      "Mg",
+      "Al",
+      "Si",
+      "P",
+      "S"
+    ],
+    "per_element_overall": {
+      "Li": 0.8439079035080171,
+      "Be": 0.6580592674791651,
+      "B": 0.5760581233639984,
+      "C": 0.48351924009746616,
+      "Na": 0.9695804195171153,
+      "Mg": 0.8622737572427221,
+      "Al": 0.6629165132092891,
+      "Si": 0.6867770834655273,
+      "P": 0.5257577287828364,
+      "S": 0.4523318316921006
+    },
+    "mean_of_element_overalls": 0.6721181868358238,
+    "evals": [
+      "conservativeness",
+      "equivariance",
+      "smoothness",
+      "stress_consistency",
+      "parity",
+      "representation",
+      "cross_maxwell",
+      "betti",
+      "zero_modes",
+      "trimer",
+      "reversibility",
+      "config_temperature",
+      "equipartition",
+      "virial"
+    ],
+    "n_total_calls": 39383
+  },
+  "results": [
+    {
+      "name": "conservativeness",
+      "section": "Self-consistency",
+      "target": 0.0,
+      "raw_defect": 0.05488305032292791,
+      "score": 0.6692246179828321,
+      "n_model_calls": 90,
+      "gate": false,
+      "crashed": {}
+    },
+    {
+      "name": "equivariance",
+      "section": "Symmetry & invariance",
+      "target": 0.0,
+      "raw_defect": 0.020609533591301354,
+      "score": 0.979752095329607,
+      "n_model_calls": 90,
+      "gate": true,
+      "crashed": {}
+    },
+    {
+      "name": "smoothness",
+      "section": "Regularity",
+      "target": 0.0,
+      "raw_defect": 0.2661456387004593,
+      "score": 0.8169597635142599,
+      "n_model_calls": 810,
+      "gate": null,
+      "crashed": {}
+    },
+    {
+      "name": "stress_consistency",
+      "section": "Self-consistency",
+      "target": 0.0,
+      "raw_defect": 0.30316735189607885,
+      "score": 0.31708533135962963,
+      "n_model_calls": 130,
+      "gate": false,
+      "crashed": {}
+    },
+    {
+      "name": "parity",
+      "section": "Symmetry & invariance",
+      "target": 0.0,
+      "raw_defect": 0.004076540888548023,
+      "score": 0.5263933919691234,
+      "n_model_calls": 20,
+      "gate": false,
+      "crashed": {}
+    },
+    {
+      "name": "representation",
+      "section": "Symmetry & invariance",
+      "target": 0.0,
+      "raw_defect": 35.69377854548885,
+      "score": 0.29225299329923093,
+      "n_model_calls": 200,
+      "gate": false,
+      "crashed": {}
+    },
+    {
+      "name": "cross_maxwell",
+      "section": "Self-consistency",
+      "target": 0.0,
+      "raw_defect": 0.28510637807348693,
+      "score": 0.09165534324890767,
+      "n_model_calls": 6142,
+      "gate": false,
+      "crashed": {}
+    },
+    {
+      "name": "betti",
+      "section": "Self-consistency",
+      "target": 0.0,
+      "raw_defect": 0.05366797629208757,
+      "score": 0.6935901770711645,
+      "n_model_calls": 480,
+      "gate": false,
+      "crashed": {}
+    },
+    {
+      "name": "zero_modes",
+      "section": "Symmetry & invariance",
+      "target": 0.0,
+      "raw_defect": 0.0013395692741024019,
+      "score": 0.6975803538516955,
+      "n_model_calls": 2099,
+      "gate": false,
+      "crashed": {}
+    },
+    {
+      "name": "trimer",
+      "section": "Symmetry & invariance",
+      "target": 0.0,
+      "raw_defect": 0.5283094944353388,
+      "score": 0.7485070604872316,
+      "n_model_calls": 1140,
+      "gate": true,
+      "crashed": {}
+    },
+    {
+      "name": "reversibility",
+      "section": "Self-consistency",
+      "target": 0.0,
+      "raw_defect": 4.95353094395185e-06,
+      "score": 0.9951392959229735,
+      "n_model_calls": 2010,
+      "gate": true,
+      "crashed": {}
+    },
+    {
+      "name": "config_temperature",
+      "section": "Statistical mechanics",
+      "target": 1.0,
+      "raw_defect": 0.07955498756365711,
+      "score": 0.9242321962560753,
+      "n_model_calls": 25392,
+      "gate": null,
+      "crashed": {}
+    },
+    {
+      "name": "equipartition",
+      "section": "Statistical mechanics",
+      "target": 1.0,
+      "raw_defect": 1.3909227918198017,
+      "score": 0.7322295526452749,
+      "n_model_calls": 780,
+      "gate": null,
+      "crashed": {}
+    },
+    {
+      "name": "virial",
+      "section": "Statistical mechanics",
+      "target": 1.0,
+      "raw_defect": 0.07952219782156364,
+      "score": 0.925052442763528,
+      "n_model_calls": 0,
+      "gate": null,
+      "crashed": {}
+    }
+  ],
+  "crashes": {},
+  "status": "ok"
+}

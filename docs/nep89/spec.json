@@ -1,0 +1,29 @@
+{
+  "slug": "nep89",
+  "label": "NEP89",
+  "family": "NEP",
+  "packages": [
+    "calorine==3.5"
+  ],
+  "requirements": [
+    "ase==3.28.0",
+    "calorine==3.5"
+  ],
+  "calculator": "calorine.calculators.CPUNEP(\"nep89_20250409.txt\")",
+  "imports": [
+    "calorine.calculators"
+  ],
+  "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
+  "notes": "Neuroevolution potential covering 89 elements, from the Zenodo record for arXiv:2504.21286.  CPUNEP, deliberately: the GPU path (GPUNEP against the locally built GPUMD, see GPUMD_BIN) was tried and reverted.  It costs a process spawn plus file IO per single-point call -- ~0.55 s/call over ~39k calls -- and, worse, round-trips forces and positions through text files, which floors the resolvable defect near 1e-9 where CPUNEP reaches 1.19e-16 on the same probe.  The GPU run scored 0.543 with 11 crashes.",
+  "precision": "float64",
+  "python": "3.11",
+  "find_links": [],
+  "n_parameters_hint": null,
+  "packages_no_deps": [],
+  "training_set": [],
+  "training_set_complete": false,
+  "n_training_structures": null,
+  "n_training_materials": null,
+  "datasets": [],
+  "torch_index": "https://download.pytorch.org/whl/cu126"
+}

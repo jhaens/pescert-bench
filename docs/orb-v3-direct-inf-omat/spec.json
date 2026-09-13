@@ -1,0 +1,44 @@
+{
+  "slug": "orb-v3-direct-inf-omat",
+  "label": "ORB-v3 (direct, inf, OMat)",
+  "family": "ORB",
+  "packages": [
+    "orb-models==0.5.4",
+    "pynanoflann==0.10.0"
+  ],
+  "requirements": [
+    "torch==2.7.1",
+    "ase==3.28.0",
+    "orb-models==0.5.4",
+    "pynanoflann==0.10.0"
+  ],
+  "calculator": "orb_models.forcefield.calculator.ORBCalculator(orb_models.forcefield.pretrained.orb_v3_direct_inf_omat(device=\"cuda\", precision=\"float32-high\"), device=\"cuda\")",
+  "imports": [
+    "orb_models.forcefield.pretrained",
+    "orb_models.forcefield.calculator"
+  ],
+  "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
+  "notes": "Direct-force twin of orb-v3-conservative-inf-omat: same backbone and same training set, forces from a head rather than from the energy gradient.",
+  "precision": "float32",
+  "python": "3.11",
+  "find_links": [],
+  "n_parameters_hint": null,
+  "packages_no_deps": [],
+  "training_set": [
+    "OMat24"
+  ],
+  "training_set_complete": true,
+  "n_training_structures": 100824585,
+  "n_training_materials": 3227606,
+  "datasets": [
+    {
+      "key": "OMat24",
+      "label": "OMat24",
+      "n_structures": 100824585,
+      "n_materials": 3227606,
+      "url": "https://huggingface.co/datasets/fairchem/OMAT24#omat24-dataset",
+      "notes": "Open Materials 2024 (Meta FAIR): >100M structures from perturbing Alexandria structures."
+    }
+  ],
+  "torch_index": "https://download.pytorch.org/whl/cu126"
+}

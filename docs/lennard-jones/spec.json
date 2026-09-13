@@ -1,0 +1,26 @@
+{
+  "slug": "lennard-jones",
+  "label": "Lennard-Jones (element-specific)",
+  "family": "Analytic",
+  "packages": [],
+  "requirements": [
+    "ase==3.28.0"
+  ],
+  "calculator": "pescert.reference.ElementLennardJones()",
+  "imports": [
+    "pescert.reference"
+  ],
+  "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
+  "notes": "Analytic reference, not a trained model: Lennard-Jones with per-element sigma (minimum at 2 * covalent_radius) and epsilon (cohesive energy / 8.61, the LJ fcc lattice sum), force-smoothed between 0.66 rc and rc = 3 sigma.  Exactly conservative and E(3)-invariant by construction, so its scores are the suite's own numerical floor.",
+  "precision": "float64",
+  "python": "3.11",
+  "find_links": [],
+  "n_parameters_hint": null,
+  "packages_no_deps": [],
+  "training_set": [],
+  "training_set_complete": true,
+  "n_training_structures": null,
+  "n_training_materials": null,
+  "datasets": [],
+  "torch_index": "https://download.pytorch.org/whl/cu126"
+}

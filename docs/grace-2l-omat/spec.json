@@ -1,0 +1,41 @@
+{
+  "slug": "grace-2l-omat",
+  "label": "GRACE-2L-OMAT",
+  "family": "GRACE",
+  "packages": [
+    "tensorpotential==0.6.1"
+  ],
+  "requirements": [
+    "torch==2.7.1",
+    "ase==3.28.0",
+    "tensorpotential==0.6.1"
+  ],
+  "calculator": "tensorpotential.calculator.grace_fm(\"GRACE-2L-OMAT\")",
+  "imports": [
+    "tensorpotential.calculator"
+  ],
+  "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
+  "notes": "OMat24-only twin of GRACE-2L-OAM: the pair isolates what the sAlex+MPtrj fine-tune does to the identities, with architecture held fixed.",
+  "precision": "float32",
+  "python": "3.11",
+  "find_links": [],
+  "n_parameters_hint": null,
+  "packages_no_deps": [],
+  "training_set": [
+    "OMat24"
+  ],
+  "training_set_complete": true,
+  "n_training_structures": 100824585,
+  "n_training_materials": 3227606,
+  "datasets": [
+    {
+      "key": "OMat24",
+      "label": "OMat24",
+      "n_structures": 100824585,
+      "n_materials": 3227606,
+      "url": "https://huggingface.co/datasets/fairchem/OMAT24#omat24-dataset",
+      "notes": "Open Materials 2024 (Meta FAIR): >100M structures from perturbing Alexandria structures."
+    }
+  ],
+  "torch_index": "https://download.pytorch.org/whl/cu126"
+}

@@ -1,0 +1,107 @@
+{
+  "slug": "equflashv2-oam",
+  "label": "EquFlashV2-45M-OAM",
+  "family": "EquFlash",
+  "packages": [
+    "GGNN@file://<local>/ggnn-0.1-py3-none-any.whl",
+    "cuequivariance==0.6.0",
+    "cuequivariance-torch==0.6.0",
+    "cuequivariance-ops-torch-cu12==0.6.0",
+    "scipy<1.15",
+    "torch-geometric",
+    "torch-scatter",
+    "torch-sparse",
+    "e3nn>=0.5",
+    "huggingface-hub>=0.27.1",
+    "hydra-core",
+    "lmdb",
+    "numba",
+    "orjson",
+    "pydantic>=2.10.0",
+    "pymatgen>=2023.10.3",
+    "pyyaml",
+    "requests",
+    "submitit",
+    "tensorboard",
+    "torchtnt",
+    "tqdm",
+    "wandb"
+  ],
+  "requirements": [
+    "torch==2.9.1",
+    "ase==3.28.0",
+    "GGNN@file://<local>/ggnn-0.1-py3-none-any.whl",
+    "cuequivariance==0.6.0",
+    "cuequivariance-torch==0.6.0",
+    "cuequivariance-ops-torch-cu12==0.6.0",
+    "scipy<1.15",
+    "torch-geometric",
+    "torch-scatter",
+    "torch-sparse",
+    "e3nn>=0.5",
+    "huggingface-hub>=0.27.1",
+    "hydra-core",
+    "lmdb",
+    "numba",
+    "orjson",
+    "pydantic>=2.10.0",
+    "pymatgen>=2023.10.3",
+    "pyyaml",
+    "requests",
+    "submitit",
+    "tensorboard",
+    "torchtnt",
+    "tqdm",
+    "wandb"
+  ],
+  "calculator": "GGNN.common.calculator.UCalculator(checkpoint_path=\"equflashv2_oam.pt\", cpu=False)",
+  "imports": [
+    "GGNN.common.calculator"
+  ],
+  "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
+  "notes": "GGNN is public at SamsungDS/GGNN; the checkpoint is the local one.  The pins come from the repo's own requirements.txt, which is where the cuequivariance version GGNN's buffer_num_segments needs is recorded.",
+  "precision": "float32",
+  "python": "3.12",
+  "find_links": [
+    "https://data.pyg.org/whl/torch-2.9.1+cu126.html"
+  ],
+  "n_parameters_hint": null,
+  "packages_no_deps": [
+    "fairchem-core==1.10.0"
+  ],
+  "training_set": [
+    "OMat24",
+    "sAlex",
+    "MPtrj"
+  ],
+  "training_set_complete": true,
+  "n_training_structures": 112852745,
+  "n_training_materials": 6601135,
+  "datasets": [
+    {
+      "key": "OMat24",
+      "label": "OMat24",
+      "n_structures": 100824585,
+      "n_materials": 3227606,
+      "url": "https://huggingface.co/datasets/fairchem/OMAT24#omat24-dataset",
+      "notes": "Open Materials 2024 (Meta FAIR): >100M structures from perturbing Alexandria structures."
+    },
+    {
+      "key": "sAlex",
+      "label": "sAlex",
+      "n_structures": 10447765,
+      "n_materials": 3227606,
+      "url": "https://huggingface.co/datasets/fairchem/OMAT24#salex-dataset",
+      "notes": "Alexandria subsampled by FAIR, filtered to remove prototype overlap with the Matbench Discovery WBM test set."
+    },
+    {
+      "key": "MPtrj",
+      "label": "MPtrj",
+      "n_structures": 1580395,
+      "n_materials": 145923,
+      "url": "https://figshare.com/articles/dataset/23713842",
+      "notes": "Materials Project relaxation trajectories, cleaned and subsampled to about every 10th ionic step; created for CHGNet."
+    }
+  ],
+  "torch_index": "https://download.pytorch.org/whl/cu126"
+}

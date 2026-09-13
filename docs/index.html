@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>pescert &middot; MLIP certification benchmark</title>
+<meta name="description" content="Ground-truth-free certification of universal machine-learning interatomic potentials: 14 exact-identity probes, no DFT reference.">
+<!-- Logo: a hexagonal certification seal with a potential-energy well cut out of it.
+     The curve is the object the suite probes, the seal is what it issues. The white
+     knockout keeps it readable down to 16px, where an outline mark closes up. -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%235b9cf5'/%3E%3Cstop offset='.55' stop-color='%237b6ef0'/%3E%3Cstop offset='1' stop-color='%23a061ee'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M16 2.2l12 6.9v13.8l-12 6.9-12-6.9V9.1z' fill='url(%23g)'/%3E%3Cpath d='M10.4 9.2c2.3 0 2.1 11.9 5.3 11.9 3.4 0 3.1-6.8 8.5-6.8' fill='none' stroke='%23fff' stroke-width='3.2' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css">
+<script>
+  /* set the theme before first paint so there is no flash */
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem('pescert-theme'); } catch (e) {}
+    if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.dataset.theme = t;
+  })();
+</script>
+</head>
+<body>
+
+<header class="site">
+  <div class="brand">
+    <h1>
+      <span class="mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="30" height="30">
+          <defs>
+            <linearGradient id="pesc-mark" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#5b9cf5"/>
+              <stop offset=".55" stop-color="#7b6ef0"/>
+              <stop offset="1" stop-color="#a061ee"/>
+            </linearGradient>
+          </defs>
+          <path d="M16 2.2l12 6.9v13.8l-12 6.9-12-6.9V9.1z" fill="url(#pesc-mark)"/>
+          <path d="M10.4 9.2c2.3 0 2.1 11.9 5.3 11.9 3.4 0 3.1-6.8 8.5-6.8"
+                fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span>pescert</span>
+      <a class="pill-paper" id="paper-link" href="https://arxiv.org/abs/XXXX.XXXXX" target="_blank" rel="noopener noreferrer">
+        arXiv preprint
+      </a>
+    </h1>
+    <p>
+      Ground-truth-free evaluation of universal MLIPs. Each probe compares a model against a
+      value the exact Born&ndash;Oppenheimer surface satisfies by construction. No DFT
+      reference is used.
+    </p>
+    <div class="meta" id="runmeta"></div>
+  </div>
+  <div class="head-actions">
+    <button class="btn icon" id="help" title="About this table" aria-label="About">?</button>
+    <button class="btn icon" id="theme" title="Toggle dark / light mode" aria-label="Toggle theme"></button>
+  </div>
+</header>
+
+<div class="toolbar" role="toolbar" aria-label="Table controls">
+  <label class="field" title="Filter by model, family or training set (press /)">
+    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5L14 14"/></svg>
+    <input id="search" type="search" placeholder="Search models…" autocomplete="off" spellcheck="false">
+  </label>
+
+  <div class="menu-host"><button class="btn" id="btn-cols" aria-haspopup="true" aria-expanded="false">Columns <span class="mono" id="cols-count"></span> &#9662;</button></div>
+  <button class="btn" id="btn-meta" title="Show or hide the model detail columns">Model details</button>
+  <div class="menu-host"><button class="btn" id="btn-data" aria-haspopup="true" aria-expanded="false">Training set &#9662;</button></div>
+  <div class="menu-host"><button class="btn" id="btn-fam" aria-haspopup="true" aria-expanded="false">Families &#9662;</button></div>
+
+  <span class="sep"></span>
+
+  <span class="lbl" title="How the per-probe scores are combined">Mean</span>
+  <div class="seg" id="seg-mean" role="group" aria-label="Averaging method">
+    <button data-v="geometric" title="Geometric mean, penalises any single low axis">Geo</button>
+    <button data-v="arithmetic" title="Arithmetic mean, plain average">Arith</button>
+    <button data-v="harmonic" title="Harmonic mean, dominated by the lowest axis">Harm</button>
+  </div>
+
+  <span class="lbl" title="What the cells print">Show</span>
+  <div class="seg" id="seg-value" role="group" aria-label="Cell value">
+    <button data-v="score" title="Normalised score in [0,1], 1 is perfect">Score</button>
+    <button data-v="defect" title="Raw defect, the distance from the exact target">Defect</button>
+  </div>
+
+  <span class="lbl" title="How cells are coloured">Colour</span>
+  <div class="seg" id="seg-color" role="group" aria-label="Colour scale">
+    <button data-v="score" title="Full 0 to 1 score range, as in the paper figure">Score</button>
+    <button data-v="rank" title="Position within the column">Rank</button>
+    <button data-v="range" title="Column minimum to maximum">Range</button>
+    <button data-v="off" title="No cell colouring">Off</button>
+  </div>
+
+  <span class="spacer"></span>
+
+  <button class="btn" id="btn-scatter" title="Show the charts">Charts</button>
+  <button class="btn" id="btn-csv" title="Download the current view as CSV">CSV</button>
+  <button class="btn" id="btn-reset" title="Clear every filter">Reset</button>
+</div>
+
+<div class="filterbar" id="filterbar"></div>
+
+<div class="wrap">
+  <section class="panel" id="scatter-panel" hidden>
+    <div class="phead">
+      <div class="seg" id="seg-chart" role="group" aria-label="Chart">
+        <button data-v="size" title="Overall score against model size">Score vs size</button>
+        <button data-v="data" title="Overall score against training-set size, circle area by parameter count">Score vs training data</button>
+        <button data-v="time" title="Overall score against suite wall time, GPU runs only">Score vs wall time</button>
+      </div>
+      <span class="spacer" style="flex:1"></span>
+      <span class="mono hint">click a point for the model card</span>
+    </div>
+    <svg class="scatter" id="scatter" aria-label="Overall score chart"></svg>
+    <div class="legend" id="scatter-legend"></div>
+  </section>
+
+  <div class="tablewrap" id="tablewrap">
+    <table class="bench" id="table"></table>
+  </div>
+
+  <section class="panel related">
+    <h3>Other MLIP benchmarks</h3>
+    <p class="sub">These measure accuracy against DFT references and downstream tasks, which is
+      the axis this table does not cover.</p>
+    <div class="linkgrid">
+      <a href="https://matbench-discovery.materialsproject.org" target="_blank" rel="noopener noreferrer">
+        <b>Matbench Discovery</b>
+        <span>Crystal stability, geometry optimisation, phonons, MD and diatomic curves against DFT.</span>
+      </a>
+      <a href="https://huggingface.co/spaces/atomind/mlip-arena" target="_blank" rel="noopener noreferrer">
+        <b>MLIP Arena</b>
+        <span>Physics awareness, chemical reactivity and stability under extreme conditions.</span>
+      </a>
+      <a href="https://huggingface.co/spaces/facebook/fairchem_leaderboard" target="_blank" rel="noopener noreferrer">
+        <b>FAIR Chemistry Leaderboard</b>
+        <span>Energy and force errors across the OMol25 and OC20 tasks, from ligand strain to spin gaps.</span>
+      </a>
+      <a href="https://pages.nist.gov/jarvis_leaderboard/" target="_blank" rel="noopener noreferrer">
+        <b>JARVIS Leaderboard</b>
+        <span>NIST leaderboard with a machine-learning force-field category.</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="panel contact" id="contact">
+    <h3>Contact</h3>
+    <div class="contactbar" id="contactbar"></div>
+    <p class="sub" id="corrections"></p>
+  </section>
+
+  <footer class="site" id="footer"></footer>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

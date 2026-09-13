@@ -1,0 +1,41 @@
+{
+  "slug": "chgnet",
+  "label": "CHGNet",
+  "family": "CHGNet",
+  "packages": [
+    "chgnet==0.4.2"
+  ],
+  "requirements": [
+    "torch==2.7.1",
+    "ase==3.28.0",
+    "chgnet==0.4.2"
+  ],
+  "calculator": "chgnet.model.dynamics.CHGNetCalculator(use_device=\"cuda\")",
+  "imports": [
+    "chgnet.model.dynamics"
+  ],
+  "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
+  "notes": "CHGNet 0.4.2 default pretrained weights.",
+  "precision": "float32",
+  "python": "3.11",
+  "find_links": [],
+  "n_parameters_hint": null,
+  "packages_no_deps": [],
+  "training_set": [
+    "MPtrj"
+  ],
+  "training_set_complete": true,
+  "n_training_structures": 1580395,
+  "n_training_materials": 145923,
+  "datasets": [
+    {
+      "key": "MPtrj",
+      "label": "MPtrj",
+      "n_structures": 1580395,
+      "n_materials": 145923,
+      "url": "https://figshare.com/articles/dataset/23713842",
+      "notes": "Materials Project relaxation trajectories, cleaned and subsampled to about every 10th ionic step; created for CHGNet."
+    }
+  ],
+  "torch_index": "https://download.pytorch.org/whl/cu126"
+}

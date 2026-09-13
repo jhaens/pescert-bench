@@ -1,0 +1,43 @@
+{
+  "slug": "dpa-4-pro-mptrj",
+  "label": "DPA-4-Pro-MPtrj",
+  "family": "DeePMD",
+  "packages": [
+    "deepmd-kit[torch]@git+https://github.com/wanghan-iapcm/deepmd-kit@3eb005be526f199f5ef67667edc7a91cd5c77f7c",
+    "e3nn==0.6.0"
+  ],
+  "requirements": [
+    "torch==2.11.0",
+    "ase==3.28.0",
+    "deepmd-kit[torch]@git+https://github.com/wanghan-iapcm/deepmd-kit@3eb005be526f199f5ef67667edc7a91cd5c77f7c",
+    "e3nn==0.6.0"
+  ],
+  "calculator": "deepmd.calculator.DP(model=\"dpa-4.0.1-pro-mptrj.pt\")",
+  "imports": [
+    "deepmd.calculator"
+  ],
+  "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
+  "notes": "Local DPA-4.0.1 Pro checkpoint fine-tuned on MPtrj.",
+  "precision": "float64",
+  "python": "3.11",
+  "find_links": [],
+  "n_parameters_hint": null,
+  "packages_no_deps": [],
+  "training_set": [
+    "MPtrj"
+  ],
+  "training_set_complete": true,
+  "n_training_structures": 1580395,
+  "n_training_materials": 145923,
+  "datasets": [
+    {
+      "key": "MPtrj",
+      "label": "MPtrj",
+      "n_structures": 1580395,
+      "n_materials": 145923,
+      "url": "https://figshare.com/articles/dataset/23713842",
+      "notes": "Materials Project relaxation trajectories, cleaned and subsampled to about every 10th ionic step; created for CHGNet."
+    }
+  ],
+  "torch_index": "https://download.pytorch.org/whl/cu128"
+}
