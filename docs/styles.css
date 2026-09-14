@@ -84,7 +84,7 @@ a:hover { text-decoration: underline; }
 
 /* ---------- layout ---------- */
 
-.wrap { max-width: 100%; padding: 0 20px 64px; }
+.wrap { max-width: 1520px; margin: 0 auto; padding: 0 20px 64px; }
 
 header.site {
   position: relative;
@@ -230,27 +230,38 @@ header.site::after {
 
 /* ---------- table ---------- */
 
+/* The table is NOT its own scroll box.  `overflow: visible` keeps the page as the one
+   scroll container, so the card is exactly as tall as the table and the column header
+   sticks to the viewport (under the toolbar) rather than to a nested frame.  On a window
+   narrower than the design width the card keeps that width and the page scrolls
+   sideways, so the border still wraps the table instead of being crossed by it. */
 .tablewrap {
   margin-top: 16px; border: 1px solid var(--border); border-radius: 12px;
-  background: var(--bg-elev); overflow: auto; max-height: calc(100vh - 60px);
+  background: var(--bg-elev); overflow: visible;
+  /* Shrink-to-fit: the card is exactly as wide as the columns that are switched on, so
+     the table keeps its compact design width instead of being stretched across a large
+     monitor, and the border always wraps it rather than being crossed by it. */
+  width: fit-content; margin-inline: auto;
   box-shadow: var(--shadow-sm); position: relative;
 }
-.tablewrap::-webkit-scrollbar { height: 11px; width: 11px; }
-.tablewrap::-webkit-scrollbar-thumb {
-  background: var(--border-strong); border-radius: 99px;
-  border: 3px solid var(--bg-elev);
+/* Fixed layout is what makes every probe column exactly the same width: the colgroup
+   widths are used as given, and any slack is shared out in the same ratio rather than
+   by how long a header happens to be. */
+table.bench {
+  border-collapse: separate; border-spacing: 0; font-size: 13px;
+  table-layout: fixed; width: 100%;
 }
-.tablewrap::-webkit-scrollbar-thumb:hover { background: var(--accent); }
-table.bench { border-collapse: separate; border-spacing: 0; width: 100%; font-size: 13px; }
 
 table.bench thead th {
   position: sticky; background: var(--bg-elev); z-index: 20;
   border-bottom: 1px solid var(--border); text-align: right;
   font-weight: 600; color: var(--fg-muted); white-space: nowrap;
 }
-table.bench thead tr.groups th { top: 0; z-index: 22; height: 30px; padding: 0 10px; line-height: 16px;
+/* --toolbar-h is measured in app.js: the toolbar is sticky at the top of the page, so
+   the table header has to come to rest just below it. */
+table.bench thead tr.groups th { top: var(--toolbar-h, 0px); z-index: 22; height: 30px; padding: 0 10px; line-height: 16px;
   text-align: center; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; }
-table.bench thead tr.cols th   { top: 30px; z-index: 21; padding: 6px 10px; font-size: 12px; cursor: pointer; outline-offset: -2px; }
+table.bench thead tr.cols th   { top: calc(var(--toolbar-h, 0px) + 30px); z-index: 21; padding: 6px 10px; font-size: 12px; cursor: pointer; outline-offset: -2px; }
 table.bench thead tr.cols th:focus-visible { outline: 2px solid var(--accent); }
 table.bench thead tr.cols th:hover { color: var(--fg); background: var(--bg-hover); }
 table.bench thead tr.groups th.grp { border-left: 1px solid var(--border); border-right: 1px solid var(--border); }
@@ -266,8 +277,19 @@ th.sticky-l, td.sticky-l { position: sticky; background: var(--bg-elev); }
    without a stacking order the later cells in DOM order win */
 tbody td.sticky-l { z-index: 10; }
 thead th.sticky-l { z-index: 30 !important; }
-th.c-rank, td.c-rank { left: 0; width: 52px; }
-th.c-model, td.c-model { left: 52px; min-width: 218px; }
+/* Widths live on the colgroup (see renderTable): under `table-layout: fixed` those are
+   what the browser uses, and every probe column is therefore exactly the same width. */
+col.w-rank    { width: 52px; }
+col.w-model   { width: 210px; }
+col.w-overall { width: 76px; }
+col.w-meta    { width: 96px; }
+col.w-meta-dataset { width: 168px; }
+col.w-pcol    { width: 70px; }
+
+/* The frozen columns pin to the inner edge of the card (its 20px page padding), not to
+   the window edge, so they do not overhang the border when the page scrolls sideways. */
+th.c-rank, td.c-rank { left: 20px; }
+th.c-model, td.c-model { left: 72px; }
 td.c-model, th.c-model, td.c-rank, th.c-rank { text-align: left; }
 th.c-model::after, td.c-model::after {
   content: ""; position: absolute; top: 0; right: -1px; bottom: 0; width: 1px;
@@ -286,6 +308,26 @@ table.bench tfoot td { padding: 8px 10px; color: var(--fg-faint); font-size: 12p
 
 .sortmark { display: inline-block; width: 11px; text-align: center; color: var(--accent); font-size: 10px; }
 th .colname { display: inline-flex; align-items: center; gap: 4px; }
+
+/* A probe header has to live in 70px.  The name wraps over up to three lines --
+   `short` in probes.json carries soft hyphens, so it breaks at a syllable rather than
+   mid-word -- and the two badges are lifted out of the text flow so they can never
+   push it onto another line. */
+table.bench thead tr.cols th.pcol {
+  text-align: center; vertical-align: bottom; padding: 6px 4px 15px;
+}
+th.pcol .colname {
+  display: block; text-align: center; font-size: 10.5px; line-height: 1.22;
+  letter-spacing: 0; white-space: normal; overflow-wrap: break-word;
+  /* `manual`, not `auto`: the break points are the soft hyphens authored in probes.json,
+     so "Strain-position" splits after its own hyphen instead of the browser guessing
+     "Strain-posi-tion". */
+  hyphens: manual;
+}
+th.pcol .info { position: absolute; top: 4px; right: 4px; width: 13px; height: 13px; font-size: 8.5px; }
+th.pcol .sortmark { position: absolute; left: 0; right: 0; bottom: 3px; width: auto; }
+table.bench thead tr.cols th.c-overall { text-align: center; }
+th.c-overall .colname { display: inline-flex; justify-content: center; gap: 3px; }
 th .info {
   width: 14px; height: 14px; border-radius: 50%; border: 1px solid var(--border-strong);
   color: var(--fg-faint); font-size: 9px; display: inline-grid; place-items: center;
@@ -318,6 +360,9 @@ td.cell .v {
   border-radius: 3px; margin: 2px 3px; transition: outline-color .1s;
   outline: 2px solid transparent; outline-offset: -2px;
 }
+/* centred in a fixed column the numbers all have the same width anyway, and the tinted
+   chip then fills the cell evenly, which is what makes the grid read as a heatmap */
+td.cell.pcol .v, td.cell.c-overall .v { padding: 5px 3px; text-align: center; margin: 2px 2px; }
 td.cell .v:hover { outline-color: var(--fg); }
 td.cell.skipped .v { font-style: italic; }
 td.cell.crashed .v { text-decoration: line-through; opacity: .8; }
@@ -483,7 +528,7 @@ kbd {
 
 @media (max-width: 820px) {
   .brand p { display: none; }
-  th.c-model, td.c-model { min-width: 160px; }
+  col.w-model { width: 160px; }
   .pop, .pop.wide { width: calc(100vw - 24px); }
 }
 

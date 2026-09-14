@@ -485,8 +485,18 @@ function renderTable() {
     return;
   }
 
+  /* --- column widths ------------------------------------------------------
+   * `table-layout: fixed` reads its widths from the first row, and that row is the
+   * section header, whose cells span several columns each.  A colgroup states the
+   * widths directly instead, which is what keeps every probe column identical. */
+  let head = '<colgroup>'
+    + '<col class="w-rank"><col class="w-model"><col class="w-overall">'
+    + metas.map((c) => `<col class="w-meta w-meta-${esc(c.key)}">`).join('')
+    + groups.map((g) => g.probes.map(() => '<col class="w-pcol">').join('')).join('')
+    + '</colgroup>';
+
   /* --- header ------------------------------------------------------------ */
-  let head = '<thead><tr class="groups">';
+  head += '<thead><tr class="groups">';
   head += `<th class="sticky-l c-rank"></th><th class="sticky-l c-model"></th>`;
   head += `<th class="grp"><span>Overall</span></th>`;
   if (metas.length) head += `<th class="grp" colspan="${metas.length}"><span>Model</span></th>`;
@@ -500,17 +510,19 @@ function renderTable() {
   head += `<th class="sticky-l c-rank" data-sort="rank" tabindex="0" role="button" title="Position by overall score inside the current filter">
              <span class="colname">#<span class="info" data-pop="rank">i</span></span></th>`;
   head += `<th class="sticky-l c-model" data-sort="model" tabindex="0" role="button">Model ${sortMark('model')}</th>`;
-  head += `<th data-sort="overall" tabindex="0" role="button" title="${esc(S.mean)} mean over the ${activeProbes().length} enabled probes">
-             <span class="colname">Overall</span> ${sortMark('overall')}</th>`;
+  head += `<th class="c-overall" data-sort="overall" tabindex="0" role="button" title="${esc(S.mean)} mean over the ${activeProbes().length} enabled probes">
+             <span class="colname">Overall${sortMark('overall')}</span></th>`;
   for (const c of metas) {
-    head += `<th data-sort="${c.key}" tabindex="0" role="button" title="${esc(c.title)}">${esc(c.label)} ${sortMark(c.key)}</th>`;
+    head += `<th class="c-meta c-meta-${esc(c.key)}" data-sort="${c.key}" tabindex="0" role="button" title="${esc(c.title)}">${esc(c.label)} ${sortMark(c.key)}</th>`;
   }
   for (const g of groups) {
     for (const p of g.probes) {
       const doc = (PROBEDOC.probes || {})[p.name] || {};
-      head += `<th data-sort="${esc(p.name)}" tabindex="0" role="button" title="${esc(doc.catches || p.name)}. Target ${p.target}">
-                 <span class="colname">${esc(doc.title || p.name)}
-                   <span class="info" data-probe="${esc(p.name)}">i</span></span> ${sortMark(p.name)}</th>`;
+      /* the header prints `short` -- the same name with soft hyphens, so a 70px column
+         breaks it at a syllable instead of mid-word.  The full name is in the tooltip,
+         the column menu and every card. */
+      head += `<th class="pcol" data-sort="${esc(p.name)}" tabindex="0" role="button" title="${esc(doc.title || p.name)} &mdash; ${esc(doc.catches || '')} Target ${p.target}">
+                 <span class="colname">${esc(doc.short || doc.title || p.name)}<span class="info" data-probe="${esc(p.name)}">i</span>${sortMark(p.name)}</span></th>`;
     }
   }
   head += '</tr></thead>';
@@ -539,7 +551,7 @@ function renderTable() {
       </div></td>`;
 
     const oc = cellColor(colorT(r.overall, 'overall'), 'overall');
-    tds += `<td class="cell overall"><span class="v" data-overall="${esc(m.slug)}"
+    tds += `<td class="cell overall c-overall"><span class="v" data-overall="${esc(m.slug)}"
               title="${esc(S.mean)} mean over ${activeProbes().length} probes. Click for the model card"
               style="${oc ? `background:${oc.bg};color:${oc.fg}` : ''}">${fmtScore(r.overall)}</span></td>`;
 
@@ -555,11 +567,11 @@ function renderTable() {
           .concat(all.length > MAXC
             ? [`<span class="chip link" data-model="${esc(m.slug)}" title="${esc(all.slice(MAXC).join(', '))}">+${all.length - MAXC}</span>`]
             : []).join(' ');
-        tds += `<td class="pad" style="text-align:left">${chips || '<span style="color:var(--fg-faint)">-</span>'}</td>`;
+        tds += `<td class="pad c-meta c-meta-${esc(c.key)}" style="text-align:left">${chips || '<span style="color:var(--fg-faint)">-</span>'}</td>`;
       } else if (c.type === 'num') {
-        tds += `<td class="pad">${isNum(v) ? esc((c.fmt || String)(v)) : '<span style="color:var(--fg-faint)">-</span>'}</td>`;
+        tds += `<td class="pad c-meta c-meta-${esc(c.key)}">${isNum(v) ? esc((c.fmt || String)(v)) : '<span style="color:var(--fg-faint)">-</span>'}</td>`;
       } else {
-        tds += `<td class="pad" style="text-align:left;color:var(--fg-muted)">${esc(v || '-')}</td>`;
+        tds += `<td class="pad c-meta c-meta-${esc(c.key)}" style="text-align:left;color:var(--fg-muted)">${esc(v || '-')}</td>`;
       }
     }
 
@@ -578,6 +590,7 @@ function renderTable() {
           : !isNum(s) ? 'not measured'
           : `score ${s.toPrecision(8)}, defect ${sci(m.defects[p.name], 2)}`;
         const col = cellColor(colorT(s, p.name), p.name);
+        cls.push('pcol');
         tds += `<td class="${cls.join(' ')}"><span class="v" data-cell="${esc(m.slug)}|${esc(p.name)}"
                  title="${esc(tip)}" style="${col ? `background:${col.bg};color:${col.fg}` : ''}">${txt}</span></td>`;
       }
@@ -1792,11 +1805,26 @@ function wire() {
     }
   });
   addEventListener('resize', () => { placePop(); if (S.scatter) renderScatter(); });
-  $('#tablewrap').addEventListener('scroll', (e) => {
-    e.currentTarget.classList.toggle('scrolled', e.currentTarget.scrollLeft > 2);
+  /* The table no longer scrolls inside itself -- the page does -- so the shadow that
+     marks the frozen Model column follows the window's horizontal offset. */
+  addEventListener('scroll', () => {
+    $('#tablewrap').classList.toggle('scrolled', (window.scrollX || 0) > 2);
     placePop();
   }, { passive: true });
-  addEventListener('scroll', placePop, { passive: true });
+  trackToolbarHeight();
+}
+
+/* The toolbar is sticky at the top of the page and the table header has to come to rest
+   directly under it.  Its height is not a constant: the controls wrap onto a second row
+   on a narrow window, so measure it and publish it as --toolbar-h. */
+function trackToolbarHeight() {
+  const bar = $('.toolbar');
+  if (!bar) return;
+  const apply = () => document.documentElement.style.setProperty(
+    '--toolbar-h', `${Math.round(bar.getBoundingClientRect().height)}px`);
+  apply();
+  if (window.ResizeObserver) new ResizeObserver(apply).observe(bar);
+  else addEventListener('resize', apply);
 }
 
 /* ============================================================================
@@ -1918,8 +1946,7 @@ function renderMeta() {
     `<span class="chip">${FAMILIES.length} families</span>`,
     ok === MODELS.length ? '' : `<span class="chip">${ok} completed</span>`,
     crashed ? `<span class="chip" title="models with at least one probe that raised">${crashed} with a crashed probe</span>` : '',
-    gen ? `<span class="chip" title="${esc(DATA.generated)}">run ${gen.toISOString().slice(0, 10)}</span>` : '',
-    `<span class="chip" title="index schema">${esc(DATA.schema || '')}</span>`
+    gen ? `<span class="chip" title="${esc(DATA.generated)}">run ${gen.toISOString().slice(0, 10)}</span>` : ''
   ].filter(Boolean).join('');
 
   $('#footer').innerHTML = `
