@@ -1583,7 +1583,13 @@ function wire() {
     refresh({ menu: true });
   };
   $('#btn-csv').onclick  = exportCSV;
-  $('#btn-scatter').onclick = () => { S.scatter = !S.scatter; refresh(); };
+  $('#btn-scatter').onclick = () => {
+    S.scatter = !S.scatter;
+    refresh();
+    /* the charts sit below the table -- which is the point of the page and so comes
+       first -- so opening them has to take you there */
+    if (S.scatter) $('#scatter-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
   $('#help').onclick = (e) => helpCard(e.currentTarget);
   $('#btn-reset').onclick = () => {
     S.search = ''; $('#search').value = '';

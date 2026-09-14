@@ -3,14 +3,23 @@
  *
  * The static CSS grid in `styles.css` is a fixed 32px mesh.  This replaces it with
  * the same mesh drawn on a canvas, with every node displaced from its equilibrium
- * site by a superposition of three plane waves:
+ * site by a superposition of eight plane waves:
  *
- *     u(r, t) = SUM_s  A_s k^_s sin(k_s . r - w_s t)
+ *     u(r, t) = SUM_s  A_s e^_s sin(k_s . r - w_s t + phi_s)
  *
- * The waves are longitudinal (displacement along k) and their wavelengths are an
- * order of magnitude longer than the lattice constant, so neighbouring nodes move
- * almost together: the lattice breathes rather than shimmering.  Amplitudes sum to
- * 1.6px on a 32px mesh -- a 5% distortion, which is about the threshold of notice.
+ * Three things keep that from looking like one wave crossing the page:
+ *
+ *   - the eight k vectors point all round the circle, so there is no direction of
+ *     travel to pick out, only the 2D interference of everything at once;
+ *   - half are longitudinal (e || k) and half transverse (e perp k), which adds
+ *     shear to what would otherwise be pure compression;
+ *   - the periods are mutually incommensurate and unrelated to the wavelengths, so
+ *     there is no common wave speed and the pattern never repeats.
+ *
+ * What survives is local: wavelengths are 150-420px against a 32px lattice, so any
+ * two neighbouring nodes still move almost together.  Zoomed out the field looks
+ * uncorrelated, close up it is smooth.  RMS displacement is about 5% of the lattice
+ * constant, peaks near 13%.
  *
  * It is progressive enhancement, and deliberately cheap to remove: drop the
  * <script> tag and the CSS grid underneath is what renders.  Nothing else on the
@@ -27,19 +36,37 @@
   const FADE_PX = 680;   // ... and the distance over which it fades out
   const FPS     = 30;
 
-  /* wavelength and period are the readable parameters; k, omega and the
-     polarisation vector are derived from them once, here. */
+  /* One knob for how alive the lattice is.  The per-wave amplitudes below are
+     relative; this scales all of them.  0 freezes it, 2 is distracting. */
+  const AMPLITUDE = 1.3;
+
+  /* Wavelength (px), period (s), direction (rad), amplitude (px), polarisation and
+     phase are the readable parameters; k, omega and the polarisation vector are
+     derived from them once, here.  `period` is signed: a negative one runs the wave
+     backwards, so the set does not drift one way on average. */
   const WAVES = [
-    { lambda: 520, period: 19, angle:  0.40, amp: 0.7 },
-    { lambda: 380, period: 14, angle:  2.20, amp: 0.5 },
-    { lambda: 700, period: 25, angle: -1.10, amp: 0.4 }
-  ].map((w) => ({
-    kx: Math.cos(w.angle) * 2 * Math.PI / w.lambda,
-    ky: Math.sin(w.angle) * 2 * Math.PI / w.lambda,
-    om: 2 * Math.PI / (w.period * 1000),
-    ax: Math.cos(w.angle) * w.amp,          /* longitudinal: u || k */
-    ay: Math.sin(w.angle) * w.amp
-  }));
+    { lambda: 310, period:  6.5, angle:  0.35, amp: 0.85, pol: 'L', phase: 0.0 },
+    { lambda: 190, period: -4.4, angle:  2.10, amp: 0.60, pol: 'T', phase: 1.7 },
+    { lambda: 420, period:  9.1, angle: -1.25, amp: 0.75, pol: 'L', phase: 3.4 },
+    { lambda: 150, period:  3.7, angle:  4.05, amp: 0.45, pol: 'T', phase: 5.1 },
+    { lambda: 260, period: -7.3, angle:  1.55, amp: 0.65, pol: 'L', phase: 2.2 },
+    { lambda: 350, period:  5.2, angle: -2.60, amp: 0.55, pol: 'T', phase: 4.8 },
+    { lambda: 210, period: 11.0, angle:  0.95, amp: 0.50, pol: 'L', phase: 0.9 },
+    { lambda: 175, period: -8.2, angle:  3.30, amp: 0.40, pol: 'T', phase: 6.0 }
+  ].map((w) => {
+    const c = Math.cos(w.angle), s = Math.sin(w.angle);
+    /* longitudinal displaces along k, transverse across it */
+    const ex = w.pol === 'L' ? c : -s;
+    const ey = w.pol === 'L' ? s :  c;
+    return {
+      kx: c * 2 * Math.PI / w.lambda,
+      ky: s * 2 * Math.PI / w.lambda,
+      om: 2 * Math.PI / (w.period * 1000),
+      ph: w.phase,
+      ax: ex * w.amp * AMPLITUDE,
+      ay: ey * w.amp * AMPLITUDE
+    };
+  });
 
   const cv = document.createElement('canvas');
   const ctx = cv.getContext && cv.getContext('2d');
@@ -90,7 +117,7 @@
         let dx = 0, dy = 0;
         for (let s = 0; s < WAVES.length; s++) {
           const w = WAVES[s];
-          const u = Math.sin(w.kx * x0 + w.ky * y0 - w.om * t);
+          const u = Math.sin(w.kx * x0 + w.ky * y0 - w.om * t + w.ph);
           dx += w.ax * u; dy += w.ay * u;
         }
         const k = j * cols + i;

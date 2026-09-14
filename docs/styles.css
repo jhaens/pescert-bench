@@ -543,6 +543,8 @@ html[data-theme="dark"] .rank.top1 { color: #ffc94d; }
 .panel .phead { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
 .panel .phead .lbl { margin-right: 2px; }
 .scatter { width: 100%; height: 330px; display: block; overflow: visible; }
+/* scrolled to from the toolbar button, so keep its top clear of the sticky bar */
+#scatter-panel { scroll-margin-top: calc(var(--toolbar-h, 60px) + 12px); }
 .scatter .grid line { stroke: var(--border); stroke-width: 1; }
 .scatter .ax { stroke: var(--border-strong); stroke-width: 1; }
 .scatter text { fill: var(--fg-faint); font-size: 10.5px; font-family: var(--sans); }
