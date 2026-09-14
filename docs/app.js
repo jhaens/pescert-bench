@@ -498,12 +498,12 @@ function renderTable() {
   /* --- header ------------------------------------------------------------ */
   head += '<thead><tr class="groups">';
   head += `<th class="sticky-l c-rank"></th><th class="sticky-l c-model"></th>`;
-  head += `<th class="grp" data-cols="1"><span>Overall</span></th>`;
-  if (metas.length) head += `<th class="grp" colspan="${metas.length}" data-cols="${metas.length}"><span>Model</span></th>`;
+  head += `<th class="grp"><span>Overall</span></th>`;
+  if (metas.length) head += `<th class="grp" colspan="${metas.length}"><span>Model</span></th>`;
   for (const g of groups) {
     const sc = (SECTION_RAMP[g.section] || {}).base;
-    head += `<th class="grp" colspan="${g.probes.length}" data-cols="${g.probes.length}" data-section="${esc(g.section)}"
-              title="Click for what this section covers" style="cursor:pointer">
+    head += `<th class="grp" colspan="${g.probes.length}" data-section="${esc(g.section)}"
+              title="${esc(g.section)} &mdash; click for what this section covers" style="cursor:pointer">
               <span${sc ? ` style="color:${sc};border-color:${sc}33"` : ''}>${esc(g.section)}</span></th>`;
   }
   head += '</tr><tr class="cols">';

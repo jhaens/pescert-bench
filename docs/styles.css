@@ -294,31 +294,26 @@ table.bench thead tr.cols th:focus-visible { outline: 2px solid var(--accent); }
 table.bench thead tr.cols th:hover { color: var(--fg); background: var(--bg-hover); }
 table.bench thead tr.groups th.grp {
   border-left: 1px solid var(--border); border-right: 1px solid var(--border);
-  padding: 0 3px;
+  padding: 0 1px;
 }
-/* Every th in the head paints an opaque background, so a pill wider than its own cell
-   was being painted over by the next section (Overall) or spilling past the table edge
-   (Regularity, a single 70px column).  max-width pins it inside its cell, and the two
-   narrow sizes below keep it legible there rather than ellipsised. */
+/* Section labels are plain coloured text rather than capsules.  A capsule cannot hold
+   "REGULARITY" over a single 70px column at any readable size -- measured, its own
+   padding and border leave 52px for a word that needs 55px even at 8.5px -- and one row
+   of labels in a single style reads better than a row of pills with an exception in it.
+   The left/right rules on the cell already mark where each section begins and ends.
+   max-width keeps a label inside its own cell: every th in the head paints an opaque
+   background, so one that overflows is simply painted over by its neighbour. */
 table.bench thead tr.groups th.grp span {
   display: inline-block; max-width: 100%; vertical-align: middle;
-  padding: 3px 10px; border-radius: 999px;
-  background: var(--bg-sunken); border: 1px solid var(--border);
-  color: var(--fg-muted); font-weight: 700; letter-spacing: .1em;
+  padding: 3px 0;
+  /* sized against the tightest case there is: "Regularity" centred over one 70px
+     column, which measures 63px here and so clears its 68px of room */
+  color: var(--fg-muted); font-weight: 700; font-size: 9.5px; letter-spacing: .01em;
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
-table.bench thead tr.groups th.grp[data-cols="2"] span { padding: 3px 7px; font-size: 10px; letter-spacing: .03em; }
-/* A section over a single 70px column drops the capsule and is set as plain coloured
-   text.  Measured: the pill's own padding and border leave 52px for the word, and
-   "REGULARITY" needs 55px even at 8.5px -- so it was always going to be ellipsised.
-   Without the chrome it fits whole at a readable size, and a label over one column
-   reads as deliberate rather than as a cramped pill. */
-table.bench thead tr.groups th.grp[data-cols="1"] { padding: 0 2px; }
-table.bench thead tr.groups th.grp[data-cols="1"] span {
-  background: none; border: none; padding: 3px 0;
-  font-size: 9.5px; letter-spacing: 0;
+table.bench thead tr.groups th.grp:hover span {
+  filter: brightness(1.12); text-decoration: underline; text-underline-offset: 3px;
 }
-table.bench thead tr.groups th.grp:hover span { filter: brightness(1.12); border-width: 1px; }
 
 th.sticky-l, td.sticky-l { position: sticky; background: var(--bg-elev); }
 /* the frozen columns have to out-paint the cells that scroll under them --
