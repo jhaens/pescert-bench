@@ -102,6 +102,11 @@ body::before {
   mask-size: 32px 32px;
 }
 
+/* grid.js draws the same mesh on a canvas with its nodes displaced by a slow wave.
+   When it takes over it sets .grid-live, and the static grid above steps aside. */
+canvas.gridfield { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
+html.grid-live body::before { display: none; }
+
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
