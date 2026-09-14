@@ -498,11 +498,11 @@ function renderTable() {
   /* --- header ------------------------------------------------------------ */
   head += '<thead><tr class="groups">';
   head += `<th class="sticky-l c-rank"></th><th class="sticky-l c-model"></th>`;
-  head += `<th class="grp"><span>Overall</span></th>`;
-  if (metas.length) head += `<th class="grp" colspan="${metas.length}"><span>Model</span></th>`;
+  head += `<th class="grp" data-cols="1"><span>Overall</span></th>`;
+  if (metas.length) head += `<th class="grp" colspan="${metas.length}" data-cols="${metas.length}"><span>Model</span></th>`;
   for (const g of groups) {
     const sc = (SECTION_RAMP[g.section] || {}).base;
-    head += `<th class="grp" colspan="${g.probes.length}" data-section="${esc(g.section)}"
+    head += `<th class="grp" colspan="${g.probes.length}" data-cols="${g.probes.length}" data-section="${esc(g.section)}"
               title="Click for what this section covers" style="cursor:pointer">
               <span${sc ? ` style="color:${sc};border-color:${sc}33"` : ''}>${esc(g.section)}</span></th>`;
   }
@@ -606,7 +606,31 @@ function renderTable() {
     </td></tr></tfoot>`;
 
   t.innerHTML = head + `<tbody>${body}</tbody>` + foot;
+  applyTableWidth();
   renderFilterBar();
+}
+
+/* The card is given the exact width of the columns that are switched on, read back from
+   the same custom properties the colgroup uses.  Without a definite width the browser is
+   free to stretch the table across a wide monitor or squeeze it on a narrow one, and a
+   squeezed fixed-layout table shares the shortfall out unevenly -- which is precisely
+   what "equally large columns" rules out. */
+function applyTableWidth() {
+  const wrap = $('#tablewrap');
+  if (!wrap) return;
+  const cs = getComputedStyle(document.documentElement);
+  const px = (n) => parseFloat(cs.getPropertyValue(n)) || 0;
+  let w = 2;                                   /* the card's own 1px borders */
+  for (const col of $$('colgroup col', wrap)) {
+    const c = col.classList;
+    w += c.contains('w-rank')         ? px('--w-rank')
+       : c.contains('w-model')        ? px('--w-model')
+       : c.contains('w-overall')      ? px('--w-overall')
+       : c.contains('w-meta-dataset') ? px('--w-meta-dataset')
+       : c.contains('w-meta')         ? px('--w-meta')
+       :                                px('--w-pcol');
+  }
+  wrap.style.setProperty('--table-w', `${w}px`);
 }
 
 /* ============================================================================
@@ -1804,7 +1828,7 @@ function wire() {
       e.preventDefault(); $('#search').focus(); $('#search').select();
     }
   });
-  addEventListener('resize', () => { placePop(); if (S.scatter) renderScatter(); });
+  addEventListener('resize', () => { applyTableWidth(); placePop(); if (S.scatter) renderScatter(); });
   /* The table no longer scrolls inside itself -- the page does -- so the shadow that
      marks the frozen Model column follows the window's horizontal offset. */
   addEventListener('scroll', () => {
