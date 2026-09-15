@@ -1,0 +1,92 @@
+{
+  "slug": "prophet-oame-mbd",
+  "label": "Prophet-OAME-MBD",
+  "family": "Prophet",
+  "packages": [
+    "e3nn==0.6.0",
+    "matscipy==1.2.0",
+    "torch-geometric==2.8.0",
+    "scipy",
+    "numpy",
+    "openequivariance>=0.6.8"
+  ],
+  "requirements": [
+    "torch==2.7.1",
+    "ase==3.28.0",
+    "e3nn==0.6.0",
+    "matscipy==1.2.0",
+    "torch-geometric==2.8.0",
+    "scipy",
+    "numpy",
+    "openequivariance>=0.6.8"
+  ],
+  "calculator": "prophet.KairosCalculator(model_path=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/prophet-oame-mbd.pt\", device=\"cuda\")",
+  "imports": [
+    "prophet"
+  ],
+  "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
+  "notes": "Prophet-V1-MBD, the Matbench Discovery submission checkpoint (F1 0.9275, kappa_SRME 0.0648): 62.3M parameters, 10 layers, lmax 4, nested cutoffs 3/7 A, thermal-conductivity fine-tuned.  Multi-Cutoff Spectral Decomposition recombines nested cutoff scales linearly, which the report claims keeps E(3) equivariance exact and the energy twice continuously differentiable -- the equivariance and conservativity probes test exactly that claim.  Weights are CC-BY-4.0 and ungated; the checkpoint is staged by hand next to the others because KairosCalculator takes a filesystem path, not a hub id (hf download kairosmaterial/prophet prophet-oame-mbd.pt).  The magnetic sibling Prophet-V1-Mag ships in the same package behind prophet_spin.SpinCalculator and is not certified here: it needs an explicit magnetic state as input.",
+  "precision": "float32",
+  "python": "3.11",
+  "find_links": [],
+  "n_parameters_hint": null,
+  "packages_no_deps": [
+    "prophet-mlip[kernel]@git+https://github.com/kairosmaterial/prophet.git"
+  ],
+  "training_set": [
+    "OMat24",
+    "ELEMENTA",
+    "MPtrj",
+    "sAlex",
+    "ELEMENTA-Vib"
+  ],
+  "training_set_complete": true,
+  "training_set_note": "Three training stages, per the technical report: OMat24 and the composition-complete ELEMENTA corpus, then MPtrj and sAlex, then the perturbed-structure subset ELEMENTA Vib.  The ELEMENTA Vib count is the source's own approximate ~8M, and it publishes no material count, so n_training_materials is null for this row while n_training_structures is a sum that includes an approximate term.",
+  "training_heads": [],
+  "evaluated_head": "",
+  "n_training_structures": 331509030,
+  "n_training_materials": null,
+  "datasets": [
+    {
+      "key": "OMat24",
+      "label": "OMat24",
+      "n_structures": 100824585,
+      "n_materials": 3227606,
+      "url": "https://huggingface.co/datasets/fairchem/OMAT24#omat24-dataset",
+      "notes": "Open Materials 2024 (Meta FAIR): >100M structures from perturbing Alexandria structures."
+    },
+    {
+      "key": "ELEMENTA",
+      "label": "ELEMENTA",
+      "n_structures": 210656285,
+      "n_materials": 9781175,
+      "url": "https://www.kairosmaterials.com/papers/ELEMENTA.pdf",
+      "notes": "Kairos Materials' composition-complete first-principles corpus (VASP, PBE+U, PBE pseudopotentials)."
+    },
+    {
+      "key": "MPtrj",
+      "label": "MPtrj",
+      "n_structures": 1580395,
+      "n_materials": 145923,
+      "url": "https://figshare.com/articles/dataset/23713842",
+      "notes": "Materials Project relaxation trajectories, cleaned and subsampled to about every 10th ionic step; created for CHGNet."
+    },
+    {
+      "key": "sAlex",
+      "label": "sAlex",
+      "n_structures": 10447765,
+      "n_materials": 3227606,
+      "url": "https://huggingface.co/datasets/fairchem/OMAT24#salex-dataset",
+      "notes": "Alexandria subsampled by FAIR, filtered to remove prototype overlap with the Matbench Discovery WBM test set."
+    },
+    {
+      "key": "ELEMENTA-Vib",
+      "label": "ELEMENTA Vib",
+      "n_structures": 8000000,
+      "n_materials": null,
+      "url": "https://www.kairosmaterials.com/papers/ELEMENTA.pdf",
+      "notes": "ELEMENTA expansion set: perturbed structures probing local vibrational environments, the corpus Prophet's third training stage uses."
+    }
+  ],
+  "torch_index": "https://download.pytorch.org/whl/cu126"
+}

@@ -1,0 +1,331 @@
+{
+  "schema": "pescert-run/1",
+  "model": {
+    "slug": "prophet-oame-mbd",
+    "label": "Prophet-OAME-MBD",
+    "family": "Prophet",
+    "packages": [
+      "e3nn==0.6.0",
+      "matscipy==1.2.0",
+      "torch-geometric==2.8.0",
+      "scipy",
+      "numpy"
+    ],
+    "calculator": "prophet.KairosCalculator(model_path=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/prophet-oame-mbd.pt\", use_kernel=False, device=\"cuda\")",
+    "notes": "Prophet-V1-MBD, the Matbench Discovery submission checkpoint (F1 0.9275, kappa_SRME 0.0648): 62.3M parameters, 10 layers, lmax 4, nested cutoffs 3/7 A, thermal-conductivity fine-tuned.  Multi-Cutoff Spectral Decomposition recombines nested cutoff scales linearly, which the report claims keeps E(3) equivariance exact and the energy twice continuously differentiable -- the equivariance and conservativity probes test exactly that claim.  Weights are CC-BY-4.0 and ungated; the checkpoint is staged by hand next to the others because KairosCalculator takes a filesystem path, not a hub id (hf download kairosmaterial/prophet prophet-oame-mbd.pt).  The magnetic sibling Prophet-V1-Mag ships in the same package behind prophet_spin.SpinCalculator and is not certified here: it needs an explicit magnetic state as input.",
+    "imports": [
+      "prophet"
+    ],
+    "python": "3.11",
+    "precision": "float32",
+    "training_set": [
+      "OMat24",
+      "ELEMENTA",
+      "MPtrj",
+      "sAlex",
+      "ELEMENTA-Vib"
+    ],
+    "training_set_complete": true,
+    "training_set_note": "Three training stages, per the technical report: OMat24 and the composition-complete ELEMENTA corpus, then MPtrj and sAlex, then the perturbed-structure subset ELEMENTA Vib.  The ELEMENTA Vib count is the source's own approximate ~8M, and it publishes no material count, so n_training_materials is null for this row while n_training_structures is a sum that includes an approximate term.",
+    "training_heads": [],
+    "evaluated_head": "",
+    "n_training_structures": 331509030,
+    "n_training_materials": null,
+    "datasets": [
+      {
+        "key": "OMat24",
+        "label": "OMat24",
+        "n_structures": 100824585,
+        "n_materials": 3227606,
+        "url": "https://huggingface.co/datasets/fairchem/OMAT24#omat24-dataset",
+        "notes": "Open Materials 2024 (Meta FAIR): >100M structures from perturbing Alexandria structures."
+      },
+      {
+        "key": "ELEMENTA",
+        "label": "ELEMENTA",
+        "n_structures": 210656285,
+        "n_materials": 9781175,
+        "url": "https://www.kairosmaterials.com/papers/ELEMENTA.pdf",
+        "notes": "Kairos Materials' composition-complete first-principles corpus (VASP, PBE+U, PBE pseudopotentials), built by random structure search over an enumerated space of ~1.9M reduced unary, binary and ternary formulas with up to twelve atoms per cell, plus representative ternary and quaternary systems with larger reduced formulas and cells of up to 40 atoms.  The counted 210M frames are DFT relaxation trajectories with energies, forces and stresses over >9.7M distinct relaxed polymorphs; Kairos reports removing structures overlapping the WBM test set before Matbench Discovery training.  ACCESS IS PARTIAL: the full 210M-frame core corpus counted here is not public.  The first public release (huggingface.co/datasets/kairosmaterial/ELEMENTA) holds ~39M core frames -- the unary and binary spaces plus ternary compositions whose reduced-formula coefficients sum to at most four -- and the complete 4.7M-frame ELEMENTA Spin set, as extended XYZ under CC-BY-NC-4.0.  doi:10.5281/zenodo.22638068, created 2026-07-27."
+      },
+      {
+        "key": "MPtrj",
+        "label": "MPtrj",
+        "n_structures": 1580395,
+        "n_materials": 145923,
+        "url": "https://figshare.com/articles/dataset/23713842",
+        "notes": "Materials Project relaxation trajectories, cleaned and subsampled to about every 10th ionic step; created for CHGNet."
+      },
+      {
+        "key": "sAlex",
+        "label": "sAlex",
+        "n_structures": 10447765,
+        "n_materials": 3227606,
+        "url": "https://huggingface.co/datasets/fairchem/OMAT24#salex-dataset",
+        "notes": "Alexandria subsampled by FAIR, filtered to remove prototype overlap with the Matbench Discovery WBM test set."
+      },
+      {
+        "key": "ELEMENTA-Vib",
+        "label": "ELEMENTA Vib",
+        "n_structures": 8000000,
+        "n_materials": null,
+        "url": "https://www.kairosmaterials.com/papers/ELEMENTA.pdf",
+        "notes": "ELEMENTA expansion set: perturbed structures probing local vibrational environments, the corpus Prophet's third training stage uses.  Not part of the 210M-frame ELEMENTA core count, and not in the public Hugging Face release, which carries the core subset and ELEMENTA Spin only."
+      }
+    ],
+    "n_parameters": 62296064,
+    "n_parameters_trainable": 62296064,
+    "n_modules_found": 1,
+    "from_state_dict": false,
+    "n_parameters_source": "runtime"
+  },
+  "run": {
+    "started": "2026-09-15T11:13:30+00:00",
+    "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
+    "seed": 0,
+    "budget_per_eval": null,
+    "agg_method": "arithmetic",
+    "evals": "all",
+    "environment": {
+      "python": "3.11.16",
+      "torch": "2.7.1+cu126",
+      "torch_cuda": "12.6",
+      "cuda_available": true,
+      "ase": "3.28.0",
+      "pescert": "0.1.0",
+      "host": "e5b261592b74",
+      "gpu": {
+        "name": "NVIDIA RTX A5000",
+        "capability": "8.6",
+        "total_memory_GB": 23.55
+      }
+    },
+    "calculator_class": "KairosCalculator",
+    "load_seconds": 12.08,
+    "suite_seconds": 20923.84,
+    "wall_seconds": 20935.93
+  },
+  "aggregate": {
+    "overall": 0.8709239950281331,
+    "overall_method": "arithmetic",
+    "sub_scores": {
+      "conservativeness": 0.9911848943366396,
+      "equivariance": 0.9503577400742556,
+      "smoothness": 0.9901685735664317,
+      "stress_consistency": 0.7138415488795857,
+      "parity": 0.9955305675528621,
+      "representation": 0.9866904282420597,
+      "cross_maxwell": 0.2936258123057536,
+      "betti": 0.9887922410978872,
+      "zero_modes": 0.7973056571110085,
+      "trimer": 0.7733759407053,
+      "reversibility": 0.9951729888755606,
+      "config_temperature": 0.9109481898976698,
+      "equipartition": 0.8682137323911527,
+      "virial": 0.9377276153576968
+    },
+    "gates": {
+      "conservativeness": true,
+      "equivariance": true,
+      "stress_consistency": true,
+      "parity": true,
+      "representation": true,
+      "cross_maxwell": false,
+      "betti": true,
+      "zero_modes": false,
+      "trimer": true,
+      "reversibility": true
+    },
+    "gates_passed": 8,
+    "gates_total": 10,
+    "n_total_calls": 35941
+  },
+  "metadata": {
+    "elements": [
+      "Li",
+      "Be",
+      "B",
+      "C",
+      "Na",
+      "Mg",
+      "Al",
+      "Si",
+      "P",
+      "S"
+    ],
+    "per_element_overall": {
+      "Li": 0.9205181849179567,
+      "Be": 0.831464327966175,
+      "B": 0.8218374770974537,
+      "C": 0.8246181394387714,
+      "Na": 0.9075041725120843,
+      "Mg": 0.8463388752653883,
+      "Al": 0.8151024146086729,
+      "Si": 0.9063602334552953,
+      "P": 0.8847203063006405,
+      "S": 0.8099952741965077
+    },
+    "mean_of_element_overalls": 0.8568459405758946,
+    "evals": [
+      "conservativeness",
+      "equivariance",
+      "smoothness",
+      "stress_consistency",
+      "parity",
+      "representation",
+      "cross_maxwell",
+      "betti",
+      "zero_modes",
+      "trimer",
+      "reversibility",
+      "config_temperature",
+      "equipartition",
+      "virial"
+    ],
+    "n_total_calls": 35901
+  },
+  "results": [
+    {
+      "name": "conservativeness",
+      "section": "Self-consistency",
+      "target": 0.0,
+      "raw_defect": 0.00044475424155226984,
+      "score": 0.9911848943366396,
+      "n_model_calls": 90,
+      "gate": true,
+      "crashed": {}
+    },
+    {
+      "name": "equivariance",
+      "section": "Symmetry & invariance",
+      "target": 0.0,
+      "raw_defect": 0.051501114228955716,
+      "score": 0.9503577400742556,
+      "n_model_calls": 90,
+      "gate": true,
+      "crashed": {}
+    },
+    {
+      "name": "smoothness",
+      "section": "Regularity",
+      "target": 0.0,
+      "raw_defect": 0.010083027996954198,
+      "score": 0.9901685735664317,
+      "n_model_calls": 810,
+      "gate": null,
+      "crashed": {}
+    },
+    {
+      "name": "stress_consistency",
+      "section": "Self-consistency",
+      "target": 0.0,
+      "raw_defect": 0.025484484051185842,
+      "score": 0.7138415488795857,
+      "n_model_calls": 130,
+      "gate": true,
+      "crashed": {}
+    },
+    {
+      "name": "parity",
+      "section": "Symmetry & invariance",
+      "target": 0.0,
+      "raw_defect": 4.486031800261767e-06,
+      "score": 0.9955305675528621,
+      "n_model_calls": 20,
+      "gate": true,
+      "crashed": {}
+    },
+    {
+      "name": "representation",
+      "section": "Symmetry & invariance",
+      "target": 0.0,
+      "raw_defect": 0.0134165867746388,
+      "score": 0.9866904282420597,
+      "n_model_calls": 200,
+      "gate": true,
+      "crashed": {}
+    },
+    {
+      "name": "cross_maxwell",
+      "section": "Self-consistency",
+      "target": 0.0,
+      "raw_defect": 0.10529225477816037,
+      "score": 0.2936258123057536,
+      "n_model_calls": 3196,
+      "gate": false,
+      "crashed": {}
+    },
+    {
+      "name": "betti",
+      "section": "Self-consistency",
+      "target": 0.0,
+      "raw_defect": 0.00022596306344820007,
+      "score": 0.9887922410978872,
+      "n_model_calls": 480,
+      "gate": true,
+      "crashed": {}
+    },
+    {
+      "name": "zero_modes",
+      "section": "Symmetry & invariance",
+      "target": 0.0,
+      "raw_defect": 9.386477862121006e-05,
+      "score": 0.7973056571110085,
+      "n_model_calls": 1935,
+      "gate": false,
+      "crashed": {}
+    },
+    {
+      "name": "trimer",
+      "section": "Symmetry & invariance",
+      "target": 0.0,
+      "raw_defect": 4.585754451365511,
+      "score": 0.7733759407053,
+      "n_model_calls": 1140,
+      "gate": true,
+      "crashed": {}
+    },
+    {
+      "name": "reversibility",
+      "section": "Self-consistency",
+      "target": 0.0,
+      "raw_defect": 4.8629312421522805e-06,
+      "score": 0.9951729888755606,
+      "n_model_calls": 2010,
+      "gate": true,
+      "crashed": {}
+    },
+    {
+      "name": "config_temperature",
+      "section": "Statistical mechanics",
+      "target": 1.0,
+      "raw_defect": 0.09399383084029186,
+      "score": 0.9109481898976698,
+      "n_model_calls": 25060,
+      "gate": null,
+      "crashed": {}
+    },
+    {
+      "name": "equipartition",
+      "section": "Statistical mechanics",
+      "target": 1.0,
+      "raw_defect": 0.1474772951046358,
+      "score": 0.8682137323911527,
+      "n_model_calls": 780,
+      "gate": null,
+      "crashed": {}
+    },
+    {
+      "name": "virial",
+      "section": "Statistical mechanics",
+      "target": 1.0,
+      "raw_defect": 0.06720935946743307,
+      "score": 0.9377276153576968,
+      "n_model_calls": 0,
+      "gate": null,
+      "crashed": {}
+    }
+  ],
+  "crashes": {},
+  "status": "ok"
+}

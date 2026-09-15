@@ -1,6 +1,6 @@
 {
   "schema": "pescert-index/1",
-  "generated": "2026-09-13T00:35:37+00:00",
+  "generated": "2026-09-15T17:25:03+00:00",
   "sections": [
     "Symmetry & invariance",
     "Self-consistency",
@@ -199,6 +199,22 @@
       "n_materials": null,
       "url": "https://github.com/microsoft/mattersim",
       "notes": "Microsoft Research corpus spanning a wide temperature and pressure range. Unreleased: the count is from the paper, the data itself is not public."
+    },
+    "ELEMENTA": {
+      "key": "ELEMENTA",
+      "label": "ELEMENTA",
+      "n_structures": 210656285,
+      "n_materials": 9781175,
+      "url": "https://www.kairosmaterials.com/papers/ELEMENTA.pdf",
+      "notes": "Kairos Materials' composition-complete first-principles corpus (VASP, PBE+U, PBE pseudopotentials)."
+    },
+    "ELEMENTA-Vib": {
+      "key": "ELEMENTA-Vib",
+      "label": "ELEMENTA Vib",
+      "n_structures": 8000000,
+      "n_materials": null,
+      "url": "https://www.kairosmaterials.com/papers/ELEMENTA.pdf",
+      "notes": "ELEMENTA expansion set: perturbed structures probing local vibrational environments, the corpus Prophet's third training stage uses."
     },
     "Alex": {
       "key": "Alex",
@@ -936,7 +952,7 @@
       "packages": [
         "calorine==3.5"
       ],
-      "calculator": "calorine.calculators.CPUNEP(\"nep89_20250409.txt\")",
+      "calculator": "calorine.calculators.CPUNEP(\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/nep89_20250409.txt\")",
       "notes": "Neuroevolution potential covering 89 elements, from the Zenodo record for arXiv:2504.21286.",
       "precision": "float64",
       "training_set": [
@@ -2051,7 +2067,7 @@
       "packages": [
         "nequip==0.19.1"
       ],
-      "calculator": "nequip.integrations.ase.NequIPCalculator.from_compiled_model(\"NequIP-OAM-L-0.1.nequip.pth\", device=\"cuda\")",
+      "calculator": "nequip.integrations.ase.NequIPCalculator.from_compiled_model(\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/NequIP-OAM-L-0.1.nequip.pth\", device=\"cuda\")",
       "notes": "Fetched from nequip.net rather than a local file.",
       "precision": "float32",
       "training_set": [
@@ -2199,7 +2215,7 @@
         "nequip==0.19.1",
         "nequip-allegro==0.8.3"
       ],
-      "calculator": "nequip.integrations.ase.NequIPCalculator.from_compiled_model(\"Allegro-OAM-L-0.1.nequip.pth\", device=\"cuda\")",
+      "calculator": "nequip.integrations.ase.NequIPCalculator.from_compiled_model(\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/Allegro-OAM-L-0.1.nequip.pth\", device=\"cuda\")",
       "notes": "Allegro shares the nequip calculator; the extra package supplies the model.",
       "precision": "float32",
       "training_set": [
@@ -2346,7 +2362,7 @@
       "packages": [
         "nequip==0.19.1"
       ],
-      "calculator": "nequip.integrations.ase.NequIPCalculator.from_compiled_model(\"NequIP-OAM-XL-0.1.nequip.pth\", device=\"cuda\")",
+      "calculator": "nequip.integrations.ase.NequIPCalculator.from_compiled_model(\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/NequIP-OAM-XL-0.1.nequip.pth\", device=\"cuda\")",
       "notes": "The distributed .nequip.zip is a package, not a compiled artifact, so it is compiled once with nequip-compile --mode torchscript --target ase.",
       "precision": "float32",
       "training_set": [
@@ -2673,7 +2689,7 @@
       "label": "EquFlashV2-45M-OAM",
       "family": "EquFlash",
       "packages": [
-        "GGNN@file://<local>/ggnn-0.1-py3-none-any.whl",
+        "GGNN@file:///scratch/joha4087/scripting/evals/playground/large_scale_pretrained/_tools/wheels/ggnn-0.1-py3-none-any.whl",
         "cuequivariance==0.6.0",
         "cuequivariance-torch==0.6.0",
         "cuequivariance-ops-torch-cu12==0.6.0",
@@ -2697,7 +2713,7 @@
         "tqdm",
         "wandb"
       ],
-      "calculator": "GGNN.common.calculator.UCalculator(checkpoint_path=\"equflashv2_oam.pt\", cpu=False)",
+      "calculator": "GGNN.common.calculator.UCalculator(checkpoint_path=\"/scratch5/joha4087/model_download/equflashv2_oam.pt\", cpu=False)",
       "notes": "GGNN is public at SamsungDS/GGNN; the checkpoint is the local one.  The pins come from the repo's own requirements.txt, which is where the cuequivariance version GGNN's buffer_num_segments needs is recorded.",
       "precision": "float32",
       "training_set": [
@@ -3478,6 +3494,175 @@
     },
     {
       "imports": [
+        "prophet"
+      ],
+      "python": "3.11",
+      "slug": "prophet-oame-mbd",
+      "label": "Prophet-OAME-MBD",
+      "family": "Prophet",
+      "packages": [
+        "e3nn==0.6.0",
+        "matscipy==1.2.0",
+        "torch-geometric==2.8.0",
+        "scipy",
+        "numpy"
+      ],
+      "calculator": "prophet.KairosCalculator(model_path=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/prophet-oame-mbd.pt\", use_kernel=False, device=\"cuda\")",
+      "notes": "Prophet-V1-MBD, the Matbench Discovery submission checkpoint (F1 0.9275, kappa_SRME 0.0648): 62.3M parameters, 10 layers, lmax 4, nested cutoffs 3/7 A, thermal-conductivity fine-tuned.  Multi-Cutoff Spectral Decomposition recombines nested cutoff scales linearly, which the report claims keeps E(3) equivariance exact and the energy twice continuously differentiable -- the equivariance and conservativity probes test exactly that claim.  Weights are CC-BY-4.0 and ungated; the checkpoint is staged by hand next to the others because KairosCalculator takes a filesystem path, not a hub id (hf download kairosmaterial/prophet prophet-oame-mbd.pt).  The magnetic sibling Prophet-V1-Mag ships in the same package behind prophet_spin.SpinCalculator and is not certified here: it needs an explicit magnetic state as input.",
+      "precision": "float32",
+      "training_set": [
+        "OMat24",
+        "ELEMENTA",
+        "MPtrj",
+        "sAlex",
+        "ELEMENTA-Vib"
+      ],
+      "training_set_complete": true,
+      "training_set_note": "Three training stages, per the technical report: OMat24 and the composition-complete ELEMENTA corpus, then MPtrj and sAlex, then the perturbed-structure subset ELEMENTA Vib.  The ELEMENTA Vib count is the source's own approximate ~8M, and it publishes no material count, so n_training_materials is null for this row while n_training_structures is a sum that includes an approximate term.",
+      "training_heads": [],
+      "evaluated_head": "",
+      "n_training_structures": 331509030,
+      "n_training_materials": null,
+      "datasets": [
+        {
+          "key": "OMat24",
+          "label": "OMat24",
+          "n_structures": 100824585,
+          "n_materials": 3227606,
+          "url": "https://huggingface.co/datasets/fairchem/OMAT24#omat24-dataset",
+          "notes": "Open Materials 2024 (Meta FAIR): >100M structures from perturbing Alexandria structures."
+        },
+        {
+          "key": "ELEMENTA",
+          "label": "ELEMENTA",
+          "n_structures": 210656285,
+          "n_materials": 9781175,
+          "url": "https://www.kairosmaterials.com/papers/ELEMENTA.pdf",
+          "notes": "Kairos Materials' composition-complete first-principles corpus (VASP, PBE+U, PBE pseudopotentials)."
+        },
+        {
+          "key": "MPtrj",
+          "label": "MPtrj",
+          "n_structures": 1580395,
+          "n_materials": 145923,
+          "url": "https://figshare.com/articles/dataset/23713842",
+          "notes": "Materials Project relaxation trajectories, cleaned and subsampled to about every 10th ionic step; created for CHGNet."
+        },
+        {
+          "key": "sAlex",
+          "label": "sAlex",
+          "n_structures": 10447765,
+          "n_materials": 3227606,
+          "url": "https://huggingface.co/datasets/fairchem/OMAT24#salex-dataset",
+          "notes": "Alexandria subsampled by FAIR, filtered to remove prototype overlap with the Matbench Discovery WBM test set."
+        },
+        {
+          "key": "ELEMENTA-Vib",
+          "label": "ELEMENTA Vib",
+          "n_structures": 8000000,
+          "n_materials": null,
+          "url": "https://www.kairosmaterials.com/papers/ELEMENTA.pdf",
+          "notes": "ELEMENTA expansion set: perturbed structures probing local vibrational environments, the corpus Prophet's third training stage uses."
+        }
+      ],
+      "n_parameters": 62296064,
+      "n_parameters_trainable": 62296064,
+      "n_modules_found": 1,
+      "from_state_dict": false,
+      "n_parameters_source": "runtime",
+      "status": "ok",
+      "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
+      "seed": 0,
+      "wall_seconds": 20935.93,
+      "environment": {
+        "python": "3.11.16",
+        "torch": "2.7.1+cu126",
+        "torch_cuda": "12.6",
+        "cuda_available": true,
+        "ase": "3.28.0",
+        "pescert": "0.1.0",
+        "host": "e5b261592b74",
+        "gpu": {
+          "name": "NVIDIA RTX A5000",
+          "capability": "8.6",
+          "total_memory_GB": 23.55
+        }
+      },
+      "scores": {
+        "conservativeness": 0.9911848943366396,
+        "equivariance": 0.9503577400742556,
+        "smoothness": 0.9901685735664317,
+        "stress_consistency": 0.7138415488795857,
+        "parity": 0.9955305675528621,
+        "representation": 0.9866904282420597,
+        "cross_maxwell": 0.2936258123057536,
+        "betti": 0.9887922410978872,
+        "zero_modes": 0.7973056571110085,
+        "trimer": 0.7733759407053,
+        "reversibility": 0.9951729888755606,
+        "config_temperature": 0.9109481898976698,
+        "equipartition": 0.8682137323911527,
+        "virial": 0.9377276153576968
+      },
+      "defects": {
+        "conservativeness": 0.00044475424155226984,
+        "equivariance": 0.051501114228955716,
+        "smoothness": 0.010083027996954198,
+        "stress_consistency": 0.025484484051185842,
+        "parity": 4.486031800261767e-06,
+        "representation": 0.0134165867746388,
+        "cross_maxwell": 0.10529225477816037,
+        "betti": 0.00022596306344820007,
+        "zero_modes": 9.386477862121006e-05,
+        "trimer": 4.585754451365511,
+        "reversibility": 4.8629312421522805e-06,
+        "config_temperature": 0.09399383084029186,
+        "equipartition": 0.1474772951046358,
+        "virial": 0.06720935946743307
+      },
+      "calls": {
+        "conservativeness": 90,
+        "equivariance": 90,
+        "smoothness": 810,
+        "stress_consistency": 130,
+        "parity": 20,
+        "representation": 200,
+        "cross_maxwell": 3196,
+        "betti": 480,
+        "zero_modes": 1935,
+        "trimer": 1140,
+        "reversibility": 2010,
+        "config_temperature": 25060,
+        "equipartition": 780,
+        "virial": 0
+      },
+      "gates": {
+        "conservativeness": true,
+        "equivariance": true,
+        "smoothness": null,
+        "stress_consistency": true,
+        "parity": true,
+        "representation": true,
+        "cross_maxwell": false,
+        "betti": true,
+        "zero_modes": false,
+        "trimer": true,
+        "reversibility": true,
+        "config_temperature": null,
+        "equipartition": null,
+        "virial": null
+      },
+      "crashes": {},
+      "skipped": {},
+      "overall": {
+        "arithmetic": 0.8709239950281331,
+        "geometric": 0.8395426458831413,
+        "harmonic": 0.7876230908171322
+      },
+      "result_file": "prophet-oame-mbd/result.json"
+    },
+    {
+      "imports": [
         "tensorpotential.calculator"
       ],
       "python": "3.11",
@@ -3894,7 +4079,7 @@
         "deepmd-kit[torch]@git+https://github.com/wanghan-iapcm/deepmd-kit@3eb005be526f199f5ef67667edc7a91cd5c77f7c",
         "e3nn==0.6.0"
       ],
-      "calculator": "deepmd.calculator.DP(model=\"DPA-3.1-3M.pt\", head=\"Omat24\")",
+      "calculator": "deepmd.calculator.DP(model=\"/scratch5/joha4087/programs/dpa_models/DPA-3.1-3M.pt\", head=\"Omat24\")",
       "notes": "DPA-3.1, 3M parameters, multitask-pretrained on the OpenLAM corpora (huggingface.co/deepmodelingcommunity/DPA-3.1-3M).  A multitask checkpoint has no single head: the \"Omat24\" branch is selected, the one whose corpus matches this element sweep, so the row is that head and not the model as a whole.",
       "precision": "float64",
       "training_set": [
@@ -4387,7 +4572,7 @@
         "numpy<2",
         "scipy<1.15"
       ],
-      "calculator": "fairchem.core.OCPCalculator(checkpoint_path=\"omat24-mptrj-salex_gradient.pt\", cpu=False)",
+      "calculator": "fairchem.core.OCPCalculator(checkpoint_path=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/checkpoint/omat24-mptrj-salex_gradient.pt\", cpu=False)",
       "notes": "Weights come from the mirror-physics/equiformer_v3 HuggingFace repo; omat24-mptrj-salex_gradient.pt is the OAM, conservative-gradient variant. The code is a fairchem fork, so the package lives in packages/fairchem-core.",
       "precision": "float32",
       "training_set": [
@@ -4537,7 +4722,7 @@
         "deepmd-kit[torch]@git+https://github.com/wanghan-iapcm/deepmd-kit@3eb005be526f199f5ef67667edc7a91cd5c77f7c",
         "e3nn==0.6.0"
       ],
-      "calculator": "deepmd.calculator.DP(model=\"dpa-4.0.1-pro-mptrj.pt\")",
+      "calculator": "deepmd.calculator.DP(model=\"/scratch5/joha4087/programs/dpa_models/dpa-4.0.1-pro-mptrj.pt\")",
       "notes": "Local DPA-4.0.1 Pro checkpoint fine-tuned on MPtrj.",
       "precision": "float64",
       "training_set": [
@@ -4816,7 +5001,7 @@
         "numpy<2",
         "scipy<1.15"
       ],
-      "calculator": "fairchem.core.OCPCalculator(checkpoint_path=\"esen_30m_mptrj.pt\", cpu=False)",
+      "calculator": "fairchem.core.OCPCalculator(checkpoint_path=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/esen_30m_mptrj.pt\", cpu=False)",
       "notes": "Same 30M eSEN, MPtrj only -- the training-corpus arm of the series.  Needs fairchem-core 1.10.0: that is the release registering the 'mlip_trainer' the checkpoint asks for (fairchem/core/models/esen/trainers).",
       "precision": "float32",
       "training_set": [
@@ -4947,7 +5132,7 @@
         "numpy<2",
         "scipy<1.15"
       ],
-      "calculator": "fairchem.core.OCPCalculator(checkpoint_path=\"esen_30m_oam.pt\", cpu=False)",
+      "calculator": "fairchem.core.OCPCalculator(checkpoint_path=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/esen_30m_oam.pt\", cpu=False)",
       "notes": "eSEN 30M on OAM; checkpoint from facebook/OMAT24.  Needs fairchem-core 1.10.0: that is the release registering the 'mlip_trainer' the checkpoint asks for (fairchem/core/models/esen/trainers).",
       "precision": "float32",
       "training_set": [
@@ -5095,7 +5280,7 @@
         "deepmd-kit[torch]@git+https://github.com/wanghan-iapcm/deepmd-kit@3eb005be526f199f5ef67667edc7a91cd5c77f7c",
         "e3nn==0.6.0"
       ],
-      "calculator": "deepmd.calculator.DP(model=\"dpa-2.4-7M.pt\", head=\"Omat24\")",
+      "calculator": "deepmd.calculator.DP(model=\"/scratch5/joha4087/programs/dpa_models/dpa-2.4-7M.pt\", head=\"Omat24\")",
       "notes": "DPA-2.4, 7M parameters: the generation before DPA-3 (huggingface.co/deepmodelingcommunity/DPA-2.4-7M), \"Omat24\" head.",
       "precision": "float64",
       "training_set": [
@@ -5336,7 +5521,7 @@
         "numpy>=2.0"
       ],
       "calculator": "matris.applications.base.MatRISCalculator(model=\"matris_10m_oam\", task=\"efsm\", device=\"cuda\")",
-      "notes": "MatRIS 10M pretrained on OMat24 and fine-tuned on sAlex+MPtrj.  The checkpoint is staged by hand: matris/model/model.py downloads from a figshare ndownloader URL that now answers 403/202 with an empty body, which is why the first run died in torch.load with EOFError.  figshare's API endpoint still serves it, and the file is kept alongside the other hand-downloaded checkpoints.  MatRIS.load looks only in ~/.cache/matris and HOME is /model-cache in the container, so after a /var/tmp wipe re-stage it: cp download_checkpoints/MatRIS_10M_OAM.pth.tar matris  (re-fetch with curl -L https://api.figshare.com/v2/file/download/59142728).",
+      "notes": "MatRIS 10M pretrained on OMat24 and fine-tuned on sAlex+MPtrj.  The checkpoint is staged by hand: matris/model/model.py downloads from a figshare ndownloader URL that now answers 403/202 with an empty body, which is why the first run died in torch.load with EOFError.  figshare's API endpoint still serves it, and the file is kept alongside the other hand-downloaded checkpoints.  MatRIS.load looks only in ~/.cache/matris and HOME is /model-cache in the container, so after a /var/tmp wipe re-stage it: cp download_checkpoints/MatRIS_10M_OAM.pth.tar /var/tmp/$USER-containers/model-cache/.cache/matris/  (re-fetch with curl -L https://api.figshare.com/v2/file/download/59142728).",
       "precision": "float32",
       "training_set": [
         "OMat24",
@@ -5486,7 +5671,7 @@
         "numpy<2",
         "scipy<1.15"
       ],
-      "calculator": "fairchem.core.OCPCalculator(checkpoint_path=\"esen_30m_omat.pt\", cpu=False)",
+      "calculator": "fairchem.core.OCPCalculator(checkpoint_path=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/esen_30m_omat.pt\", cpu=False)",
       "notes": "Same 30M eSEN architecture as the OAM checkpoint, OMat24 only.  Needs fairchem-core 1.10.0: that is the release registering the 'mlip_trainer' the checkpoint asks for (fairchem/core/models/esen/trainers).",
       "precision": "float32",
       "training_set": [
@@ -5616,7 +5801,7 @@
         "metatrain==2026.2.1",
         "metatomic-torch==0.1.11"
       ],
-      "calculator": "metatomic.torch.ase_calculator.MetatomicCalculator(\"pet-oam-xl.pt\", device=\"cuda\")",
+      "calculator": "metatomic.torch.ase_calculator.MetatomicCalculator(\"/scratch/joha4087/.cache/pet_foundation/pet-oam-xl.pt\", device=\"cuda\")",
       "notes": "Local checkpoint (2.8 GB); mounted read-only into the container.",
       "precision": "float32",
       "training_set": [
@@ -5929,7 +6114,7 @@
         "upet==0.2.1",
         "warp-lang==1.12.0"
       ],
-      "calculator": "upet.calculator.UPETCalculator(checkpoint_path=\"pet-mad-s-v1.5.0.ckpt\", device=\"cuda\")",
+      "calculator": "upet.calculator.UPETCalculator(checkpoint_path=\"/scratch/joha4087/mlip_error/pet_umodels/pet-mad-s-v1.5.0.ckpt\", device=\"cuda\")",
       "notes": "PET-MAD small, v1.5.0 local checkpoint. Trained on the MAD dataset.",
       "precision": "float32",
       "training_set": [
@@ -6777,7 +6962,7 @@
         "deepmd-kit[torch]@git+https://github.com/wanghan-iapcm/deepmd-kit@3eb005be526f199f5ef67667edc7a91cd5c77f7c",
         "e3nn==0.6.0"
       ],
-      "calculator": "deepmd.calculator.DP(model=\"dpa4_omol_neo_tmp.pt\")",
+      "calculator": "deepmd.calculator.DP(model=\"/scratch5/joha4087/programs/dpa_models/dpa4_omol_neo_tmp.pt\")",
       "notes": "The other small DPA-4 OMol preview checkpoint (dpa4_omol_neo_tmp.pt), same environment as dpa-4-air-omol.",
       "precision": "float64",
       "training_set": [
@@ -6907,7 +7092,7 @@
         "deepmd-kit[torch]@git+https://github.com/wanghan-iapcm/deepmd-kit@3eb005be526f199f5ef67667edc7a91cd5c77f7c",
         "e3nn==0.6.0"
       ],
-      "calculator": "deepmd.calculator.DP(model=\"dpa4_omol_air_tmp.pt\")",
+      "calculator": "deepmd.calculator.DP(model=\"/scratch5/joha4087/programs/dpa_models/dpa4_omol_air_tmp.pt\")",
       "notes": "Small DPA-4 on OMol25 (preview checkpoint dpa4_omol_air_tmp.pt).  Same environment as DPA-4-Pro.",
       "precision": "float64",
       "training_set": [
@@ -7566,7 +7751,7 @@
         "numpy<2",
         "scipy<1.15"
       ],
-      "calculator": "fairchem.core.OCPCalculator(checkpoint_path=\"omat24_direct-uncompiled.pt\", cpu=False)",
+      "calculator": "fairchem.core.OCPCalculator(checkpoint_path=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/checkpoint/omat24_direct-uncompiled.pt\", cpu=False)",
       "notes": "Stage-1 checkpoint of the same mirror-physics/equiformer_v3 series: direct pre-training on OMat24 only, before the gradient fine-tuning that produces omat24_gradient.pt and then the OAM omat24-mptrj-salex_gradient.pt.  Forces come from a direct head (use-gate-force-head), not from the energy gradient, so this is the non-conservative member of the family.\n  The published omat24_direct.pt was saved from a torch.compile'd model, so every key carries an '_orig_mod.' prefix.  fairchem's match_state_dict counts the substring 'module' and strips 7 characters per level, which turns '_orig_mod.module.X' into 'od.module.X' and fails the load; the checkpoint used here is the same file with that prefix removed (weights untouched) -- see omat24_direct-uncompiled.pt next to the original download.",
       "precision": "float32",
       "training_set": [
@@ -7832,7 +8017,7 @@
         "numpy<2",
         "scipy<1.15"
       ],
-      "calculator": "fairchem.core.OCPCalculator(checkpoint_path=\"eqV2_31M_omat_mp_salex.pt\", cpu=False)",
+      "calculator": "fairchem.core.OCPCalculator(checkpoint_path=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/eqV2_31M_omat_mp_salex.pt\", cpu=False)",
       "notes": "The OAM-trained 31M eqV2, matching the other OAM models.",
       "precision": "float32",
       "training_set": [
@@ -7982,7 +8167,7 @@
         "fairchem-core[torch-extras]==1.10.0",
         "scipy<1.17"
       ],
-      "calculator": "fairchem.core.OCPCalculator(checkpoint_path=\"eqV2_31M_omat.pt\", cpu=False)",
+      "calculator": "fairchem.core.OCPCalculator(checkpoint_path=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/eqV2_31M_omat.pt\", cpu=False)",
       "notes": "EquiformerV2 31M on OMat24, from the facebook/OMAT24 hub (no GGNN needed).",
       "precision": "float32",
       "training_set": [
