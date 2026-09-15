@@ -1,32 +1,9 @@
 /* =============================================================================
  * Background lattice
  *
- * The static CSS grid in `styles.css` is a fixed 32px mesh.  This replaces it with
- * the same mesh drawn on a canvas, with every node displaced from its equilibrium
- * site by a superposition of eight plane waves:
- *
- *     u(r, t) = SUM_s  A_s e^_s sin(k_s . r - w_s t + phi_s)
- *
- * Three things keep that from looking like one wave crossing the page:
- *
- *   - the eight k vectors point all round the circle, so there is no direction of
- *     travel to pick out, only the 2D interference of everything at once;
- *   - half are longitudinal (e || k) and half transverse (e perp k), which adds
- *     shear to what would otherwise be pure compression;
- *   - the periods are mutually incommensurate and unrelated to the wavelengths, so
- *     there is no common wave speed and the pattern never repeats.
- *
- * What survives is local: wavelengths are 150-420px against a 32px lattice, so any
- * two neighbouring nodes still move almost together.  Zoomed out the field looks
- * uncorrelated, close up it is smooth.  RMS displacement is about 5% of the lattice
- * constant, peaks near 13%.
- *
- * It is progressive enhancement, and deliberately cheap to remove: drop the
- * <script> tag and the CSS grid underneath is what renders.  Nothing else on the
- * page reads from here.
- *
- * Costs: one 30fps canvas repaint of the viewport, paused whenever the tab is
- * hidden, and skipped entirely under prefers-reduced-motion (one static frame).
+ * The 32px CSS grid in `styles.css`, redrawn on a canvas with every node displaced
+ * by a superposition of eight plane waves.  Progressive enhancement: drop the
+ * <script> tag and the CSS grid underneath is what renders.
  * ========================================================================== */
 
 (function () {
@@ -77,8 +54,6 @@
   let W = 0, H = 0, cols = 0, rows = 0, nx = null, ny = null;
   let stroke = null, alpha = 0.13;
 
-  /* Colours and strength come from the same custom properties the CSS grid used,
-     so the two stay in step and a theme switch needs no second definition. */
   function readTheme() {
     const cs = getComputedStyle(document.documentElement);
     alpha = parseFloat(cs.getPropertyValue('--grid-strength')) || 0.13;

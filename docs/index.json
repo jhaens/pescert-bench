@@ -110,7 +110,7 @@
       "n_structures": 504811,
       "n_materials": 281572,
       "url": "https://matpes.ai",
-      "notes": "Materials Potential Energy Surface dataset (Materials Virtual Lab + Materials Project), single-point PBE DFT on periodic solids, near-complete periodic-table coverage (all but noble gases and unstable radionuclides).(arXiv:2503.04070) "
+      "notes": "Materials Potential Energy Surface dataset (Materials Virtual Lab + Materials Project): single-point PBE DFT on periodic solids, near-complete periodic-table coverage (arXiv:2503.04070)."
     },
     "SPICE": {
       "key": "SPICE",
@@ -118,7 +118,7 @@
       "n_structures": null,
       "n_materials": null,
       "url": "https://github.com/openmm/spice-dataset",
-      "notes": "Small drug-like molecules, peptides and ion pairs at wB97M-D3(BJ)/def2-TZVPPD.  A molecular corpus, not a solid-state one.  Cited unversioned by some checkpoints and as SPICE 2 by others; the per-model note records which."
+      "notes": "Small drug-like molecules, peptides and ion pairs at wB97M-D3(BJ)/def2-TZVPPD; molecular, not solid-state. Cited unversioned by some checkpoints and as SPICE 2 by others, as the per-model note records."
     },
     "OC20": {
       "key": "OC20",
@@ -134,7 +134,7 @@
       "n_structures": 100000000,
       "n_materials": 83000000,
       "url": "https://huggingface.co/facebook/OMol25",
-      "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms.  Counts are the paper's own rounding -- it states 'more than 100 million' calculations over '~83M unique molecular systems' (arXiv:2505.08762), so treat n_structures as a lower bound."
+      "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms. Counts follow the paper's own rounding (arXiv:2505.08762), so n_structures is a lower bound."
     },
     "ANI-1xnr": {
       "key": "ANI-1xnr",
@@ -174,7 +174,7 @@
       "n_structures": 33500000,
       "n_materials": null,
       "url": "https://doi.org/10.1038/s41597-025-04720-7",
-      "notes": "Quantum chemistry reference data for small molecules of up to 8 heavy atoms, covering a large part of the periodic table and several electronic states.  33.5M DFT entries alongside 14.7B semi-empirical ones; the DFT count is the one recorded here."
+      "notes": "Quantum chemistry reference data for molecules of up to 8 heavy atoms, across much of the periodic table and several electronic states. 33.5M DFT entries alongside 14.7B semi-empirical ones; the DFT count is the one recorded here."
     },
     "ODAC23": {
       "key": "ODAC23",
@@ -238,7 +238,7 @@
       "n_structures": null,
       "n_materials": null,
       "url": "https://github.com/deepmodeling/deepmd-kit",
-      "notes": "Placeholder for the DeepModeling/OpenLAM domain corpora that the DPA multi-task checkpoints carry heads for (Domains_*, Metals_*, H2O_*, Electrolyte, Hybrid_Perovskite, SSE_ABACUS, ...).  These are not public releases with citable counts; the exact head list is recorded per model in ``training_heads``."
+      "notes": "Placeholder for the DeepModeling/OpenLAM domain corpora that the DPA multi-task checkpoints carry heads for. These are not public releases with citable counts; the exact head list is recorded per model in training_heads."
     },
     "OMC25": {
       "key": "OMC25",
@@ -260,7 +260,7 @@
       "family": "Analytic",
       "packages": [],
       "calculator": "pescert.reference.ElementLennardJones()",
-      "notes": "Analytic reference, not a trained model: Lennard-Jones with per-element sigma (minimum at 2 * covalent_radius) and epsilon (cohesive energy / 8.61, the LJ fcc lattice sum), force-smoothed between 0.66 rc and rc = 3 sigma.  Exactly conservative and E(3)-invariant by construction, so its scores are the suite's own numerical floor.",
+      "notes": "Analytic reference, not a trained model: Lennard-Jones with per-element sigma and epsilon, force-smoothed out to rc = 3 sigma. Exactly conservative and E(3)-invariant by construction, so its scores are the suite's own numerical floor.",
       "precision": "float64",
       "training_set": [],
       "training_set_complete": true,
@@ -670,7 +670,7 @@
           "n_structures": 504811,
           "n_materials": 281572,
           "url": "https://matpes.ai",
-          "notes": "Materials Potential Energy Surface dataset (Materials Virtual Lab + Materials Project), single-point PBE DFT on periodic solids, near-complete periodic-table coverage (all but noble gases and unstable radionuclides).(arXiv:2503.04070) "
+          "notes": "Materials Potential Energy Surface dataset (Materials Virtual Lab + Materials Project): single-point PBE DFT on periodic solids, near-complete periodic-table coverage (arXiv:2503.04070)."
         },
         {
           "key": "MPtrj",
@@ -686,7 +686,7 @@
           "n_structures": null,
           "n_materials": null,
           "url": "https://github.com/openmm/spice-dataset",
-          "notes": "Small drug-like molecules, peptides and ion pairs at wB97M-D3(BJ)/def2-TZVPPD.  A molecular corpus, not a solid-state one.  Cited unversioned by some checkpoints and as SPICE 2 by others; the per-model note records which."
+          "notes": "Small drug-like molecules, peptides and ion pairs at wB97M-D3(BJ)/def2-TZVPPD; molecular, not solid-state. Cited unversioned by some checkpoints and as SPICE 2 by others, as the per-model note records."
         },
         {
           "key": "OC20",
@@ -702,7 +702,7 @@
           "n_structures": 100000000,
           "n_materials": 83000000,
           "url": "https://huggingface.co/facebook/OMol25",
-          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms.  Counts are the paper's own rounding -- it states 'more than 100 million' calculations over '~83M unique molecular systems' (arXiv:2505.08762), so treat n_structures as a lower bound."
+          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms. Counts follow the paper's own rounding (arXiv:2505.08762), so n_structures is a lower bound."
         }
       ],
       "n_parameters": 6439878,
@@ -988,7 +988,7 @@
           "n_structures": null,
           "n_materials": null,
           "url": "https://github.com/openmm/spice-dataset",
-          "notes": "Small drug-like molecules, peptides and ion pairs at wB97M-D3(BJ)/def2-TZVPPD.  A molecular corpus, not a solid-state one.  Cited unversioned by some checkpoints and as SPICE 2 by others; the per-model note records which."
+          "notes": "Small drug-like molecules, peptides and ion pairs at wB97M-D3(BJ)/def2-TZVPPD; molecular, not solid-state. Cited unversioned by some checkpoints and as SPICE 2 by others, as the per-model note records."
         },
         {
           "key": "ANI-1xnr",
@@ -1010,7 +1010,7 @@
       "n_parameters": null,
       "n_parameters_trainable": null,
       "n_modules_found": 0,
-      "training_set_note": "A descriptor-space subsample of each corpus rather than the whole of it (OMat24 395,469, MPtrj 56,987, SPICE 24,142 and ANI-1xnr 18,723 structures), so the summed dataset counts would be wrong by orders of magnitude and are not reported. It also draws on SSE-ABACUS, SSE-VASP, a protein set, a CH set, a reactive CHONPS set and a water set, which have no citable public release (arXiv:2504.21286).",
+      "training_set_note": "A descriptor-space subsample of each corpus, not the whole of it (OMat24 395,469, MPtrj 56,987, SPICE 24,142, ANI-1xnr 18,723 structures), so summed dataset counts are not reported. It also draws on several sets with no citable public release (arXiv:2504.21286).",
       "training_heads": [],
       "evaluated_head": "",
       "status": "ok",
@@ -2539,7 +2539,7 @@
           "n_structures": 504811,
           "n_materials": 281572,
           "url": "https://matpes.ai",
-          "notes": "Materials Potential Energy Surface dataset (Materials Virtual Lab + Materials Project), single-point PBE DFT on periodic solids, near-complete periodic-table coverage (all but noble gases and unstable radionuclides).(arXiv:2503.04070) "
+          "notes": "Materials Potential Energy Surface dataset (Materials Virtual Lab + Materials Project): single-point PBE DFT on periodic solids, near-complete periodic-table coverage (arXiv:2503.04070)."
         },
         {
           "key": "MPtrj",
@@ -2555,7 +2555,7 @@
           "n_structures": null,
           "n_materials": null,
           "url": "https://github.com/openmm/spice-dataset",
-          "notes": "Small drug-like molecules, peptides and ion pairs at wB97M-D3(BJ)/def2-TZVPPD.  A molecular corpus, not a solid-state one.  Cited unversioned by some checkpoints and as SPICE 2 by others; the per-model note records which."
+          "notes": "Small drug-like molecules, peptides and ion pairs at wB97M-D3(BJ)/def2-TZVPPD; molecular, not solid-state. Cited unversioned by some checkpoints and as SPICE 2 by others, as the per-model note records."
         },
         {
           "key": "OC20",
@@ -2571,7 +2571,7 @@
           "n_structures": 100000000,
           "n_materials": 83000000,
           "url": "https://huggingface.co/facebook/OMol25",
-          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms.  Counts are the paper's own rounding -- it states 'more than 100 million' calculations over '~83M unique molecular systems' (arXiv:2505.08762), so treat n_structures as a lower bound."
+          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms. Counts follow the paper's own rounding (arXiv:2505.08762), so n_structures is a lower bound."
         }
       ],
       "n_parameters": 9077038,
@@ -2714,7 +2714,7 @@
         "wandb"
       ],
       "calculator": "GGNN.common.calculator.UCalculator(checkpoint_path=\"/scratch5/joha4087/model_download/equflashv2_oam.pt\", cpu=False)",
-      "notes": "GGNN is public at SamsungDS/GGNN; the checkpoint is the local one.  The pins come from the repo's own requirements.txt, which is where the cuequivariance version GGNN's buffer_num_segments needs is recorded.",
+      "notes": "GGNN is public at SamsungDS/GGNN; the checkpoint is the local one. Package pins come from the repo's own requirements.txt, which fixes the cuequivariance version GGNN needs.",
       "precision": "float32",
       "training_set": [
         "OMat24",
@@ -3190,7 +3190,7 @@
           "n_structures": 100000000,
           "n_materials": 83000000,
           "url": "https://huggingface.co/facebook/OMol25",
-          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms.  Counts are the paper's own rounding -- it states 'more than 100 million' calculations over '~83M unique molecular systems' (arXiv:2505.08762), so treat n_structures as a lower bound."
+          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms. Counts follow the paper's own rounding (arXiv:2505.08762), so n_structures is a lower bound."
         },
         {
           "key": "MatPES",
@@ -3198,7 +3198,7 @@
           "n_structures": 504811,
           "n_materials": 281572,
           "url": "https://matpes.ai",
-          "notes": "Materials Potential Energy Surface dataset (Materials Virtual Lab + Materials Project), single-point PBE DFT on periodic solids, near-complete periodic-table coverage (all but noble gases and unstable radionuclides).(arXiv:2503.04070) "
+          "notes": "Materials Potential Energy Surface dataset (Materials Virtual Lab + Materials Project): single-point PBE DFT on periodic solids, near-complete periodic-table coverage (arXiv:2503.04070)."
         },
         {
           "key": "OC20",
@@ -3222,7 +3222,7 @@
           "n_structures": null,
           "n_materials": null,
           "url": "https://github.com/openmm/spice-dataset",
-          "notes": "Small drug-like molecules, peptides and ion pairs at wB97M-D3(BJ)/def2-TZVPPD.  A molecular corpus, not a solid-state one.  Cited unversioned by some checkpoints and as SPICE 2 by others; the per-model note records which."
+          "notes": "Small drug-like molecules, peptides and ion pairs at wB97M-D3(BJ)/def2-TZVPPD; molecular, not solid-state. Cited unversioned by some checkpoints and as SPICE 2 by others, as the per-model note records."
         },
         {
           "key": "QCML",
@@ -3230,7 +3230,7 @@
           "n_structures": 33500000,
           "n_materials": null,
           "url": "https://doi.org/10.1038/s41597-025-04720-7",
-          "notes": "Quantum chemistry reference data for small molecules of up to 8 heavy atoms, covering a large part of the periodic table and several electronic states.  33.5M DFT entries alongside 14.7B semi-empirical ones; the DFT count is the one recorded here."
+          "notes": "Quantum chemistry reference data for molecules of up to 8 heavy atoms, across much of the periodic table and several electronic states. 33.5M DFT entries alongside 14.7B semi-empirical ones; the DFT count is the one recorded here."
         },
         {
           "key": "ODAC23",
@@ -3254,7 +3254,7 @@
       "n_modules_found": 1,
       "from_state_dict": false,
       "n_parameters_source": "runtime",
-      "training_set_note": "Thirteen-modality multi-fidelity checkpoint; the modality map is read from the checkpoint itself (_modal_map). Evaluated on 'mpa' -- the MPtrj + sAlex PBE modality -- so this row is that fidelity. The mp_r2scan and matpes_r2scan modalities are meta-GGA fidelities of MP and MatPES.",
+      "training_set_note": "Thirteen-modality multi-fidelity checkpoint; the modality map is read from the checkpoint itself (_modal_map). Evaluated on 'mpa', the MPtrj + sAlex PBE modality, so this row is that fidelity.",
       "training_heads": [
         "omat24",
         "mpa",
@@ -3508,7 +3508,7 @@
         "numpy"
       ],
       "calculator": "prophet.KairosCalculator(model_path=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/prophet-oame-mbd.pt\", use_kernel=False, device=\"cuda\")",
-      "notes": "Prophet-V1-MBD, the Matbench Discovery submission checkpoint (F1 0.9275, kappa_SRME 0.0648): 62.3M parameters, 10 layers, lmax 4, nested cutoffs 3/7 A, thermal-conductivity fine-tuned.  Multi-Cutoff Spectral Decomposition recombines nested cutoff scales linearly, which the report claims keeps E(3) equivariance exact and the energy twice continuously differentiable -- the equivariance and conservativity probes test exactly that claim.  Weights are CC-BY-4.0 and ungated; the checkpoint is staged by hand next to the others because KairosCalculator takes a filesystem path, not a hub id (hf download kairosmaterial/prophet prophet-oame-mbd.pt).  The magnetic sibling Prophet-V1-Mag ships in the same package behind prophet_spin.SpinCalculator and is not certified here: it needs an explicit magnetic state as input.",
+      "notes": "Prophet-V1-MBD: 62.3M parameters, 10 layers, lmax 4, nested cutoffs 3/7 A, thermal-conductivity fine-tuned.  Multi-Cutoff Spectral Decomposition recombines nested cutoff scales linearly.",
       "precision": "float32",
       "training_set": [
         "OMat24",
@@ -3518,7 +3518,7 @@
         "ELEMENTA-Vib"
       ],
       "training_set_complete": true,
-      "training_set_note": "Three training stages, per the technical report: OMat24 and the composition-complete ELEMENTA corpus, then MPtrj and sAlex, then the perturbed-structure subset ELEMENTA Vib.  The ELEMENTA Vib count is the source's own approximate ~8M, and it publishes no material count, so n_training_materials is null for this row while n_training_structures is a sum that includes an approximate term.",
+      "training_set_note": "Three training stages, per the technical report: OMat24 and the composition-complete ELEMENTA corpus, then MPtrj and sAlex, then the perturbed-structure subset ELEMENTA Vib.",
       "training_heads": [],
       "evaluated_head": "",
       "n_training_structures": 331509030,
@@ -4080,7 +4080,7 @@
         "e3nn==0.6.0"
       ],
       "calculator": "deepmd.calculator.DP(model=\"/scratch5/joha4087/programs/dpa_models/DPA-3.1-3M.pt\", head=\"Omat24\")",
-      "notes": "DPA-3.1, 3M parameters, multitask-pretrained on the OpenLAM corpora (huggingface.co/deepmodelingcommunity/DPA-3.1-3M).  A multitask checkpoint has no single head: the \"Omat24\" branch is selected, the one whose corpus matches this element sweep, so the row is that head and not the model as a whole.",
+      "notes": "DPA-3.1, 3M parameters, multitask-pretrained on the OpenLAM corpora (huggingface.co/deepmodelingcommunity/DPA-3.1-3M). A multitask checkpoint has no single head; the Omat24 branch is evaluated, so this row is that head, not the whole model.",
       "precision": "float64",
       "training_set": [
         "OMat24",
@@ -4151,7 +4151,7 @@
           "n_structures": null,
           "n_materials": null,
           "url": "https://github.com/openmm/spice-dataset",
-          "notes": "Small drug-like molecules, peptides and ion pairs at wB97M-D3(BJ)/def2-TZVPPD.  A molecular corpus, not a solid-state one.  Cited unversioned by some checkpoints and as SPICE 2 by others; the per-model note records which."
+          "notes": "Small drug-like molecules, peptides and ion pairs at wB97M-D3(BJ)/def2-TZVPPD; molecular, not solid-state. Cited unversioned by some checkpoints and as SPICE 2 by others, as the per-model note records."
         },
         {
           "key": "Transition1x",
@@ -4167,7 +4167,7 @@
           "n_structures": null,
           "n_materials": null,
           "url": "https://github.com/deepmodeling/deepmd-kit",
-          "notes": "Placeholder for the DeepModeling/OpenLAM domain corpora that the DPA multi-task checkpoints carry heads for (Domains_*, Metals_*, H2O_*, Electrolyte, Hybrid_Perovskite, SSE_ABACUS, ...).  These are not public releases with citable counts; the exact head list is recorded per model in ``training_heads``."
+          "notes": "Placeholder for the DeepModeling/OpenLAM domain corpora that the DPA multi-task checkpoints carry heads for. These are not public releases with citable counts; the exact head list is recorded per model in training_heads."
         }
       ],
       "n_parameters": 3268689,
@@ -4175,7 +4175,7 @@
       "n_modules_found": 1,
       "from_state_dict": false,
       "n_parameters_source": "runtime",
-      "training_set_note": "Multi-task checkpoint from the OpenLAM programme: one head per training corpus, read out of the checkpoint's own state dict and listed in training_heads. The public corpora among them are named individually; the Domains_*, Metals_*, H2O_*, Electrolyte, Hybrid_Perovskite and SSE_ABACUS heads are DeepModeling in-house sets with no citable release, grouped under OpenLAM in-house.",
+      "training_set_note": "Multi-task checkpoint from the OpenLAM programme: one head per training corpus, read from the checkpoint's own state dict and listed in training_heads. The public corpora are named individually; the DeepModeling in-house heads are grouped under OpenLAM in-house.",
       "training_heads": [
         "Alex2D",
         "Alloy_tongqi",
@@ -4573,7 +4573,7 @@
         "scipy<1.15"
       ],
       "calculator": "fairchem.core.OCPCalculator(checkpoint_path=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/checkpoint/omat24-mptrj-salex_gradient.pt\", cpu=False)",
-      "notes": "Weights come from the mirror-physics/equiformer_v3 HuggingFace repo; omat24-mptrj-salex_gradient.pt is the OAM, conservative-gradient variant. The code is a fairchem fork, so the package lives in packages/fairchem-core.",
+      "notes": "Weights from the mirror-physics/equiformer_v3 HuggingFace repo; omat24-mptrj-salex_gradient.pt is the OAM conservative-gradient variant. The code is a fairchem fork, so the package lives in packages/fairchem-core.",
       "precision": "float32",
       "training_set": [
         "OMat24",
@@ -5002,7 +5002,7 @@
         "scipy<1.15"
       ],
       "calculator": "fairchem.core.OCPCalculator(checkpoint_path=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/esen_30m_mptrj.pt\", cpu=False)",
-      "notes": "Same 30M eSEN, MPtrj only -- the training-corpus arm of the series.  Needs fairchem-core 1.10.0: that is the release registering the 'mlip_trainer' the checkpoint asks for (fairchem/core/models/esen/trainers).",
+      "notes": "Same 30M eSEN, MPtrj only -- the training-corpus arm of the series. Needs fairchem-core 1.10.0, the release that registers the 'mlip_trainer' the checkpoint asks for.",
       "precision": "float32",
       "training_set": [
         "MPtrj"
@@ -5133,7 +5133,7 @@
         "scipy<1.15"
       ],
       "calculator": "fairchem.core.OCPCalculator(checkpoint_path=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/esen_30m_oam.pt\", cpu=False)",
-      "notes": "eSEN 30M on OAM; checkpoint from facebook/OMAT24.  Needs fairchem-core 1.10.0: that is the release registering the 'mlip_trainer' the checkpoint asks for (fairchem/core/models/esen/trainers).",
+      "notes": "eSEN 30M on OAM; checkpoint from facebook/OMAT24. Needs fairchem-core 1.10.0, the release that registers the 'mlip_trainer' the checkpoint asks for.",
       "precision": "float32",
       "training_set": [
         "OMat24",
@@ -5352,7 +5352,7 @@
           "n_structures": null,
           "n_materials": null,
           "url": "https://github.com/openmm/spice-dataset",
-          "notes": "Small drug-like molecules, peptides and ion pairs at wB97M-D3(BJ)/def2-TZVPPD.  A molecular corpus, not a solid-state one.  Cited unversioned by some checkpoints and as SPICE 2 by others; the per-model note records which."
+          "notes": "Small drug-like molecules, peptides and ion pairs at wB97M-D3(BJ)/def2-TZVPPD; molecular, not solid-state. Cited unversioned by some checkpoints and as SPICE 2 by others, as the per-model note records."
         },
         {
           "key": "Transition1x",
@@ -5368,7 +5368,7 @@
           "n_structures": null,
           "n_materials": null,
           "url": "https://github.com/deepmodeling/deepmd-kit",
-          "notes": "Placeholder for the DeepModeling/OpenLAM domain corpora that the DPA multi-task checkpoints carry heads for (Domains_*, Metals_*, H2O_*, Electrolyte, Hybrid_Perovskite, SSE_ABACUS, ...).  These are not public releases with citable counts; the exact head list is recorded per model in ``training_heads``."
+          "notes": "Placeholder for the DeepModeling/OpenLAM domain corpora that the DPA multi-task checkpoints carry heads for. These are not public releases with citable counts; the exact head list is recorded per model in training_heads."
         }
       ],
       "n_parameters": 6425169,
@@ -5376,7 +5376,7 @@
       "n_modules_found": 1,
       "from_state_dict": false,
       "n_parameters_source": "runtime",
-      "training_set_note": "Multi-task checkpoint from the OpenLAM programme: one head per training corpus, read out of the checkpoint's own state dict and listed in training_heads. The public corpora among them are named individually; the Domains_*, Metals_*, H2O_*, Electrolyte, Hybrid_Perovskite and SSE_ABACUS heads are DeepModeling in-house sets with no citable release, grouped under OpenLAM in-house.",
+      "training_set_note": "Multi-task checkpoint from the OpenLAM programme: one head per training corpus, read from the checkpoint's own state dict and listed in training_heads. The public corpora are named individually; the DeepModeling in-house heads are grouped under OpenLAM in-house.",
       "training_heads": [
         "Alex2D",
         "Alloy_tongqi",
@@ -5521,7 +5521,7 @@
         "numpy>=2.0"
       ],
       "calculator": "matris.applications.base.MatRISCalculator(model=\"matris_10m_oam\", task=\"efsm\", device=\"cuda\")",
-      "notes": "MatRIS 10M pretrained on OMat24 and fine-tuned on sAlex+MPtrj.  The checkpoint is staged by hand: matris/model/model.py downloads from a figshare ndownloader URL that now answers 403/202 with an empty body, which is why the first run died in torch.load with EOFError.  figshare's API endpoint still serves it, and the file is kept alongside the other hand-downloaded checkpoints.  MatRIS.load looks only in ~/.cache/matris and HOME is /model-cache in the container, so after a /var/tmp wipe re-stage it: cp download_checkpoints/MatRIS_10M_OAM.pth.tar /var/tmp/$USER-containers/model-cache/.cache/matris/  (re-fetch with curl -L https://api.figshare.com/v2/file/download/59142728).",
+      "notes": "MatRIS 10M pretrained on OMat24 and fine-tuned on sAlex+MPtrj. The checkpoint is staged by hand: the figshare URL in matris/model/model.py now answers 403 with an empty body, so the file is kept alongside the other hand-downloaded checkpoints.",
       "precision": "float32",
       "training_set": [
         "OMat24",
@@ -5672,7 +5672,7 @@
         "scipy<1.15"
       ],
       "calculator": "fairchem.core.OCPCalculator(checkpoint_path=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/esen_30m_omat.pt\", cpu=False)",
-      "notes": "Same 30M eSEN architecture as the OAM checkpoint, OMat24 only.  Needs fairchem-core 1.10.0: that is the release registering the 'mlip_trainer' the checkpoint asks for (fairchem/core/models/esen/trainers).",
+      "notes": "Same 30M eSEN architecture as the OAM checkpoint, OMat24 only. Needs fairchem-core 1.10.0, the release that registers the 'mlip_trainer' the checkpoint asks for.",
       "precision": "float32",
       "training_set": [
         "OMat24"
@@ -5976,7 +5976,7 @@
           "n_structures": 100000000,
           "n_materials": 83000000,
           "url": "https://huggingface.co/facebook/OMol25",
-          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms.  Counts are the paper's own rounding -- it states 'more than 100 million' calculations over '~83M unique molecular systems' (arXiv:2505.08762), so treat n_structures as a lower bound."
+          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms. Counts follow the paper's own rounding (arXiv:2505.08762), so n_structures is a lower bound."
         },
         {
           "key": "OC20",
@@ -6271,7 +6271,7 @@
           "n_structures": 100000000,
           "n_materials": 83000000,
           "url": "https://huggingface.co/facebook/OMol25",
-          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms.  Counts are the paper's own rounding -- it states 'more than 100 million' calculations over '~83M unique molecular systems' (arXiv:2505.08762), so treat n_structures as a lower bound."
+          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms. Counts follow the paper's own rounding (arXiv:2505.08762), so n_structures is a lower bound."
         },
         {
           "key": "OC20",
@@ -6553,7 +6553,7 @@
           "n_structures": 100000000,
           "n_materials": 83000000,
           "url": "https://huggingface.co/facebook/OMol25",
-          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms.  Counts are the paper's own rounding -- it states 'more than 100 million' calculations over '~83M unique molecular systems' (arXiv:2505.08762), so treat n_structures as a lower bound."
+          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms. Counts follow the paper's own rounding (arXiv:2505.08762), so n_structures is a lower bound."
         }
       ],
       "n_parameters": 6332801,
@@ -6694,7 +6694,7 @@
           "n_structures": 100000000,
           "n_materials": 83000000,
           "url": "https://huggingface.co/facebook/OMol25",
-          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms.  Counts are the paper's own rounding -- it states 'more than 100 million' calculations over '~83M unique molecular systems' (arXiv:2505.08762), so treat n_structures as a lower bound."
+          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms. Counts follow the paper's own rounding (arXiv:2505.08762), so n_structures is a lower bound."
         },
         {
           "key": "OC20",
@@ -6833,7 +6833,7 @@
         "matgl==4.0.3"
       ],
       "calculator": "matgl.ext.ase.PESCalculator(matgl.load_model(\"M3GNet-PES-MatPES-PBE-2025.2\").to(\"cuda\"), stress_unit=\"eV/A3\")",
-      "notes": "stress_unit='eV/A3' is required: matgl's PESCalculator reports stress in GPa by default, which is ASE's unit off by 160.2 and shows up as a stress defect of exactly that factor.  .to('cuda') is what puts the run on the GPU: matgl loads the Potential on CPU and Potential.forward migrates the graph to the module's own device, so without it the whole suite runs on CPU.  matgl 4.0.3 no longer ships the 2021 MP checkpoint that Matbench Discovery lists as M3GNet, so this is the current MatPES-PBE PES model and its parameter count will not match theirs.",
+      "notes": "Current MatPES-PBE PES model: matgl 4.0.3 no longer ships the 2021 MP checkpoint that Matbench Discovery lists as M3GNet, so the parameter count will not match theirs. stress_unit='eV/A3' and .to('cuda') are both required, or matgl reports stress in GPa and runs the suite on CPU.",
       "precision": "float32",
       "training_set": [
         "MatPES"
@@ -6848,7 +6848,7 @@
           "n_structures": 504811,
           "n_materials": 281572,
           "url": "https://matpes.ai",
-          "notes": "Materials Potential Energy Surface dataset (Materials Virtual Lab + Materials Project), single-point PBE DFT on periodic solids, near-complete periodic-table coverage (all but noble gases and unstable radionuclides).(arXiv:2503.04070) "
+          "notes": "Materials Potential Energy Surface dataset (Materials Virtual Lab + Materials Project): single-point PBE DFT on periodic solids, near-complete periodic-table coverage (arXiv:2503.04070)."
         }
       ],
       "n_parameters": 288157,
@@ -6978,7 +6978,7 @@
           "n_structures": 100000000,
           "n_materials": 83000000,
           "url": "https://huggingface.co/facebook/OMol25",
-          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms.  Counts are the paper's own rounding -- it states 'more than 100 million' calculations over '~83M unique molecular systems' (arXiv:2505.08762), so treat n_structures as a lower bound."
+          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms. Counts follow the paper's own rounding (arXiv:2505.08762), so n_structures is a lower bound."
         }
       ],
       "n_parameters": 774926,
@@ -7093,7 +7093,7 @@
         "e3nn==0.6.0"
       ],
       "calculator": "deepmd.calculator.DP(model=\"/scratch5/joha4087/programs/dpa_models/dpa4_omol_air_tmp.pt\")",
-      "notes": "Small DPA-4 on OMol25 (preview checkpoint dpa4_omol_air_tmp.pt).  Same environment as DPA-4-Pro.",
+      "notes": "Small DPA-4 on OMol25 (preview checkpoint dpa4_omol_air_tmp.pt). Same environment as DPA-4-Pro.",
       "precision": "float64",
       "training_set": [
         "OMol25"
@@ -7108,7 +7108,7 @@
           "n_structures": 100000000,
           "n_materials": 83000000,
           "url": "https://huggingface.co/facebook/OMol25",
-          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms.  Counts are the paper's own rounding -- it states 'more than 100 million' calculations over '~83M unique molecular systems' (arXiv:2505.08762), so treat n_structures as a lower bound."
+          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms. Counts follow the paper's own rounding (arXiv:2505.08762), so n_structures is a lower bound."
         }
       ],
       "n_parameters": 3454853,
@@ -7368,7 +7368,7 @@
           "n_structures": 100000000,
           "n_materials": 83000000,
           "url": "https://huggingface.co/facebook/OMol25",
-          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms.  Counts are the paper's own rounding -- it states 'more than 100 million' calculations over '~83M unique molecular systems' (arXiv:2505.08762), so treat n_structures as a lower bound."
+          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms. Counts follow the paper's own rounding (arXiv:2505.08762), so n_structures is a lower bound."
         }
       ],
       "n_parameters": 6333058,
@@ -7488,7 +7488,7 @@
         "pynanoflann==0.10.0"
       ],
       "calculator": "orb_models.forcefield.calculator.ORBCalculator(orb_models.forcefield.pretrained.orb_v3_conservative_20_omat(device=\"cuda\", precision=\"float32-high\"), device=\"cuda\")",
-      "notes": "The 20-neighbour variant of orb-v3-conservative-inf-omat.  Truncating the neighbour list to a fixed count is orientation-dependent whenever neighbour distances are degenerate, which the icosahedral and close-packed substrates are full of, so the 20/inf pair isolates that effect in the equivariance and null-space probes.",
+      "notes": "The 20-neighbour variant of orb-v3-conservative-inf-omat. A fixed-count neighbour list is orientation-dependent whenever neighbour distances are degenerate, as they are in the close-packed substrates, so the 20/inf pair isolates that effect.",
       "precision": "float32",
       "training_set": [
         "OMat24"
@@ -7632,7 +7632,7 @@
           "n_structures": 100000000,
           "n_materials": 83000000,
           "url": "https://huggingface.co/facebook/OMol25",
-          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms.  Counts are the paper's own rounding -- it states 'more than 100 million' calculations over '~83M unique molecular systems' (arXiv:2505.08762), so treat n_structures as a lower bound."
+          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms. Counts follow the paper's own rounding (arXiv:2505.08762), so n_structures is a lower bound."
         }
       ],
       "n_parameters": 50671234,
@@ -7752,7 +7752,7 @@
         "scipy<1.15"
       ],
       "calculator": "fairchem.core.OCPCalculator(checkpoint_path=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/checkpoint/omat24_direct-uncompiled.pt\", cpu=False)",
-      "notes": "Stage-1 checkpoint of the same mirror-physics/equiformer_v3 series: direct pre-training on OMat24 only, before the gradient fine-tuning that produces omat24_gradient.pt and then the OAM omat24-mptrj-salex_gradient.pt.  Forces come from a direct head (use-gate-force-head), not from the energy gradient, so this is the non-conservative member of the family.\n  The published omat24_direct.pt was saved from a torch.compile'd model, so every key carries an '_orig_mod.' prefix.  fairchem's match_state_dict counts the substring 'module' and strips 7 characters per level, which turns '_orig_mod.module.X' into 'od.module.X' and fails the load; the checkpoint used here is the same file with that prefix removed (weights untouched) -- see omat24_direct-uncompiled.pt next to the original download.",
+      "notes": "Stage-1 checkpoint of the mirror-physics/equiformer_v3 series: direct pre-training on OMat24 only, before the gradient fine-tuning. Forces come from a direct head, not the energy gradient, so this is the non-conservative member. The checkpoint used here has the '_orig_mod.' prefix stripped so fairchem can load it.",
       "precision": "float32",
       "training_set": [
         "OMat24"
@@ -7898,7 +7898,7 @@
           "n_structures": 100000000,
           "n_materials": 83000000,
           "url": "https://huggingface.co/facebook/OMol25",
-          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms.  Counts are the paper's own rounding -- it states 'more than 100 million' calculations over '~83M unique molecular systems' (arXiv:2505.08762), so treat n_structures as a lower bound."
+          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms. Counts follow the paper's own rounding (arXiv:2505.08762), so n_structures is a lower bound."
         }
       ],
       "n_parameters": 85972531,
@@ -8445,7 +8445,7 @@
           "n_structures": 100000000,
           "n_materials": 83000000,
           "url": "https://huggingface.co/facebook/OMol25",
-          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms.  Counts are the paper's own rounding -- it states 'more than 100 million' calculations over '~83M unique molecular systems' (arXiv:2505.08762), so treat n_structures as a lower bound."
+          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms. Counts follow the paper's own rounding (arXiv:2505.08762), so n_structures is a lower bound."
         }
       ],
       "n_parameters": 86800694,
