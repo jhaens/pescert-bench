@@ -2,13 +2,13 @@
   "schema": "pescert-run/1",
   "model": {
     "slug": "dpa-4-pro-mptrj",
-    "label": "DPA-4-Pro-MPtrj",
+    "label": "DPA-4-Pro (MPtrj)",
     "family": "DeePMD",
     "packages": [
       "deepmd-kit[torch]@git+https://github.com/wanghan-iapcm/deepmd-kit@3eb005be526f199f5ef67667edc7a91cd5c77f7c",
       "e3nn==0.6.0"
     ],
-    "calculator": "deepmd.calculator.DP(model=\"dpa-4.0.1-pro-mptrj.pt\")",
+    "calculator": "deepmd.calculator.DP(model=\"/scratch5/joha4087/programs/dpa_models/dpa-4.0.1-pro-mptrj.pt\")",
     "notes": "Local DPA-4.0.1 Pro checkpoint fine-tuned on MPtrj.",
     "precision": "float64",
     "training_set": [

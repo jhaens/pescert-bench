@@ -8,7 +8,7 @@
       "deepmd-kit[torch]@git+https://github.com/wanghan-iapcm/deepmd-kit@3eb005be526f199f5ef67667edc7a91cd5c77f7c",
       "e3nn==0.6.0"
     ],
-    "calculator": "deepmd.calculator.DP(model=\"dpa-2.4-7M.pt\", head=\"Omat24\")",
+    "calculator": "deepmd.calculator.DP(model=\"/scratch5/joha4087/programs/dpa_models/dpa-2.4-7M.pt\", head=\"Omat24\")",
     "notes": "DPA-2.4, 7M parameters: the generation before DPA-3 (huggingface.co/deepmodelingcommunity/DPA-2.4-7M), \"Omat24\" head.",
     "precision": "float64",
     "training_set": [],

@@ -1,6 +1,6 @@
 {
   "slug": "dpa-4-neo-omol",
-  "label": "DPA-4-neo (OMol)",
+  "label": "DPA-4-Neo (OMol)",
   "family": "DPA",
   "packages": [
     "deepmd-kit[torch]@git+https://github.com/wanghan-iapcm/deepmd-kit@3eb005be526f199f5ef67667edc7a91cd5c77f7c",
@@ -12,7 +12,7 @@
     "deepmd-kit[torch]@git+https://github.com/wanghan-iapcm/deepmd-kit@3eb005be526f199f5ef67667edc7a91cd5c77f7c",
     "e3nn==0.6.0"
   ],
-  "calculator": "deepmd.calculator.DP(model=\"dpa4_omol_neo_tmp.pt\")",
+  "calculator": "deepmd.calculator.DP(model=\"/scratch5/joha4087/programs/dpa_models/dpa4_omol_neo_tmp.pt\")",
   "imports": [
     "deepmd.calculator"
   ],

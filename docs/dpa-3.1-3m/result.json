@@ -8,7 +8,7 @@
       "deepmd-kit[torch]@git+https://github.com/wanghan-iapcm/deepmd-kit@3eb005be526f199f5ef67667edc7a91cd5c77f7c",
       "e3nn==0.6.0"
     ],
-    "calculator": "deepmd.calculator.DP(model=\"DPA-3.1-3M.pt\", head=\"Omat24\")",
+    "calculator": "deepmd.calculator.DP(model=\"/scratch5/joha4087/programs/dpa_models/DPA-3.1-3M.pt\", head=\"Omat24\")",
     "notes": "DPA-3.1, 3M parameters, multitask-pretrained on the OpenLAM corpora (huggingface.co/deepmodelingcommunity/DPA-3.1-3M).  A multitask checkpoint has no single head: the \"Omat24\" branch is selected, the one whose corpus matches this element sweep, so the row is that head and not the model as a whole.",
     "precision": "float64",
     "training_set": [],

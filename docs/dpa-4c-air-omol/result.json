@@ -1,22 +1,28 @@
 {
   "schema": "pescert-run/1",
   "model": {
-    "slug": "dpa-4-neo-omol",
-    "label": "DPA-4-Neo (OMol)",
+    "slug": "dpa-4c-air-omol",
+    "label": "DPA-4C-Air (OMol)",
     "family": "DPA",
     "packages": [
-      "deepmd-kit[torch]@git+https://github.com/wanghan-iapcm/deepmd-kit@3eb005be526f199f5ef67667edc7a91cd5c77f7c",
-      "e3nn==0.6.0"
+      "deepmd-kit[torch]==3.2.0"
     ],
-    "calculator": "deepmd.calculator.DP(model=\"/scratch5/joha4087/programs/dpa_models/dpa4_omol_neo_tmp.pt\")",
-    "notes": "The other small DPA-4 OMol preview checkpoint (dpa4_omol_neo_tmp.pt), same environment and caveats as dpa-4-air-omol.",
-    "precision": "float64",
+    "calculator": "deepmd.calculator.DP(model=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/DPA4C-Air-OMol25-100M-v20260820.pt\")",
+    "notes": "DPA4C Air: the compressible, message-passing-free member of the DPA4 family (630k parameters, 6.0 A cutoff, one hop).  Released validation on the OMol-0 out-of-distribution split is 21.37 kcal/mol energy / 1.597 kcal/mol/A force MAE.  Near-Neo parameter count, bought with 1.6x the training hours.",
+    "imports": [
+      "deepmd.calculator"
+    ],
+    "python": "3.11",
+    "precision": "float32",
     "training_set": [
       "OMol25"
     ],
-    "training_set_complete": false,
-    "n_training_structures": null,
-    "n_training_materials": null,
+    "training_set_complete": true,
+    "training_set_note": "Trained on the OMol25 100M split (101,666,280 frames); the DATASETS figure is the round 100M the corpus is published under, so the count is the split, not the whole of OMol25.",
+    "training_heads": [],
+    "evaluated_head": "",
+    "n_training_structures": 100000000,
+    "n_training_materials": 83000000,
     "datasets": [
       {
         "key": "OMol25",
@@ -27,14 +33,14 @@
         "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms.  Counts are the paper's own rounding -- it states 'more than 100 million' calculations over '~83M unique molecular systems' (arXiv:2505.08762), so treat n_structures as a lower bound."
       }
     ],
-    "n_parameters": 774926,
-    "n_parameters_trainable": 774926,
+    "n_parameters": 630281,
+    "n_parameters_trainable": 630281,
     "n_modules_found": 1,
     "from_state_dict": false,
     "n_parameters_source": "runtime"
   },
   "run": {
-    "started": "2026-09-10T09:07:35+00:00",
+    "started": "2026-09-16T08:04:36+00:00",
     "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
     "seed": 0,
     "budget_per_eval": null,
@@ -47,7 +53,7 @@
       "cuda_available": true,
       "ase": "3.28.0",
       "pescert": "0.1.0",
-      "host": "224706311dbb",
+      "host": "9c98a3c54dff",
       "gpu": {
         "name": "NVIDIA RTX A5000",
         "capability": "8.6",
@@ -55,34 +61,34 @@
       }
     },
     "calculator_class": "DP",
-    "load_seconds": 14.72,
-    "suite_seconds": 1801.99,
-    "wall_seconds": 1816.71
+    "load_seconds": 2.48,
+    "suite_seconds": 552.37,
+    "wall_seconds": 554.87
   },
   "aggregate": {
-    "overall": 0.6445490009803223,
+    "overall": 0.7091621362986757,
     "overall_method": "arithmetic",
     "sub_scores": {
-      "conservativeness": 0.9479103542898096,
-      "equivariance": 0.6613555758644274,
-      "smoothness": 0.8843219736889874,
-      "stress_consistency": 0.4749587312617799,
-      "parity": 0.22365001721019823,
-      "representation": 0.9330152328020878,
-      "cross_maxwell": 0.14435777689214926,
-      "betti": 0.7226165334474102,
-      "zero_modes": 0.29078250239438214,
-      "trimer": 0.4318728855653126,
-      "reversibility": 0.8455794569139716,
-      "config_temperature": 0.9133538043867638,
-      "equipartition": 0.6390046308083992,
-      "virial": 0.9109065381988343
+      "conservativeness": 0.8954729617008329,
+      "equivariance": 0.9742888052617008,
+      "smoothness": 0.5949048953021239,
+      "stress_consistency": 0.48638660370038683,
+      "parity": 0.9988247249033817,
+      "representation": 0.9862348182214328,
+      "cross_maxwell": 0.22070517460897715,
+      "betti": 0.9656998459964029,
+      "zero_modes": 0.20610097752678427,
+      "trimer": 0.22914406583710845,
+      "reversibility": 0.9893017573065371,
+      "config_temperature": 0.9222134504841757,
+      "equipartition": 0.578678041732883,
+      "virial": 0.8803137855987362
     },
     "gates": {
       "conservativeness": true,
-      "equivariance": false,
+      "equivariance": true,
       "stress_consistency": false,
-      "parity": false,
+      "parity": true,
       "representation": true,
       "cross_maxwell": false,
       "betti": true,
@@ -90,9 +96,9 @@
       "trimer": true,
       "reversibility": true
     },
-    "gates_passed": 5,
+    "gates_passed": 7,
     "gates_total": 10,
-    "n_total_calls": 40770
+    "n_total_calls": 39524
   },
   "metadata": {
     "elements": [
@@ -108,18 +114,18 @@
       "S"
     ],
     "per_element_overall": {
-      "Li": 0.5506120345601423,
-      "Be": 0.8055797638362481,
-      "B": 0.6996031980999641,
-      "C": 0.6504585666915729,
-      "Na": 0.8095470700102962,
-      "Mg": 0.3842572308203839,
-      "Al": 0.5384707828385896,
-      "Si": 0.7182812502035733,
-      "P": 0.7190673261302304,
-      "S": 0.569612786612223
+      "Li": 0.6450783287761735,
+      "Be": 0.7781716195634033,
+      "B": 0.7144902914796845,
+      "C": 0.7672231649961049,
+      "Na": 0.5991900218289361,
+      "Mg": 0.6605760868855196,
+      "Al": 0.6766916278744951,
+      "Si": 0.6280322836572132,
+      "P": 0.7922605285812175,
+      "S": 0.8299074093440119
     },
-    "mean_of_element_overalls": 0.6445490009803223,
+    "mean_of_element_overalls": 0.709162136298676,
     "evals": [
       "conservativeness",
       "equivariance",
@@ -136,16 +142,16 @@
       "equipartition",
       "virial"
     ],
-    "n_total_calls": 40770
+    "n_total_calls": 39524
   },
   "results": [
     {
       "name": "conservativeness",
       "section": "Self-consistency",
       "target": 0.0,
-      "raw_defect": 0.002867610460640495,
-      "score": 0.9479103542898096,
-      "n_model_calls": 310,
+      "raw_defect": 0.006215920441308334,
+      "score": 0.8954729617008329,
+      "n_model_calls": 90,
       "gate": true,
       "crashed": {}
     },
@@ -153,18 +159,18 @@
       "name": "equivariance",
       "section": "Symmetry & invariance",
       "target": 0.0,
-      "raw_defect": 2.0553168197845895,
-      "score": 0.6613555758644274,
+      "raw_defect": 0.02615738210177741,
+      "score": 0.9742888052617008,
       "n_model_calls": 90,
-      "gate": false,
+      "gate": true,
       "crashed": {}
     },
     {
       "name": "smoothness",
       "section": "Regularity",
       "target": 0.0,
-      "raw_defect": 0.2093329331721412,
-      "score": 0.8843219736889874,
+      "raw_defect": 0.9470361788282025,
+      "score": 0.5949048953021239,
       "n_model_calls": 810,
       "gate": null,
       "crashed": {}
@@ -173,8 +179,8 @@
       "name": "stress_consistency",
       "section": "Self-consistency",
       "target": 0.0,
-      "raw_defect": 0.23550167779189618,
-      "score": 0.4749587312617799,
+      "raw_defect": 0.08385526262966445,
+      "score": 0.48638660370038683,
       "n_model_calls": 130,
       "gate": false,
       "crashed": {}
@@ -183,18 +189,18 @@
       "name": "parity",
       "section": "Symmetry & invariance",
       "target": 0.0,
-      "raw_defect": 0.00591774901461266,
-      "score": 0.22365001721019823,
+      "raw_defect": 1.1763097815363932e-06,
+      "score": 0.9988247249033817,
       "n_model_calls": 20,
-      "gate": false,
+      "gate": true,
       "crashed": {}
     },
     {
       "name": "representation",
       "section": "Symmetry & invariance",
       "target": 0.0,
-      "raw_defect": 0.07361247631626544,
-      "score": 0.9330152328020878,
+      "raw_defect": 0.013884592459446097,
+      "score": 0.9862348182214328,
       "n_model_calls": 200,
       "gate": true,
       "crashed": {}
@@ -203,9 +209,9 @@
       "name": "cross_maxwell",
       "section": "Self-consistency",
       "target": 0.0,
-      "raw_defect": 0.29603579262440366,
-      "score": 0.14435777689214926,
-      "n_model_calls": 7012,
+      "raw_defect": 0.10462193036442294,
+      "score": 0.22070517460897715,
+      "n_model_calls": 6196,
       "gate": false,
       "crashed": {}
     },
@@ -213,8 +219,8 @@
       "name": "betti",
       "section": "Self-consistency",
       "target": 0.0,
-      "raw_defect": 0.012336406408306837,
-      "score": 0.7226165334474102,
+      "raw_defect": 0.0007011626216302001,
+      "score": 0.9656998459964029,
       "n_model_calls": 480,
       "gate": true,
       "crashed": {}
@@ -223,9 +229,9 @@
       "name": "zero_modes",
       "section": "Symmetry & invariance",
       "target": 0.0,
-      "raw_defect": 0.0076646219308969905,
-      "score": 0.29078250239438214,
-      "n_model_calls": 2255,
+      "raw_defect": 0.0002308758743938512,
+      "score": 0.20610097752678427,
+      "n_model_calls": 2187,
       "gate": false,
       "crashed": {}
     },
@@ -233,8 +239,8 @@
       "name": "trimer",
       "section": "Symmetry & invariance",
       "target": 0.0,
-      "raw_defect": 0.8749203777084172,
-      "score": 0.4318728855653126,
+      "raw_defect": 4.425146231948011,
+      "score": 0.22914406583710845,
       "n_model_calls": 1140,
       "gate": true,
       "crashed": {}
@@ -243,8 +249,8 @@
       "name": "reversibility",
       "section": "Self-consistency",
       "target": 0.0,
-      "raw_defect": 0.00021222220130394056,
-      "score": 0.8455794569139716,
+      "raw_defect": 1.0839882030222622e-05,
+      "score": 0.9893017573065371,
       "n_model_calls": 2010,
       "gate": true,
       "crashed": {}
@@ -253,9 +259,9 @@
       "name": "config_temperature",
       "section": "Statistical mechanics",
       "target": 1.0,
-      "raw_defect": 0.09176839836384801,
-      "score": 0.9133538043867638,
-      "n_model_calls": 25533,
+      "raw_defect": 0.0824818703201372,
+      "score": 0.9222134504841757,
+      "n_model_calls": 25391,
       "gate": null,
       "crashed": {}
     },
@@ -263,8 +269,8 @@
       "name": "equipartition",
       "section": "Statistical mechanics",
       "target": 1.0,
-      "raw_defect": 0.6387530954460342,
-      "score": 0.6390046308083992,
+      "raw_defect": 1.064882056310269,
+      "score": 0.578678041732883,
       "n_model_calls": 780,
       "gate": null,
       "crashed": {}
@@ -273,8 +279,8 @@
       "name": "virial",
       "section": "Statistical mechanics",
       "target": 1.0,
-      "raw_defect": 0.09840445858299465,
-      "score": 0.9109065381988343,
+      "raw_defect": 0.1528030927471764,
+      "score": 0.8803137855987362,
       "n_model_calls": 0,
       "gate": null,
       "crashed": {}

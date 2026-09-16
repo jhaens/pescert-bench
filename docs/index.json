@@ -1,6 +1,6 @@
 {
   "schema": "pescert-index/1",
-  "generated": "2026-09-15T17:25:03+00:00",
+  "generated": "2026-09-16T13:05:00+00:00",
   "sections": [
     "Symmetry & invariance",
     "Self-consistency",
@@ -110,7 +110,7 @@
       "n_structures": 504811,
       "n_materials": 281572,
       "url": "https://matpes.ai",
-      "notes": "Materials Potential Energy Surface dataset (Materials Virtual Lab + Materials Project): single-point PBE DFT on periodic solids, near-complete periodic-table coverage (arXiv:2503.04070)."
+      "notes": "Materials Potential Energy Surface dataset (Materials Virtual Lab + Materials Project), single-point PBE DFT on periodic solids, near-complete periodic-table coverage (all but noble gases and unstable radionuclides).(arXiv:2503.04070) "
     },
     "SPICE": {
       "key": "SPICE",
@@ -118,7 +118,7 @@
       "n_structures": null,
       "n_materials": null,
       "url": "https://github.com/openmm/spice-dataset",
-      "notes": "Small drug-like molecules, peptides and ion pairs at wB97M-D3(BJ)/def2-TZVPPD; molecular, not solid-state. Cited unversioned by some checkpoints and as SPICE 2 by others, as the per-model note records."
+      "notes": "Small drug-like molecules, peptides and ion pairs at wB97M-D3(BJ)/def2-TZVPPD.  A molecular corpus, not a solid-state one.  Cited unversioned by some checkpoints and as SPICE 2 by others; the per-model note records which."
     },
     "OC20": {
       "key": "OC20",
@@ -134,7 +134,7 @@
       "n_structures": 100000000,
       "n_materials": 83000000,
       "url": "https://huggingface.co/facebook/OMol25",
-      "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms. Counts follow the paper's own rounding (arXiv:2505.08762), so n_structures is a lower bound."
+      "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms.  Counts are the paper's own rounding -- it states 'more than 100 million' calculations over '~83M unique molecular systems' (arXiv:2505.08762), so treat n_structures as a lower bound."
     },
     "ANI-1xnr": {
       "key": "ANI-1xnr",
@@ -174,7 +174,7 @@
       "n_structures": 33500000,
       "n_materials": null,
       "url": "https://doi.org/10.1038/s41597-025-04720-7",
-      "notes": "Quantum chemistry reference data for molecules of up to 8 heavy atoms, across much of the periodic table and several electronic states. 33.5M DFT entries alongside 14.7B semi-empirical ones; the DFT count is the one recorded here."
+      "notes": "Quantum chemistry reference data for small molecules of up to 8 heavy atoms, covering a large part of the periodic table and several electronic states.  33.5M DFT entries alongside 14.7B semi-empirical ones; the DFT count is the one recorded here."
     },
     "ODAC23": {
       "key": "ODAC23",
@@ -238,7 +238,7 @@
       "n_structures": null,
       "n_materials": null,
       "url": "https://github.com/deepmodeling/deepmd-kit",
-      "notes": "Placeholder for the DeepModeling/OpenLAM domain corpora that the DPA multi-task checkpoints carry heads for. These are not public releases with citable counts; the exact head list is recorded per model in training_heads."
+      "notes": "Placeholder for the DeepModeling/OpenLAM domain corpora that the DPA multi-task checkpoints carry heads for (Domains_*, Metals_*, H2O_*, Electrolyte, Hybrid_Perovskite, SSE_ABACUS, ...).  These are not public releases with citable counts; the exact head list is recorded per model in ``training_heads``."
     },
     "OMC25": {
       "key": "OMC25",
@@ -247,6 +247,38 @@
       "n_materials": null,
       "url": "https://arxiv.org/abs/2506.23971",
       "notes": "Open Molecular Crystals 2025, released alongside UMA.  Listed because UMA trains on it; no separate count transcribed."
+    },
+    "GEMS": {
+      "key": "GEMS",
+      "label": "GEMS",
+      "n_structures": null,
+      "n_materials": null,
+      "url": "https://doi.org/10.5281/zenodo.14779793",
+      "notes": "General protein fragments, part of the SO3LR training mixture.  Biomolecular, not solid-state."
+    },
+    "QM7-X": {
+      "key": "QM7-X",
+      "label": "QM7-X",
+      "n_structures": null,
+      "n_materials": null,
+      "url": "https://doi.org/10.5281/zenodo.4288677",
+      "notes": "Equilibrium and non-equilibrium structures of small organic molecules at PBE0+MBD."
+    },
+    "AQM": {
+      "key": "AQM",
+      "label": "Aquamarine (AQM)",
+      "n_structures": null,
+      "n_materials": null,
+      "url": "https://doi.org/10.5281/zenodo.14779793",
+      "notes": "Large drug-like molecules at PBE0+MBD; the large-molecule end of the SO3LR mixture.  Url is the SO3LR training record, which is where this corpus is named for our purposes -- AQM's own release DOI is not transcribed here because it was not verified."
+    },
+    "DES15k": {
+      "key": "DES15k",
+      "label": "DES15K",
+      "n_structures": null,
+      "n_materials": null,
+      "url": "https://doi.org/10.5281/zenodo.14779793",
+      "notes": "Intermolecular dimer interaction energies; supplies the non-covalent channel of the SO3LR mixture.  Recomputed at PBE0+MBD/tight for SO3LR so the whole mixture shares one reference."
     }
   },
   "models": [
@@ -256,11 +288,11 @@
       ],
       "python": "3.11",
       "slug": "lennard-jones",
-      "label": "Lennard-Jones (element-specific)",
+      "label": "Lennard-Jones",
       "family": "Analytic",
       "packages": [],
       "calculator": "pescert.reference.ElementLennardJones()",
-      "notes": "Analytic reference, not a trained model: Lennard-Jones with per-element sigma and epsilon, force-smoothed out to rc = 3 sigma. Exactly conservative and E(3)-invariant by construction, so its scores are the suite's own numerical floor.",
+      "notes": "Analytic reference, not a trained model: Lennard-Jones with per-element sigma (minimum at 2 * covalent_radius) and epsilon (cohesive energy / 8.61, the LJ fcc lattice sum), force-smoothed between 0.66 rc and rc = 3 sigma.  Exactly conservative and E(3)-invariant by construction, so its scores are the suite's own numerical floor.",
       "precision": "float64",
       "training_set": [],
       "training_set_complete": true,
@@ -670,7 +702,7 @@
           "n_structures": 504811,
           "n_materials": 281572,
           "url": "https://matpes.ai",
-          "notes": "Materials Potential Energy Surface dataset (Materials Virtual Lab + Materials Project): single-point PBE DFT on periodic solids, near-complete periodic-table coverage (arXiv:2503.04070)."
+          "notes": "Materials Potential Energy Surface dataset (Materials Virtual Lab + Materials Project), single-point PBE DFT on periodic solids, near-complete periodic-table coverage (all but noble gases and unstable radionuclides).(arXiv:2503.04070) "
         },
         {
           "key": "MPtrj",
@@ -686,7 +718,7 @@
           "n_structures": null,
           "n_materials": null,
           "url": "https://github.com/openmm/spice-dataset",
-          "notes": "Small drug-like molecules, peptides and ion pairs at wB97M-D3(BJ)/def2-TZVPPD; molecular, not solid-state. Cited unversioned by some checkpoints and as SPICE 2 by others, as the per-model note records."
+          "notes": "Small drug-like molecules, peptides and ion pairs at wB97M-D3(BJ)/def2-TZVPPD.  A molecular corpus, not a solid-state one.  Cited unversioned by some checkpoints and as SPICE 2 by others; the per-model note records which."
         },
         {
           "key": "OC20",
@@ -702,7 +734,7 @@
           "n_structures": 100000000,
           "n_materials": 83000000,
           "url": "https://huggingface.co/facebook/OMol25",
-          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms. Counts follow the paper's own rounding (arXiv:2505.08762), so n_structures is a lower bound."
+          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms.  Counts are the paper's own rounding -- it states 'more than 100 million' calculations over '~83M unique molecular systems' (arXiv:2505.08762), so treat n_structures as a lower bound."
         }
       ],
       "n_parameters": 6439878,
@@ -988,7 +1020,7 @@
           "n_structures": null,
           "n_materials": null,
           "url": "https://github.com/openmm/spice-dataset",
-          "notes": "Small drug-like molecules, peptides and ion pairs at wB97M-D3(BJ)/def2-TZVPPD; molecular, not solid-state. Cited unversioned by some checkpoints and as SPICE 2 by others, as the per-model note records."
+          "notes": "Small drug-like molecules, peptides and ion pairs at wB97M-D3(BJ)/def2-TZVPPD.  A molecular corpus, not a solid-state one.  Cited unversioned by some checkpoints and as SPICE 2 by others; the per-model note records which."
         },
         {
           "key": "ANI-1xnr",
@@ -1010,7 +1042,7 @@
       "n_parameters": null,
       "n_parameters_trainable": null,
       "n_modules_found": 0,
-      "training_set_note": "A descriptor-space subsample of each corpus, not the whole of it (OMat24 395,469, MPtrj 56,987, SPICE 24,142, ANI-1xnr 18,723 structures), so summed dataset counts are not reported. It also draws on several sets with no citable public release (arXiv:2504.21286).",
+      "training_set_note": "A descriptor-space subsample of each corpus rather than the whole of it (OMat24 395,469, MPtrj 56,987, SPICE 24,142 and ANI-1xnr 18,723 structures), so the summed dataset counts would be wrong by orders of magnitude and are not reported. It also draws on SSE-ABACUS, SSE-VASP, a protein set, a CH set, a reactive CHONPS set and a water set, which have no citable public release (arXiv:2504.21286).",
       "training_heads": [],
       "evaluated_head": "",
       "status": "ok",
@@ -2539,7 +2571,7 @@
           "n_structures": 504811,
           "n_materials": 281572,
           "url": "https://matpes.ai",
-          "notes": "Materials Potential Energy Surface dataset (Materials Virtual Lab + Materials Project): single-point PBE DFT on periodic solids, near-complete periodic-table coverage (arXiv:2503.04070)."
+          "notes": "Materials Potential Energy Surface dataset (Materials Virtual Lab + Materials Project), single-point PBE DFT on periodic solids, near-complete periodic-table coverage (all but noble gases and unstable radionuclides).(arXiv:2503.04070) "
         },
         {
           "key": "MPtrj",
@@ -2555,7 +2587,7 @@
           "n_structures": null,
           "n_materials": null,
           "url": "https://github.com/openmm/spice-dataset",
-          "notes": "Small drug-like molecules, peptides and ion pairs at wB97M-D3(BJ)/def2-TZVPPD; molecular, not solid-state. Cited unversioned by some checkpoints and as SPICE 2 by others, as the per-model note records."
+          "notes": "Small drug-like molecules, peptides and ion pairs at wB97M-D3(BJ)/def2-TZVPPD.  A molecular corpus, not a solid-state one.  Cited unversioned by some checkpoints and as SPICE 2 by others; the per-model note records which."
         },
         {
           "key": "OC20",
@@ -2571,7 +2603,7 @@
           "n_structures": 100000000,
           "n_materials": 83000000,
           "url": "https://huggingface.co/facebook/OMol25",
-          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms. Counts follow the paper's own rounding (arXiv:2505.08762), so n_structures is a lower bound."
+          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms.  Counts are the paper's own rounding -- it states 'more than 100 million' calculations over '~83M unique molecular systems' (arXiv:2505.08762), so treat n_structures as a lower bound."
         }
       ],
       "n_parameters": 9077038,
@@ -2714,7 +2746,7 @@
         "wandb"
       ],
       "calculator": "GGNN.common.calculator.UCalculator(checkpoint_path=\"/scratch5/joha4087/model_download/equflashv2_oam.pt\", cpu=False)",
-      "notes": "GGNN is public at SamsungDS/GGNN; the checkpoint is the local one. Package pins come from the repo's own requirements.txt, which fixes the cuequivariance version GGNN needs.",
+      "notes": "GGNN is public at SamsungDS/GGNN; the checkpoint is the local one.  The pins come from the repo's own requirements.txt, which is where the cuequivariance version GGNN's buffer_num_segments needs is recorded.",
       "precision": "float32",
       "training_set": [
         "OMat24",
@@ -3134,6 +3166,144 @@
         "sevenn.calculator"
       ],
       "python": "3.11",
+      "slug": "sevennet-nano-6.0",
+      "label": "SevenNet-Nano-6.0",
+      "family": "SevenNet",
+      "packages": [
+        "sevenn@git+https://github.com/MDIL-SNU/SevenNet@8d9905cc4f4b7ca93be02b37a263785add53c759"
+      ],
+      "calculator": "sevenn.calculator.SevenNetCalculator(model=\"7net-nano-6.0\", device=\"cuda\")",
+      "notes": "105k-parameter student distilled from the SevenNet-Omni mpa task (doi:10.1021/acs.jcim.6c01103), l=2, 3 layers, full parity, at the widest of its four cutoffs (6.0 A).  Its teacher is in the suite as sevennet-omni-i12, so the pair measures what distillation costs.",
+      "precision": "float32",
+      "training_set": [
+        "MPtrj",
+        "sAlex"
+      ],
+      "training_set_complete": false,
+      "training_set_note": "A distillation student, so it never saw these labels directly: it was trained against the SevenNet-Omni 'mpa' head, whose own corpus is MPtrj + sAlex.  The structure pool used for the distillation is not stated in the release, so the two corpora describe the teacher, not this checkpoint, and no structure count is claimed.",
+      "training_heads": [],
+      "evaluated_head": "",
+      "n_training_structures": null,
+      "n_training_materials": null,
+      "datasets": [
+        {
+          "key": "MPtrj",
+          "label": "MPtrj",
+          "n_structures": 1580395,
+          "n_materials": 145923,
+          "url": "https://figshare.com/articles/dataset/23713842",
+          "notes": "Materials Project relaxation trajectories, cleaned and subsampled to about every 10th ionic step; created for CHGNet."
+        },
+        {
+          "key": "sAlex",
+          "label": "sAlex",
+          "n_structures": 10447765,
+          "n_materials": 3227606,
+          "url": "https://huggingface.co/datasets/fairchem/OMAT24#salex-dataset",
+          "notes": "Alexandria subsampled by FAIR, filtered to remove prototype overlap with the Matbench Discovery WBM test set."
+        }
+      ],
+      "n_parameters": 103401,
+      "n_parameters_trainable": 103279,
+      "n_modules_found": 1,
+      "from_state_dict": false,
+      "n_parameters_source": "runtime",
+      "status": "ok",
+      "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
+      "seed": 0,
+      "wall_seconds": 676.04,
+      "environment": {
+        "python": "3.11.16",
+        "torch": "2.7.1+cu126",
+        "torch_cuda": "12.6",
+        "cuda_available": true,
+        "ase": "3.28.0",
+        "pescert": "0.1.0",
+        "host": "038bd3c143be",
+        "gpu": {
+          "name": "NVIDIA RTX A5000",
+          "capability": "8.6",
+          "total_memory_GB": 23.55
+        }
+      },
+      "scores": {
+        "conservativeness": 0.9844607475053309,
+        "equivariance": 0.9946119202351067,
+        "smoothness": 0.9977855877129483,
+        "stress_consistency": 0.7152549218181001,
+        "parity": 0.9998313901857541,
+        "representation": 0.9984105197042646,
+        "cross_maxwell": 0.5670256203652967,
+        "betti": 0.9950654592085897,
+        "zero_modes": 0.547426899415708,
+        "trimer": 0.7724760509992048,
+        "reversibility": 0.9992055246091096,
+        "config_temperature": 0.9063081651042711,
+        "equipartition": 0.8705134421424783,
+        "virial": 0.9616372833232745
+      },
+      "defects": {
+        "conservativeness": 0.0007991934237325738,
+        "equivariance": 0.005409841096753101,
+        "smoothness": 0.0022226885571085876,
+        "stress_consistency": 0.024071414842225778,
+        "parity": 1.6865393380173425e-07,
+        "representation": 0.0015912780776739862,
+        "cross_maxwell": 0.03392351879098743,
+        "betti": 9.935946063487902e-05,
+        "zero_modes": 0.00022286538331117112,
+        "trimer": 1.0842708589701588,
+        "reversibility": 7.96202019383441e-07,
+        "config_temperature": 0.09980043861799237,
+        "equipartition": 0.14316830923813972,
+        "virial": 0.03956075488239228
+      },
+      "calls": {
+        "conservativeness": 90,
+        "equivariance": 90,
+        "smoothness": 810,
+        "stress_consistency": 130,
+        "parity": 20,
+        "representation": 200,
+        "cross_maxwell": 2938,
+        "betti": 480,
+        "zero_modes": 1937,
+        "trimer": 1140,
+        "reversibility": 2010,
+        "config_temperature": 25032,
+        "equipartition": 780,
+        "virial": 0
+      },
+      "gates": {
+        "conservativeness": true,
+        "equivariance": true,
+        "smoothness": null,
+        "stress_consistency": true,
+        "parity": true,
+        "representation": true,
+        "cross_maxwell": true,
+        "betti": true,
+        "zero_modes": false,
+        "trimer": true,
+        "reversibility": true,
+        "config_temperature": null,
+        "equipartition": null,
+        "virial": null
+      },
+      "crashes": {},
+      "skipped": {},
+      "overall": {
+        "arithmetic": 0.8792866808806741,
+        "geometric": 0.8625484585095163,
+        "harmonic": 0.8430732421353158
+      },
+      "result_file": "sevennet-nano-6.0/result.json"
+    },
+    {
+      "imports": [
+        "sevenn.calculator"
+      ],
+      "python": "3.11",
       "slug": "sevennet-omni-i12",
       "label": "SevenNet-Omni-i12",
       "family": "SevenNet",
@@ -3190,7 +3360,7 @@
           "n_structures": 100000000,
           "n_materials": 83000000,
           "url": "https://huggingface.co/facebook/OMol25",
-          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms. Counts follow the paper's own rounding (arXiv:2505.08762), so n_structures is a lower bound."
+          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms.  Counts are the paper's own rounding -- it states 'more than 100 million' calculations over '~83M unique molecular systems' (arXiv:2505.08762), so treat n_structures as a lower bound."
         },
         {
           "key": "MatPES",
@@ -3198,7 +3368,7 @@
           "n_structures": 504811,
           "n_materials": 281572,
           "url": "https://matpes.ai",
-          "notes": "Materials Potential Energy Surface dataset (Materials Virtual Lab + Materials Project): single-point PBE DFT on periodic solids, near-complete periodic-table coverage (arXiv:2503.04070)."
+          "notes": "Materials Potential Energy Surface dataset (Materials Virtual Lab + Materials Project), single-point PBE DFT on periodic solids, near-complete periodic-table coverage (all but noble gases and unstable radionuclides).(arXiv:2503.04070) "
         },
         {
           "key": "OC20",
@@ -3222,7 +3392,7 @@
           "n_structures": null,
           "n_materials": null,
           "url": "https://github.com/openmm/spice-dataset",
-          "notes": "Small drug-like molecules, peptides and ion pairs at wB97M-D3(BJ)/def2-TZVPPD; molecular, not solid-state. Cited unversioned by some checkpoints and as SPICE 2 by others, as the per-model note records."
+          "notes": "Small drug-like molecules, peptides and ion pairs at wB97M-D3(BJ)/def2-TZVPPD.  A molecular corpus, not a solid-state one.  Cited unversioned by some checkpoints and as SPICE 2 by others; the per-model note records which."
         },
         {
           "key": "QCML",
@@ -3230,7 +3400,7 @@
           "n_structures": 33500000,
           "n_materials": null,
           "url": "https://doi.org/10.1038/s41597-025-04720-7",
-          "notes": "Quantum chemistry reference data for molecules of up to 8 heavy atoms, across much of the periodic table and several electronic states. 33.5M DFT entries alongside 14.7B semi-empirical ones; the DFT count is the one recorded here."
+          "notes": "Quantum chemistry reference data for small molecules of up to 8 heavy atoms, covering a large part of the periodic table and several electronic states.  33.5M DFT entries alongside 14.7B semi-empirical ones; the DFT count is the one recorded here."
         },
         {
           "key": "ODAC23",
@@ -3254,7 +3424,7 @@
       "n_modules_found": 1,
       "from_state_dict": false,
       "n_parameters_source": "runtime",
-      "training_set_note": "Thirteen-modality multi-fidelity checkpoint; the modality map is read from the checkpoint itself (_modal_map). Evaluated on 'mpa', the MPtrj + sAlex PBE modality, so this row is that fidelity.",
+      "training_set_note": "Thirteen-modality multi-fidelity checkpoint; the modality map is read from the checkpoint itself (_modal_map). Evaluated on 'mpa' -- the MPtrj + sAlex PBE modality -- so this row is that fidelity. The mp_r2scan and matpes_r2scan modalities are meta-GGA fidelities of MP and MatPES.",
       "training_heads": [
         "omat24",
         "mpa",
@@ -3508,7 +3678,7 @@
         "numpy"
       ],
       "calculator": "prophet.KairosCalculator(model_path=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/prophet-oame-mbd.pt\", use_kernel=False, device=\"cuda\")",
-      "notes": "Prophet-V1-MBD: 62.3M parameters, 10 layers, lmax 4, nested cutoffs 3/7 A, thermal-conductivity fine-tuned.  Multi-Cutoff Spectral Decomposition recombines nested cutoff scales linearly.",
+      "notes": "Prophet-V1-MBD, the Matbench Discovery submission checkpoint (F1 0.9275, kappa_SRME 0.0648): 62.3M parameters, 10 layers, lmax 4, nested cutoffs 3/7 A, thermal-conductivity fine-tuned.  Multi-Cutoff Spectral Decomposition recombines nested cutoff scales linearly, which the report claims keeps E(3) equivariance exact and the energy twice continuously differentiable -- the equivariance and conservativity probes test exactly that claim.  Weights are CC-BY-4.0 and ungated; the checkpoint is staged by hand next to the others because KairosCalculator takes a filesystem path, not a hub id (hf download kairosmaterial/prophet prophet-oame-mbd.pt).  The magnetic sibling Prophet-V1-Mag ships in the same package behind prophet_spin.SpinCalculator and is not certified here: it needs an explicit magnetic state as input.",
       "precision": "float32",
       "training_set": [
         "OMat24",
@@ -3518,7 +3688,7 @@
         "ELEMENTA-Vib"
       ],
       "training_set_complete": true,
-      "training_set_note": "Three training stages, per the technical report: OMat24 and the composition-complete ELEMENTA corpus, then MPtrj and sAlex, then the perturbed-structure subset ELEMENTA Vib.",
+      "training_set_note": "Three training stages, per the technical report: OMat24 and the composition-complete ELEMENTA corpus, then MPtrj and sAlex, then the perturbed-structure subset ELEMENTA Vib.  The ELEMENTA Vib count is the source's own approximate ~8M, and it publishes no material count, so n_training_materials is null for this row while n_training_structures is a sum that includes an approximate term.",
       "training_heads": [],
       "evaluated_head": "",
       "n_training_structures": 331509030,
@@ -4080,7 +4250,7 @@
         "e3nn==0.6.0"
       ],
       "calculator": "deepmd.calculator.DP(model=\"/scratch5/joha4087/programs/dpa_models/DPA-3.1-3M.pt\", head=\"Omat24\")",
-      "notes": "DPA-3.1, 3M parameters, multitask-pretrained on the OpenLAM corpora (huggingface.co/deepmodelingcommunity/DPA-3.1-3M). A multitask checkpoint has no single head; the Omat24 branch is evaluated, so this row is that head, not the whole model.",
+      "notes": "DPA-3.1, 3M parameters, multitask-pretrained on the OpenLAM corpora (huggingface.co/deepmodelingcommunity/DPA-3.1-3M).  A multitask checkpoint has no single head: the \"Omat24\" branch is selected, the one whose corpus matches this element sweep, so the row is that head and not the model as a whole.",
       "precision": "float64",
       "training_set": [
         "OMat24",
@@ -4151,7 +4321,7 @@
           "n_structures": null,
           "n_materials": null,
           "url": "https://github.com/openmm/spice-dataset",
-          "notes": "Small drug-like molecules, peptides and ion pairs at wB97M-D3(BJ)/def2-TZVPPD; molecular, not solid-state. Cited unversioned by some checkpoints and as SPICE 2 by others, as the per-model note records."
+          "notes": "Small drug-like molecules, peptides and ion pairs at wB97M-D3(BJ)/def2-TZVPPD.  A molecular corpus, not a solid-state one.  Cited unversioned by some checkpoints and as SPICE 2 by others; the per-model note records which."
         },
         {
           "key": "Transition1x",
@@ -4167,7 +4337,7 @@
           "n_structures": null,
           "n_materials": null,
           "url": "https://github.com/deepmodeling/deepmd-kit",
-          "notes": "Placeholder for the DeepModeling/OpenLAM domain corpora that the DPA multi-task checkpoints carry heads for. These are not public releases with citable counts; the exact head list is recorded per model in training_heads."
+          "notes": "Placeholder for the DeepModeling/OpenLAM domain corpora that the DPA multi-task checkpoints carry heads for (Domains_*, Metals_*, H2O_*, Electrolyte, Hybrid_Perovskite, SSE_ABACUS, ...).  These are not public releases with citable counts; the exact head list is recorded per model in ``training_heads``."
         }
       ],
       "n_parameters": 3268689,
@@ -4175,7 +4345,7 @@
       "n_modules_found": 1,
       "from_state_dict": false,
       "n_parameters_source": "runtime",
-      "training_set_note": "Multi-task checkpoint from the OpenLAM programme: one head per training corpus, read from the checkpoint's own state dict and listed in training_heads. The public corpora are named individually; the DeepModeling in-house heads are grouped under OpenLAM in-house.",
+      "training_set_note": "Multi-task checkpoint from the OpenLAM programme: one head per training corpus, read out of the checkpoint's own state dict and listed in training_heads. The public corpora among them are named individually; the Domains_*, Metals_*, H2O_*, Electrolyte, Hybrid_Perovskite and SSE_ABACUS heads are DeepModeling in-house sets with no citable release, grouped under OpenLAM in-house.",
       "training_heads": [
         "Alex2D",
         "Alloy_tongqi",
@@ -4561,6 +4731,135 @@
     },
     {
       "imports": [
+        "deepmd.calculator"
+      ],
+      "python": "3.11",
+      "slug": "dpa-4-plus-omat",
+      "label": "DPA-4-Plus (OMat24)",
+      "family": "DPA",
+      "packages": [
+        "deepmd-kit[torch]==3.2.0"
+      ],
+      "calculator": "deepmd.calculator.DP(model=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/DPA4-Plus-OMat24-v20260805.pt\")",
+      "notes": "DPA-4 / SeZM Plus on OMat24: 8,848,518 parameters, SO(3)-equivariant and conservative, the message-passing counterpart of the DPA-4C rows above.  Its OMol25 twin was measured and then archived to _removed/, so the corpus comparison that pair supported is no longer in the table.",
+      "precision": "float32",
+      "training_set": [
+        "OMat24"
+      ],
+      "training_set_complete": true,
+      "training_set_note": "OMat24 only (100,568,576 frames as released here, against the 100,824,585 recorded for the corpus in DATASETS).",
+      "training_heads": [],
+      "evaluated_head": "",
+      "n_training_structures": 100824585,
+      "n_training_materials": 3227606,
+      "datasets": [
+        {
+          "key": "OMat24",
+          "label": "OMat24",
+          "n_structures": 100824585,
+          "n_materials": 3227606,
+          "url": "https://huggingface.co/datasets/fairchem/OMAT24#omat24-dataset",
+          "notes": "Open Materials 2024 (Meta FAIR): >100M structures from perturbing Alexandria structures."
+        }
+      ],
+      "n_parameters": 8848518,
+      "n_parameters_trainable": 8848518,
+      "n_modules_found": 1,
+      "from_state_dict": false,
+      "n_parameters_source": "runtime",
+      "status": "ok",
+      "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
+      "seed": 0,
+      "wall_seconds": 2353.15,
+      "environment": {
+        "python": "3.11.16",
+        "torch": "2.11.0+cu126",
+        "torch_cuda": "12.6",
+        "cuda_available": true,
+        "ase": "3.28.0",
+        "pescert": "0.1.0",
+        "host": "e4858c14a93c",
+        "gpu": {
+          "name": "NVIDIA RTX A5000",
+          "capability": "8.6",
+          "total_memory_GB": 23.55
+        }
+      },
+      "scores": {
+        "conservativeness": 0.9983950701735435,
+        "equivariance": 0.9913589766738259,
+        "smoothness": 0.9932017086707978,
+        "stress_consistency": 0.8605718583643579,
+        "parity": 0.19753117693943956,
+        "representation": 0.9983871135377008,
+        "cross_maxwell": 0.6782309358408803,
+        "betti": 0.995853288816323,
+        "zero_modes": 0.6794562401515534,
+        "trimer": 0.35332269840066977,
+        "reversibility": 0.9983273265773057,
+        "config_temperature": 0.9144724150878419,
+        "equipartition": 0.8628749528433779,
+        "virial": 0.9482235398317093
+      },
+      "defects": {
+        "conservativeness": 8.040394406743563e-05,
+        "equivariance": 0.00868931709148608,
+        "smoothness": 0.00691674648199474,
+        "stress_consistency": 0.008543931084708484,
+        "parity": 0.0024330645737613106,
+        "representation": 0.0016144816269111997,
+        "cross_maxwell": 0.028773635758602967,
+        "betti": 8.331366109552379e-05,
+        "zero_modes": 0.00018324472987344087,
+        "trimer": 0.9748065446376593,
+        "reversibility": 1.679120625825988e-06,
+        "config_temperature": 0.09069587121405595,
+        "equipartition": 0.14994009509086867,
+        "virial": 0.05386328147756703
+      },
+      "calls": {
+        "conservativeness": 90,
+        "equivariance": 90,
+        "smoothness": 810,
+        "stress_consistency": 130,
+        "parity": 20,
+        "representation": 200,
+        "cross_maxwell": 3526,
+        "betti": 480,
+        "zero_modes": 2074,
+        "trimer": 1140,
+        "reversibility": 2010,
+        "config_temperature": 25244,
+        "equipartition": 780,
+        "virial": 0
+      },
+      "gates": {
+        "conservativeness": true,
+        "equivariance": true,
+        "smoothness": null,
+        "stress_consistency": true,
+        "parity": false,
+        "representation": true,
+        "cross_maxwell": false,
+        "betti": true,
+        "zero_modes": false,
+        "trimer": true,
+        "reversibility": true,
+        "config_temperature": null,
+        "equipartition": null,
+        "virial": null
+      },
+      "crashes": {},
+      "skipped": {},
+      "overall": {
+        "arithmetic": 0.8193005215649519,
+        "geometric": 0.7567707512307225,
+        "harmonic": 0.6562712218838307
+      },
+      "result_file": "dpa-4-plus-omat/result.json"
+    },
+    {
+      "imports": [
         "fairchem.core"
       ],
       "python": "3.12",
@@ -4573,7 +4872,7 @@
         "scipy<1.15"
       ],
       "calculator": "fairchem.core.OCPCalculator(checkpoint_path=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/checkpoint/omat24-mptrj-salex_gradient.pt\", cpu=False)",
-      "notes": "Weights from the mirror-physics/equiformer_v3 HuggingFace repo; omat24-mptrj-salex_gradient.pt is the OAM conservative-gradient variant. The code is a fairchem fork, so the package lives in packages/fairchem-core.",
+      "notes": "Weights come from the mirror-physics/equiformer_v3 HuggingFace repo; omat24-mptrj-salex_gradient.pt is the OAM, conservative-gradient variant. The code is a fairchem fork, so the package lives in packages/fairchem-core.",
       "precision": "float32",
       "training_set": [
         "OMat24",
@@ -4716,7 +5015,7 @@
       ],
       "python": "3.11",
       "slug": "dpa-4-pro-mptrj",
-      "label": "DPA-4-Pro-MPtrj",
+      "label": "DPA-4-Pro (MPtrj)",
       "family": "DeePMD",
       "packages": [
         "deepmd-kit[torch]@git+https://github.com/wanghan-iapcm/deepmd-kit@3eb005be526f199f5ef67667edc7a91cd5c77f7c",
@@ -5002,7 +5301,7 @@
         "scipy<1.15"
       ],
       "calculator": "fairchem.core.OCPCalculator(checkpoint_path=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/esen_30m_mptrj.pt\", cpu=False)",
-      "notes": "Same 30M eSEN, MPtrj only -- the training-corpus arm of the series. Needs fairchem-core 1.10.0, the release that registers the 'mlip_trainer' the checkpoint asks for.",
+      "notes": "Same 30M eSEN, MPtrj only -- the training-corpus arm of the series.  Needs fairchem-core 1.10.0: that is the release registering the 'mlip_trainer' the checkpoint asks for (fairchem/core/models/esen/trainers).",
       "precision": "float32",
       "training_set": [
         "MPtrj"
@@ -5121,6 +5420,135 @@
     },
     {
       "imports": [
+        "deepmd.calculator"
+      ],
+      "python": "3.11",
+      "slug": "dpa-4c-nano-omol",
+      "label": "DPA-4C-Nano (OMol)",
+      "family": "DPA",
+      "packages": [
+        "deepmd-kit[torch]==3.2.0"
+      ],
+      "calculator": "deepmd.calculator.DP(model=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/DPA4C-Nano-OMol25-100M-v20260820.pt\")",
+      "notes": "DPA-4C-Nano: the compressible, message-passing-free member of the DPA-4 family (35k parameters, 6.0 A cutoff, one hop).  Released validation on the OMol-0 out-of-distribution split is 40.97 kcal/mol energy / 2.485 kcal/mol/A force MAE.  The smallest checkpoint in the whole suite.",
+      "precision": "float32",
+      "training_set": [
+        "OMol25"
+      ],
+      "training_set_complete": true,
+      "training_set_note": "Trained on the OMol25 100M split (101,666,280 frames); the DATASETS figure is the round 100M the corpus is published under, so the count is the split, not the whole of OMol25.",
+      "training_heads": [],
+      "evaluated_head": "",
+      "n_training_structures": 100000000,
+      "n_training_materials": 83000000,
+      "datasets": [
+        {
+          "key": "OMol25",
+          "label": "OMol25",
+          "n_structures": 100000000,
+          "n_materials": 83000000,
+          "url": "https://huggingface.co/facebook/OMol25",
+          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms.  Counts are the paper's own rounding -- it states 'more than 100 million' calculations over '~83M unique molecular systems' (arXiv:2505.08762), so treat n_structures as a lower bound."
+        }
+      ],
+      "n_parameters": 35473,
+      "n_parameters_trainable": 35473,
+      "n_modules_found": 1,
+      "from_state_dict": false,
+      "n_parameters_source": "runtime",
+      "status": "ok",
+      "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
+      "seed": 0,
+      "wall_seconds": 491.48,
+      "environment": {
+        "python": "3.11.16",
+        "torch": "2.11.0+cu126",
+        "torch_cuda": "12.6",
+        "cuda_available": true,
+        "ase": "3.28.0",
+        "pescert": "0.1.0",
+        "host": "75bf757bd194",
+        "gpu": {
+          "name": "NVIDIA RTX A5000",
+          "capability": "8.6",
+          "total_memory_GB": 23.55
+        }
+      },
+      "scores": {
+        "conservativeness": 0.938632331519802,
+        "equivariance": 0.9666442015768467,
+        "smoothness": 0.6827048108328926,
+        "stress_consistency": 0.8669974301971939,
+        "parity": 0.9995722933618776,
+        "representation": 0.9904980882075595,
+        "cross_maxwell": 0.2148878446166968,
+        "betti": 0.9783331308549092,
+        "zero_modes": 0.2635057865237254,
+        "trimer": 0.6105492013382652,
+        "reversibility": 0.9940529122043127,
+        "config_temperature": 0.9403557298925513,
+        "equipartition": 0.6400095712637995,
+        "virial": 0.8301386564141374
+      },
+      "defects": {
+        "conservativeness": 0.0033067794930151267,
+        "equivariance": 0.03430988353767782,
+        "smoothness": 0.5435010750080171,
+        "stress_consistency": 0.008699799384153061,
+        "parity": 4.27917736716233e-07,
+        "representation": 0.009556844055211275,
+        "cross_maxwell": 0.10001006610916471,
+        "betti": 0.0004413686809338164,
+        "zero_modes": 7.396152787523187e-05,
+        "trimer": 2.3938254871036966,
+        "reversibility": 5.992475432340972e-06,
+        "config_temperature": 0.0619145171659673,
+        "equipartition": 1.361564072913771,
+        "virial": 0.22138644226910148
+      },
+      "calls": {
+        "conservativeness": 90,
+        "equivariance": 90,
+        "smoothness": 810,
+        "stress_consistency": 130,
+        "parity": 20,
+        "representation": 200,
+        "cross_maxwell": 3994,
+        "betti": 480,
+        "zero_modes": 2157,
+        "trimer": 1140,
+        "reversibility": 2010,
+        "config_temperature": 25231,
+        "equipartition": 780,
+        "virial": 0
+      },
+      "gates": {
+        "conservativeness": true,
+        "equivariance": true,
+        "smoothness": null,
+        "stress_consistency": true,
+        "parity": true,
+        "representation": true,
+        "cross_maxwell": false,
+        "betti": true,
+        "zero_modes": false,
+        "trimer": false,
+        "reversibility": true,
+        "config_temperature": null,
+        "equipartition": null,
+        "virial": null
+      },
+      "crashes": {},
+      "skipped": {},
+      "overall": {
+        "arithmetic": 0.7797772849146121,
+        "geometric": 0.7139006640698865,
+        "harmonic": 0.6174699003867155
+      },
+      "result_file": "dpa-4c-nano-omol/result.json"
+    },
+    {
+      "imports": [
         "fairchem.core"
       ],
       "python": "3.12",
@@ -5133,7 +5561,7 @@
         "scipy<1.15"
       ],
       "calculator": "fairchem.core.OCPCalculator(checkpoint_path=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/esen_30m_oam.pt\", cpu=False)",
-      "notes": "eSEN 30M on OAM; checkpoint from facebook/OMAT24. Needs fairchem-core 1.10.0, the release that registers the 'mlip_trainer' the checkpoint asks for.",
+      "notes": "eSEN 30M on OAM; checkpoint from facebook/OMAT24.  Needs fairchem-core 1.10.0: that is the release registering the 'mlip_trainer' the checkpoint asks for (fairchem/core/models/esen/trainers).",
       "precision": "float32",
       "training_set": [
         "OMat24",
@@ -5352,7 +5780,7 @@
           "n_structures": null,
           "n_materials": null,
           "url": "https://github.com/openmm/spice-dataset",
-          "notes": "Small drug-like molecules, peptides and ion pairs at wB97M-D3(BJ)/def2-TZVPPD; molecular, not solid-state. Cited unversioned by some checkpoints and as SPICE 2 by others, as the per-model note records."
+          "notes": "Small drug-like molecules, peptides and ion pairs at wB97M-D3(BJ)/def2-TZVPPD.  A molecular corpus, not a solid-state one.  Cited unversioned by some checkpoints and as SPICE 2 by others; the per-model note records which."
         },
         {
           "key": "Transition1x",
@@ -5368,7 +5796,7 @@
           "n_structures": null,
           "n_materials": null,
           "url": "https://github.com/deepmodeling/deepmd-kit",
-          "notes": "Placeholder for the DeepModeling/OpenLAM domain corpora that the DPA multi-task checkpoints carry heads for. These are not public releases with citable counts; the exact head list is recorded per model in training_heads."
+          "notes": "Placeholder for the DeepModeling/OpenLAM domain corpora that the DPA multi-task checkpoints carry heads for (Domains_*, Metals_*, H2O_*, Electrolyte, Hybrid_Perovskite, SSE_ABACUS, ...).  These are not public releases with citable counts; the exact head list is recorded per model in ``training_heads``."
         }
       ],
       "n_parameters": 6425169,
@@ -5376,7 +5804,7 @@
       "n_modules_found": 1,
       "from_state_dict": false,
       "n_parameters_source": "runtime",
-      "training_set_note": "Multi-task checkpoint from the OpenLAM programme: one head per training corpus, read from the checkpoint's own state dict and listed in training_heads. The public corpora are named individually; the DeepModeling in-house heads are grouped under OpenLAM in-house.",
+      "training_set_note": "Multi-task checkpoint from the OpenLAM programme: one head per training corpus, read out of the checkpoint's own state dict and listed in training_heads. The public corpora among them are named individually; the Domains_*, Metals_*, H2O_*, Electrolyte, Hybrid_Perovskite and SSE_ABACUS heads are DeepModeling in-house sets with no citable release, grouped under OpenLAM in-house.",
       "training_heads": [
         "Alex2D",
         "Alloy_tongqi",
@@ -5521,7 +5949,7 @@
         "numpy>=2.0"
       ],
       "calculator": "matris.applications.base.MatRISCalculator(model=\"matris_10m_oam\", task=\"efsm\", device=\"cuda\")",
-      "notes": "MatRIS 10M pretrained on OMat24 and fine-tuned on sAlex+MPtrj. The checkpoint is staged by hand: the figshare URL in matris/model/model.py now answers 403 with an empty body, so the file is kept alongside the other hand-downloaded checkpoints.",
+      "notes": "MatRIS 10M pretrained on OMat24 and fine-tuned on sAlex+MPtrj.  The checkpoint is staged by hand: matris/model/model.py downloads from a figshare ndownloader URL that now answers 403/202 with an empty body, which is why the first run died in torch.load with EOFError.  figshare's API endpoint still serves it, and the file is kept alongside the other hand-downloaded checkpoints.  MatRIS.load looks only in ~/.cache/matris and HOME is /model-cache in the container, so after a /var/tmp wipe re-stage it: cp download_checkpoints/MatRIS_10M_OAM.pth.tar /var/tmp/$USER-containers/model-cache/.cache/matris/  (re-fetch with curl -L https://api.figshare.com/v2/file/download/59142728).",
       "precision": "float32",
       "training_set": [
         "OMat24",
@@ -5672,7 +6100,7 @@
         "scipy<1.15"
       ],
       "calculator": "fairchem.core.OCPCalculator(checkpoint_path=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/esen_30m_omat.pt\", cpu=False)",
-      "notes": "Same 30M eSEN architecture as the OAM checkpoint, OMat24 only. Needs fairchem-core 1.10.0, the release that registers the 'mlip_trainer' the checkpoint asks for.",
+      "notes": "Same 30M eSEN architecture as the OAM checkpoint, OMat24 only.  Needs fairchem-core 1.10.0: that is the release registering the 'mlip_trainer' the checkpoint asks for (fairchem/core/models/esen/trainers).",
       "precision": "float32",
       "training_set": [
         "OMat24"
@@ -5976,7 +6404,7 @@
           "n_structures": 100000000,
           "n_materials": 83000000,
           "url": "https://huggingface.co/facebook/OMol25",
-          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms. Counts follow the paper's own rounding (arXiv:2505.08762), so n_structures is a lower bound."
+          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms.  Counts are the paper's own rounding -- it states 'more than 100 million' calculations over '~83M unique molecular systems' (arXiv:2505.08762), so treat n_structures as a lower bound."
         },
         {
           "key": "OC20",
@@ -6101,6 +6529,526 @@
         "harmonic": 2.625597437677657e-07
       },
       "result_file": "uma-s1p2/result.json"
+    },
+    {
+      "imports": [
+        "deepmd.calculator"
+      ],
+      "python": "3.11",
+      "slug": "dpa-4c-neo-omol",
+      "label": "DPA-4C-Neo (OMol)",
+      "family": "DPA",
+      "packages": [
+        "deepmd-kit[torch]==3.2.0"
+      ],
+      "calculator": "deepmd.calculator.DP(model=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/DPA4C-Neo-OMol25-100M-v20260820.pt\")",
+      "notes": "DPA-4C-Neo: the compressible, message-passing-free member of the DPA-4 family (539k parameters, 6.0 A cutoff, one hop).  Released validation on the OMol-0 out-of-distribution split is 24.74 kcal/mol energy / 1.731 kcal/mol/A force MAE.  The midpoint of the DPA-4C series.",
+      "precision": "float32",
+      "training_set": [
+        "OMol25"
+      ],
+      "training_set_complete": true,
+      "training_set_note": "Trained on the OMol25 100M split (101,666,280 frames); the DATASETS figure is the round 100M the corpus is published under, so the count is the split, not the whole of OMol25.",
+      "training_heads": [],
+      "evaluated_head": "",
+      "n_training_structures": 100000000,
+      "n_training_materials": 83000000,
+      "datasets": [
+        {
+          "key": "OMol25",
+          "label": "OMol25",
+          "n_structures": 100000000,
+          "n_materials": 83000000,
+          "url": "https://huggingface.co/facebook/OMol25",
+          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms.  Counts are the paper's own rounding -- it states 'more than 100 million' calculations over '~83M unique molecular systems' (arXiv:2505.08762), so treat n_structures as a lower bound."
+        }
+      ],
+      "n_parameters": 538697,
+      "n_parameters_trainable": 538697,
+      "n_modules_found": 1,
+      "from_state_dict": false,
+      "n_parameters_source": "runtime",
+      "status": "ok",
+      "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
+      "seed": 0,
+      "wall_seconds": 490.54,
+      "environment": {
+        "python": "3.11.16",
+        "torch": "2.11.0+cu126",
+        "torch_cuda": "12.6",
+        "cuda_available": true,
+        "ase": "3.28.0",
+        "pescert": "0.1.0",
+        "host": "e010af1b5a77",
+        "gpu": {
+          "name": "NVIDIA RTX A5000",
+          "capability": "8.6",
+          "total_memory_GB": 23.55
+        }
+      },
+      "scores": {
+        "conservativeness": 0.8323030933941871,
+        "equivariance": 0.952949814490936,
+        "smoothness": 0.56120743608256,
+        "stress_consistency": 0.7057077304657025,
+        "parity": 0.998973601402118,
+        "representation": 0.9809173596476308,
+        "cross_maxwell": 0.17513009854153877,
+        "betti": 0.943203190719853,
+        "zero_modes": 0.2528752017543067,
+        "trimer": 0.38304983953920535,
+        "reversibility": 0.9863955776133068,
+        "config_temperature": 0.9293360357356397,
+        "equipartition": 0.6062973594769524,
+        "virial": 0.8804853632623313
+      },
+      "defects": {
+        "conservativeness": 0.01557345447951678,
+        "equivariance": 0.048663592289419216,
+        "smoothness": 1.0282006038117713,
+        "stress_consistency": 0.03454164562602928,
+        "parity": 1.0272659442724532e-06,
+        "representation": 0.019361613661810134,
+        "cross_maxwell": 0.147080294256433,
+        "betti": 0.001201222951463888,
+        "zero_modes": 0.00014444309521699657,
+        "trimer": 2.6201407447923715,
+        "reversibility": 1.3874779282112696e-05,
+        "config_temperature": 0.07435082786276558,
+        "equipartition": 3.2669635308605742,
+        "virial": 0.14236698853037097
+      },
+      "calls": {
+        "conservativeness": 90,
+        "equivariance": 90,
+        "smoothness": 810,
+        "stress_consistency": 130,
+        "parity": 20,
+        "representation": 200,
+        "cross_maxwell": 3892,
+        "betti": 480,
+        "zero_modes": 2020,
+        "trimer": 1140,
+        "reversibility": 2010,
+        "config_temperature": 25140,
+        "equipartition": 780,
+        "virial": 0
+      },
+      "gates": {
+        "conservativeness": true,
+        "equivariance": true,
+        "smoothness": null,
+        "stress_consistency": true,
+        "parity": true,
+        "representation": true,
+        "cross_maxwell": false,
+        "betti": true,
+        "zero_modes": false,
+        "trimer": false,
+        "reversibility": true,
+        "config_temperature": null,
+        "equipartition": null,
+        "virial": null
+      },
+      "crashes": {},
+      "skipped": {},
+      "overall": {
+        "arithmetic": 0.7277736930090192,
+        "geometric": 0.6501345613871997,
+        "harmonic": 0.5451595506678898
+      },
+      "result_file": "dpa-4c-neo-omol/result.json"
+    },
+    {
+      "imports": [
+        "deepmd.calculator"
+      ],
+      "python": "3.11",
+      "slug": "dpa-4c-mini-omol",
+      "label": "DPA-4C-Mini (OMol)",
+      "family": "DPA",
+      "packages": [
+        "deepmd-kit[torch]==3.2.0"
+      ],
+      "calculator": "deepmd.calculator.DP(model=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/DPA4C-Mini-OMol25-100M-v20260820.pt\")",
+      "notes": "DPA-4C-Mini: the compressible, message-passing-free member of the DPA-4 family (200k parameters, 6.0 A cutoff, one hop).  Released validation on the OMol-0 out-of-distribution split is 28.58 kcal/mol energy / 1.881 kcal/mol/A force MAE.  One step up from Nano at under six times the training cost of it.",
+      "precision": "float32",
+      "training_set": [
+        "OMol25"
+      ],
+      "training_set_complete": true,
+      "training_set_note": "Trained on the OMol25 100M split (101,666,280 frames); the DATASETS figure is the round 100M the corpus is published under, so the count is the split, not the whole of OMol25.",
+      "training_heads": [],
+      "evaluated_head": "",
+      "n_training_structures": 100000000,
+      "n_training_materials": 83000000,
+      "datasets": [
+        {
+          "key": "OMol25",
+          "label": "OMol25",
+          "n_structures": 100000000,
+          "n_materials": 83000000,
+          "url": "https://huggingface.co/facebook/OMol25",
+          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms.  Counts are the paper's own rounding -- it states 'more than 100 million' calculations over '~83M unique molecular systems' (arXiv:2505.08762), so treat n_structures as a lower bound."
+        }
+      ],
+      "n_parameters": 200169,
+      "n_parameters_trainable": 200169,
+      "n_modules_found": 1,
+      "from_state_dict": false,
+      "n_parameters_source": "runtime",
+      "status": "ok",
+      "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
+      "seed": 0,
+      "wall_seconds": 480.62,
+      "environment": {
+        "python": "3.11.16",
+        "torch": "2.11.0+cu126",
+        "torch_cuda": "12.6",
+        "cuda_available": true,
+        "ase": "3.28.0",
+        "pescert": "0.1.0",
+        "host": "8cc16f9295a2",
+        "gpu": {
+          "name": "NVIDIA RTX A5000",
+          "capability": "8.6",
+          "total_memory_GB": 23.55
+        }
+      },
+      "scores": {
+        "conservativeness": 0.8390367507186136,
+        "equivariance": 0.9660393433984058,
+        "smoothness": 0.6662409865655732,
+        "stress_consistency": 0.6812177619930736,
+        "parity": 0.9989237632268523,
+        "representation": 0.9914896667875711,
+        "cross_maxwell": 0.1407890218443723,
+        "betti": 0.9342571974285372,
+        "zero_modes": 0.34938504322424196,
+        "trimer": 0.38629747325948655,
+        "reversibility": 0.9793685045708986,
+        "config_temperature": 0.8893104433186989,
+        "equipartition": 0.5329518012767005,
+        "virial": 0.8122282922407227
+      },
+      "defects": {
+        "conservativeness": 0.020756718828637732,
+        "equivariance": 0.03490927539766462,
+        "smoothness": 1.4326025783228153,
+        "stress_consistency": 0.033280836793953765,
+        "parity": 1.0777461027135291e-06,
+        "representation": 0.008550681663991925,
+        "cross_maxwell": 0.13773822697748986,
+        "betti": 0.001536561693807541,
+        "zero_modes": 0.00015789306951288223,
+        "trimer": 1.438227385033673,
+        "reversibility": 2.183537032689582e-05,
+        "config_temperature": 0.1236609309814283,
+        "equipartition": 0.8271960355392615,
+        "virial": 0.30725175060784526
+      },
+      "calls": {
+        "conservativeness": 90,
+        "equivariance": 90,
+        "smoothness": 810,
+        "stress_consistency": 130,
+        "parity": 20,
+        "representation": 200,
+        "cross_maxwell": 4786,
+        "betti": 480,
+        "zero_modes": 2049,
+        "trimer": 1140,
+        "reversibility": 2010,
+        "config_temperature": 25123,
+        "equipartition": 780,
+        "virial": 0
+      },
+      "gates": {
+        "conservativeness": true,
+        "equivariance": true,
+        "smoothness": null,
+        "stress_consistency": true,
+        "parity": true,
+        "representation": true,
+        "cross_maxwell": false,
+        "betti": true,
+        "zero_modes": false,
+        "trimer": false,
+        "reversibility": true,
+        "config_temperature": null,
+        "equipartition": null,
+        "virial": null
+      },
+      "crashes": {},
+      "skipped": {},
+      "overall": {
+        "arithmetic": 0.7262525749895534,
+        "geometric": 0.6506795962007563,
+        "harmonic": 0.5367546999345679
+      },
+      "result_file": "dpa-4c-mini-omol/result.json"
+    },
+    {
+      "imports": [
+        "deepmd.calculator"
+      ],
+      "python": "3.11",
+      "slug": "dpa-4c-plus-omol",
+      "label": "DPA-4C-Plus (OMol)",
+      "family": "DPA",
+      "packages": [
+        "deepmd-kit[torch]==3.2.0"
+      ],
+      "calculator": "deepmd.calculator.DP(model=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/DPA4C-Plus-OMol25-100M-v20260820.pt\")",
+      "notes": "DPA-4C-Plus: the compressible, message-passing-free member of the DPA-4 family (2.19M parameters, 6.0 A cutoff, one hop).  Released validation on the OMol-0 out-of-distribution split is 16.77 kcal/mol energy / 1.383 kcal/mol/A force MAE.  The largest DPA4C; the five sizes together give a clean capacity ladder on one corpus and one architecture.",
+      "precision": "float32",
+      "training_set": [
+        "OMol25"
+      ],
+      "training_set_complete": true,
+      "training_set_note": "Trained on the OMol25 100M split (101,666,280 frames); the DATASETS figure is the round 100M the corpus is published under, so the count is the split, not the whole of OMol25.",
+      "training_heads": [],
+      "evaluated_head": "",
+      "n_training_structures": 100000000,
+      "n_training_materials": 83000000,
+      "datasets": [
+        {
+          "key": "OMol25",
+          "label": "OMol25",
+          "n_structures": 100000000,
+          "n_materials": 83000000,
+          "url": "https://huggingface.co/facebook/OMol25",
+          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms.  Counts are the paper's own rounding -- it states 'more than 100 million' calculations over '~83M unique molecular systems' (arXiv:2505.08762), so treat n_structures as a lower bound."
+        }
+      ],
+      "n_parameters": 2188865,
+      "n_parameters_trainable": 2188865,
+      "n_modules_found": 1,
+      "from_state_dict": false,
+      "n_parameters_source": "runtime",
+      "status": "ok",
+      "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
+      "seed": 0,
+      "wall_seconds": 569.9,
+      "environment": {
+        "python": "3.11.16",
+        "torch": "2.11.0+cu126",
+        "torch_cuda": "12.6",
+        "cuda_available": true,
+        "ase": "3.28.0",
+        "pescert": "0.1.0",
+        "host": "76abbc17df14",
+        "gpu": {
+          "name": "NVIDIA RTX A5000",
+          "capability": "8.6",
+          "total_memory_GB": 23.55
+        }
+      },
+      "scores": {
+        "conservativeness": 0.8492320380557766,
+        "equivariance": 0.9640849077742178,
+        "smoothness": 0.5307916896218139,
+        "stress_consistency": 0.7139005207380824,
+        "parity": 0.9990562031840288,
+        "representation": 0.9782212154208082,
+        "cross_maxwell": 0.037175470836189994,
+        "betti": 0.9534883970947199,
+        "zero_modes": 0.17812582038153985,
+        "trimer": 0.37129145821653886,
+        "reversibility": 0.9810273762357713,
+        "config_temperature": 0.9145323322564037,
+        "equipartition": 0.5651817136036963,
+        "virial": 0.9173936566921845
+      },
+      "defects": {
+        "conservativeness": 0.009496290665115212,
+        "equivariance": 0.037013419397557305,
+        "smoothness": 1.0364118300436638,
+        "stress_consistency": 0.021469090576872168,
+        "parity": 9.446815102454026e-07,
+        "representation": 0.022096499300425187,
+        "cross_maxwell": null,
+        "betti": 0.0009579812123846211,
+        "zero_modes": 0.00014637960006045166,
+        "trimer": 4.094809176821543,
+        "reversibility": 1.9827475952341055e-05,
+        "config_temperature": 0.09143649484945288,
+        "equipartition": 2.3712507010459647,
+        "virial": 0.08982546189195222
+      },
+      "calls": {
+        "conservativeness": 90,
+        "equivariance": 90,
+        "smoothness": 810,
+        "stress_consistency": 130,
+        "parity": 20,
+        "representation": 200,
+        "cross_maxwell": 2322,
+        "betti": 480,
+        "zero_modes": 2057,
+        "trimer": 1140,
+        "reversibility": 2010,
+        "config_temperature": 25203,
+        "equipartition": 780,
+        "virial": 0
+      },
+      "gates": {
+        "conservativeness": true,
+        "equivariance": true,
+        "smoothness": null,
+        "stress_consistency": true,
+        "parity": true,
+        "representation": true,
+        "cross_maxwell": false,
+        "betti": true,
+        "zero_modes": false,
+        "trimer": true,
+        "reversibility": true,
+        "config_temperature": null,
+        "equipartition": null,
+        "virial": null
+      },
+      "crashes": {
+        "cross_maxwell": {
+          "Be": "OutOfMemoryError: The callable still throws an out-of-memory (OOM) error even when batch size is 1!"
+        }
+      },
+      "skipped": {},
+      "overall": {
+        "arithmetic": 0.7109644857222694,
+        "geometric": 0.5641355184005403,
+        "harmonic": 0.28717677547485054
+      },
+      "result_file": "dpa-4c-plus-omol/result.json"
+    },
+    {
+      "imports": [
+        "deepmd.calculator"
+      ],
+      "python": "3.11",
+      "slug": "dpa-4c-air-omol",
+      "label": "DPA-4C-Air (OMol)",
+      "family": "DPA",
+      "packages": [
+        "deepmd-kit[torch]==3.2.0"
+      ],
+      "calculator": "deepmd.calculator.DP(model=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/DPA4C-Air-OMol25-100M-v20260820.pt\")",
+      "notes": "DPA-4C-Air: the compressible, message-passing-free member of the DPA-4 family (630k parameters, 6.0 A cutoff, one hop).  Released validation on the OMol-0 out-of-distribution split is 21.37 kcal/mol energy / 1.597 kcal/mol/A force MAE.  Near-Neo parameter count, bought with 1.6x the training hours.",
+      "precision": "float32",
+      "training_set": [
+        "OMol25"
+      ],
+      "training_set_complete": true,
+      "training_set_note": "Trained on the OMol25 100M split (101,666,280 frames); the DATASETS figure is the round 100M the corpus is published under, so the count is the split, not the whole of OMol25.",
+      "training_heads": [],
+      "evaluated_head": "",
+      "n_training_structures": 100000000,
+      "n_training_materials": 83000000,
+      "datasets": [
+        {
+          "key": "OMol25",
+          "label": "OMol25",
+          "n_structures": 100000000,
+          "n_materials": 83000000,
+          "url": "https://huggingface.co/facebook/OMol25",
+          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms.  Counts are the paper's own rounding -- it states 'more than 100 million' calculations over '~83M unique molecular systems' (arXiv:2505.08762), so treat n_structures as a lower bound."
+        }
+      ],
+      "n_parameters": 630281,
+      "n_parameters_trainable": 630281,
+      "n_modules_found": 1,
+      "from_state_dict": false,
+      "n_parameters_source": "runtime",
+      "status": "ok",
+      "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
+      "seed": 0,
+      "wall_seconds": 554.87,
+      "environment": {
+        "python": "3.11.16",
+        "torch": "2.11.0+cu126",
+        "torch_cuda": "12.6",
+        "cuda_available": true,
+        "ase": "3.28.0",
+        "pescert": "0.1.0",
+        "host": "9c98a3c54dff",
+        "gpu": {
+          "name": "NVIDIA RTX A5000",
+          "capability": "8.6",
+          "total_memory_GB": 23.55
+        }
+      },
+      "scores": {
+        "conservativeness": 0.8954729617008329,
+        "equivariance": 0.9742888052617008,
+        "smoothness": 0.5949048953021239,
+        "stress_consistency": 0.48638660370038683,
+        "parity": 0.9988247249033817,
+        "representation": 0.9862348182214328,
+        "cross_maxwell": 0.22070517460897715,
+        "betti": 0.9656998459964029,
+        "zero_modes": 0.20610097752678427,
+        "trimer": 0.22914406583710845,
+        "reversibility": 0.9893017573065371,
+        "config_temperature": 0.9222134504841757,
+        "equipartition": 0.578678041732883,
+        "virial": 0.8803137855987362
+      },
+      "defects": {
+        "conservativeness": 0.006215920441308334,
+        "equivariance": 0.02615738210177741,
+        "smoothness": 0.9470361788282025,
+        "stress_consistency": 0.08385526262966445,
+        "parity": 1.1763097815363932e-06,
+        "representation": 0.013884592459446097,
+        "cross_maxwell": 0.10462193036442294,
+        "betti": 0.0007011626216302001,
+        "zero_modes": 0.0002308758743938512,
+        "trimer": 4.425146231948011,
+        "reversibility": 1.0839882030222622e-05,
+        "config_temperature": 0.0824818703201372,
+        "equipartition": 1.064882056310269,
+        "virial": 0.1528030927471764
+      },
+      "calls": {
+        "conservativeness": 90,
+        "equivariance": 90,
+        "smoothness": 810,
+        "stress_consistency": 130,
+        "parity": 20,
+        "representation": 200,
+        "cross_maxwell": 6196,
+        "betti": 480,
+        "zero_modes": 2187,
+        "trimer": 1140,
+        "reversibility": 2010,
+        "config_temperature": 25391,
+        "equipartition": 780,
+        "virial": 0
+      },
+      "gates": {
+        "conservativeness": true,
+        "equivariance": true,
+        "smoothness": null,
+        "stress_consistency": false,
+        "parity": true,
+        "representation": true,
+        "cross_maxwell": false,
+        "betti": true,
+        "zero_modes": false,
+        "trimer": true,
+        "reversibility": true,
+        "config_temperature": null,
+        "equipartition": null,
+        "virial": null
+      },
+      "crashes": {},
+      "skipped": {},
+      "overall": {
+        "arithmetic": 0.7091621362986761,
+        "geometric": 0.6171750482287198,
+        "harmonic": 0.5065695823635343
+      },
+      "result_file": "dpa-4c-air-omol/result.json"
     },
     {
       "imports": [
@@ -6271,7 +7219,7 @@
           "n_structures": 100000000,
           "n_materials": 83000000,
           "url": "https://huggingface.co/facebook/OMol25",
-          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms. Counts follow the paper's own rounding (arXiv:2505.08762), so n_structures is a lower bound."
+          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms.  Counts are the paper's own rounding -- it states 'more than 100 million' calculations over '~83M unique molecular systems' (arXiv:2505.08762), so treat n_structures as a lower bound."
         },
         {
           "key": "OC20",
@@ -6553,7 +7501,7 @@
           "n_structures": 100000000,
           "n_materials": 83000000,
           "url": "https://huggingface.co/facebook/OMol25",
-          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms. Counts follow the paper's own rounding (arXiv:2505.08762), so n_structures is a lower bound."
+          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms.  Counts are the paper's own rounding -- it states 'more than 100 million' calculations over '~83M unique molecular systems' (arXiv:2505.08762), so treat n_structures as a lower bound."
         }
       ],
       "n_parameters": 6332801,
@@ -6694,7 +7642,7 @@
           "n_structures": 100000000,
           "n_materials": 83000000,
           "url": "https://huggingface.co/facebook/OMol25",
-          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms. Counts follow the paper's own rounding (arXiv:2505.08762), so n_structures is a lower bound."
+          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms.  Counts are the paper's own rounding -- it states 'more than 100 million' calculations over '~83M unique molecular systems' (arXiv:2505.08762), so treat n_structures as a lower bound."
         },
         {
           "key": "OC20",
@@ -6833,7 +7781,7 @@
         "matgl==4.0.3"
       ],
       "calculator": "matgl.ext.ase.PESCalculator(matgl.load_model(\"M3GNet-PES-MatPES-PBE-2025.2\").to(\"cuda\"), stress_unit=\"eV/A3\")",
-      "notes": "Current MatPES-PBE PES model: matgl 4.0.3 no longer ships the 2021 MP checkpoint that Matbench Discovery lists as M3GNet, so the parameter count will not match theirs. stress_unit='eV/A3' and .to('cuda') are both required, or matgl reports stress in GPa and runs the suite on CPU.",
+      "notes": "stress_unit='eV/A3' is required: matgl's PESCalculator reports stress in GPa by default, which is ASE's unit off by 160.2 and shows up as a stress defect of exactly that factor.  .to('cuda') is what puts the run on the GPU: matgl loads the Potential on CPU and Potential.forward migrates the graph to the module's own device, so without it the whole suite runs on CPU.  matgl 4.0.3 no longer ships the 2021 MP checkpoint that Matbench Discovery lists as M3GNet, so this is the current MatPES-PBE PES model and its parameter count will not match theirs.",
       "precision": "float32",
       "training_set": [
         "MatPES"
@@ -6848,7 +7796,7 @@
           "n_structures": 504811,
           "n_materials": 281572,
           "url": "https://matpes.ai",
-          "notes": "Materials Potential Energy Surface dataset (Materials Virtual Lab + Materials Project): single-point PBE DFT on periodic solids, near-complete periodic-table coverage (arXiv:2503.04070)."
+          "notes": "Materials Potential Energy Surface dataset (Materials Virtual Lab + Materials Project), single-point PBE DFT on periodic solids, near-complete periodic-table coverage (all but noble gases and unstable radionuclides).(arXiv:2503.04070) "
         }
       ],
       "n_parameters": 288157,
@@ -6956,7 +7904,7 @@
       ],
       "python": "3.11",
       "slug": "dpa-4-neo-omol",
-      "label": "DPA-4-neo (OMol)",
+      "label": "DPA-4-Neo (OMol)",
       "family": "DPA",
       "packages": [
         "deepmd-kit[torch]@git+https://github.com/wanghan-iapcm/deepmd-kit@3eb005be526f199f5ef67667edc7a91cd5c77f7c",
@@ -6978,7 +7926,7 @@
           "n_structures": 100000000,
           "n_materials": 83000000,
           "url": "https://huggingface.co/facebook/OMol25",
-          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms. Counts follow the paper's own rounding (arXiv:2505.08762), so n_structures is a lower bound."
+          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms.  Counts are the paper's own rounding -- it states 'more than 100 million' calculations over '~83M unique molecular systems' (arXiv:2505.08762), so treat n_structures as a lower bound."
         }
       ],
       "n_parameters": 774926,
@@ -7086,14 +8034,14 @@
       ],
       "python": "3.11",
       "slug": "dpa-4-air-omol",
-      "label": "DPA-4-air (OMol)",
+      "label": "DPA-4-Air (OMol)",
       "family": "DPA",
       "packages": [
         "deepmd-kit[torch]@git+https://github.com/wanghan-iapcm/deepmd-kit@3eb005be526f199f5ef67667edc7a91cd5c77f7c",
         "e3nn==0.6.0"
       ],
       "calculator": "deepmd.calculator.DP(model=\"/scratch5/joha4087/programs/dpa_models/dpa4_omol_air_tmp.pt\")",
-      "notes": "Small DPA-4 on OMol25 (preview checkpoint dpa4_omol_air_tmp.pt). Same environment as DPA-4-Pro.",
+      "notes": "Small DPA-4 on OMol25 (preview checkpoint dpa4_omol_air_tmp.pt).  Same environment as DPA-4-Pro.",
       "precision": "float64",
       "training_set": [
         "OMol25"
@@ -7108,7 +8056,7 @@
           "n_structures": 100000000,
           "n_materials": 83000000,
           "url": "https://huggingface.co/facebook/OMol25",
-          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms. Counts follow the paper's own rounding (arXiv:2505.08762), so n_structures is a lower bound."
+          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms.  Counts are the paper's own rounding -- it states 'more than 100 million' calculations over '~83M unique molecular systems' (arXiv:2505.08762), so treat n_structures as a lower bound."
         }
       ],
       "n_parameters": 3454853,
@@ -7368,7 +8316,7 @@
           "n_structures": 100000000,
           "n_materials": 83000000,
           "url": "https://huggingface.co/facebook/OMol25",
-          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms. Counts follow the paper's own rounding (arXiv:2505.08762), so n_structures is a lower bound."
+          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms.  Counts are the paper's own rounding -- it states 'more than 100 million' calculations over '~83M unique molecular systems' (arXiv:2505.08762), so treat n_structures as a lower bound."
         }
       ],
       "n_parameters": 6333058,
@@ -7488,7 +8436,7 @@
         "pynanoflann==0.10.0"
       ],
       "calculator": "orb_models.forcefield.calculator.ORBCalculator(orb_models.forcefield.pretrained.orb_v3_conservative_20_omat(device=\"cuda\", precision=\"float32-high\"), device=\"cuda\")",
-      "notes": "The 20-neighbour variant of orb-v3-conservative-inf-omat. A fixed-count neighbour list is orientation-dependent whenever neighbour distances are degenerate, as they are in the close-packed substrates, so the 20/inf pair isolates that effect.",
+      "notes": "The 20-neighbour variant of orb-v3-conservative-inf-omat.  Truncating the neighbour list to a fixed count is orientation-dependent whenever neighbour distances are degenerate, which the icosahedral and close-packed substrates are full of, so the 20/inf pair isolates that effect in the equivariance and null-space probes.",
       "precision": "float32",
       "training_set": [
         "OMat24"
@@ -7632,7 +8580,7 @@
           "n_structures": 100000000,
           "n_materials": 83000000,
           "url": "https://huggingface.co/facebook/OMol25",
-          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms. Counts follow the paper's own rounding (arXiv:2505.08762), so n_structures is a lower bound."
+          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms.  Counts are the paper's own rounding -- it states 'more than 100 million' calculations over '~83M unique molecular systems' (arXiv:2505.08762), so treat n_structures as a lower bound."
         }
       ],
       "n_parameters": 50671234,
@@ -7752,7 +8700,7 @@
         "scipy<1.15"
       ],
       "calculator": "fairchem.core.OCPCalculator(checkpoint_path=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/checkpoint/omat24_direct-uncompiled.pt\", cpu=False)",
-      "notes": "Stage-1 checkpoint of the mirror-physics/equiformer_v3 series: direct pre-training on OMat24 only, before the gradient fine-tuning. Forces come from a direct head, not the energy gradient, so this is the non-conservative member. The checkpoint used here has the '_orig_mod.' prefix stripped so fairchem can load it.",
+      "notes": "Stage-1 checkpoint of the same mirror-physics/equiformer_v3 series: direct pre-training on OMat24 only, before the gradient fine-tuning that produces omat24_gradient.pt and then the OAM omat24-mptrj-salex_gradient.pt.  Forces come from a direct head (use-gate-force-head), not from the energy gradient, so this is the non-conservative member of the family.\n  The published omat24_direct.pt was saved from a torch.compile'd model, so every key carries an '_orig_mod.' prefix.  fairchem's match_state_dict counts the substring 'module' and strips 7 characters per level, which turns '_orig_mod.module.X' into 'od.module.X' and fails the load; the checkpoint used here is the same file with that prefix removed (weights untouched) -- see omat24_direct-uncompiled.pt next to the original download.",
       "precision": "float32",
       "training_set": [
         "OMat24"
@@ -7898,7 +8846,7 @@
           "n_structures": 100000000,
           "n_materials": 83000000,
           "url": "https://huggingface.co/facebook/OMol25",
-          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms. Counts follow the paper's own rounding (arXiv:2505.08762), so n_structures is a lower bound."
+          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms.  Counts are the paper's own rounding -- it states 'more than 100 million' calculations over '~83M unique molecular systems' (arXiv:2505.08762), so treat n_structures as a lower bound."
         }
       ],
       "n_parameters": 85972531,
@@ -8420,6 +9368,181 @@
     },
     {
       "imports": [
+        "so3lr",
+        "numpy"
+      ],
+      "python": "3.12",
+      "slug": "so3lr",
+      "label": "SO3LR (SO3krates)",
+      "family": "SO3krates",
+      "packages": [
+        "jax[cuda12]==0.5.3",
+        "nvidia-cublas-cu12==12.8.4.1",
+        "nvidia-cuda-cupti-cu12==12.8.90",
+        "nvidia-cuda-nvcc-cu12==12.8.93",
+        "nvidia-cuda-runtime-cu12==12.8.90",
+        "nvidia-cudnn-cu12==9.8.0.87",
+        "nvidia-cufft-cu12==11.3.3.83",
+        "nvidia-cusolver-cu12==11.7.2.55",
+        "nvidia-cusparse-cu12==12.5.8.93",
+        "nvidia-nvjitlink-cu12==12.8.93",
+        "orbax-checkpoint==0.11.13",
+        "setuptools<81",
+        "jraph@git+https://github.com/kabylda/jraph.git@bcaa8f014bb046299aa77e73ed5a0b46724d3c47",
+        "jax-md@git+https://github.com/kabylda/jax-md.git@a213e136072ccfa1bc02c866bc62240c30460b26",
+        "glp@git+https://github.com/kabylda/glp.git@f6955d50b34b352b2ea27b0ac1264909f4cde278",
+        "jax-pme@git+https://github.com/fbruenig/jax-pme@de9a3a9dfeb1f5b635a54a8f277c1ec3ecd2bf6d",
+        "mlff@git+https://github.com/kabylda/mlff.git@aeb80dcd208a4607c01dbac6c9574b7b32bcf93e",
+        "so3lr@git+https://github.com/general-molecular-simulations/so3lr.git@5c6f36914bd2424563c1fd80bc21610960d947a4"
+      ],
+      "calculator": "so3lr.So3lrCalculator(calculate_stress=True, dtype=numpy.float32)",
+      "notes": "SO3LR ('solar'): the SO3krates transformer for semi-local interactions plus universal pairwise short-range repulsion, electrostatics and dispersion (doi:10.1021/jacs.5c09558).  The only pretrained SO3krates available as a ready-to-run potential.  Out of domain on these elemental solids -- it is a (bio)molecular force field -- so the row measures extrapolation.  Upstream also notes it was not trained on absolute energies, which these probes tolerate: every one of them is invariant to a constant energy offset.",
+      "precision": "float32",
+      "training_set": [
+        "GEMS",
+        "QM7-X",
+        "AQM",
+        "SPICE",
+        "DES15k"
+      ],
+      "training_set_complete": true,
+      "training_set_note": "The five corpora named in the Zenodo record for the paper.  Entirely molecular: not one of the materials corpora the rest of this table uses, which is why its row is an out-of-distribution probe.  Its SPICE share is the dipeptide subset, and that subset and DES15k were recomputed at PBE0+MBD/tight rather than SPICE's own wB97M-D3(BJ), so this is not the same SPICE the other rows cite.  No per-corpus counts are published, so no total is claimed.",
+      "training_heads": [],
+      "evaluated_head": "",
+      "n_training_structures": null,
+      "n_training_materials": null,
+      "datasets": [
+        {
+          "key": "GEMS",
+          "label": "GEMS",
+          "n_structures": null,
+          "n_materials": null,
+          "url": "https://doi.org/10.5281/zenodo.14779793",
+          "notes": "General protein fragments, part of the SO3LR training mixture.  Biomolecular, not solid-state."
+        },
+        {
+          "key": "QM7-X",
+          "label": "QM7-X",
+          "n_structures": null,
+          "n_materials": null,
+          "url": "https://doi.org/10.5281/zenodo.4288677",
+          "notes": "Equilibrium and non-equilibrium structures of small organic molecules at PBE0+MBD."
+        },
+        {
+          "key": "AQM",
+          "label": "Aquamarine (AQM)",
+          "n_structures": null,
+          "n_materials": null,
+          "url": "https://doi.org/10.5281/zenodo.14779793",
+          "notes": "Large drug-like molecules at PBE0+MBD; the large-molecule end of the SO3LR mixture.  Url is the SO3LR training record, which is where this corpus is named for our purposes -- AQM's own release DOI is not transcribed here because it was not verified."
+        },
+        {
+          "key": "SPICE",
+          "label": "SPICE",
+          "n_structures": null,
+          "n_materials": null,
+          "url": "https://github.com/openmm/spice-dataset",
+          "notes": "Small drug-like molecules, peptides and ion pairs at wB97M-D3(BJ)/def2-TZVPPD.  A molecular corpus, not a solid-state one.  Cited unversioned by some checkpoints and as SPICE 2 by others; the per-model note records which."
+        },
+        {
+          "key": "DES15k",
+          "label": "DES15K",
+          "n_structures": null,
+          "n_materials": null,
+          "url": "https://doi.org/10.5281/zenodo.14779793",
+          "notes": "Intermolecular dimer interaction energies; supplies the non-covalent channel of the SO3LR mixture.  Recomputed at PBE0+MBD/tight for SO3LR so the whole mixture shares one reference."
+        }
+      ],
+      "n_parameters": 530238,
+      "n_parameters_trainable": null,
+      "n_modules_found": 0,
+      "n_parameters_source": "hint",
+      "status": "ok",
+      "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
+      "seed": 0,
+      "wall_seconds": 366.61,
+      "environment": {
+        "python": "3.12.14",
+        "torch": null,
+        "torch_cuda": null,
+        "cuda_available": null,
+        "ase": "3.28.0",
+        "pescert": "0.1.0",
+        "host": "7c5c97687acf",
+        "gpu": null
+      },
+      "scores": {
+        "betti": 0.12185548418107739,
+        "config_temperature": 0.9504998084134186,
+        "conservativeness": 0.2593542221167572,
+        "equipartition": 0.6755863160392106,
+        "equivariance": 0.002311880951327426,
+        "reversibility": 0.3496166336909281,
+        "smoothness": 0.3797803185658977,
+        "trimer": 0.0,
+        "virial": 0.9159111598654395,
+        "zero_modes": 0.11335133123643037
+      },
+      "defects": {
+        "betti": 0.0799980504639993,
+        "config_temperature": 0.05157066995183799,
+        "conservativeness": 0.09007840417311394,
+        "equipartition": 4.693559113874106,
+        "equivariance": 32.562516349029536,
+        "reversibility": 0.0171085727582431,
+        "smoothness": 5.211513272433335,
+        "trimer": null,
+        "virial": 0.10246716209966913,
+        "zero_modes": 0.003492090777197658
+      },
+      "calls": {
+        "betti": 480,
+        "config_temperature": 26757,
+        "conservativeness": 90,
+        "equipartition": 780,
+        "equivariance": 90,
+        "reversibility": 2010,
+        "smoothness": 810,
+        "trimer": 0,
+        "virial": 0,
+        "zero_modes": 2731
+      },
+      "gates": {
+        "betti": false,
+        "config_temperature": null,
+        "conservativeness": false,
+        "equipartition": null,
+        "equivariance": false,
+        "reversibility": false,
+        "smoothness": null,
+        "trimer": null,
+        "virial": null,
+        "zero_modes": false
+      },
+      "crashes": {
+        "trimer": {
+          "Li": "ValueError: vmap got inconsistent sizes for array axes to be mapped:\n  * one axis had size 13: axis 0 of argument Ra of type float32[13,3];\n  * one axis had size 3: axis 0 of argument Rb of type float32[3,3]",
+          "Be": "ValueError: vmap got inconsistent sizes for array axes to be mapped:\n  * one axis had size 13: axis 0 of argument Ra of type float32[13,3];\n  * one axis had size 3: axis 0 of argument Rb of type float32[3,3]",
+          "B": "ValueError: vmap got inconsistent sizes for array axes to be mapped:\n  * one axis had size 13: axis 0 of argument Ra of type float32[13,3];\n  * one axis had size 3: axis 0 of argument Rb of type float32[3,3]",
+          "C": "ValueError: vmap got inconsistent sizes for array axes to be mapped:\n  * one axis had size 13: axis 0 of argument Ra of type float32[13,3];\n  * one axis had size 3: axis 0 of argument Rb of type float32[3,3]",
+          "Na": "ValueError: vmap got inconsistent sizes for array axes to be mapped:\n  * one axis had size 13: axis 0 of argument Ra of type float32[13,3];\n  * one axis had size 3: axis 0 of argument Rb of type float32[3,3]",
+          "Mg": "ValueError: vmap got inconsistent sizes for array axes to be mapped:\n  * one axis had size 13: axis 0 of argument Ra of type float32[13,3];\n  * one axis had size 3: axis 0 of argument Rb of type float32[3,3]",
+          "Al": "ValueError: vmap got inconsistent sizes for array axes to be mapped:\n  * one axis had size 13: axis 0 of argument Ra of type float32[13,3];\n  * one axis had size 3: axis 0 of argument Rb of type float32[3,3]",
+          "Si": "ValueError: vmap got inconsistent sizes for array axes to be mapped:\n  * one axis had size 13: axis 0 of argument Ra of type float32[13,3];\n  * one axis had size 3: axis 0 of argument Rb of type float32[3,3]",
+          "P": "ValueError: vmap got inconsistent sizes for array axes to be mapped:\n  * one axis had size 13: axis 0 of argument Ra of type float32[13,3];\n  * one axis had size 3: axis 0 of argument Rb of type float32[3,3]",
+          "S": "ValueError: vmap got inconsistent sizes for array axes to be mapped:\n  * one axis had size 13: axis 0 of argument Ra of type float32[13,3];\n  * one axis had size 3: axis 0 of argument Rb of type float32[3,3]"
+        }
+      },
+      "skipped": {},
+      "overall": {
+        "arithmetic": 0.3768267155060487,
+        "geometric": 0.015173093231785392,
+        "harmonic": 9.9999999953745e-12
+      },
+      "result_file": "so3lr/result.json"
+    },
+    {
+      "imports": [
         "fairchem.core"
       ],
       "python": "3.11",
@@ -8445,7 +9568,7 @@
           "n_structures": 100000000,
           "n_materials": 83000000,
           "url": "https://huggingface.co/facebook/OMol25",
-          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms. Counts follow the paper's own rounding (arXiv:2505.08762), so n_structures is a lower bound."
+          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms.  Counts are the paper's own rounding -- it states 'more than 100 million' calculations over '~83M unique molecular systems' (arXiv:2505.08762), so treat n_structures as a lower bound."
         }
       ],
       "n_parameters": 86800694,
