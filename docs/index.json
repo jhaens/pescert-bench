@@ -1,6 +1,6 @@
 {
   "schema": "pescert-index/1",
-  "generated": "2026-09-16T13:05:00+00:00",
+  "generated": "2026-09-16T14:11:55+00:00",
   "sections": [
     "Symmetry & invariance",
     "Self-consistency",
@@ -247,38 +247,6 @@
       "n_materials": null,
       "url": "https://arxiv.org/abs/2506.23971",
       "notes": "Open Molecular Crystals 2025, released alongside UMA.  Listed because UMA trains on it; no separate count transcribed."
-    },
-    "GEMS": {
-      "key": "GEMS",
-      "label": "GEMS",
-      "n_structures": null,
-      "n_materials": null,
-      "url": "https://doi.org/10.5281/zenodo.14779793",
-      "notes": "General protein fragments, part of the SO3LR training mixture.  Biomolecular, not solid-state."
-    },
-    "QM7-X": {
-      "key": "QM7-X",
-      "label": "QM7-X",
-      "n_structures": null,
-      "n_materials": null,
-      "url": "https://doi.org/10.5281/zenodo.4288677",
-      "notes": "Equilibrium and non-equilibrium structures of small organic molecules at PBE0+MBD."
-    },
-    "AQM": {
-      "key": "AQM",
-      "label": "Aquamarine (AQM)",
-      "n_structures": null,
-      "n_materials": null,
-      "url": "https://doi.org/10.5281/zenodo.14779793",
-      "notes": "Large drug-like molecules at PBE0+MBD; the large-molecule end of the SO3LR mixture.  Url is the SO3LR training record, which is where this corpus is named for our purposes -- AQM's own release DOI is not transcribed here because it was not verified."
-    },
-    "DES15k": {
-      "key": "DES15k",
-      "label": "DES15K",
-      "n_structures": null,
-      "n_materials": null,
-      "url": "https://doi.org/10.5281/zenodo.14779793",
-      "notes": "Intermolecular dimer interaction energies; supplies the non-covalent channel of the SO3LR mixture.  Recomputed at PBE0+MBD/tight for SO3LR so the whole mixture shares one reference."
     }
   },
   "models": [
@@ -292,7 +260,7 @@
       "family": "Analytic",
       "packages": [],
       "calculator": "pescert.reference.ElementLennardJones()",
-      "notes": "Analytic reference, not a trained model: Lennard-Jones with per-element sigma (minimum at 2 * covalent_radius) and epsilon (cohesive energy / 8.61, the LJ fcc lattice sum), force-smoothed between 0.66 rc and rc = 3 sigma.  Exactly conservative and E(3)-invariant by construction, so its scores are the suite's own numerical floor.",
+      "notes": "Analytic reference, not a trained model.  Exactly conservative and E(3)-invariant by construction, so its scores are the suite's own numerical floor.",
       "precision": "float64",
       "training_set": [],
       "training_set_complete": true,
@@ -674,7 +642,7 @@
         "cuequivariance==0.10.0"
       ],
       "calculator": "mace.calculators.mace_mp(model=\"mh-1\", default_dtype=\"float64\", device=\"cuda\", head=\"omat_pbe\")",
-      "notes": "MACE multi-head foundation model, rev 1.  Evaluated on the omat_pbe head; the checkpoint also carries matpes_r2scan, mp_pbe_refit_add, spice_wB97M, oc20_usemppbe and omol heads.",
+      "notes": "MACE multi-head foundation model, rev 1; evaluated on the omat_pbe head.",
       "precision": "float64",
       "training_set": [
         "OMat24",
@@ -1274,7 +1242,7 @@
         "tensorpotential==0.6.1"
       ],
       "calculator": "tensorpotential.calculator.grace_fm(\"GRACE-FS-OAM\")",
-      "notes": "The message-passing-free (local) GRACE: same corpus as GRACE-1L/2L-OAM with a strictly semi-local descriptor, so the 1L/2L/3L series gains its zero-layer end.",
+      "notes": "Message-passing-free (local) GRACE: the same corpus as GRACE-1L/2L-OAM with a strictly semi-local descriptor, giving the series its zero-layer end.",
       "precision": "float32",
       "training_set": [
         "OMat24",
@@ -2543,7 +2511,7 @@
         "cuequivariance==0.10.0"
       ],
       "calculator": "mace.calculators.mace_mp(model=\"mh-0\", default_dtype=\"float64\", device=\"cuda\", head=\"omat_pbe\")",
-      "notes": "MACE multi-head foundation model, rev 0.  Evaluated on the omat_pbe head; the checkpoint also carries matpes_r2scan, mp_pbe_refit_add, spice_wB97M, oc20_usemppbe and omol heads.",
+      "notes": "MACE multi-head foundation model, rev 0; evaluated on the omat_pbe head.",
       "precision": "float64",
       "training_set": [
         "OMat24",
@@ -2746,7 +2714,7 @@
         "wandb"
       ],
       "calculator": "GGNN.common.calculator.UCalculator(checkpoint_path=\"/scratch5/joha4087/model_download/equflashv2_oam.pt\", cpu=False)",
-      "notes": "GGNN is public at SamsungDS/GGNN; the checkpoint is the local one.  The pins come from the repo's own requirements.txt, which is where the cuequivariance version GGNN's buffer_num_segments needs is recorded.",
+      "notes": "GGNN EquFlashV2 on OAM; code is public at SamsungDS/GGNN.",
       "precision": "float32",
       "training_set": [
         "OMat24",
@@ -3173,7 +3141,7 @@
         "sevenn@git+https://github.com/MDIL-SNU/SevenNet@8d9905cc4f4b7ca93be02b37a263785add53c759"
       ],
       "calculator": "sevenn.calculator.SevenNetCalculator(model=\"7net-nano-6.0\", device=\"cuda\")",
-      "notes": "105k-parameter student distilled from the SevenNet-Omni mpa task (doi:10.1021/acs.jcim.6c01103), l=2, 3 layers, full parity, at the widest of its four cutoffs (6.0 A).  Its teacher is in the suite as sevennet-omni-i12, so the pair measures what distillation costs.",
+      "notes": "105k-parameter student distilled from the SevenNet-Omni mpa task; l=2, 3 layers, full parity, at the widest of its four cutoffs (6.0 A).  Its teacher is here as sevennet-omni-i12, so the pair measures what distillation costs.",
       "precision": "float32",
       "training_set": [
         "MPtrj",
@@ -3678,7 +3646,7 @@
         "numpy"
       ],
       "calculator": "prophet.KairosCalculator(model_path=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/prophet-oame-mbd.pt\", use_kernel=False, device=\"cuda\")",
-      "notes": "Prophet-V1-MBD, the Matbench Discovery submission checkpoint (F1 0.9275, kappa_SRME 0.0648): 62.3M parameters, 10 layers, lmax 4, nested cutoffs 3/7 A, thermal-conductivity fine-tuned.  Multi-Cutoff Spectral Decomposition recombines nested cutoff scales linearly, which the report claims keeps E(3) equivariance exact and the energy twice continuously differentiable -- the equivariance and conservativity probes test exactly that claim.  Weights are CC-BY-4.0 and ungated; the checkpoint is staged by hand next to the others because KairosCalculator takes a filesystem path, not a hub id (hf download kairosmaterial/prophet prophet-oame-mbd.pt).  The magnetic sibling Prophet-V1-Mag ships in the same package behind prophet_spin.SpinCalculator and is not certified here: it needs an explicit magnetic state as input.",
+      "notes": "Matbench Discovery submission checkpoint (F1 0.9275, kappa_SRME 0.0648): 62.3M parameters, 10 layers, lmax 4, nested 3/7 A cutoffs.  Its Multi-Cutoff Spectral Decomposition is claimed to keep E(3) equivariance exact and the energy twice differentiable -- which these probes test directly.",
       "precision": "float32",
       "training_set": [
         "OMat24",
@@ -4250,7 +4218,7 @@
         "e3nn==0.6.0"
       ],
       "calculator": "deepmd.calculator.DP(model=\"/scratch5/joha4087/programs/dpa_models/DPA-3.1-3M.pt\", head=\"Omat24\")",
-      "notes": "DPA-3.1, 3M parameters, multitask-pretrained on the OpenLAM corpora (huggingface.co/deepmodelingcommunity/DPA-3.1-3M).  A multitask checkpoint has no single head: the \"Omat24\" branch is selected, the one whose corpus matches this element sweep, so the row is that head and not the model as a whole.",
+      "notes": "DPA-3.1, 3M parameters, multitask-pretrained on the OpenLAM corpora. Evaluated on the Omat24 head, the one whose corpus matches this element sweep -- the row is that head, not the checkpoint as a whole.",
       "precision": "float64",
       "training_set": [
         "OMat24",
@@ -4741,7 +4709,7 @@
         "deepmd-kit[torch]==3.2.0"
       ],
       "calculator": "deepmd.calculator.DP(model=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/DPA4-Plus-OMat24-v20260805.pt\")",
-      "notes": "DPA-4 / SeZM Plus on OMat24: 8,848,518 parameters, SO(3)-equivariant and conservative, the message-passing counterpart of the DPA-4C rows above.  Its OMol25 twin was measured and then archived to _removed/, so the corpus comparison that pair supported is no longer in the table.",
+      "notes": "DPA-4 / SeZM Plus on OMat24: 8.85M parameters, SO(3)-equivariant and conservative -- the message-passing counterpart of the DPA-4C rows.",
       "precision": "float32",
       "training_set": [
         "OMat24"
@@ -4872,7 +4840,7 @@
         "scipy<1.15"
       ],
       "calculator": "fairchem.core.OCPCalculator(checkpoint_path=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/checkpoint/omat24-mptrj-salex_gradient.pt\", cpu=False)",
-      "notes": "Weights come from the mirror-physics/equiformer_v3 HuggingFace repo; omat24-mptrj-salex_gradient.pt is the OAM, conservative-gradient variant. The code is a fairchem fork, so the package lives in packages/fairchem-core.",
+      "notes": "The OAM, conservative-gradient variant of equiformer_v3 (omat24-mptrj- salex_gradient.pt).",
       "precision": "float32",
       "training_set": [
         "OMat24",
@@ -5301,7 +5269,7 @@
         "scipy<1.15"
       ],
       "calculator": "fairchem.core.OCPCalculator(checkpoint_path=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/esen_30m_mptrj.pt\", cpu=False)",
-      "notes": "Same 30M eSEN, MPtrj only -- the training-corpus arm of the series.  Needs fairchem-core 1.10.0: that is the release registering the 'mlip_trainer' the checkpoint asks for (fairchem/core/models/esen/trainers).",
+      "notes": "The same 30M eSEN, MPtrj only -- the training-corpus arm of the series.",
       "precision": "float32",
       "training_set": [
         "MPtrj"
@@ -5430,7 +5398,7 @@
         "deepmd-kit[torch]==3.2.0"
       ],
       "calculator": "deepmd.calculator.DP(model=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/DPA4C-Nano-OMol25-100M-v20260820.pt\")",
-      "notes": "DPA-4C-Nano: the compressible, message-passing-free member of the DPA-4 family (35k parameters, 6.0 A cutoff, one hop).  Released validation on the OMol-0 out-of-distribution split is 40.97 kcal/mol energy / 2.485 kcal/mol/A force MAE.  The smallest checkpoint in the whole suite.",
+      "notes": "One-hop, compressible DPA-4 at 35k parameters, 6.0 A cutoff.  Published OMol-0 MAE 40.97 kcal/mol energy, 2.485 kcal/mol/A force.  The smallest checkpoint in the suite.",
       "precision": "float32",
       "training_set": [
         "OMol25"
@@ -5561,7 +5529,7 @@
         "scipy<1.15"
       ],
       "calculator": "fairchem.core.OCPCalculator(checkpoint_path=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/esen_30m_oam.pt\", cpu=False)",
-      "notes": "eSEN 30M on OAM; checkpoint from facebook/OMAT24.  Needs fairchem-core 1.10.0: that is the release registering the 'mlip_trainer' the checkpoint asks for (fairchem/core/models/esen/trainers).",
+      "notes": "eSEN 30M on OAM; checkpoint from facebook/OMAT24.",
       "precision": "float32",
       "training_set": [
         "OMat24",
@@ -5949,7 +5917,7 @@
         "numpy>=2.0"
       ],
       "calculator": "matris.applications.base.MatRISCalculator(model=\"matris_10m_oam\", task=\"efsm\", device=\"cuda\")",
-      "notes": "MatRIS 10M pretrained on OMat24 and fine-tuned on sAlex+MPtrj.  The checkpoint is staged by hand: matris/model/model.py downloads from a figshare ndownloader URL that now answers 403/202 with an empty body, which is why the first run died in torch.load with EOFError.  figshare's API endpoint still serves it, and the file is kept alongside the other hand-downloaded checkpoints.  MatRIS.load looks only in ~/.cache/matris and HOME is /model-cache in the container, so after a /var/tmp wipe re-stage it: cp download_checkpoints/MatRIS_10M_OAM.pth.tar /var/tmp/$USER-containers/model-cache/.cache/matris/  (re-fetch with curl -L https://api.figshare.com/v2/file/download/59142728).",
+      "notes": "MatRIS 10M pretrained on OMat24, fine-tuned on sAlex+MPtrj.",
       "precision": "float32",
       "training_set": [
         "OMat24",
@@ -6100,7 +6068,7 @@
         "scipy<1.15"
       ],
       "calculator": "fairchem.core.OCPCalculator(checkpoint_path=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/esen_30m_omat.pt\", cpu=False)",
-      "notes": "Same 30M eSEN architecture as the OAM checkpoint, OMat24 only.  Needs fairchem-core 1.10.0: that is the release registering the 'mlip_trainer' the checkpoint asks for (fairchem/core/models/esen/trainers).",
+      "notes": "The same 30M eSEN architecture, OMat24 only.",
       "precision": "float32",
       "training_set": [
         "OMat24"
@@ -6542,7 +6510,7 @@
         "deepmd-kit[torch]==3.2.0"
       ],
       "calculator": "deepmd.calculator.DP(model=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/DPA4C-Neo-OMol25-100M-v20260820.pt\")",
-      "notes": "DPA-4C-Neo: the compressible, message-passing-free member of the DPA-4 family (539k parameters, 6.0 A cutoff, one hop).  Released validation on the OMol-0 out-of-distribution split is 24.74 kcal/mol energy / 1.731 kcal/mol/A force MAE.  The midpoint of the DPA-4C series.",
+      "notes": "One-hop, compressible DPA-4 at 539k parameters, 6.0 A cutoff.  Published OMol-0 MAE 24.74 kcal/mol energy, 1.731 kcal/mol/A force.  The midpoint of the series.",
       "precision": "float32",
       "training_set": [
         "OMol25"
@@ -6671,7 +6639,7 @@
         "deepmd-kit[torch]==3.2.0"
       ],
       "calculator": "deepmd.calculator.DP(model=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/DPA4C-Mini-OMol25-100M-v20260820.pt\")",
-      "notes": "DPA-4C-Mini: the compressible, message-passing-free member of the DPA-4 family (200k parameters, 6.0 A cutoff, one hop).  Released validation on the OMol-0 out-of-distribution split is 28.58 kcal/mol energy / 1.881 kcal/mol/A force MAE.  One step up from Nano at under six times the training cost of it.",
+      "notes": "One-hop, compressible DPA-4 at 200k parameters, 6.0 A cutoff.  Published OMol-0 MAE 28.58 kcal/mol energy, 1.881 kcal/mol/A force.",
       "precision": "float32",
       "training_set": [
         "OMol25"
@@ -6800,7 +6768,7 @@
         "deepmd-kit[torch]==3.2.0"
       ],
       "calculator": "deepmd.calculator.DP(model=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/DPA4C-Plus-OMol25-100M-v20260820.pt\")",
-      "notes": "DPA-4C-Plus: the compressible, message-passing-free member of the DPA-4 family (2.19M parameters, 6.0 A cutoff, one hop).  Released validation on the OMol-0 out-of-distribution split is 16.77 kcal/mol energy / 1.383 kcal/mol/A force MAE.  The largest DPA4C; the five sizes together give a clean capacity ladder on one corpus and one architecture.",
+      "notes": "One-hop, compressible DPA-4 at 2.19M parameters, 6.0 A cutoff.  Published OMol-0 MAE 16.77 kcal/mol energy, 1.383 kcal/mol/A force.  The largest DPA-4C.",
       "precision": "float32",
       "training_set": [
         "OMol25"
@@ -6933,7 +6901,7 @@
         "deepmd-kit[torch]==3.2.0"
       ],
       "calculator": "deepmd.calculator.DP(model=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/DPA4C-Air-OMol25-100M-v20260820.pt\")",
-      "notes": "DPA-4C-Air: the compressible, message-passing-free member of the DPA-4 family (630k parameters, 6.0 A cutoff, one hop).  Released validation on the OMol-0 out-of-distribution split is 21.37 kcal/mol energy / 1.597 kcal/mol/A force MAE.  Near-Neo parameter count, bought with 1.6x the training hours.",
+      "notes": "One-hop, compressible DPA-4 at 630k parameters, 6.0 A cutoff.  Published OMol-0 MAE 21.37 kcal/mol energy, 1.597 kcal/mol/A force.",
       "precision": "float32",
       "training_set": [
         "OMol25"
@@ -7781,7 +7749,7 @@
         "matgl==4.0.3"
       ],
       "calculator": "matgl.ext.ase.PESCalculator(matgl.load_model(\"M3GNet-PES-MatPES-PBE-2025.2\").to(\"cuda\"), stress_unit=\"eV/A3\")",
-      "notes": "stress_unit='eV/A3' is required: matgl's PESCalculator reports stress in GPa by default, which is ASE's unit off by 160.2 and shows up as a stress defect of exactly that factor.  .to('cuda') is what puts the run on the GPU: matgl loads the Potential on CPU and Potential.forward migrates the graph to the module's own device, so without it the whole suite runs on CPU.  matgl 4.0.3 no longer ships the 2021 MP checkpoint that Matbench Discovery lists as M3GNet, so this is the current MatPES-PBE PES model and its parameter count will not match theirs.",
+      "notes": "matgl's current MatPES-PBE PES model.  matgl 4.0.3 no longer ships the 2021 MP checkpoint Matbench Discovery lists as M3GNet, so the parameter count will not match theirs.",
       "precision": "float32",
       "training_set": [
         "MatPES"
@@ -8436,7 +8404,7 @@
         "pynanoflann==0.10.0"
       ],
       "calculator": "orb_models.forcefield.calculator.ORBCalculator(orb_models.forcefield.pretrained.orb_v3_conservative_20_omat(device=\"cuda\", precision=\"float32-high\"), device=\"cuda\")",
-      "notes": "The 20-neighbour variant of orb-v3-conservative-inf-omat.  Truncating the neighbour list to a fixed count is orientation-dependent whenever neighbour distances are degenerate, which the icosahedral and close-packed substrates are full of, so the 20/inf pair isolates that effect in the equivariance and null-space probes.",
+      "notes": "The 20-neighbour variant of orb-v3-conservative-inf-omat.  A fixed-count neighbour list is orientation-dependent wherever neighbour distances are degenerate -- which these substrates are full of -- so the 20/inf pair isolates that effect.",
       "precision": "float32",
       "training_set": [
         "OMat24"
@@ -8700,7 +8668,7 @@
         "scipy<1.15"
       ],
       "calculator": "fairchem.core.OCPCalculator(checkpoint_path=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/checkpoint/omat24_direct-uncompiled.pt\", cpu=False)",
-      "notes": "Stage-1 checkpoint of the same mirror-physics/equiformer_v3 series: direct pre-training on OMat24 only, before the gradient fine-tuning that produces omat24_gradient.pt and then the OAM omat24-mptrj-salex_gradient.pt.  Forces come from a direct head (use-gate-force-head), not from the energy gradient, so this is the non-conservative member of the family.\n  The published omat24_direct.pt was saved from a torch.compile'd model, so every key carries an '_orig_mod.' prefix.  fairchem's match_state_dict counts the substring 'module' and strips 7 characters per level, which turns '_orig_mod.module.X' into 'od.module.X' and fails the load; the checkpoint used here is the same file with that prefix removed (weights untouched) -- see omat24_direct-uncompiled.pt next to the original download.",
+      "notes": "Stage-1 of the equiformer_v3 series: direct pre-training on OMat24 only, before the gradient fine-tuning.  Forces come from a direct head rather than the energy gradient, so this is the family's non-conservative member.",
       "precision": "float32",
       "training_set": [
         "OMat24"
@@ -9365,181 +9333,6 @@
         "harmonic": 1.3999999935276657e-11
       },
       "result_file": "orb-v3-direct-inf-omat/result.json"
-    },
-    {
-      "imports": [
-        "so3lr",
-        "numpy"
-      ],
-      "python": "3.12",
-      "slug": "so3lr",
-      "label": "SO3LR (SO3krates)",
-      "family": "SO3krates",
-      "packages": [
-        "jax[cuda12]==0.5.3",
-        "nvidia-cublas-cu12==12.8.4.1",
-        "nvidia-cuda-cupti-cu12==12.8.90",
-        "nvidia-cuda-nvcc-cu12==12.8.93",
-        "nvidia-cuda-runtime-cu12==12.8.90",
-        "nvidia-cudnn-cu12==9.8.0.87",
-        "nvidia-cufft-cu12==11.3.3.83",
-        "nvidia-cusolver-cu12==11.7.2.55",
-        "nvidia-cusparse-cu12==12.5.8.93",
-        "nvidia-nvjitlink-cu12==12.8.93",
-        "orbax-checkpoint==0.11.13",
-        "setuptools<81",
-        "jraph@git+https://github.com/kabylda/jraph.git@bcaa8f014bb046299aa77e73ed5a0b46724d3c47",
-        "jax-md@git+https://github.com/kabylda/jax-md.git@a213e136072ccfa1bc02c866bc62240c30460b26",
-        "glp@git+https://github.com/kabylda/glp.git@f6955d50b34b352b2ea27b0ac1264909f4cde278",
-        "jax-pme@git+https://github.com/fbruenig/jax-pme@de9a3a9dfeb1f5b635a54a8f277c1ec3ecd2bf6d",
-        "mlff@git+https://github.com/kabylda/mlff.git@aeb80dcd208a4607c01dbac6c9574b7b32bcf93e",
-        "so3lr@git+https://github.com/general-molecular-simulations/so3lr.git@5c6f36914bd2424563c1fd80bc21610960d947a4"
-      ],
-      "calculator": "so3lr.So3lrCalculator(calculate_stress=True, dtype=numpy.float32)",
-      "notes": "SO3LR ('solar'): the SO3krates transformer for semi-local interactions plus universal pairwise short-range repulsion, electrostatics and dispersion (doi:10.1021/jacs.5c09558).  The only pretrained SO3krates available as a ready-to-run potential.  Out of domain on these elemental solids -- it is a (bio)molecular force field -- so the row measures extrapolation.  Upstream also notes it was not trained on absolute energies, which these probes tolerate: every one of them is invariant to a constant energy offset.",
-      "precision": "float32",
-      "training_set": [
-        "GEMS",
-        "QM7-X",
-        "AQM",
-        "SPICE",
-        "DES15k"
-      ],
-      "training_set_complete": true,
-      "training_set_note": "The five corpora named in the Zenodo record for the paper.  Entirely molecular: not one of the materials corpora the rest of this table uses, which is why its row is an out-of-distribution probe.  Its SPICE share is the dipeptide subset, and that subset and DES15k were recomputed at PBE0+MBD/tight rather than SPICE's own wB97M-D3(BJ), so this is not the same SPICE the other rows cite.  No per-corpus counts are published, so no total is claimed.",
-      "training_heads": [],
-      "evaluated_head": "",
-      "n_training_structures": null,
-      "n_training_materials": null,
-      "datasets": [
-        {
-          "key": "GEMS",
-          "label": "GEMS",
-          "n_structures": null,
-          "n_materials": null,
-          "url": "https://doi.org/10.5281/zenodo.14779793",
-          "notes": "General protein fragments, part of the SO3LR training mixture.  Biomolecular, not solid-state."
-        },
-        {
-          "key": "QM7-X",
-          "label": "QM7-X",
-          "n_structures": null,
-          "n_materials": null,
-          "url": "https://doi.org/10.5281/zenodo.4288677",
-          "notes": "Equilibrium and non-equilibrium structures of small organic molecules at PBE0+MBD."
-        },
-        {
-          "key": "AQM",
-          "label": "Aquamarine (AQM)",
-          "n_structures": null,
-          "n_materials": null,
-          "url": "https://doi.org/10.5281/zenodo.14779793",
-          "notes": "Large drug-like molecules at PBE0+MBD; the large-molecule end of the SO3LR mixture.  Url is the SO3LR training record, which is where this corpus is named for our purposes -- AQM's own release DOI is not transcribed here because it was not verified."
-        },
-        {
-          "key": "SPICE",
-          "label": "SPICE",
-          "n_structures": null,
-          "n_materials": null,
-          "url": "https://github.com/openmm/spice-dataset",
-          "notes": "Small drug-like molecules, peptides and ion pairs at wB97M-D3(BJ)/def2-TZVPPD.  A molecular corpus, not a solid-state one.  Cited unversioned by some checkpoints and as SPICE 2 by others; the per-model note records which."
-        },
-        {
-          "key": "DES15k",
-          "label": "DES15K",
-          "n_structures": null,
-          "n_materials": null,
-          "url": "https://doi.org/10.5281/zenodo.14779793",
-          "notes": "Intermolecular dimer interaction energies; supplies the non-covalent channel of the SO3LR mixture.  Recomputed at PBE0+MBD/tight for SO3LR so the whole mixture shares one reference."
-        }
-      ],
-      "n_parameters": 530238,
-      "n_parameters_trainable": null,
-      "n_modules_found": 0,
-      "n_parameters_source": "hint",
-      "status": "ok",
-      "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
-      "seed": 0,
-      "wall_seconds": 366.61,
-      "environment": {
-        "python": "3.12.14",
-        "torch": null,
-        "torch_cuda": null,
-        "cuda_available": null,
-        "ase": "3.28.0",
-        "pescert": "0.1.0",
-        "host": "7c5c97687acf",
-        "gpu": null
-      },
-      "scores": {
-        "betti": 0.12185548418107739,
-        "config_temperature": 0.9504998084134186,
-        "conservativeness": 0.2593542221167572,
-        "equipartition": 0.6755863160392106,
-        "equivariance": 0.002311880951327426,
-        "reversibility": 0.3496166336909281,
-        "smoothness": 0.3797803185658977,
-        "trimer": 0.0,
-        "virial": 0.9159111598654395,
-        "zero_modes": 0.11335133123643037
-      },
-      "defects": {
-        "betti": 0.0799980504639993,
-        "config_temperature": 0.05157066995183799,
-        "conservativeness": 0.09007840417311394,
-        "equipartition": 4.693559113874106,
-        "equivariance": 32.562516349029536,
-        "reversibility": 0.0171085727582431,
-        "smoothness": 5.211513272433335,
-        "trimer": null,
-        "virial": 0.10246716209966913,
-        "zero_modes": 0.003492090777197658
-      },
-      "calls": {
-        "betti": 480,
-        "config_temperature": 26757,
-        "conservativeness": 90,
-        "equipartition": 780,
-        "equivariance": 90,
-        "reversibility": 2010,
-        "smoothness": 810,
-        "trimer": 0,
-        "virial": 0,
-        "zero_modes": 2731
-      },
-      "gates": {
-        "betti": false,
-        "config_temperature": null,
-        "conservativeness": false,
-        "equipartition": null,
-        "equivariance": false,
-        "reversibility": false,
-        "smoothness": null,
-        "trimer": null,
-        "virial": null,
-        "zero_modes": false
-      },
-      "crashes": {
-        "trimer": {
-          "Li": "ValueError: vmap got inconsistent sizes for array axes to be mapped:\n  * one axis had size 13: axis 0 of argument Ra of type float32[13,3];\n  * one axis had size 3: axis 0 of argument Rb of type float32[3,3]",
-          "Be": "ValueError: vmap got inconsistent sizes for array axes to be mapped:\n  * one axis had size 13: axis 0 of argument Ra of type float32[13,3];\n  * one axis had size 3: axis 0 of argument Rb of type float32[3,3]",
-          "B": "ValueError: vmap got inconsistent sizes for array axes to be mapped:\n  * one axis had size 13: axis 0 of argument Ra of type float32[13,3];\n  * one axis had size 3: axis 0 of argument Rb of type float32[3,3]",
-          "C": "ValueError: vmap got inconsistent sizes for array axes to be mapped:\n  * one axis had size 13: axis 0 of argument Ra of type float32[13,3];\n  * one axis had size 3: axis 0 of argument Rb of type float32[3,3]",
-          "Na": "ValueError: vmap got inconsistent sizes for array axes to be mapped:\n  * one axis had size 13: axis 0 of argument Ra of type float32[13,3];\n  * one axis had size 3: axis 0 of argument Rb of type float32[3,3]",
-          "Mg": "ValueError: vmap got inconsistent sizes for array axes to be mapped:\n  * one axis had size 13: axis 0 of argument Ra of type float32[13,3];\n  * one axis had size 3: axis 0 of argument Rb of type float32[3,3]",
-          "Al": "ValueError: vmap got inconsistent sizes for array axes to be mapped:\n  * one axis had size 13: axis 0 of argument Ra of type float32[13,3];\n  * one axis had size 3: axis 0 of argument Rb of type float32[3,3]",
-          "Si": "ValueError: vmap got inconsistent sizes for array axes to be mapped:\n  * one axis had size 13: axis 0 of argument Ra of type float32[13,3];\n  * one axis had size 3: axis 0 of argument Rb of type float32[3,3]",
-          "P": "ValueError: vmap got inconsistent sizes for array axes to be mapped:\n  * one axis had size 13: axis 0 of argument Ra of type float32[13,3];\n  * one axis had size 3: axis 0 of argument Rb of type float32[3,3]",
-          "S": "ValueError: vmap got inconsistent sizes for array axes to be mapped:\n  * one axis had size 13: axis 0 of argument Ra of type float32[13,3];\n  * one axis had size 3: axis 0 of argument Rb of type float32[3,3]"
-        }
-      },
-      "skipped": {},
-      "overall": {
-        "arithmetic": 0.3768267155060487,
-        "geometric": 0.015173093231785392,
-        "harmonic": 9.9999999953745e-12
-      },
-      "result_file": "so3lr/result.json"
     },
     {
       "imports": [

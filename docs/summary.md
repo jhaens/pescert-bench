@@ -1,6 +1,6 @@
-# Universal MLIP certification -- 66 run(s)
+# Universal MLIP certification -- 65 run(s)
 
-_generated 2026-09-16T13:05:00+00:00_
+_generated 2026-09-16T14:11:55+00:00_
 
 | Model | Params | Training set | Train structures | Elements | Overall (arith) | Overall (geom) | Gates | Calls | Status |
 |---|---|---|---|---|---|---|---|---|---|
@@ -67,7 +67,6 @@ _generated 2026-09-16T13:05:00+00:00_
 | EquiformerV2-31M-OAM | 31,207,438 | OMat24+sAlex+MPtrj | 112,852,745 | Li, Be, B, C, Na, Mg, Al, Si, P, S | 0.425 | 0.103 | 1/9 | 36,606 | ok |
 | EquiformerV2-31M-OMat | 31,207,437 | OMat24 | 100,824,585 | Li, Be, B, C, Na, Mg, Al, Si, P, S | 0.398 | 0.114 | 2/9 | 41,215 | ok |
 | ORB-v3 (direct, inf, OMat) | 25,644,479 | OMat24 | 100,824,585 | Li, Be, B, C, Na, Mg, Al, Si, P, S | 0.382 | 0.024 | 2/10 | 41,586 | ok |
-| SO3LR (SO3krates) | 530,238 | GEMS+QM7-X+AQM+SPICE+DES15k | - | Li, Be, B, C, Na, Mg, Al, Si, P, S | 0.377 | 0.015 | 0/5 | 33,748 | ok |
 | AllScaIP-md-direct (OMol) | 86,800,694 | OMol25 | 100,000,000 | Li, Be, B, C, Na, Mg, Al, Si, P, S | 0.355 | 0.014 | 1/7 | 35,228 | ok |
 | ORB-v2 | 25,213,601 | MPtrj+Alex | 32,078,023 | Li, Be, B, C, Na, Mg, Al, Si, P, S | 0.342 | 0.011 | 2/10 | 36,759 | ok |
 
@@ -140,7 +139,6 @@ _generated 2026-09-16T13:05:00+00:00_
 | EquiformerV2-31M-OAM | 0.020 | 0.159 | 0.732 | - | 0.009 |
 | EquiformerV2-31M-OMat | 0.050 | 0.073 | 0.977 | - | 0.039 |
 | ORB-v3 (direct, inf, OMat) | 0.000 | 0.079 | 0.191 | 0.362 | 0.260 |
-| SO3LR (SO3krates) | 0.002 | - | - | 0.000 | 0.113 |
 | AllScaIP-md-direct (OMol) | 0.000 | - | 0.001 | 0.015 | 0.172 |
 | ORB-v2 | 0.000 | 0.019 | 0.176 | 0.433 | 0.006 |
 
@@ -211,7 +209,6 @@ _generated 2026-09-16T13:05:00+00:00_
 | EquiformerV2-31M-OAM | 0.196 | 0.153 | 0.000 | 0.946 | 0.002 |
 | EquiformerV2-31M-OMat | 0.185 | 0.028 | 0.021 | 0.959 | 0.000 |
 | ORB-v3 (direct, inf, OMat) | 0.129 | 0.208 | 0.007 | 0.707 | 0.000 |
-| SO3LR (SO3krates) | 0.122 | 0.259 | - | 0.350 | - |
 | AllScaIP-md-direct (OMol) | 0.103 | 0.081 | - | 0.911 | - |
 | ORB-v2 | 0.085 | 0.101 | 0.000 | 0.805 | 0.001 |
 
@@ -282,7 +279,6 @@ _generated 2026-09-16T13:05:00+00:00_
 | EquiformerV2-31M-OAM | 0.887 | 0.637 | 0.783 |
 | EquiformerV2-31M-OMat | 0.904 | 0.454 | 0.609 |
 | ORB-v3 (direct, inf, OMat) | 0.921 | 0.707 | 0.895 |
-| SO3LR (SO3krates) | 0.950 | 0.676 | 0.916 |
 | AllScaIP-md-direct (OMol) | 0.922 | 0.512 | 0.704 |
 | ORB-v2 | 0.891 | 0.590 | 0.817 |
 
@@ -353,7 +349,6 @@ _generated 2026-09-16T13:05:00+00:00_
 | EquiformerV2-31M-OAM | 0.998 |
 | EquiformerV2-31M-OMat | 0.873 |
 | ORB-v3 (direct, inf, OMat) | 0.889 |
-| SO3LR (SO3krates) | 0.380 |
 | AllScaIP-md-direct (OMol) | 0.479 |
 | ORB-v2 | 0.864 |
 
