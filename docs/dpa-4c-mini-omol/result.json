@@ -7,7 +7,7 @@
     "packages": [
       "deepmd-kit[torch]==3.2.0"
     ],
-    "calculator": "deepmd.calculator.DP(model=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/DPA4C-Mini-OMol25-100M-v20260820.pt\")",
+    "calculator": "deepmd.calculator.DP(model=\"DPA4C-Mini-OMol25-100M-v20260820.pt\")",
     "notes": "DPA4C Mini: the compressible, message-passing-free member of the DPA4 family (200k parameters, 6.0 A cutoff, one hop).  Released validation on the OMol-0 out-of-distribution split is 28.58 kcal/mol energy / 1.881 kcal/mol/A force MAE.  One step up from Nano at under six times the training cost of it.",
     "imports": [
       "deepmd.calculator"

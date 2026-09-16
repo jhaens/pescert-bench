@@ -7,7 +7,7 @@
     "packages": [
       "deepmd-kit[torch]==3.2.0"
     ],
-    "calculator": "deepmd.calculator.DP(model=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/DPA4C-Nano-OMol25-100M-v20260820.pt\")",
+    "calculator": "deepmd.calculator.DP(model=\"DPA4C-Nano-OMol25-100M-v20260820.pt\")",
     "notes": "DPA4C Nano: the compressible, message-passing-free member of the DPA4 family (35k parameters, 6.0 A cutoff, one hop).  Released validation on the OMol-0 out-of-distribution split is 40.97 kcal/mol energy / 2.485 kcal/mol/A force MAE.  The smallest checkpoint in the whole suite.",
     "imports": [
       "deepmd.calculator"

@@ -2,7 +2,7 @@
   "schema": "pescert-run/1",
   "model": {
     "slug": "lennard-jones",
-    "label": "Lennard-Jones (element-specific)",
+    "label": "Lennard-Jones",
     "family": "Analytic",
     "packages": [],
     "calculator": "pescert.reference.ElementLennardJones()",

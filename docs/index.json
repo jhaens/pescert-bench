@@ -1,6 +1,6 @@
 {
   "schema": "pescert-index/1",
-  "generated": "2026-09-16T14:11:55+00:00",
+  "generated": "2026-09-16T14:27:40+00:00",
   "sections": [
     "Symmetry & invariance",
     "Self-consistency",
@@ -952,7 +952,7 @@
       "packages": [
         "calorine==3.5"
       ],
-      "calculator": "calorine.calculators.CPUNEP(\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/nep89_20250409.txt\")",
+      "calculator": "calorine.calculators.CPUNEP(\"nep89_20250409.txt\")",
       "notes": "Neuroevolution potential covering 89 elements, from the Zenodo record for arXiv:2504.21286.",
       "precision": "float64",
       "training_set": [
@@ -2067,7 +2067,7 @@
       "packages": [
         "nequip==0.19.1"
       ],
-      "calculator": "nequip.integrations.ase.NequIPCalculator.from_compiled_model(\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/NequIP-OAM-L-0.1.nequip.pth\", device=\"cuda\")",
+      "calculator": "nequip.integrations.ase.NequIPCalculator.from_compiled_model(\"NequIP-OAM-L-0.1.nequip.pth\", device=\"cuda\")",
       "notes": "Fetched from nequip.net rather than a local file.",
       "precision": "float32",
       "training_set": [
@@ -2215,7 +2215,7 @@
         "nequip==0.19.1",
         "nequip-allegro==0.8.3"
       ],
-      "calculator": "nequip.integrations.ase.NequIPCalculator.from_compiled_model(\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/Allegro-OAM-L-0.1.nequip.pth\", device=\"cuda\")",
+      "calculator": "nequip.integrations.ase.NequIPCalculator.from_compiled_model(\"Allegro-OAM-L-0.1.nequip.pth\", device=\"cuda\")",
       "notes": "Allegro shares the nequip calculator; the extra package supplies the model.",
       "precision": "float32",
       "training_set": [
@@ -2362,7 +2362,7 @@
       "packages": [
         "nequip==0.19.1"
       ],
-      "calculator": "nequip.integrations.ase.NequIPCalculator.from_compiled_model(\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/NequIP-OAM-XL-0.1.nequip.pth\", device=\"cuda\")",
+      "calculator": "nequip.integrations.ase.NequIPCalculator.from_compiled_model(\"NequIP-OAM-XL-0.1.nequip.pth\", device=\"cuda\")",
       "notes": "The distributed .nequip.zip is a package, not a compiled artifact, so it is compiled once with nequip-compile --mode torchscript --target ase.",
       "precision": "float32",
       "training_set": [
@@ -2689,7 +2689,7 @@
       "label": "EquFlashV2-45M-OAM",
       "family": "EquFlash",
       "packages": [
-        "GGNN@file:///scratch/joha4087/scripting/evals/playground/large_scale_pretrained/_tools/wheels/ggnn-0.1-py3-none-any.whl",
+        "GGNN@file://ggnn-0.1-py3-none-any.whl",
         "cuequivariance==0.6.0",
         "cuequivariance-torch==0.6.0",
         "cuequivariance-ops-torch-cu12==0.6.0",
@@ -3645,7 +3645,7 @@
         "scipy",
         "numpy"
       ],
-      "calculator": "prophet.KairosCalculator(model_path=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/prophet-oame-mbd.pt\", use_kernel=False, device=\"cuda\")",
+      "calculator": "prophet.KairosCalculator(model_path=\"prophet-oame-mbd.pt\", use_kernel=False, device=\"cuda\")",
       "notes": "Matbench Discovery submission checkpoint (F1 0.9275, kappa_SRME 0.0648): 62.3M parameters, 10 layers, lmax 4, nested 3/7 A cutoffs.  Its Multi-Cutoff Spectral Decomposition is claimed to keep E(3) equivariance exact and the energy twice differentiable -- which these probes test directly.",
       "precision": "float32",
       "training_set": [
@@ -4708,7 +4708,7 @@
       "packages": [
         "deepmd-kit[torch]==3.2.0"
       ],
-      "calculator": "deepmd.calculator.DP(model=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/DPA4-Plus-OMat24-v20260805.pt\")",
+      "calculator": "deepmd.calculator.DP(model=\"DPA4-Plus-OMat24-v20260805.pt\")",
       "notes": "DPA-4 / SeZM Plus on OMat24: 8.85M parameters, SO(3)-equivariant and conservative -- the message-passing counterpart of the DPA-4C rows.",
       "precision": "float32",
       "training_set": [
@@ -4839,7 +4839,7 @@
         "numpy<2",
         "scipy<1.15"
       ],
-      "calculator": "fairchem.core.OCPCalculator(checkpoint_path=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/checkpoint/omat24-mptrj-salex_gradient.pt\", cpu=False)",
+      "calculator": "fairchem.core.OCPCalculator(checkpoint_path=\"omat24-mptrj-salex_gradient.pt\", cpu=False)",
       "notes": "The OAM, conservative-gradient variant of equiformer_v3 (omat24-mptrj- salex_gradient.pt).",
       "precision": "float32",
       "training_set": [
@@ -5268,7 +5268,7 @@
         "numpy<2",
         "scipy<1.15"
       ],
-      "calculator": "fairchem.core.OCPCalculator(checkpoint_path=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/esen_30m_mptrj.pt\", cpu=False)",
+      "calculator": "fairchem.core.OCPCalculator(checkpoint_path=\"esen_30m_mptrj.pt\", cpu=False)",
       "notes": "The same 30M eSEN, MPtrj only -- the training-corpus arm of the series.",
       "precision": "float32",
       "training_set": [
@@ -5397,7 +5397,7 @@
       "packages": [
         "deepmd-kit[torch]==3.2.0"
       ],
-      "calculator": "deepmd.calculator.DP(model=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/DPA4C-Nano-OMol25-100M-v20260820.pt\")",
+      "calculator": "deepmd.calculator.DP(model=\"DPA4C-Nano-OMol25-100M-v20260820.pt\")",
       "notes": "One-hop, compressible DPA-4 at 35k parameters, 6.0 A cutoff.  Published OMol-0 MAE 40.97 kcal/mol energy, 2.485 kcal/mol/A force.  The smallest checkpoint in the suite.",
       "precision": "float32",
       "training_set": [
@@ -5528,7 +5528,7 @@
         "numpy<2",
         "scipy<1.15"
       ],
-      "calculator": "fairchem.core.OCPCalculator(checkpoint_path=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/esen_30m_oam.pt\", cpu=False)",
+      "calculator": "fairchem.core.OCPCalculator(checkpoint_path=\"esen_30m_oam.pt\", cpu=False)",
       "notes": "eSEN 30M on OAM; checkpoint from facebook/OMAT24.",
       "precision": "float32",
       "training_set": [
@@ -6067,7 +6067,7 @@
         "numpy<2",
         "scipy<1.15"
       ],
-      "calculator": "fairchem.core.OCPCalculator(checkpoint_path=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/esen_30m_omat.pt\", cpu=False)",
+      "calculator": "fairchem.core.OCPCalculator(checkpoint_path=\"esen_30m_omat.pt\", cpu=False)",
       "notes": "The same 30M eSEN architecture, OMat24 only.",
       "precision": "float32",
       "training_set": [
@@ -6197,7 +6197,7 @@
         "metatrain==2026.2.1",
         "metatomic-torch==0.1.11"
       ],
-      "calculator": "metatomic.torch.ase_calculator.MetatomicCalculator(\"/scratch/joha4087/.cache/pet_foundation/pet-oam-xl.pt\", device=\"cuda\")",
+      "calculator": "metatomic.torch.ase_calculator.MetatomicCalculator(\"pet-oam-xl.pt\", device=\"cuda\")",
       "notes": "Local checkpoint (2.8 GB); mounted read-only into the container.",
       "precision": "float32",
       "training_set": [
@@ -6509,7 +6509,7 @@
       "packages": [
         "deepmd-kit[torch]==3.2.0"
       ],
-      "calculator": "deepmd.calculator.DP(model=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/DPA4C-Neo-OMol25-100M-v20260820.pt\")",
+      "calculator": "deepmd.calculator.DP(model=\"DPA4C-Neo-OMol25-100M-v20260820.pt\")",
       "notes": "One-hop, compressible DPA-4 at 539k parameters, 6.0 A cutoff.  Published OMol-0 MAE 24.74 kcal/mol energy, 1.731 kcal/mol/A force.  The midpoint of the series.",
       "precision": "float32",
       "training_set": [
@@ -6638,7 +6638,7 @@
       "packages": [
         "deepmd-kit[torch]==3.2.0"
       ],
-      "calculator": "deepmd.calculator.DP(model=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/DPA4C-Mini-OMol25-100M-v20260820.pt\")",
+      "calculator": "deepmd.calculator.DP(model=\"DPA4C-Mini-OMol25-100M-v20260820.pt\")",
       "notes": "One-hop, compressible DPA-4 at 200k parameters, 6.0 A cutoff.  Published OMol-0 MAE 28.58 kcal/mol energy, 1.881 kcal/mol/A force.",
       "precision": "float32",
       "training_set": [
@@ -6767,7 +6767,7 @@
       "packages": [
         "deepmd-kit[torch]==3.2.0"
       ],
-      "calculator": "deepmd.calculator.DP(model=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/DPA4C-Plus-OMol25-100M-v20260820.pt\")",
+      "calculator": "deepmd.calculator.DP(model=\"DPA4C-Plus-OMol25-100M-v20260820.pt\")",
       "notes": "One-hop, compressible DPA-4 at 2.19M parameters, 6.0 A cutoff.  Published OMol-0 MAE 16.77 kcal/mol energy, 1.383 kcal/mol/A force.  The largest DPA-4C.",
       "precision": "float32",
       "training_set": [
@@ -6797,7 +6797,7 @@
       "status": "ok",
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
-      "wall_seconds": 569.9,
+      "wall_seconds": 552.57,
       "environment": {
         "python": "3.11.16",
         "torch": "2.11.0+cu126",
@@ -6805,7 +6805,7 @@
         "cuda_available": true,
         "ase": "3.28.0",
         "pescert": "0.1.0",
-        "host": "76abbc17df14",
+        "host": "88c715175592",
         "gpu": {
           "name": "NVIDIA RTX A5000",
           "capability": "8.6",
@@ -6813,36 +6813,36 @@
         }
       },
       "scores": {
-        "conservativeness": 0.8492320380557766,
-        "equivariance": 0.9640849077742178,
-        "smoothness": 0.5307916896218139,
-        "stress_consistency": 0.7139005207380824,
-        "parity": 0.9990562031840288,
-        "representation": 0.9782212154208082,
-        "cross_maxwell": 0.037175470836189994,
-        "betti": 0.9534883970947199,
-        "zero_modes": 0.17812582038153985,
-        "trimer": 0.37129145821653886,
-        "reversibility": 0.9810273762357713,
-        "config_temperature": 0.9145323322564037,
-        "equipartition": 0.5651817136036963,
-        "virial": 0.9173936566921845
+        "conservativeness": 0.8490741462985196,
+        "equivariance": 0.9645522172908096,
+        "smoothness": 0.5307913942573865,
+        "stress_consistency": 0.7139026212767454,
+        "parity": 0.9992113236729555,
+        "representation": 0.9806349697117099,
+        "cross_maxwell": 0.05124906825848278,
+        "betti": 0.9542194324644061,
+        "zero_modes": 0.17918651824686604,
+        "trimer": 0.37126630758769913,
+        "reversibility": 0.9689139082833058,
+        "config_temperature": 0.9175578923056535,
+        "equipartition": 0.5674090063304214,
+        "virial": 0.9181429622820205
       },
       "defects": {
-        "conservativeness": 0.009496290665115212,
-        "equivariance": 0.037013419397557305,
-        "smoothness": 1.0364118300436638,
-        "stress_consistency": 0.021469090576872168,
-        "parity": 9.446815102454026e-07,
-        "representation": 0.022096499300425187,
+        "conservativeness": 0.009505408631795678,
+        "equivariance": 0.03653428630806964,
+        "smoothness": 1.0364125392604249,
+        "stress_consistency": 0.02147151942844219,
+        "parity": 7.891101833648496e-07,
+        "representation": 0.0196169749459806,
         "cross_maxwell": null,
-        "betti": 0.0009579812123846211,
-        "zero_modes": 0.00014637960006045166,
-        "trimer": 4.094809176821543,
-        "reversibility": 1.9827475952341055e-05,
-        "config_temperature": 0.09143649484945288,
-        "equipartition": 2.3712507010459647,
-        "virial": 0.08982546189195222
+        "betti": 0.0009430862225948382,
+        "zero_modes": 0.00013693805646597683,
+        "trimer": 4.094904297944264,
+        "reversibility": 3.3285142316066325e-05,
+        "config_temperature": 0.08797452269901404,
+        "equipartition": 2.3631800795823072,
+        "virial": 0.0890581528702248
       },
       "calls": {
         "conservativeness": 90,
@@ -6851,12 +6851,12 @@
         "stress_consistency": 130,
         "parity": 20,
         "representation": 200,
-        "cross_maxwell": 2322,
+        "cross_maxwell": 2850,
         "betti": 480,
-        "zero_modes": 2057,
+        "zero_modes": 2089,
         "trimer": 1140,
         "reversibility": 2010,
-        "config_temperature": 25203,
+        "config_temperature": 25216,
         "equipartition": 780,
         "virial": 0
       },
@@ -6883,9 +6883,9 @@
       },
       "skipped": {},
       "overall": {
-        "arithmetic": 0.7109644857222694,
-        "geometric": 0.5641355184005403,
-        "harmonic": 0.28717677547485054
+        "arithmetic": 0.7118651263047845,
+        "geometric": 0.57743554847913,
+        "harmonic": 0.3387530224709165
       },
       "result_file": "dpa-4c-plus-omol/result.json"
     },
@@ -6900,7 +6900,7 @@
       "packages": [
         "deepmd-kit[torch]==3.2.0"
       ],
-      "calculator": "deepmd.calculator.DP(model=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/DPA4C-Air-OMol25-100M-v20260820.pt\")",
+      "calculator": "deepmd.calculator.DP(model=\"DPA4C-Air-OMol25-100M-v20260820.pt\")",
       "notes": "One-hop, compressible DPA-4 at 630k parameters, 6.0 A cutoff.  Published OMol-0 MAE 21.37 kcal/mol energy, 1.597 kcal/mol/A force.",
       "precision": "float32",
       "training_set": [
@@ -7030,7 +7030,7 @@
         "upet==0.2.1",
         "warp-lang==1.12.0"
       ],
-      "calculator": "upet.calculator.UPETCalculator(checkpoint_path=\"/scratch/joha4087/mlip_error/pet_umodels/pet-mad-s-v1.5.0.ckpt\", device=\"cuda\")",
+      "calculator": "upet.calculator.UPETCalculator(checkpoint_path=\"pet-mad-s-v1.5.0.ckpt\", device=\"cuda\")",
       "notes": "PET-MAD small, v1.5.0 local checkpoint. Trained on the MAD dataset.",
       "precision": "float32",
       "training_set": [
@@ -8667,7 +8667,7 @@
         "numpy<2",
         "scipy<1.15"
       ],
-      "calculator": "fairchem.core.OCPCalculator(checkpoint_path=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/checkpoint/omat24_direct-uncompiled.pt\", cpu=False)",
+      "calculator": "fairchem.core.OCPCalculator(checkpoint_path=\"omat24_direct-uncompiled.pt\", cpu=False)",
       "notes": "Stage-1 of the equiformer_v3 series: direct pre-training on OMat24 only, before the gradient fine-tuning.  Forces come from a direct head rather than the energy gradient, so this is the family's non-conservative member.",
       "precision": "float32",
       "training_set": [
@@ -8933,7 +8933,7 @@
         "numpy<2",
         "scipy<1.15"
       ],
-      "calculator": "fairchem.core.OCPCalculator(checkpoint_path=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/eqV2_31M_omat_mp_salex.pt\", cpu=False)",
+      "calculator": "fairchem.core.OCPCalculator(checkpoint_path=\"eqV2_31M_omat_mp_salex.pt\", cpu=False)",
       "notes": "The OAM-trained 31M eqV2, matching the other OAM models.",
       "precision": "float32",
       "training_set": [
@@ -9083,7 +9083,7 @@
         "fairchem-core[torch-extras]==1.10.0",
         "scipy<1.17"
       ],
-      "calculator": "fairchem.core.OCPCalculator(checkpoint_path=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/eqV2_31M_omat.pt\", cpu=False)",
+      "calculator": "fairchem.core.OCPCalculator(checkpoint_path=\"eqV2_31M_omat.pt\", cpu=False)",
       "notes": "EquiformerV2 31M on OMat24, from the facebook/OMAT24 hub (no GGNN needed).",
       "precision": "float32",
       "training_set": [

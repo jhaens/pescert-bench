@@ -7,7 +7,7 @@
     "packages": [
       "deepmd-kit[torch]==3.2.0"
     ],
-    "calculator": "deepmd.calculator.DP(model=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/DPA4C-Air-OMol25-100M-v20260820.pt\")",
+    "calculator": "deepmd.calculator.DP(model=\"DPA4C-Air-OMol25-100M-v20260820.pt\")",
     "notes": "DPA4C Air: the compressible, message-passing-free member of the DPA4 family (630k parameters, 6.0 A cutoff, one hop).  Released validation on the OMol-0 out-of-distribution split is 21.37 kcal/mol energy / 1.597 kcal/mol/A force MAE.  Near-Neo parameter count, bought with 1.6x the training hours.",
     "imports": [
       "deepmd.calculator"

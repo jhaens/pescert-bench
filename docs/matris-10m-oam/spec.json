@@ -17,7 +17,7 @@
     "matris.applications.base"
   ],
   "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
-  "notes": "MatRIS 10M pretrained on OMat24 and fine-tuned on sAlex+MPtrj.  The checkpoint is staged by hand: matris/model/model.py downloads from a figshare ndownloader URL that now answers 403/202 with an empty body, which is why the first run died in torch.load with EOFError.  figshare's API endpoint still serves it, and the file is kept alongside the other hand-downloaded checkpoints.  MatRIS.load looks only in ~/.cache/matris and HOME is /model-cache in the container, so after a /var/tmp wipe re-stage it: cp download_checkpoints/MatRIS_10M_OAM.pth.tar matris  (re-fetch with curl -L https://api.figshare.com/v2/file/download/59142728).",
+  "notes": "MatRIS 10M pretrained on OMat24 and fine-tuned on sAlex+MPtrj.  The checkpoint is staged by hand: matris/model/model.py downloads from a figshare ndownloader URL that now answers 403/202 with an empty body, which is why the first run died in torch.load with EOFError.  figshare's API endpoint still serves it, and the file is kept alongside the other hand-downloaded checkpoints.  MatRIS.load looks only in ~/.cache/matris and HOME is /model-cache in the container, so after a /var/tmp wipe re-stage it: cp download_checkpoints/MatRIS_10M_OAM.pth.tar /var/tmp/$USER-containers/model-cache/.cache/matris/  (re-fetch with curl -L https://api.figshare.com/v2/file/download/59142728).",
   "precision": "float32",
   "python": "3.11",
   "find_links": [],

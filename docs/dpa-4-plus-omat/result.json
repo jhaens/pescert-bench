@@ -7,7 +7,7 @@
     "packages": [
       "deepmd-kit[torch]==3.2.0"
     ],
-    "calculator": "deepmd.calculator.DP(model=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/DPA4-Plus-OMat24-v20260805.pt\")",
+    "calculator": "deepmd.calculator.DP(model=\"DPA4-Plus-OMat24-v20260805.pt\")",
     "notes": "The DPA4 / SeZM Plus of dpa-4-plus-omol trained on OMat24 instead of OMol25, so the pair isolates the corpus with the architecture held fixed.  8,848,518 parameters against the OMol row's 8,876,166: the difference is the charge/spin conditioning, which a periodic corpus does not carry.",
     "imports": [
       "deepmd.calculator"

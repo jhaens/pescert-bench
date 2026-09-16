@@ -1,6 +1,6 @@
 {
   "slug": "lennard-jones",
-  "label": "Lennard-Jones (element-specific)",
+  "label": "Lennard-Jones",
   "family": "Analytic",
   "packages": [],
   "requirements": [

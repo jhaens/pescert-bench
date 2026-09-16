@@ -3,7 +3,7 @@
   "label": "EquFlashV2-45M-OAM",
   "family": "EquFlash",
   "packages": [
-    "GGNN@file://<local>/ggnn-0.1-py3-none-any.whl",
+    "GGNN@file://ggnn-0.1-py3-none-any.whl",
     "cuequivariance==0.6.0",
     "cuequivariance-torch==0.6.0",
     "cuequivariance-ops-torch-cu12==0.6.0",
@@ -30,7 +30,7 @@
   "requirements": [
     "torch==2.9.1",
     "ase==3.28.0",
-    "GGNN@file://<local>/ggnn-0.1-py3-none-any.whl",
+    "GGNN@file://ggnn-0.1-py3-none-any.whl",
     "cuequivariance==0.6.0",
     "cuequivariance-torch==0.6.0",
     "cuequivariance-ops-torch-cu12==0.6.0",
@@ -54,7 +54,7 @@
     "tqdm",
     "wandb"
   ],
-  "calculator": "GGNN.common.calculator.UCalculator(checkpoint_path=\"equflashv2_oam.pt\", cpu=False)",
+  "calculator": "GGNN.common.calculator.UCalculator(checkpoint_path=\"/scratch5/joha4087/model_download/equflashv2_oam.pt\", cpu=False)",
   "imports": [
     "GGNN.common.calculator"
   ],

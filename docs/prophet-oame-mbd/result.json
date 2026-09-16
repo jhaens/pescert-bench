@@ -11,7 +11,7 @@
       "scipy",
       "numpy"
     ],
-    "calculator": "prophet.KairosCalculator(model_path=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/prophet-oame-mbd.pt\", use_kernel=False, device=\"cuda\")",
+    "calculator": "prophet.KairosCalculator(model_path=\"prophet-oame-mbd.pt\", use_kernel=False, device=\"cuda\")",
     "notes": "Prophet-V1-MBD, the Matbench Discovery submission checkpoint (F1 0.9275, kappa_SRME 0.0648): 62.3M parameters, 10 layers, lmax 4, nested cutoffs 3/7 A, thermal-conductivity fine-tuned.  Multi-Cutoff Spectral Decomposition recombines nested cutoff scales linearly, which the report claims keeps E(3) equivariance exact and the energy twice continuously differentiable -- the equivariance and conservativity probes test exactly that claim.  Weights are CC-BY-4.0 and ungated; the checkpoint is staged by hand next to the others because KairosCalculator takes a filesystem path, not a hub id (hf download kairosmaterial/prophet prophet-oame-mbd.pt).  The magnetic sibling Prophet-V1-Mag ships in the same package behind prophet_spin.SpinCalculator and is not certified here: it needs an explicit magnetic state as input.",
     "imports": [
       "prophet"

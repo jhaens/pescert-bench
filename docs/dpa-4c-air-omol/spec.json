@@ -10,7 +10,7 @@
     "ase==3.28.0",
     "deepmd-kit[torch]==3.2.0"
   ],
-  "calculator": "deepmd.calculator.DP(model=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/DPA4C-Air-OMol25-100M-v20260820.pt\")",
+  "calculator": "deepmd.calculator.DP(model=\"DPA4C-Air-OMol25-100M-v20260820.pt\")",
   "imports": [
     "deepmd.calculator"
   ],

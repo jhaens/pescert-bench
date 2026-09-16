@@ -20,7 +20,7 @@
     "numpy",
     "openequivariance>=0.6.8"
   ],
-  "calculator": "prophet.KairosCalculator(model_path=\"/scratch/joha4087/scripting/evals/playground/large_scale_pretrained/download_checkpoints/prophet-oame-mbd.pt\", device=\"cuda\")",
+  "calculator": "prophet.KairosCalculator(model_path=\"prophet-oame-mbd.pt\", device=\"cuda\")",
   "imports": [
     "prophet"
   ],
