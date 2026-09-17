@@ -78,6 +78,15 @@ function fmtSI(x) {
   return String(x);
 }
 
+/* Throughput is a rate, so sub-unit precision is noise: fmtSI would print "610.9"
+   in the same column as "1.7k" and "13k". Round below 1k, keep the SI step above. */
+function fmtRate(x) {
+  if (!isNum(x)) return '-';
+  if (x >= 1e4) return (x / 1e3).toFixed(0) + 'k';
+  if (x >= 1e3) return (x / 1e3).toFixed(1) + 'k';
+  return x.toFixed(0);
+}
+
 function fmtDuration(sec) {
   if (!isNum(sec)) return '-';
   if (sec < 90) return sec.toFixed(0) + ' s';
@@ -203,7 +212,7 @@ const famColor = (fam) => FAM_COLORS[FAMILIES.indexOf(fam) % FAM_COLORS.length];
 
 /* Every model-detail column starts hidden: the probe columns are the table, and the
    details are one click away on the "Model details" button. */
-const DEFAULT_OFF_META = ['family', 'params', 'dataset', 'nstruct', 'precision', 'calls', 'wall'];
+const DEFAULT_OFF_META = ['family', 'params', 'dataset', 'nstruct', 'precision', 'calls', 'wall', 'speed'];
 /* What the button turns on, rather than everything at once. */
 const META_ON_DEFAULT = ['params', 'dataset', 'precision'];
 
@@ -247,7 +256,7 @@ const META_COLS = [
     title: 'MD throughput: 100-atom NaCl, NVE velocity Verlet, 20 warm-up steps then '
          + '3 x 100 timed steps, mean of the three rates. Measured separately from the '
          + 'suite so it compares models rather than the probe mix.',
-    get: (m) => m.atom_steps_per_s, fmt: fmtSI }
+    get: (m) => m.atom_steps_per_s, fmt: fmtRate }
 ];
 
 /* ------------------------------------------------------------- data loading */
