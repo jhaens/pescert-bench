@@ -67,10 +67,6 @@
       "weights": "https://huggingface.co/deepmodelingcommunity",
       "docs": "https://docs.deepmodeling.com/projects/deepmd"
     },
-    "DeePMD": {
-      "code": "https://github.com/deepmodeling/deepmd-kit",
-      "docs": "https://docs.deepmodeling.com/projects/deepmd"
-    },
     "PET": {
       "code": "https://github.com/metatensor/metatrain",
       "paper": "https://arxiv.org/abs/2305.19302",
@@ -182,10 +178,6 @@
       "weights": "https://huggingface.co/deepmodelingcommunity/DPA4C-OMol"
     },
     "dpa-4c-neo-omol": {
-      "paper": "https://arxiv.org/abs/2608.19041",
-      "weights": "https://huggingface.co/deepmodelingcommunity/DPA4C-OMol"
-    },
-    "dpa-4c-plus-omol": {
       "paper": "https://arxiv.org/abs/2608.19041",
       "weights": "https://huggingface.co/deepmodelingcommunity/DPA4C-OMol"
     },
@@ -360,6 +352,10 @@
           "https://arxiv.org/abs/2503.02579"
         ]
       ]
+    },
+    "sevennet-nano-4.5": {
+      "paper": "https://arxiv.org/abs/2604.10887",
+      "weights": "https://github.com/MDIL-SNU/SevenNet/releases/tag/v0.13.1.cp"
     },
     "sevennet-nano-6.0": {
       "paper": "https://arxiv.org/abs/2604.10887",

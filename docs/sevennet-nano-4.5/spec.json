@@ -1,0 +1,53 @@
+{
+  "slug": "sevennet-nano-4.5",
+  "label": "SevenNet-Nano-4.5",
+  "family": "SevenNet",
+  "packages": [
+    "sevenn@git+https://github.com/MDIL-SNU/SevenNet@8d9905cc4f4b7ca93be02b37a263785add53c759"
+  ],
+  "requirements": [
+    "torch==2.7.1",
+    "ase==3.28.0",
+    "sevenn@git+https://github.com/MDIL-SNU/SevenNet@8d9905cc4f4b7ca93be02b37a263785add53c759"
+  ],
+  "calculator": "sevenn.calculator.SevenNetCalculator(model=\"7net-nano-4.5\", device=\"cuda\")",
+  "imports": [
+    "sevenn.calculator"
+  ],
+  "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
+  "notes": "The same 105k-parameter SevenNet-Omni student as sevennet-nano-6.0 at the narrowest of its four cutoffs (4.5 A).  Identical weights count and architecture, so the 4.5/6.0 pair isolates receptive-field radius with everything else held fixed.",
+  "precision": "float32",
+  "python": "3.11",
+  "find_links": [],
+  "n_parameters_hint": null,
+  "packages_no_deps": [],
+  "training_set": [
+    "MPtrj",
+    "sAlex"
+  ],
+  "training_set_complete": false,
+  "training_set_note": "A distillation student, so it never saw these labels directly: it was trained against the SevenNet-Omni 'mpa' head, whose own corpus is MPtrj + sAlex.  The structure pool used for the distillation is not stated in the release, so the two corpora describe the teacher, not this checkpoint, and no structure count is claimed.",
+  "training_heads": [],
+  "evaluated_head": "",
+  "n_training_structures": null,
+  "n_training_materials": null,
+  "datasets": [
+    {
+      "key": "MPtrj",
+      "label": "MPtrj",
+      "n_structures": 1580395,
+      "n_materials": 145923,
+      "url": "https://figshare.com/articles/dataset/23713842",
+      "notes": "Materials Project relaxation trajectories, cleaned and subsampled to about every 10th ionic step; created for CHGNet."
+    },
+    {
+      "key": "sAlex",
+      "label": "sAlex",
+      "n_structures": 10447765,
+      "n_materials": 3227606,
+      "url": "https://huggingface.co/datasets/fairchem/OMAT24#salex-dataset",
+      "notes": "Alexandria subsampled by FAIR, filtered to remove prototype overlap with the Matbench Discovery WBM test set."
+    }
+  ],
+  "torch_index": "https://download.pytorch.org/whl/cu126"
+}

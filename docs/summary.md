@@ -1,6 +1,6 @@
 # Universal MLIP certification -- 65 run(s)
 
-_generated 2026-09-16T14:27:40+00:00_
+_generated 2026-09-17T11:55:21+00:00_
 
 | Model | Params | Training set | Train structures | Elements | Overall (arith) | Overall (geom) | Gates | Calls | Status |
 |---|---|---|---|---|---|---|---|---|---|
@@ -24,6 +24,7 @@ _generated 2026-09-16T14:27:40+00:00_
 | EquFlashV2-45M-OAM | 44,890,492 | OMat24+sAlex+MPtrj | 112,852,745 | Li, Be, B, C, Na, Mg, Al, Si, P, S | 0.899 | 0.891 | 9/10 | 35,632 | ok |
 | SevenNet-MF-ompa | 25,735,090 | OMat24+sAlex+MPtrj | 112,852,745 | Li, Be, B, C, Na, Mg, Al, Si, P, S | 0.891 | 0.881 | 9/10 | 35,570 | ok |
 | Nequix-MP-1-PFT | - | MPtrj+MDR-Phonon | - | Li, Be, B, C, Na, Mg, Al, Si, P, S | 0.886 | 0.872 | 9/10 | 36,448 | ok |
+| SevenNet-Nano-4.5 | 103,401 | MPtrj+sAlex | - | Li, Be, B, C, Na, Mg, Al, Si, P, S | 0.880 | 0.864 | 7/10 | 35,278 | ok |
 | SevenNet-Nano-6.0 | 103,401 | MPtrj+sAlex | - | Li, Be, B, C, Na, Mg, Al, Si, P, S | 0.879 | 0.863 | 9/10 | 35,657 | ok |
 | SevenNet-Omni-i12 | 54,921,494 | OMat24+sAlex+MPtrj+OMol25+MatPES+OC20+OC22+SPICE+QCML+ODAC23+MAD | - | Li, Be, B, C, Na, Mg, Al, Si, P, S | 0.874 | 0.857 | 9/10 | 35,211 | ok |
 | MatterSim-v1 (1M) | 890,034 | MatterSim | 17,000,000 | Li, Be, B, C, Na, Mg, Al, Si, P, S | 0.873 | 0.845 | 8/10 | 36,402 | ok |
@@ -48,7 +49,6 @@ _generated 2026-09-16T14:27:40+00:00_
 | UMA-S-1p2 | 291,482,433 | OMat24+OMol25+OC20+ODAC23+OMC25 | - | Li, Be, B, C, Na, Mg, Al, Si, P, S | 0.732 | 0.205 | 6/10 | 37,040 | ok |
 | DPA-4C-Neo (OMol) | 538,697 | OMol25 | 100,000,000 | Li, Be, B, C, Na, Mg, Al, Si, P, S | 0.728 | 0.650 | 7/10 | 36,802 | ok |
 | DPA-4C-Mini (OMol) | 200,169 | OMol25 | 100,000,000 | Li, Be, B, C, Na, Mg, Al, Si, P, S | 0.726 | 0.651 | 7/10 | 37,708 | ok |
-| DPA-4C-Plus (OMol) | 2,188,865 | OMol25 | 100,000,000 | Li, Be, B, C, Na, Mg, Al, Si, P, S | 0.712 | 0.577 | 8/10 | 35,905 | ok |
 | DPA-4C-Air (OMol) | 630,281 | OMol25 | 100,000,000 | Li, Be, B, C, Na, Mg, Al, Si, P, S | 0.709 | 0.617 | 7/10 | 39,524 | ok |
 | PET-MAD-S | 25,989,658 | MAD | - | Li, Be, B, C, Na, Mg, Al, Si, P, S | 0.709 | 0.087 | 6/10 | 39,250 | ok |
 | UMA-S-1p1 | 146,566,817 | OMat24+OMol25+OC20+ODAC23+OMC25 | - | Li, Be, B, C, Na, Mg, Al, Si, P, S | 0.706 | 0.571 | 6/10 | 36,582 | ok |
@@ -96,6 +96,7 @@ _generated 2026-09-16T14:27:40+00:00_
 | EquFlashV2-45M-OAM | 0.980 | 1.000 | 0.997 | 0.707 | 0.707 |
 | SevenNet-MF-ompa | 0.995 | 1.000 | 0.999 | 0.723 | 0.622 |
 | Nequix-MP-1-PFT | 0.975 | 0.999 | 0.993 | 0.759 | 0.617 |
+| SevenNet-Nano-4.5 | 0.995 | 1.000 | 0.999 | 0.877 | 0.628 |
 | SevenNet-Nano-6.0 | 0.995 | 1.000 | 0.998 | 0.772 | 0.547 |
 | SevenNet-Omni-i12 | 0.994 | 1.000 | 0.999 | 0.529 | 0.589 |
 | MatterSim-v1 (1M) | 0.901 | 0.999 | 0.989 | 0.883 | 0.655 |
@@ -120,7 +121,6 @@ _generated 2026-09-16T14:27:40+00:00_
 | UMA-S-1p2 | 0.913 | 0.127 | 0.000 | 0.658 | 0.613 |
 | DPA-4C-Neo (OMol) | 0.953 | 0.999 | 0.981 | 0.383 | 0.253 |
 | DPA-4C-Mini (OMol) | 0.966 | 0.999 | 0.991 | 0.386 | 0.349 |
-| DPA-4C-Plus (OMol) | 0.965 | 0.999 | 0.981 | 0.371 | 0.179 |
 | DPA-4C-Air (OMol) | 0.974 | 0.999 | 0.986 | 0.229 | 0.206 |
 | PET-MAD-S | 0.000 | 0.030 | 0.995 | 0.540 | 0.638 |
 | UMA-S-1p1 | 0.654 | 0.182 | 0.974 | 0.044 | 0.544 |
@@ -166,6 +166,7 @@ _generated 2026-09-16T14:27:40+00:00_
 | EquFlashV2-45M-OAM | 0.997 | 0.998 | 0.722 | 0.999 | 0.778 |
 | SevenNet-MF-ompa | 0.997 | 0.996 | 0.717 | 1.000 | 0.747 |
 | Nequix-MP-1-PFT | 0.995 | 0.995 | 0.556 | 0.998 | 0.824 |
+| SevenNet-Nano-4.5 | 0.993 | 0.961 | 0.523 | 1.000 | 0.686 |
 | SevenNet-Nano-6.0 | 0.995 | 0.984 | 0.567 | 0.999 | 0.715 |
 | SevenNet-Omni-i12 | 0.997 | 0.997 | 0.683 | 0.999 | 0.789 |
 | MatterSim-v1 (1M) | 0.990 | 0.996 | 0.330 | 0.995 | 0.819 |
@@ -190,7 +191,6 @@ _generated 2026-09-16T14:27:40+00:00_
 | UMA-S-1p2 | 0.993 | 0.993 | 0.466 | 0.998 | 0.776 |
 | DPA-4C-Neo (OMol) | 0.943 | 0.832 | 0.175 | 0.986 | 0.706 |
 | DPA-4C-Mini (OMol) | 0.934 | 0.839 | 0.141 | 0.979 | 0.681 |
-| DPA-4C-Plus (OMol) | 0.954 | 0.849 | 0.051 | 0.969 | 0.714 |
 | DPA-4C-Air (OMol) | 0.966 | 0.895 | 0.221 | 0.989 | 0.486 |
 | PET-MAD-S | 0.995 | 0.996 | 0.217 | 0.999 | 0.829 |
 | UMA-S-1p1 | 0.872 | 0.911 | 0.359 | 0.895 | 0.769 |
@@ -236,6 +236,7 @@ _generated 2026-09-16T14:27:40+00:00_
 | EquFlashV2-45M-OAM | 0.906 | 0.852 | 0.951 |
 | SevenNet-MF-ompa | 0.910 | 0.851 | 0.932 |
 | Nequix-MP-1-PFT | 0.922 | 0.829 | 0.959 |
+| SevenNet-Nano-4.5 | 0.912 | 0.811 | 0.935 |
 | SevenNet-Nano-6.0 | 0.906 | 0.871 | 0.962 |
 | SevenNet-Omni-i12 | 0.912 | 0.816 | 0.948 |
 | MatterSim-v1 (1M) | 0.914 | 0.854 | 0.903 |
@@ -260,7 +261,6 @@ _generated 2026-09-16T14:27:40+00:00_
 | UMA-S-1p2 | 0.931 | 0.855 | 0.932 |
 | DPA-4C-Neo (OMol) | 0.929 | 0.606 | 0.880 |
 | DPA-4C-Mini (OMol) | 0.889 | 0.533 | 0.812 |
-| DPA-4C-Plus (OMol) | 0.918 | 0.567 | 0.918 |
 | DPA-4C-Air (OMol) | 0.922 | 0.579 | 0.880 |
 | PET-MAD-S | 0.929 | 0.858 | 0.911 |
 | UMA-S-1p1 | 0.934 | 0.868 | 0.939 |
@@ -306,6 +306,7 @@ _generated 2026-09-16T14:27:40+00:00_
 | EquFlashV2-45M-OAM | 0.986 |
 | SevenNet-MF-ompa | 0.990 |
 | Nequix-MP-1-PFT | 0.985 |
+| SevenNet-Nano-4.5 | 0.994 |
 | SevenNet-Nano-6.0 | 0.998 |
 | SevenNet-Omni-i12 | 0.991 |
 | MatterSim-v1 (1M) | 0.991 |
@@ -330,7 +331,6 @@ _generated 2026-09-16T14:27:40+00:00_
 | UMA-S-1p2 | 0.994 |
 | DPA-4C-Neo (OMol) | 0.561 |
 | DPA-4C-Mini (OMol) | 0.666 |
-| DPA-4C-Plus (OMol) | 0.531 |
 | DPA-4C-Air (OMol) | 0.595 |
 | PET-MAD-S | 0.991 |
 | UMA-S-1p1 | 0.932 |

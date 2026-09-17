@@ -297,5 +297,22 @@
     }
   ],
   "crashes": {},
-  "status": "ok"
+  "status": "ok",
+  "throughput": {
+    "atom_steps_per_s": 10014.0,
+    "atom_steps_per_s_stdev": 24.8,
+    "ms_per_step": 9.986,
+    "repeat_atom_steps_per_s": [
+      9986.3,
+      10034.2,
+      10021.6
+    ],
+    "n_atoms": 100,
+    "timed_steps": 100,
+    "warmup_steps": 20,
+    "n_repeats": 3,
+    "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+    "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+    "status": "ok"
+  }
 }

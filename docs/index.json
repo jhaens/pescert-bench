@@ -1,6 +1,6 @@
 {
   "schema": "pescert-index/1",
-  "generated": "2026-09-16T14:27:40+00:00",
+  "generated": "2026-09-17T11:55:21+00:00",
   "sections": [
     "Symmetry & invariance",
     "Self-consistency",
@@ -277,6 +277,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 168.3,
+      "throughput": {
+        "atom_steps_per_s": 13443.3,
+        "atom_steps_per_s_stdev": 248.7,
+        "ms_per_step": 7.44,
+        "repeat_atom_steps_per_s": [
+          13668.0,
+          13485.8,
+          13176.0
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 13443.3,
       "environment": {
         "python": "3.11.16",
         "torch": null,
@@ -412,6 +430,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 994.05,
+      "throughput": {
+        "atom_steps_per_s": 610.9,
+        "atom_steps_per_s_stdev": 23.7,
+        "ms_per_step": 163.849,
+        "repeat_atom_steps_per_s": [
+          583.6,
+          624.9,
+          624.3
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 610.9,
       "environment": {
         "python": "3.11.16",
         "torch": "2.7.1+cu126",
@@ -542,6 +578,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 730.1,
+      "throughput": {
+        "atom_steps_per_s": 1718.3,
+        "atom_steps_per_s_stdev": 194.7,
+        "ms_per_step": 58.736,
+        "repeat_atom_steps_per_s": [
+          1493.5,
+          1830.3,
+          1831.1
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 1718.3,
       "environment": {
         "python": "3.11.16",
         "torch": "2.7.1+cu126",
@@ -724,6 +778,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 1151.12,
+      "throughput": {
+        "atom_steps_per_s": 802.1,
+        "atom_steps_per_s_stdev": 43.7,
+        "ms_per_step": 124.928,
+        "repeat_atom_steps_per_s": [
+          751.7,
+          828.4,
+          826.2
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 802.1,
       "environment": {
         "python": "3.11.16",
         "torch": "2.7.1+cu126",
@@ -854,6 +926,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 1449.75,
+      "throughput": {
+        "atom_steps_per_s": 363.8,
+        "atom_steps_per_s_stdev": 3.8,
+        "ms_per_step": 274.932,
+        "repeat_atom_steps_per_s": [
+          359.3,
+          366.3,
+          365.7
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 363.8,
       "environment": {
         "python": "3.11.16",
         "torch": "2.7.1+cu126",
@@ -1017,6 +1107,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 10542.17,
+      "throughput": {
+        "atom_steps_per_s": 17692.6,
+        "atom_steps_per_s_stdev": 144.7,
+        "ms_per_step": 5.653,
+        "repeat_atom_steps_per_s": [
+          17526.5,
+          17760.1,
+          17791.1
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 17692.6,
       "environment": {
         "python": "3.11.16",
         "torch": null,
@@ -1143,6 +1251,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 1294.81,
+      "throughput": {
+        "atom_steps_per_s": 642.4,
+        "atom_steps_per_s_stdev": 28.2,
+        "ms_per_step": 155.874,
+        "repeat_atom_steps_per_s": [
+          610.0,
+          655.4,
+          661.7
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 642.4,
       "environment": {
         "python": "3.11.16",
         "torch": "2.7.1+cu126",
@@ -1289,6 +1415,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 442.84,
+      "throughput": {
+        "atom_steps_per_s": 3005.7,
+        "atom_steps_per_s_stdev": 13.0,
+        "ms_per_step": 33.271,
+        "repeat_atom_steps_per_s": [
+          2999.8,
+          2996.7,
+          3020.6
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 3005.7,
       "environment": {
         "python": "3.11.16",
         "torch": "2.7.1+cu126",
@@ -1419,6 +1563,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 4808.59,
+      "throughput": {
+        "atom_steps_per_s": 1941.9,
+        "atom_steps_per_s_stdev": 246.5,
+        "ms_per_step": 52.1,
+        "repeat_atom_steps_per_s": [
+          1657.3,
+          2088.4,
+          2080.0
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 1941.9,
       "environment": {
         "python": "3.11.16",
         "torch": "2.7.1+cu126",
@@ -1565,6 +1727,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 357.14,
+      "throughput": {
+        "atom_steps_per_s": 10014.0,
+        "atom_steps_per_s_stdev": 24.8,
+        "ms_per_step": 9.986,
+        "repeat_atom_steps_per_s": [
+          9986.3,
+          10034.2,
+          10021.6
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 10014.0,
       "environment": {
         "python": "3.11.16",
         "torch": "2.7.1+cu126",
@@ -1695,6 +1875,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 1048.89,
+      "throughput": {
+        "atom_steps_per_s": 614.9,
+        "atom_steps_per_s_stdev": 25.2,
+        "ms_per_step": 162.81,
+        "repeat_atom_steps_per_s": [
+          585.8,
+          630.1,
+          628.9
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 614.9,
       "environment": {
         "python": "3.11.16",
         "torch": "2.7.1+cu126",
@@ -1823,6 +2021,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 574.99,
+      "throughput": {
+        "atom_steps_per_s": 6379.7,
+        "atom_steps_per_s_stdev": 139.6,
+        "ms_per_step": 15.68,
+        "repeat_atom_steps_per_s": [
+          6535.4,
+          6338.1,
+          6265.6
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 6379.7,
       "environment": {
         "python": "3.11.16",
         "torch": "2.7.1+cu126",
@@ -1969,6 +2185,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 465.39,
+      "throughput": {
+        "atom_steps_per_s": 7040.6,
+        "atom_steps_per_s_stdev": 19.6,
+        "ms_per_step": 14.203,
+        "repeat_atom_steps_per_s": [
+          7018.1,
+          7049.6,
+          7054.1
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 7040.6,
       "environment": {
         "python": "3.11.16",
         "torch": "2.7.1+cu126",
@@ -2116,6 +2350,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 2001.5,
+      "throughput": {
+        "atom_steps_per_s": 1537.3,
+        "atom_steps_per_s_stdev": 2.0,
+        "ms_per_step": 65.051,
+        "repeat_atom_steps_per_s": [
+          1535.0,
+          1538.1,
+          1538.7
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 1537.3,
       "environment": {
         "python": "3.11.16",
         "torch": "2.7.1+cu126",
@@ -2264,6 +2516,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 307.69,
+      "throughput": {
+        "atom_steps_per_s": 385.8,
+        "atom_steps_per_s_stdev": 2.3,
+        "ms_per_step": 259.186,
+        "repeat_atom_steps_per_s": [
+          388.4,
+          385.1,
+          384.0
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 385.8,
       "environment": {
         "python": "3.11.16",
         "torch": "2.7.1+cu126",
@@ -2411,6 +2681,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 3091.57,
+      "throughput": {
+        "atom_steps_per_s": 587.0,
+        "atom_steps_per_s_stdev": 0.3,
+        "ms_per_step": 170.358,
+        "repeat_atom_steps_per_s": [
+          587.3,
+          586.8,
+          586.8
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 587.0,
       "environment": {
         "python": "3.11.16",
         "torch": "2.7.1+cu126",
@@ -2593,6 +2881,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 5419.43,
+      "throughput": {
+        "atom_steps_per_s": 607.6,
+        "atom_steps_per_s_stdev": 26.5,
+        "ms_per_step": 164.803,
+        "repeat_atom_steps_per_s": [
+          577.0,
+          622.1,
+          623.7
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 607.6,
       "environment": {
         "python": "3.11.16",
         "torch": "2.7.1+cu126",
@@ -2762,6 +3068,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 6583.53,
+      "throughput": {
+        "atom_steps_per_s": 510.1,
+        "atom_steps_per_s_stdev": 33.3,
+        "ms_per_step": 196.629,
+        "repeat_atom_steps_per_s": [
+          471.7,
+          530.6,
+          528.0
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 510.1,
       "environment": {
         "python": "3.12.14",
         "torch": "2.9.1+cu126",
@@ -2909,6 +3233,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 2958.42,
+      "throughput": {
+        "atom_steps_per_s": 870.5,
+        "atom_steps_per_s_stdev": 54.2,
+        "ms_per_step": 115.183,
+        "repeat_atom_steps_per_s": [
+          808.0,
+          899.2,
+          904.4
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 870.5,
       "environment": {
         "python": "3.11.16",
         "torch": "2.7.1+cu126",
@@ -3046,6 +3388,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 477.32,
+      "throughput": {
+        "atom_steps_per_s": 339.0,
+        "atom_steps_per_s_stdev": 4.1,
+        "ms_per_step": 295.051,
+        "repeat_atom_steps_per_s": [
+          342.9,
+          339.1,
+          334.8
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 339.0,
       "environment": {
         "python": "3.11.16",
         "torch": null,
@@ -3134,6 +3494,162 @@
         "sevenn.calculator"
       ],
       "python": "3.11",
+      "slug": "sevennet-nano-4.5",
+      "label": "SevenNet-Nano-4.5",
+      "family": "SevenNet",
+      "packages": [
+        "sevenn@git+https://github.com/MDIL-SNU/SevenNet@8d9905cc4f4b7ca93be02b37a263785add53c759"
+      ],
+      "calculator": "sevenn.calculator.SevenNetCalculator(model=\"7net-nano-4.5\", device=\"cuda\")",
+      "notes": "The same 105k-parameter SevenNet-Omni student as sevennet-nano-6.0 at the narrowest of its four cutoffs (4.5 A).  Identical weights count and architecture, so the 4.5/6.0 pair isolates receptive-field radius with everything else held fixed.",
+      "precision": "float32",
+      "training_set": [
+        "MPtrj",
+        "sAlex"
+      ],
+      "training_set_complete": false,
+      "training_set_note": "A distillation student, so it never saw these labels directly: it was trained against the SevenNet-Omni 'mpa' head, whose own corpus is MPtrj + sAlex.  The structure pool used for the distillation is not stated in the release, so the two corpora describe the teacher, not this checkpoint, and no structure count is claimed.",
+      "training_heads": [],
+      "evaluated_head": "",
+      "n_training_structures": null,
+      "n_training_materials": null,
+      "datasets": [
+        {
+          "key": "MPtrj",
+          "label": "MPtrj",
+          "n_structures": 1580395,
+          "n_materials": 145923,
+          "url": "https://figshare.com/articles/dataset/23713842",
+          "notes": "Materials Project relaxation trajectories, cleaned and subsampled to about every 10th ionic step; created for CHGNet."
+        },
+        {
+          "key": "sAlex",
+          "label": "sAlex",
+          "n_structures": 10447765,
+          "n_materials": 3227606,
+          "url": "https://huggingface.co/datasets/fairchem/OMAT24#salex-dataset",
+          "notes": "Alexandria subsampled by FAIR, filtered to remove prototype overlap with the Matbench Discovery WBM test set."
+        }
+      ],
+      "n_parameters": 103401,
+      "n_parameters_trainable": 103279,
+      "n_modules_found": 1,
+      "from_state_dict": false,
+      "n_parameters_source": "runtime",
+      "status": "ok",
+      "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
+      "seed": 0,
+      "wall_seconds": 692.62,
+      "throughput": {
+        "atom_steps_per_s": 4709.1,
+        "atom_steps_per_s_stdev": 366.1,
+        "ms_per_step": 21.323,
+        "repeat_atom_steps_per_s": [
+          4315.2,
+          4773.0,
+          5039.0
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 4709.1,
+      "environment": {
+        "python": "3.11.16",
+        "torch": "2.7.1+cu126",
+        "torch_cuda": "12.6",
+        "cuda_available": true,
+        "ase": "3.28.0",
+        "pescert": "0.1.0",
+        "host": "985d85f36fc8",
+        "gpu": {
+          "name": "NVIDIA RTX A5000",
+          "capability": "8.6",
+          "total_memory_GB": 23.55
+        }
+      },
+      "scores": {
+        "conservativeness": 0.9609621501690546,
+        "equivariance": 0.9952994205073399,
+        "smoothness": 0.9943367903781754,
+        "stress_consistency": 0.6864408442709669,
+        "parity": 0.9997633978330291,
+        "representation": 0.998646241591717,
+        "cross_maxwell": 0.5227044054635777,
+        "betti": 0.9926450451605607,
+        "zero_modes": 0.6277898828552797,
+        "trimer": 0.8773689997182638,
+        "reversibility": 0.9995390650602121,
+        "config_temperature": 0.9120874770232927,
+        "equipartition": 0.8107407856004298,
+        "virial": 0.9352486477949992
+      },
+      "defects": {
+        "conservativeness": 0.0021214807759242183,
+        "equivariance": 0.0047154360314079075,
+        "smoothness": 0.005720664496000993,
+        "stress_consistency": 0.06649651188123071,
+        "parity": 2.3670995621734617e-07,
+        "representation": 0.001355402539162158,
+        "cross_maxwell": 0.044490995048809545,
+        "betti": 0.0001484748565030543,
+        "zero_modes": 6.087360102721453e-05,
+        "trimer": 4.077864827330626,
+        "reversibility": 4.6135327598765916e-07,
+        "config_temperature": 0.09357656937300296,
+        "equipartition": 0.21753077317483527,
+        "virial": 0.06870737762040405
+      },
+      "calls": {
+        "conservativeness": 90,
+        "equivariance": 90,
+        "smoothness": 810,
+        "stress_consistency": 130,
+        "parity": 20,
+        "representation": 200,
+        "cross_maxwell": 2632,
+        "betti": 480,
+        "zero_modes": 1948,
+        "trimer": 1140,
+        "reversibility": 2010,
+        "config_temperature": 24948,
+        "equipartition": 780,
+        "virial": 0
+      },
+      "gates": {
+        "conservativeness": true,
+        "equivariance": true,
+        "smoothness": null,
+        "stress_consistency": false,
+        "parity": true,
+        "representation": true,
+        "cross_maxwell": false,
+        "betti": true,
+        "zero_modes": false,
+        "trimer": true,
+        "reversibility": true,
+        "config_temperature": null,
+        "equipartition": null,
+        "virial": null
+      },
+      "crashes": {},
+      "skipped": {},
+      "overall": {
+        "arithmetic": 0.8795409395304927,
+        "geometric": 0.8638018299484835,
+        "harmonic": 0.8453012403844147
+      },
+      "result_file": "sevennet-nano-4.5/result.json"
+    },
+    {
+      "imports": [
+        "sevenn.calculator"
+      ],
+      "python": "3.11",
       "slug": "sevennet-nano-6.0",
       "label": "SevenNet-Nano-6.0",
       "family": "SevenNet",
@@ -3180,6 +3696,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 676.04,
+      "throughput": {
+        "atom_steps_per_s": 4241.1,
+        "atom_steps_per_s_stdev": 442.0,
+        "ms_per_step": 23.761,
+        "repeat_atom_steps_per_s": [
+          3737.2,
+          4563.3,
+          4422.7
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 4241.1,
       "environment": {
         "python": "3.11.16",
         "torch": "2.7.1+cu126",
@@ -3413,6 +3947,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 5506.65,
+      "throughput": {
+        "atom_steps_per_s": 560.0,
+        "atom_steps_per_s_stdev": 26.9,
+        "ms_per_step": 178.867,
+        "repeat_atom_steps_per_s": [
+          528.9,
+          575.9,
+          575.1
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 560.0,
       "environment": {
         "python": "3.11.16",
         "torch": "2.7.1+cu126",
@@ -3543,6 +4095,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 803.36,
+      "throughput": {
+        "atom_steps_per_s": 3683.2,
+        "atom_steps_per_s_stdev": 172.2,
+        "ms_per_step": 27.19,
+        "repeat_atom_steps_per_s": [
+          3489.6,
+          3740.8,
+          3819.3
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 3683.2,
       "environment": {
         "python": "3.12.14",
         "torch": "2.14.0+cu126",
@@ -3712,6 +4282,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 20935.93,
+      "throughput": {
+        "atom_steps_per_s": 194.0,
+        "atom_steps_per_s_stdev": 17.0,
+        "ms_per_step": 518.1,
+        "repeat_atom_steps_per_s": [
+          178.5,
+          191.3,
+          212.1
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 194.0,
       "environment": {
         "python": "3.11.16",
         "torch": "2.7.1+cu126",
@@ -3840,6 +4428,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 1213.99,
+      "throughput": {
+        "atom_steps_per_s": 1661.4,
+        "atom_steps_per_s_stdev": 6.7,
+        "ms_per_step": 60.19,
+        "repeat_atom_steps_per_s": [
+          1668.5,
+          1660.6,
+          1655.2
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 1661.4,
       "environment": {
         "python": "3.11.16",
         "torch": "2.7.1+cu126",
@@ -3970,6 +4576,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 982.1,
+      "throughput": {
+        "atom_steps_per_s": 3171.0,
+        "atom_steps_per_s_stdev": 7.2,
+        "ms_per_step": 31.536,
+        "repeat_atom_steps_per_s": [
+          3169.9,
+          3164.5,
+          3178.7
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 3171.0,
       "environment": {
         "python": "3.12.14",
         "torch": "2.14.0+cu126",
@@ -4118,6 +4742,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 11701.2,
+      "throughput": {
+        "atom_steps_per_s": 264.0,
+        "atom_steps_per_s_stdev": 0.4,
+        "ms_per_step": 378.804,
+        "repeat_atom_steps_per_s": [
+          263.7,
+          263.9,
+          264.4
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 264.0,
       "environment": {
         "python": "3.11.16",
         "torch": "2.7.1+cu126",
@@ -4352,6 +4994,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 2744.36,
+      "throughput": {
+        "atom_steps_per_s": 724.6,
+        "atom_steps_per_s_stdev": 255.5,
+        "ms_per_step": 154.04,
+        "repeat_atom_steps_per_s": [
+          429.6,
+          873.0,
+          871.3
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 724.6,
       "environment": {
         "python": "3.11.16",
         "torch": "2.11.0+cu126",
@@ -4481,6 +5141,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 1200.2,
+      "throughput": {
+        "atom_steps_per_s": 2889.8,
+        "atom_steps_per_s_stdev": 2.7,
+        "ms_per_step": 34.604,
+        "repeat_atom_steps_per_s": [
+          2887.9,
+          2893.0,
+          2888.6
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 2889.8,
       "environment": {
         "python": "3.11.16",
         "torch": "2.7.1+cu126",
@@ -4610,6 +5288,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 1865.0,
+      "throughput": {
+        "atom_steps_per_s": 1769.9,
+        "atom_steps_per_s_stdev": 10.4,
+        "ms_per_step": 56.502,
+        "repeat_atom_steps_per_s": [
+          1761.7,
+          1766.5,
+          1781.5
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 1769.9,
       "environment": {
         "python": "3.11.16",
         "torch": "2.7.1+cu126",
@@ -4739,6 +5435,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 2353.15,
+      "throughput": {
+        "atom_steps_per_s": 1237.4,
+        "atom_steps_per_s_stdev": 26.1,
+        "ms_per_step": 80.839,
+        "repeat_atom_steps_per_s": [
+          1252.8,
+          1207.3,
+          1252.2
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 1237.4,
       "environment": {
         "python": "3.11.16",
         "torch": "2.11.0+cu126",
@@ -4888,6 +5602,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 2839.22,
+      "throughput": {
+        "atom_steps_per_s": 477.8,
+        "atom_steps_per_s_stdev": 4.9,
+        "ms_per_step": 209.318,
+        "repeat_atom_steps_per_s": [
+          472.1,
+          481.2,
+          480.0
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 477.8,
       "environment": {
         "python": "3.12.14",
         "torch": "2.4.0+cu121",
@@ -4984,7 +5716,7 @@
       "python": "3.11",
       "slug": "dpa-4-pro-mptrj",
       "label": "DPA-4-Pro (MPtrj)",
-      "family": "DeePMD",
+      "family": "DPA",
       "packages": [
         "deepmd-kit[torch]@git+https://github.com/wanghan-iapcm/deepmd-kit@3eb005be526f199f5ef67667edc7a91cd5c77f7c",
         "e3nn==0.6.0"
@@ -5020,6 +5752,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 3360.82,
+      "throughput": {
+        "atom_steps_per_s": 669.9,
+        "atom_steps_per_s_stdev": 2.0,
+        "ms_per_step": 149.271,
+        "repeat_atom_steps_per_s": [
+          671.4,
+          670.7,
+          667.6
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 669.9,
       "environment": {
         "python": "3.11.16",
         "torch": "2.11.0+cu128",
@@ -5168,6 +5918,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 4987.62,
+      "throughput": {
+        "atom_steps_per_s": 507.4,
+        "atom_steps_per_s_stdev": 0.2,
+        "ms_per_step": 197.079,
+        "repeat_atom_steps_per_s": [
+          507.2,
+          507.6,
+          507.4
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 507.4,
       "environment": {
         "python": "3.11.16",
         "torch": "2.7.1+cu126",
@@ -5299,6 +6067,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 3558.52,
+      "throughput": {
+        "atom_steps_per_s": 445.0,
+        "atom_steps_per_s_stdev": 0.6,
+        "ms_per_step": 224.709,
+        "repeat_atom_steps_per_s": [
+          444.4,
+          445.5,
+          445.2
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 445.0,
       "environment": {
         "python": "3.12.14",
         "torch": "2.4.0+cu121",
@@ -5428,6 +6214,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 491.48,
+      "throughput": {
+        "atom_steps_per_s": 6133.7,
+        "atom_steps_per_s_stdev": 89.9,
+        "ms_per_step": 16.306,
+        "repeat_atom_steps_per_s": [
+          6237.4,
+          6086.9,
+          6076.7
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 6133.7,
       "environment": {
         "python": "3.11.16",
         "torch": "2.11.0+cu126",
@@ -5577,6 +6381,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 3604.22,
+      "throughput": {
+        "atom_steps_per_s": 454.4,
+        "atom_steps_per_s_stdev": 2.6,
+        "ms_per_step": 220.067,
+        "repeat_atom_steps_per_s": [
+          452.5,
+          453.5,
+          457.3
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 454.4,
       "environment": {
         "python": "3.11.16",
         "torch": "2.4.0+cu121",
@@ -5817,6 +6639,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 1166.33,
+      "throughput": {
+        "atom_steps_per_s": 2729.6,
+        "atom_steps_per_s_stdev": 168.8,
+        "ms_per_step": 36.73,
+        "repeat_atom_steps_per_s": [
+          2553.5,
+          2745.2,
+          2890.0
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 2729.6,
       "environment": {
         "python": "3.11.16",
         "torch": "2.11.0+cu126",
@@ -5965,6 +6805,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 7957.41,
+      "throughput": {
+        "atom_steps_per_s": 367.1,
+        "atom_steps_per_s_stdev": 18.2,
+        "ms_per_step": 272.885,
+        "repeat_atom_steps_per_s": [
+          368.3,
+          384.6,
+          348.3
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 367.1,
       "environment": {
         "python": "3.11.16",
         "torch": "2.7.1+cu126",
@@ -6098,6 +6956,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 3528.96,
+      "throughput": {
+        "atom_steps_per_s": 457.8,
+        "atom_steps_per_s_stdev": 2.0,
+        "ms_per_step": 218.449,
+        "repeat_atom_steps_per_s": [
+          455.5,
+          459.0,
+          458.8
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 457.8,
       "environment": {
         "python": "3.12.14",
         "torch": "2.4.0+cu121",
@@ -6246,6 +7122,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 1393.06,
+      "throughput": {
+        "atom_steps_per_s": 512.3,
+        "atom_steps_per_s_stdev": 0.9,
+        "ms_per_step": 195.207,
+        "repeat_atom_steps_per_s": [
+          511.4,
+          512.2,
+          513.2
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 512.3,
       "environment": {
         "python": "3.11.16",
         "torch": "2.10.0+cu126",
@@ -6411,6 +7305,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 2454.3,
+      "throughput": {
+        "atom_steps_per_s": 1546.9,
+        "atom_steps_per_s_stdev": 12.6,
+        "ms_per_step": 64.647,
+        "repeat_atom_steps_per_s": [
+          1534.2,
+          1559.5,
+          1547.1
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 1546.9,
       "environment": {
         "python": "3.11.16",
         "torch": "2.8.0+cu126",
@@ -6540,6 +7452,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 490.54,
+      "throughput": {
+        "atom_steps_per_s": 6239.5,
+        "atom_steps_per_s_stdev": 352.2,
+        "ms_per_step": 16.06,
+        "repeat_atom_steps_per_s": [
+          6618.1,
+          6178.8,
+          5921.7
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 6239.5,
       "environment": {
         "python": "3.11.16",
         "torch": "2.11.0+cu126",
@@ -6669,6 +7599,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 480.62,
+      "throughput": {
+        "atom_steps_per_s": 6719.4,
+        "atom_steps_per_s_stdev": 120.4,
+        "ms_per_step": 14.885,
+        "repeat_atom_steps_per_s": [
+          6600.1,
+          6717.1,
+          6841.0
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 6719.4,
       "environment": {
         "python": "3.11.16",
         "torch": "2.11.0+cu126",
@@ -6761,139 +7709,6 @@
         "deepmd.calculator"
       ],
       "python": "3.11",
-      "slug": "dpa-4c-plus-omol",
-      "label": "DPA-4C-Plus (OMol)",
-      "family": "DPA",
-      "packages": [
-        "deepmd-kit[torch]==3.2.0"
-      ],
-      "calculator": "deepmd.calculator.DP(model=\"DPA4C-Plus-OMol25-100M-v20260820.pt\")",
-      "notes": "One-hop, compressible DPA-4 at 2.19M parameters, 6.0 A cutoff.  Published OMol-0 MAE 16.77 kcal/mol energy, 1.383 kcal/mol/A force.  The largest DPA-4C.",
-      "precision": "float32",
-      "training_set": [
-        "OMol25"
-      ],
-      "training_set_complete": true,
-      "training_set_note": "Trained on the OMol25 100M split (101,666,280 frames); the DATASETS figure is the round 100M the corpus is published under, so the count is the split, not the whole of OMol25.",
-      "training_heads": [],
-      "evaluated_head": "",
-      "n_training_structures": 100000000,
-      "n_training_materials": 83000000,
-      "datasets": [
-        {
-          "key": "OMol25",
-          "label": "OMol25",
-          "n_structures": 100000000,
-          "n_materials": 83000000,
-          "url": "https://huggingface.co/facebook/OMol25",
-          "notes": "Open Molecules 2025 (Meta FAIR), wB97M-V/def2-TZVPD, 83 elements, systems up to 350 atoms.  Counts are the paper's own rounding -- it states 'more than 100 million' calculations over '~83M unique molecular systems' (arXiv:2505.08762), so treat n_structures as a lower bound."
-        }
-      ],
-      "n_parameters": 2188865,
-      "n_parameters_trainable": 2188865,
-      "n_modules_found": 1,
-      "from_state_dict": false,
-      "n_parameters_source": "runtime",
-      "status": "ok",
-      "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
-      "seed": 0,
-      "wall_seconds": 552.57,
-      "environment": {
-        "python": "3.11.16",
-        "torch": "2.11.0+cu126",
-        "torch_cuda": "12.6",
-        "cuda_available": true,
-        "ase": "3.28.0",
-        "pescert": "0.1.0",
-        "host": "88c715175592",
-        "gpu": {
-          "name": "NVIDIA RTX A5000",
-          "capability": "8.6",
-          "total_memory_GB": 23.55
-        }
-      },
-      "scores": {
-        "conservativeness": 0.8490741462985196,
-        "equivariance": 0.9645522172908096,
-        "smoothness": 0.5307913942573865,
-        "stress_consistency": 0.7139026212767454,
-        "parity": 0.9992113236729555,
-        "representation": 0.9806349697117099,
-        "cross_maxwell": 0.05124906825848278,
-        "betti": 0.9542194324644061,
-        "zero_modes": 0.17918651824686604,
-        "trimer": 0.37126630758769913,
-        "reversibility": 0.9689139082833058,
-        "config_temperature": 0.9175578923056535,
-        "equipartition": 0.5674090063304214,
-        "virial": 0.9181429622820205
-      },
-      "defects": {
-        "conservativeness": 0.009505408631795678,
-        "equivariance": 0.03653428630806964,
-        "smoothness": 1.0364125392604249,
-        "stress_consistency": 0.02147151942844219,
-        "parity": 7.891101833648496e-07,
-        "representation": 0.0196169749459806,
-        "cross_maxwell": null,
-        "betti": 0.0009430862225948382,
-        "zero_modes": 0.00013693805646597683,
-        "trimer": 4.094904297944264,
-        "reversibility": 3.3285142316066325e-05,
-        "config_temperature": 0.08797452269901404,
-        "equipartition": 2.3631800795823072,
-        "virial": 0.0890581528702248
-      },
-      "calls": {
-        "conservativeness": 90,
-        "equivariance": 90,
-        "smoothness": 810,
-        "stress_consistency": 130,
-        "parity": 20,
-        "representation": 200,
-        "cross_maxwell": 2850,
-        "betti": 480,
-        "zero_modes": 2089,
-        "trimer": 1140,
-        "reversibility": 2010,
-        "config_temperature": 25216,
-        "equipartition": 780,
-        "virial": 0
-      },
-      "gates": {
-        "conservativeness": true,
-        "equivariance": true,
-        "smoothness": null,
-        "stress_consistency": true,
-        "parity": true,
-        "representation": true,
-        "cross_maxwell": false,
-        "betti": true,
-        "zero_modes": false,
-        "trimer": true,
-        "reversibility": true,
-        "config_temperature": null,
-        "equipartition": null,
-        "virial": null
-      },
-      "crashes": {
-        "cross_maxwell": {
-          "Be": "OutOfMemoryError: The callable still throws an out-of-memory (OOM) error even when batch size is 1!"
-        }
-      },
-      "skipped": {},
-      "overall": {
-        "arithmetic": 0.7118651263047845,
-        "geometric": 0.57743554847913,
-        "harmonic": 0.3387530224709165
-      },
-      "result_file": "dpa-4c-plus-omol/result.json"
-    },
-    {
-      "imports": [
-        "deepmd.calculator"
-      ],
-      "python": "3.11",
       "slug": "dpa-4c-air-omol",
       "label": "DPA-4C-Air (OMol)",
       "family": "DPA",
@@ -6931,6 +7746,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 554.87,
+      "throughput": {
+        "atom_steps_per_s": 5508.8,
+        "atom_steps_per_s_stdev": 183.8,
+        "ms_per_step": 18.166,
+        "repeat_atom_steps_per_s": [
+          5628.1,
+          5601.2,
+          5297.1
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 5508.8,
       "environment": {
         "python": "3.11.16",
         "torch": "2.11.0+cu126",
@@ -7061,6 +7894,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 735.0,
+      "throughput": {
+        "atom_steps_per_s": 4702.0,
+        "atom_steps_per_s_stdev": 95.5,
+        "ms_per_step": 21.274,
+        "repeat_atom_steps_per_s": [
+          4591.8,
+          4752.3,
+          4761.8
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 4702.0,
       "environment": {
         "python": "3.11.16",
         "torch": "2.10.0+cu126",
@@ -7226,6 +8077,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 2370.26,
+      "throughput": {
+        "atom_steps_per_s": 1549.8,
+        "atom_steps_per_s_stdev": 4.7,
+        "ms_per_step": 64.523,
+        "repeat_atom_steps_per_s": [
+          1545.1,
+          1554.5,
+          1550.0
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 1549.8,
       "environment": {
         "python": "3.11.16",
         "torch": "2.8.0+cu126",
@@ -7355,6 +8224,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 941.64,
+      "throughput": {
+        "atom_steps_per_s": 2440.5,
+        "atom_steps_per_s_stdev": 17.9,
+        "ms_per_step": 40.977,
+        "repeat_atom_steps_per_s": [
+          2421.8,
+          2457.6,
+          2442.1
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 2440.5,
       "environment": {
         "python": "3.11.16",
         "torch": "2.7.1+cu126",
@@ -7484,6 +8371,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 1873.55,
+      "throughput": {
+        "atom_steps_per_s": 1879.2,
+        "atom_steps_per_s_stdev": 39.9,
+        "ms_per_step": 53.231,
+        "repeat_atom_steps_per_s": [
+          1833.1,
+          1901.2,
+          1903.3
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 1879.2,
       "environment": {
         "python": "3.11.16",
         "torch": "2.8.0+cu126",
@@ -7649,6 +8554,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 5398.43,
+      "throughput": {
+        "atom_steps_per_s": 354.5,
+        "atom_steps_per_s_stdev": 0.8,
+        "ms_per_step": 282.079,
+        "repeat_atom_steps_per_s": [
+          353.6,
+          355.0,
+          354.9
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 354.5,
       "environment": {
         "python": "3.11.16",
         "torch": "2.8.0+cu126",
@@ -7779,6 +8702,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 748.63,
+      "throughput": {
+        "atom_steps_per_s": 3653.6,
+        "atom_steps_per_s_stdev": 162.8,
+        "ms_per_step": 27.407,
+        "repeat_atom_steps_per_s": [
+          3672.6,
+          3482.1,
+          3806.0
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 3653.6,
       "environment": {
         "python": "3.11.16",
         "torch": "2.7.1+cu126",
@@ -7909,6 +8850,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 1816.71,
+      "throughput": {
+        "atom_steps_per_s": 2222.4,
+        "atom_steps_per_s_stdev": 72.3,
+        "ms_per_step": 45.029,
+        "repeat_atom_steps_per_s": [
+          2140.2,
+          2250.5,
+          2276.5
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 2222.4,
       "environment": {
         "python": "3.11.16",
         "torch": "2.11.0+cu126",
@@ -8039,6 +8998,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 2167.6,
+      "throughput": {
+        "atom_steps_per_s": 1576.2,
+        "atom_steps_per_s_stdev": 59.6,
+        "ms_per_step": 63.505,
+        "repeat_atom_steps_per_s": [
+          1568.0,
+          1521.2,
+          1639.4
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 1576.2,
       "environment": {
         "python": "3.11.16",
         "torch": "2.11.0+cu126",
@@ -8170,6 +9147,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 490.85,
+      "throughput": {
+        "atom_steps_per_s": 6534.3,
+        "atom_steps_per_s_stdev": 23.1,
+        "ms_per_step": 15.304,
+        "repeat_atom_steps_per_s": [
+          6546.1,
+          6507.7,
+          6549.3
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 6534.3,
       "environment": {
         "python": "3.11.16",
         "torch": "2.7.1+cu126",
@@ -8299,6 +9294,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 729.47,
+      "throughput": {
+        "atom_steps_per_s": 4776.3,
+        "atom_steps_per_s_stdev": 27.4,
+        "ms_per_step": 20.937,
+        "repeat_atom_steps_per_s": [
+          4798.3,
+          4745.6,
+          4784.9
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 4776.3,
       "environment": {
         "python": "3.11.16",
         "torch": "2.8.0+cu126",
@@ -8434,6 +9447,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 505.46,
+      "throughput": {
+        "atom_steps_per_s": 7127.2,
+        "atom_steps_per_s_stdev": 364.8,
+        "ms_per_step": 14.056,
+        "repeat_atom_steps_per_s": [
+          6727.4,
+          7212.2,
+          7441.9
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 7127.2,
       "environment": {
         "python": "3.11.16",
         "torch": "2.7.1+cu126",
@@ -8563,6 +9594,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 1425.98,
+      "throughput": {
+        "atom_steps_per_s": 1318.0,
+        "atom_steps_per_s_stdev": 2.1,
+        "ms_per_step": 75.87,
+        "repeat_atom_steps_per_s": [
+          1316.8,
+          1320.4,
+          1316.9
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 1318.0,
       "environment": {
         "python": "3.11.16",
         "torch": "2.8.0+cu126",
@@ -8698,6 +9747,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 1313.93,
+      "throughput": {
+        "atom_steps_per_s": 1097.1,
+        "atom_steps_per_s_stdev": 7.0,
+        "ms_per_step": 91.151,
+        "repeat_atom_steps_per_s": [
+          1104.9,
+          1094.8,
+          1091.5
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 1097.1,
       "environment": {
         "python": "3.12.14",
         "torch": "2.4.0+cu121",
@@ -8829,6 +9896,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 3328.2,
+      "throughput": {
+        "atom_steps_per_s": 988.2,
+        "atom_steps_per_s_stdev": 12.4,
+        "ms_per_step": 101.204,
+        "repeat_atom_steps_per_s": [
+          1000.4,
+          975.5,
+          988.6
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 988.2,
       "environment": {
         "python": "3.11.16",
         "torch": "2.8.0+cu126",
@@ -8982,6 +10067,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 1932.15,
+      "throughput": {
+        "atom_steps_per_s": 1023.4,
+        "atom_steps_per_s_stdev": 10.4,
+        "ms_per_step": 97.718,
+        "repeat_atom_steps_per_s": [
+          1031.5,
+          1027.1,
+          1011.7
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 1023.4,
       "environment": {
         "python": "3.12.14",
         "torch": "2.4.0+cu121",
@@ -9114,6 +10217,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 2091.05,
+      "throughput": {
+        "atom_steps_per_s": 1058.5,
+        "atom_steps_per_s_stdev": 2.8,
+        "ms_per_step": 94.477,
+        "repeat_atom_steps_per_s": [
+          1057.7,
+          1056.1,
+          1061.6
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 1058.5,
       "environment": {
         "python": "3.11.16",
         "torch": "2.4.1+cu121",
@@ -9247,6 +10368,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 317.0,
+      "throughput": {
+        "atom_steps_per_s": 11136.0,
+        "atom_steps_per_s_stdev": 26.3,
+        "ms_per_step": 8.98,
+        "repeat_atom_steps_per_s": [
+          11105.9,
+          11147.5,
+          11154.5
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 11136.0,
       "environment": {
         "python": "3.11.16",
         "torch": "2.7.1+cu126",
@@ -9376,6 +10515,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 1182.65,
+      "throughput": {
+        "atom_steps_per_s": 3042.9,
+        "atom_steps_per_s_stdev": 0.4,
+        "ms_per_step": 32.863,
+        "repeat_atom_steps_per_s": [
+          3043.2,
+          3042.5,
+          3043.0
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 3042.9,
       "environment": {
         "python": "3.11.16",
         "torch": "2.8.0+cu126",
@@ -9520,6 +10677,24 @@
       "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
       "seed": 0,
       "wall_seconds": 337.45,
+      "throughput": {
+        "atom_steps_per_s": 12770.0,
+        "atom_steps_per_s_stdev": 12.9,
+        "ms_per_step": 7.831,
+        "repeat_atom_steps_per_s": [
+          12755.4,
+          12775.0,
+          12779.7
+        ],
+        "n_atoms": 100,
+        "timed_steps": 100,
+        "warmup_steps": 20,
+        "n_repeats": 3,
+        "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+        "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+        "status": "ok"
+      },
+      "atom_steps_per_s": 12770.0,
       "environment": {
         "python": "3.11.16",
         "torch": "2.7.1+cu126",

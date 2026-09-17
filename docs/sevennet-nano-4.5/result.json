@@ -1,32 +1,37 @@
 {
   "schema": "pescert-run/1",
   "model": {
-    "slug": "pet-oam-xl",
-    "label": "PET-OAM-XL",
-    "family": "PET",
+    "slug": "sevennet-nano-4.5",
+    "label": "SevenNet-Nano-4.5",
+    "family": "SevenNet",
     "packages": [
-      "metatrain==2026.2.1",
-      "metatomic-torch==0.1.11"
+      "sevenn@git+https://github.com/MDIL-SNU/SevenNet@8d9905cc4f4b7ca93be02b37a263785add53c759"
     ],
-    "calculator": "metatomic.torch.ase_calculator.MetatomicCalculator(\"pet-oam-xl.pt\", device=\"cuda\")",
-    "notes": "Local checkpoint (2.8 GB); mounted read-only into the container.",
+    "calculator": "sevenn.calculator.SevenNetCalculator(model=\"7net-nano-4.5\", device=\"cuda\")",
+    "notes": "The same 105k-parameter SevenNet-Omni student as sevennet-nano-6.0 at the narrowest of its four cutoffs (4.5 A).  Identical weights count and architecture, so the 4.5/6.0 pair isolates receptive-field radius with everything else held fixed.",
+    "imports": [
+      "sevenn.calculator"
+    ],
+    "python": "3.11",
     "precision": "float32",
     "training_set": [
-      "OMat24",
-      "sAlex",
-      "MPtrj"
+      "MPtrj",
+      "sAlex"
     ],
-    "training_set_complete": true,
-    "n_training_structures": 112852745,
-    "n_training_materials": 6601135,
+    "training_set_complete": false,
+    "training_set_note": "A distillation student, so it never saw these labels directly: it was trained against the SevenNet-Omni 'mpa' head, whose own corpus is MPtrj + sAlex.  The structure pool used for the distillation is not stated in the release, so the two corpora describe the teacher, not this checkpoint, and no structure count is claimed.",
+    "training_heads": [],
+    "evaluated_head": "",
+    "n_training_structures": null,
+    "n_training_materials": null,
     "datasets": [
       {
-        "key": "OMat24",
-        "label": "OMat24",
-        "n_structures": 100824585,
-        "n_materials": 3227606,
-        "url": "https://huggingface.co/datasets/fairchem/OMAT24#omat24-dataset",
-        "notes": "Open Materials 2024 (Meta FAIR): >100M structures from perturbing Alexandria structures."
+        "key": "MPtrj",
+        "label": "MPtrj",
+        "n_structures": 1580395,
+        "n_materials": 145923,
+        "url": "https://figshare.com/articles/dataset/23713842",
+        "notes": "Materials Project relaxation trajectories, cleaned and subsampled to about every 10th ionic step; created for CHGNet."
       },
       {
         "key": "sAlex",
@@ -35,24 +40,16 @@
         "n_materials": 3227606,
         "url": "https://huggingface.co/datasets/fairchem/OMAT24#salex-dataset",
         "notes": "Alexandria subsampled by FAIR, filtered to remove prototype overlap with the Matbench Discovery WBM test set."
-      },
-      {
-        "key": "MPtrj",
-        "label": "MPtrj",
-        "n_structures": 1580395,
-        "n_materials": 145923,
-        "url": "https://figshare.com/articles/dataset/23713842",
-        "notes": "Materials Project relaxation trajectories, cleaned and subsampled to about every 10th ionic step; created for CHGNet."
       }
     ],
-    "n_parameters": 730128666,
-    "n_parameters_trainable": 0,
+    "n_parameters": 103401,
+    "n_parameters_trainable": 103279,
     "n_modules_found": 1,
     "from_state_dict": false,
     "n_parameters_source": "runtime"
   },
   "run": {
-    "started": "2026-09-10T19:32:14+00:00",
+    "started": "2026-09-17T01:55:08+00:00",
     "elements": "Li, Be, B, C, Na, Mg, Al, Si, P, S",
     "seed": 0,
     "budget_per_eval": null,
@@ -60,47 +57,47 @@
     "evals": "all",
     "environment": {
       "python": "3.11.16",
-      "torch": "2.10.0+cu126",
+      "torch": "2.7.1+cu126",
       "torch_cuda": "12.6",
       "cuda_available": true,
       "ase": "3.28.0",
       "pescert": "0.1.0",
-      "host": "060562143e9e",
+      "host": "985d85f36fc8",
       "gpu": {
         "name": "NVIDIA RTX A5000",
         "capability": "8.6",
         "total_memory_GB": 23.55
       }
     },
-    "calculator_class": "MetatomicCalculator",
-    "load_seconds": 7.22,
-    "suite_seconds": 1385.81,
-    "wall_seconds": 1393.06
+    "calculator_class": "SevenNetCalculator",
+    "load_seconds": 5.08,
+    "suite_seconds": 687.52,
+    "wall_seconds": 692.62
   },
   "aggregate": {
-    "overall": 0.7417084942821547,
+    "overall": 0.8795409395304928,
     "overall_method": "arithmetic",
     "sub_scores": {
-      "conservativeness": 0.9966587526854968,
-      "equivariance": 2.258600011413206e-15,
-      "smoothness": 0.9922700318721107,
-      "stress_consistency": 0.804634794714049,
-      "parity": 0.3010868878714691,
-      "representation": 0.9956016837013614,
-      "cross_maxwell": 0.3470208477797588,
-      "betti": 0.9947778589370962,
-      "zero_modes": 0.609002599361951,
-      "trimer": 0.6158736377833801,
-      "reversibility": 0.998139431448658,
-      "config_temperature": 0.910989237448058,
-      "equipartition": 0.8885213929157931,
-      "virial": 0.9293417634309801
+      "conservativeness": 0.9609621501690546,
+      "equivariance": 0.9952994205073399,
+      "smoothness": 0.9943367903781754,
+      "stress_consistency": 0.6864408442709669,
+      "parity": 0.9997633978330291,
+      "representation": 0.998646241591717,
+      "cross_maxwell": 0.5227044054635777,
+      "betti": 0.9926450451605607,
+      "zero_modes": 0.6277898828552797,
+      "trimer": 0.8773689997182638,
+      "reversibility": 0.9995390650602121,
+      "config_temperature": 0.9120874770232927,
+      "equipartition": 0.8107407856004298,
+      "virial": 0.9352486477949992
     },
     "gates": {
       "conservativeness": true,
-      "equivariance": false,
-      "stress_consistency": true,
-      "parity": false,
+      "equivariance": true,
+      "stress_consistency": false,
+      "parity": true,
       "representation": true,
       "cross_maxwell": false,
       "betti": true,
@@ -108,9 +105,9 @@
       "trimer": true,
       "reversibility": true
     },
-    "gates_passed": 6,
+    "gates_passed": 7,
     "gates_total": 10,
-    "n_total_calls": 38412
+    "n_total_calls": 35278
   },
   "metadata": {
     "elements": [
@@ -126,18 +123,18 @@
       "S"
     ],
     "per_element_overall": {
-      "Li": 0.7504542796816522,
-      "Be": 0.7989161222240645,
-      "B": 0.7782619039324034,
-      "C": 0.727786199161124,
-      "Na": 0.7376201096841456,
-      "Mg": 0.7342403753947283,
-      "Al": 0.7516454667520185,
-      "Si": 0.8014643541612223,
-      "P": 0.7037263900723477,
-      "S": 0.6310859638448648
+      "Li": 0.9770138368043992,
+      "Be": 0.942430073684883,
+      "B": 0.7810334957161402,
+      "C": 0.8128253377841934,
+      "Na": 0.9450732096754356,
+      "Mg": 0.9273478559628162,
+      "Al": 0.8884675721792653,
+      "Si": 0.8189396386016977,
+      "P": 0.8674258877731538,
+      "S": 0.8348524871229435
     },
-    "mean_of_element_overalls": 0.7415201164908571,
+    "mean_of_element_overalls": 0.879540939530493,
     "evals": [
       "conservativeness",
       "equivariance",
@@ -154,15 +151,15 @@
       "equipartition",
       "virial"
     ],
-    "n_total_calls": 38412
+    "n_total_calls": 35278
   },
   "results": [
     {
       "name": "conservativeness",
       "section": "Self-consistency",
       "target": 0.0,
-      "raw_defect": 0.00016820617685996519,
-      "score": 0.9966587526854968,
+      "raw_defect": 0.0021214807759242183,
+      "score": 0.9609621501690546,
       "n_model_calls": 90,
       "gate": true,
       "crashed": {}
@@ -171,18 +168,18 @@
       "name": "equivariance",
       "section": "Symmetry & invariance",
       "target": 0.0,
-      "raw_defect": 188.1576935262962,
-      "score": 2.258600011413206e-15,
+      "raw_defect": 0.0047154360314079075,
+      "score": 0.9952994205073399,
       "n_model_calls": 90,
-      "gate": false,
+      "gate": true,
       "crashed": {}
     },
     {
       "name": "smoothness",
       "section": "Regularity",
       "target": 0.0,
-      "raw_defect": 0.007893022495307855,
-      "score": 0.9922700318721107,
+      "raw_defect": 0.005720664496000993,
+      "score": 0.9943367903781754,
       "n_model_calls": 810,
       "gate": null,
       "crashed": {}
@@ -191,28 +188,28 @@
       "name": "stress_consistency",
       "section": "Self-consistency",
       "target": 0.0,
-      "raw_defect": 0.013441241572640907,
-      "score": 0.804634794714049,
-      "n_model_calls": 118,
-      "gate": true,
+      "raw_defect": 0.06649651188123071,
+      "score": 0.6864408442709669,
+      "n_model_calls": 130,
+      "gate": false,
       "crashed": {}
     },
     {
       "name": "parity",
       "section": "Symmetry & invariance",
       "target": 0.0,
-      "raw_defect": 0.0022873151550119124,
-      "score": 0.3010868878714691,
+      "raw_defect": 2.3670995621734617e-07,
+      "score": 0.9997633978330291,
       "n_model_calls": 20,
-      "gate": false,
+      "gate": true,
       "crashed": {}
     },
     {
       "name": "representation",
       "section": "Symmetry & invariance",
       "target": 0.0,
-      "raw_defect": 0.0044135501456784325,
-      "score": 0.9956016837013614,
+      "raw_defect": 0.001355402539162158,
+      "score": 0.998646241591717,
       "n_model_calls": 200,
       "gate": true,
       "crashed": {}
@@ -221,9 +218,9 @@
       "name": "cross_maxwell",
       "section": "Self-consistency",
       "target": 0.0,
-      "raw_defect": 0.08821896282740757,
-      "score": 0.3470208477797588,
-      "n_model_calls": 3784,
+      "raw_defect": 0.044490995048809545,
+      "score": 0.5227044054635777,
+      "n_model_calls": 2632,
       "gate": false,
       "crashed": {}
     },
@@ -231,8 +228,8 @@
       "name": "betti",
       "section": "Self-consistency",
       "target": 0.0,
-      "raw_defect": 0.00010519219752534836,
-      "score": 0.9947778589370962,
+      "raw_defect": 0.0001484748565030543,
+      "score": 0.9926450451605607,
       "n_model_calls": 480,
       "gate": true,
       "crashed": {}
@@ -241,9 +238,9 @@
       "name": "zero_modes",
       "section": "Symmetry & invariance",
       "target": 0.0,
-      "raw_defect": 0.0010949240153890227,
-      "score": 0.609002599361951,
-      "n_model_calls": 2701,
+      "raw_defect": 6.087360102721453e-05,
+      "score": 0.6277898828552797,
+      "n_model_calls": 1948,
       "gate": false,
       "crashed": {}
     },
@@ -251,8 +248,8 @@
       "name": "trimer",
       "section": "Symmetry & invariance",
       "target": 0.0,
-      "raw_defect": 0.4443615646919666,
-      "score": 0.6158736377833801,
+      "raw_defect": 4.077864827330626,
+      "score": 0.8773689997182638,
       "n_model_calls": 1140,
       "gate": true,
       "crashed": {}
@@ -261,8 +258,8 @@
       "name": "reversibility",
       "section": "Self-consistency",
       "target": 0.0,
-      "raw_defect": 1.870898900069142e-06,
-      "score": 0.998139431448658,
+      "raw_defect": 4.6135327598765916e-07,
+      "score": 0.9995390650602121,
       "n_model_calls": 2010,
       "gate": true,
       "crashed": {}
@@ -271,9 +268,9 @@
       "name": "config_temperature",
       "section": "Statistical mechanics",
       "target": 1.0,
-      "raw_defect": 0.09383594807856492,
-      "score": 0.910989237448058,
-      "n_model_calls": 26189,
+      "raw_defect": 0.09357656937300296,
+      "score": 0.9120874770232927,
+      "n_model_calls": 24948,
       "gate": null,
       "crashed": {}
     },
@@ -281,8 +278,8 @@
       "name": "equipartition",
       "section": "Statistical mechanics",
       "target": 1.0,
-      "raw_defect": 0.11962660789015997,
-      "score": 0.8885213929157931,
+      "raw_defect": 0.21753077317483527,
+      "score": 0.8107407856004298,
       "n_model_calls": 780,
       "gate": null,
       "crashed": {}
@@ -291,8 +288,8 @@
       "name": "virial",
       "section": "Statistical mechanics",
       "target": 1.0,
-      "raw_defect": 0.07504106008320462,
-      "score": 0.9293417634309801,
+      "raw_defect": 0.06870737762040405,
+      "score": 0.9352486477949992,
       "n_model_calls": 0,
       "gate": null,
       "crashed": {}
@@ -301,13 +298,13 @@
   "crashes": {},
   "status": "ok",
   "throughput": {
-    "atom_steps_per_s": 512.3,
-    "atom_steps_per_s_stdev": 0.9,
-    "ms_per_step": 195.207,
+    "atom_steps_per_s": 4709.1,
+    "atom_steps_per_s_stdev": 366.1,
+    "ms_per_step": 21.323,
     "repeat_atom_steps_per_s": [
-      511.4,
-      512.2,
-      513.2
+      4315.2,
+      4773.0,
+      5039.0
     ],
     "n_atoms": 100,
     "timed_steps": 100,

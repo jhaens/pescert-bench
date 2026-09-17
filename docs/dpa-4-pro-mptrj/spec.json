@@ -1,7 +1,7 @@
 {
   "slug": "dpa-4-pro-mptrj",
   "label": "DPA-4-Pro (MPtrj)",
-  "family": "DeePMD",
+  "family": "DPA",
   "packages": [
     "deepmd-kit[torch]@git+https://github.com/wanghan-iapcm/deepmd-kit@3eb005be526f199f5ef67667edc7a91cd5c77f7c",
     "e3nn==0.6.0"

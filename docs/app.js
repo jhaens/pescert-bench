@@ -5,13 +5,14 @@
  * column per certification probe).  Per-element breakdowns are pulled lazily
  * from each model's `report_full.json` only when a cell is opened.
  *
- * Data root defaults to the page's own directory; override with `?root=<url>`.
+ * Data root defaults to the parent directory (the folder holding index.json and
+ * the per-model folders); override with `?root=<url>`.
  * ========================================================================== */
 
 'use strict';
 
 const QS   = new URLSearchParams(location.search);
-const ROOT = (QS.get('root') || '.').replace(/\/$/, '');
+const ROOT = (QS.get('root') || '..').replace(/\/$/, '');
 
 /* ---------------------------------------------------------------- utilities */
 
@@ -39,6 +40,14 @@ function sci(x, digits = 1) {
 }
 
 /** Score in [0,1] -> short string that never rounds a near-perfect score to 1. */
+/**
+ * Score as a plain 4-decimal number.
+ *
+ * Truncated rather than rounded, so a score below 1 never prints as "1.0000": at this
+ * width almost every symmetry probe would round up, and a cell claiming an exact
+ * identity the model does not satisfy is worse than a slightly pessimistic digit.
+ * Full precision is in the cell card, and the Defect view shows the raw residual.
+ */
 function fmtScore(s) {
   if (!isNum(s)) return '-';
   if (s >= 1) return '1.0000';
@@ -46,8 +55,11 @@ function fmtScore(s) {
   return (Math.floor(s * 1e4) / 1e4).toFixed(4);
 }
 
-/** -log10(1 - score); gives bars and colour scales a usable dynamic range.
- *  Never shown as a number. */
+/**
+ * -log10(1 - score), used only to give bars and colour scales a usable dynamic range:
+ * scores cluster against 1, so a linear mapping would put almost every bar at full
+ * length. It is never shown as a number.
+ */
 function nines(s) {
   if (!isNum(s)) return NaN;
   if (s <= 0) return 0;
@@ -91,8 +103,18 @@ function combine(scores, method) {
 
 /* ----------------------------------------------------------- colour palette */
 
-/* Lifted from `_scripts/plot_heatmap.py` so the page and the paper figure agree.
- * Probe columns take their section's ramp; the overall column uses plasma. */
+/*
+ * Lifted from `_scripts/plot_heatmap.py` so the page and the paper figure agree.
+ *
+ * Probe columns are tinted by the colour of the section their probe belongs to, using
+ * seaborn's `light_palette` ramp (a pale neutral up to the section colour). Dark mode
+ * uses `dark_palette` instead, which keeps the same hue but starts from a dark neutral
+ * so the cells do not turn the table into a bright island. Both ramps are a linear RGB
+ * blend between their endpoints, which is why two stops reproduce seaborn to within one
+ * 8-bit level; the endpoints below came out of seaborn itself.
+ *
+ * The overall column uses matplotlib's plasma, sampled at 64 anchors and interpolated.
+ */
 const SECTION_RAMP = {
   "Symmetry & invariance": { base: '#2F6DB0', light: ['#f0f1f2', '#2f6db0'], dark: ['#24262a', '#2f6db0'] },
   "Self-consistency": { base: '#E07B1A', light: ['#f3f0ef', '#e07b1a'], dark: ['#2b2422', '#e07b1a'] },
@@ -178,6 +200,8 @@ const famColor = (fam) => FAM_COLORS[FAMILIES.indexOf(fam) % FAM_COLORS.length];
 
 /* ------------------------------------------------------------------- state */
 
+/* Every model-detail column starts hidden: the probe columns are the table, and the
+   details are one click away on the "Model details" button. */
 const DEFAULT_OFF_META = ['family', 'params', 'dataset', 'nstruct', 'precision', 'calls', 'wall'];
 /* What the button turns on, rather than everything at once. */
 const META_ON_DEFAULT = ['params', 'dataset', 'precision'];
@@ -217,15 +241,23 @@ const META_COLS = [
   { key: 'calls',     label: 'Calls',     type: 'num',  title: 'Total single-point model calls used by the suite',
     get: (m) => m._calls, fmt: fmtSI },
   { key: 'wall',      label: 'Wall',      type: 'num',  title: 'Wall-clock time for the full suite run (hardware-dependent)',
-    get: (m) => m.wall_seconds, fmt: fmtDuration }
+    get: (m) => m.wall_seconds, fmt: fmtDuration },
+  { key: 'speed',     label: 'atom-steps/s', type: 'num',
+    title: 'MD throughput: 100-atom NaCl, NVE velocity Verlet, 20 warm-up steps then '
+         + '3 x 100 timed steps, mean of the three rates. Measured separately from the '
+         + 'suite so it compares models rather than the probe mix.',
+    get: (m) => m.atom_steps_per_s, fmt: fmtSI }
 ];
 
 /* ------------------------------------------------------------- data loading */
 
 /**
  * JSON.parse, tolerating the bare `Infinity` / `-Infinity` / `NaN` literals that
- * Python's json.dump writes.  They become `null`, which every consumer here reads
- * as "not measured".
+ * Python's json.dump writes by default.  They are not valid JSON, so a browser
+ * rejects the whole file over them; a probe that diverged or returned NaN would
+ * otherwise take the entire dashboard down.  They become `null`, which every
+ * consumer here already reads as "not measured".  The scan tracks string state
+ * so the same words inside a crash message are left alone.
  */
 function parseLooseJSON(text) {
   try {
@@ -345,6 +377,8 @@ function buildView() {
     return { m, overall: o[S.mean], overalls: o };
   });
 
+  /* Rank follows the overall score of the *filtered* set, whatever the table is sorted
+     by. Reference rows are not learned models and are left out of the numbering. */
   const byOverall = rows.filter((r) => !r.m._reference)
     .sort((a, b) => (b.overall - a.overall) || a.m.label.localeCompare(b.m.label));
   byOverall.forEach((r, i) => { r.rank = i + 1; });
@@ -395,7 +429,14 @@ function buildView() {
   return rows;
 }
 
-/** Colour weight in [0,1] for one score inside one column. */
+/**
+ * Colour weight in [0,1] for one score inside one column.
+ *
+ * 'score' is the default and matches the paper figure: the ramp spans the full [0,1]
+ * score range, so a pale cell means a low score. The ramps run from near-white, and
+ * under a per-column normalisation the weakest model in a column would be painted
+ * near-white even at 0.9998, which reads as missing data rather than as a rank.
+ */
 function colorT(score, colKey) {
   if (S.color === 'off' || !isNum(score)) return NaN;
   if (S.color === 'score') return clamp(score, 0, 1);
@@ -448,38 +489,32 @@ function renderTable() {
     return;
   }
 
-  /* --- column widths ------------------------------------------------------ */
-  let head = '<colgroup>'
-    + '<col class="w-rank"><col class="w-model"><col class="w-overall">'
-    + metas.map((c) => `<col class="w-meta w-meta-${esc(c.key)}">`).join('')
-    + groups.map((g) => g.probes.map(() => '<col class="w-pcol">').join('')).join('')
-    + '</colgroup>';
-
   /* --- header ------------------------------------------------------------ */
-  head += '<thead><tr class="groups">';
+  let head = '<thead><tr class="groups">';
   head += `<th class="sticky-l c-rank"></th><th class="sticky-l c-model"></th>`;
   head += `<th class="grp"><span>Overall</span></th>`;
   if (metas.length) head += `<th class="grp" colspan="${metas.length}"><span>Model</span></th>`;
   for (const g of groups) {
     const sc = (SECTION_RAMP[g.section] || {}).base;
     head += `<th class="grp" colspan="${g.probes.length}" data-section="${esc(g.section)}"
-              title="${esc(g.section)} &mdash; click for what this section covers" style="cursor:pointer">
+              title="Click for what this section covers" style="cursor:pointer">
               <span${sc ? ` style="color:${sc};border-color:${sc}33"` : ''}>${esc(g.section)}</span></th>`;
   }
   head += '</tr><tr class="cols">';
   head += `<th class="sticky-l c-rank" data-sort="rank" tabindex="0" role="button" title="Position by overall score inside the current filter">
              <span class="colname">#<span class="info" data-pop="rank">i</span></span></th>`;
   head += `<th class="sticky-l c-model" data-sort="model" tabindex="0" role="button">Model ${sortMark('model')}</th>`;
-  head += `<th class="c-overall" data-sort="overall" tabindex="0" role="button" title="${esc(S.mean)} mean over the ${activeProbes().length} enabled probes">
-             <span class="colname">Overall${sortMark('overall')}</span></th>`;
+  head += `<th data-sort="overall" tabindex="0" role="button" title="${esc(S.mean)} mean over the ${activeProbes().length} enabled probes">
+             <span class="colname">Overall</span> ${sortMark('overall')}</th>`;
   for (const c of metas) {
-    head += `<th class="c-meta c-meta-${esc(c.key)}" data-sort="${c.key}" tabindex="0" role="button" title="${esc(c.title)}">${esc(c.label)} ${sortMark(c.key)}</th>`;
+    head += `<th data-sort="${c.key}" tabindex="0" role="button" title="${esc(c.title)}">${esc(c.label)} ${sortMark(c.key)}</th>`;
   }
   for (const g of groups) {
     for (const p of g.probes) {
       const doc = (PROBEDOC.probes || {})[p.name] || {};
-      head += `<th class="pcol" data-sort="${esc(p.name)}" tabindex="0" role="button" title="${esc(doc.title || p.name)} &mdash; ${esc(doc.catches || '')} Target ${p.target}">
-                 <span class="colname">${esc(doc.short || doc.title || p.name)}<span class="info" data-probe="${esc(p.name)}">i</span>${sortMark(p.name)}</span></th>`;
+      head += `<th data-sort="${esc(p.name)}" tabindex="0" role="button" title="${esc(doc.catches || p.name)}. Target ${p.target}">
+                 <span class="colname">${esc(doc.title || p.name)}
+                   <span class="info" data-probe="${esc(p.name)}">i</span></span> ${sortMark(p.name)}</th>`;
     }
   }
   head += '</tr></thead>';
@@ -508,13 +543,15 @@ function renderTable() {
       </div></td>`;
 
     const oc = cellColor(colorT(r.overall, 'overall'), 'overall');
-    tds += `<td class="cell overall c-overall"><span class="v" data-overall="${esc(m.slug)}"
+    tds += `<td class="cell overall"><span class="v" data-overall="${esc(m.slug)}"
               title="${esc(S.mean)} mean over ${activeProbes().length} probes. Click for the model card"
               style="${oc ? `background:${oc.bg};color:${oc.fg}` : ''}">${fmtScore(r.overall)}</span></td>`;
 
     for (const c of metas) {
       const v = c.get(m);
       if (c.key === 'dataset') {
+        /* a 13-set multi-task model would otherwise push every probe column off
+           screen; the rest are one click away in the model card */
         const all = m.training_set || [];
         const MAXC = 3;
         const chips = all.slice(0, MAXC).map((k) =>
@@ -522,11 +559,11 @@ function renderTable() {
           .concat(all.length > MAXC
             ? [`<span class="chip link" data-model="${esc(m.slug)}" title="${esc(all.slice(MAXC).join(', '))}">+${all.length - MAXC}</span>`]
             : []).join(' ');
-        tds += `<td class="pad c-meta c-meta-${esc(c.key)}" style="text-align:left">${chips || '<span style="color:var(--fg-faint)">-</span>'}</td>`;
+        tds += `<td class="pad" style="text-align:left">${chips || '<span style="color:var(--fg-faint)">-</span>'}</td>`;
       } else if (c.type === 'num') {
-        tds += `<td class="pad c-meta c-meta-${esc(c.key)}">${isNum(v) ? esc((c.fmt || String)(v)) : '<span style="color:var(--fg-faint)">-</span>'}</td>`;
+        tds += `<td class="pad">${isNum(v) ? esc((c.fmt || String)(v)) : '<span style="color:var(--fg-faint)">-</span>'}</td>`;
       } else {
-        tds += `<td class="pad c-meta c-meta-${esc(c.key)}" style="text-align:left;color:var(--fg-muted)">${esc(v || '-')}</td>`;
+        tds += `<td class="pad" style="text-align:left;color:var(--fg-muted)">${esc(v || '-')}</td>`;
       }
     }
 
@@ -545,7 +582,6 @@ function renderTable() {
           : !isNum(s) ? 'not measured'
           : `score ${s.toPrecision(8)}, defect ${sci(m.defects[p.name], 2)}`;
         const col = cellColor(colorT(s, p.name), p.name);
-        cls.push('pcol');
         tds += `<td class="${cls.join(' ')}"><span class="v" data-cell="${esc(m.slug)}|${esc(p.name)}"
                  title="${esc(tip)}" style="${col ? `background:${col.bg};color:${col.fg}` : ''}">${txt}</span></td>`;
       }
@@ -561,26 +597,7 @@ function renderTable() {
     </td></tr></tfoot>`;
 
   t.innerHTML = head + `<tbody>${body}</tbody>` + foot;
-  applyTableWidth();
   renderFilterBar();
-}
-
-function applyTableWidth() {
-  const wrap = $('#tablewrap');
-  if (!wrap) return;
-  const cs = getComputedStyle(document.documentElement);
-  const px = (n) => parseFloat(cs.getPropertyValue(n)) || 0;
-  let w = 2;                                   /* the card's own 1px borders */
-  for (const col of $$('colgroup col', wrap)) {
-    const c = col.classList;
-    w += c.contains('w-rank')         ? px('--w-rank')
-       : c.contains('w-model')        ? px('--w-model')
-       : c.contains('w-overall')      ? px('--w-overall')
-       : c.contains('w-meta-dataset') ? px('--w-meta-dataset')
-       : c.contains('w-meta')         ? px('--w-meta')
-       :                                px('--w-pcol');
-  }
-  wrap.style.setProperty('--table-w', `${w}px`);
 }
 
 /* ============================================================================
@@ -598,6 +615,8 @@ function placePop() {
   if (!popEl || !popAnchor) return;
   const a = popAnchor.getBoundingClientRect();
   if (a.bottom < 0 || a.top > innerHeight || a.right < 0 || a.left > innerWidth) { closePop(); return; }
+  /* offsetWidth/Height, not getBoundingClientRect: the entry animation scales the
+     card, and the scaled box would under-report its size and defeat the clamp. */
   const pw = popEl.offsetWidth, ph = popEl.offsetHeight;
   const pad = 10;
   let left = a.left;
@@ -664,10 +683,13 @@ const ICON = {
   plus:     _svg('<path d="M8 3.5v9M3.5 8h9"/>')
 };
 
-/* ============================================================================
- * Reproducing a row's calculator on an ``ase.Atoms``, from the run's own spec
- * ========================================================================== */
-
+/**
+ * The few lines that reproduce this row's calculator on an ``ase.Atoms``.
+ *
+ * Everything comes from the run's own spec -- the pinned packages, the modules that
+ * have to be imported before the expression can be evaluated, and the expression
+ * itself -- so the snippet is what actually produced the numbers, not a paraphrase.
+ */
 /**
  * Replace absolute filesystem paths inside a calculator expression with just the file
  * name. The run needs the full path on the machine it ran on; a reader does not, and
@@ -867,6 +889,9 @@ function modelCard(anchor, slug) {
         <dt>seed</dt><dd>${esc(String(m.seed))}</dd>
         <dt>model calls</dt><dd>${m._calls.toLocaleString('en-US')}</dd>
         <dt>wall time</dt><dd>${fmtDuration(m.wall_seconds)}</dd>
+        <dt>throughput</dt><dd>${isNum(m.atom_steps_per_s)
+          ? m.atom_steps_per_s.toLocaleString('en-US', { maximumFractionDigits: 0 })
+            + ' atom-steps/s' : '-'}</dd>
         <dt>elements</dt><dd class="txt">${esc(m.elements)}</dd>
       </dl>
     </div>
@@ -1232,17 +1257,25 @@ function renderFilterBar() {
 const SC_LABELS = {
   n_parameters: 'parameters',
   n_training_structures: 'training structures',
-  wall_seconds: 'wall time (s)'
+  wall_seconds: 'wall time (s)',
+  atom_steps_per_s: 'throughput (atom-steps/s)'
 };
 
-/* "size" is score against parameter count; "data" is score against training-set
-   size, with circle *area* proportional to the parameter count. */
+/* Two charts. "size" is score against parameter count; "data" is score against
+   training-set size with circle *area* proportional to the parameter count, so the
+   two axes of "how big is this model" can be read at once. */
 const CHARTS = {
   size: { x: 'n_parameters', r: null },
   data: { x: 'n_training_structures', r: 'n_parameters' },
-  time: { x: 'wall_seconds', r: 'n_parameters', gpuOnly: true,
-          note: 'GPU runs only, all on one RTX A5000. Call counts are near-constant '
-              + 'across models, so this reads as cost per model call.' }
+  /* Throughput rather than suite wall time: the suite's probes drive the model in
+     different ways (finite differences, strained cells, isolated fragments), so its wall
+     time partly measures the probe mix. This is one MD step on one fixed 100-atom NaCl
+     cell, identical for every model, and it points the useful way round -- right is
+     faster. CPU-only runs are left out because they compare nothing. */
+  time: { x: 'atom_steps_per_s', r: 'n_parameters', gpuOnly: true,
+          note: 'GPU runs only, all on one RTX A5000. 100-atom NaCl, NVE velocity '
+              + 'Verlet: 20 warm-up steps, then 3 x 100 timed steps, mean of the three. '
+              + 'Right is faster.' }
 };
 
 const onGPU = (m) => !!((m.environment || {}).gpu || {}).name;
@@ -1524,11 +1557,7 @@ function wire() {
     refresh({ menu: true });
   };
   $('#btn-csv').onclick  = exportCSV;
-  $('#btn-scatter').onclick = () => {
-    S.scatter = !S.scatter;
-    refresh();
-    if (S.scatter) $('#scatter-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  };
+  $('#btn-scatter').onclick = () => { S.scatter = !S.scatter; refresh(); };
   $('#help').onclick = (e) => helpCard(e.currentTarget);
   $('#btn-reset').onclick = () => {
     S.search = ''; $('#search').value = '';
@@ -1747,6 +1776,9 @@ function wire() {
   });
 
   /* --- global ------------------------------------------------------------ */
+  /* Where a click landed has to be recorded on the *capture* pass: the handlers
+     below re-render, which detaches e.target from the document, and a detached
+     node's .closest() no longer finds the menu or popover it came from. */
   const OPENERS = '[data-cell],[data-model],[data-overall],[data-dataset],[data-probe],[data-pop],th.grp,#help,#btn-request';
   document.addEventListener('click', (e) => {
     e._inMenu = !!(e.target.closest && (e.target.closest('.menu') || e.target.closest('.menu-host')));
@@ -1770,22 +1802,12 @@ function wire() {
       e.preventDefault(); $('#search').focus(); $('#search').select();
     }
   });
-  addEventListener('resize', () => { applyTableWidth(); placePop(); if (S.scatter) renderScatter(); });
-  addEventListener('scroll', () => {
-    $('#tablewrap').classList.toggle('scrolled', (window.scrollX || 0) > 2);
+  addEventListener('resize', () => { placePop(); if (S.scatter) renderScatter(); });
+  $('#tablewrap').addEventListener('scroll', (e) => {
+    e.currentTarget.classList.toggle('scrolled', e.currentTarget.scrollLeft > 2);
     placePop();
   }, { passive: true });
-  trackToolbarHeight();
-}
-
-function trackToolbarHeight() {
-  const bar = $('.toolbar');
-  if (!bar) return;
-  const apply = () => document.documentElement.style.setProperty(
-    '--toolbar-h', `${Math.round(bar.getBoundingClientRect().height)}px`);
-  apply();
-  if (window.ResizeObserver) new ResizeObserver(apply).observe(bar);
-  else addEventListener('resize', apply);
+  addEventListener('scroll', placePop, { passive: true });
 }
 
 /* ============================================================================
@@ -1799,9 +1821,6 @@ function trackToolbarHeight() {
 /* Edit these two lines to change where requests go. The address is assembled at
    runtime from parts and never appears as a literal mailto: in the served HTML, which
    is enough to defeat the scrapers that read markup but do not run scripts. */
-/* Both repositories below are private today, so those two buttons 404 for a visitor.
-   Make them public, or drop the entry, before announcing the page -- see
-   INSTRUCTION_JONAS.md, "Before you announce the page". */
 const CONTACT = {
   user: 'jonas.haenseroth',
   host: 'tu-ilmenau.de',
@@ -1907,7 +1926,8 @@ function renderMeta() {
     `<span class="chip">${FAMILIES.length} families</span>`,
     ok === MODELS.length ? '' : `<span class="chip">${ok} completed</span>`,
     crashed ? `<span class="chip" title="models with at least one probe that raised">${crashed} with a crashed probe</span>` : '',
-    gen ? `<span class="chip" title="${esc(DATA.generated)}">run ${gen.toISOString().slice(0, 10)}</span>` : ''
+    gen ? `<span class="chip" title="${esc(DATA.generated)}">run ${gen.toISOString().slice(0, 10)}</span>` : '',
+    `<span class="chip" title="index schema">${esc(DATA.schema || '')}</span>`
   ].filter(Boolean).join('');
 
   $('#footer').innerHTML = `

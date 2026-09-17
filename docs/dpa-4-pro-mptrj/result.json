@@ -3,7 +3,7 @@
   "model": {
     "slug": "dpa-4-pro-mptrj",
     "label": "DPA-4-Pro (MPtrj)",
-    "family": "DeePMD",
+    "family": "DPA",
     "packages": [
       "deepmd-kit[torch]@git+https://github.com/wanghan-iapcm/deepmd-kit@3eb005be526f199f5ef67667edc7a91cd5c77f7c",
       "e3nn==0.6.0"
@@ -281,5 +281,22 @@
     }
   ],
   "crashes": {},
-  "status": "ok"
+  "status": "ok",
+  "throughput": {
+    "atom_steps_per_s": 669.9,
+    "atom_steps_per_s_stdev": 2.0,
+    "ms_per_step": 149.271,
+    "repeat_atom_steps_per_s": [
+      671.4,
+      670.7,
+      667.6
+    ],
+    "n_atoms": 100,
+    "timed_steps": 100,
+    "warmup_steps": 20,
+    "n_repeats": 3,
+    "system": "NaCl rocksalt a=5.64 A, primitive x (5,5,2)",
+    "integrator": "NVE velocity Verlet, 1.0 fs, 300.0 K init",
+    "status": "ok"
+  }
 }
