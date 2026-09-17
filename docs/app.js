@@ -5,14 +5,15 @@
  * column per certification probe).  Per-element breakdowns are pulled lazily
  * from each model's `report_full.json` only when a cell is opened.
  *
- * Data root defaults to the parent directory (the folder holding index.json and
- * the per-model folders); override with `?root=<url>`.
+ * Data root defaults to the page's own directory: `publish.sh` writes index.json and
+ * the per-model folders next to this file, so the published tree is self-contained
+ * and needs no server config.  Override with `?root=<url>` to point at another run.
  * ========================================================================== */
 
 'use strict';
 
 const QS   = new URLSearchParams(location.search);
-const ROOT = (QS.get('root') || '..').replace(/\/$/, '');
+const ROOT = (QS.get('root') || '.').replace(/\/$/, '');
 
 /* ---------------------------------------------------------------- utilities */
 
