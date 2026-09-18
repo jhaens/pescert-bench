@@ -74,6 +74,26 @@ function fmtRate(x) {
   return x.toFixed(0);
 }
 
+/* ------------------------------------------------------------------ analytics */
+
+/**
+ * Send one custom event to GoatCounter.
+ *
+ * A no-op unless the published site loaded the counter (index.html only injects it
+ * on the hostnames listed there), so local previews, file:// opens and any fork
+ * report nothing and need no configuration.  Never throws: analytics must not be
+ * able to break the page, so every call is wrapped.
+ *
+ * `name` becomes the event path in GoatCounter and is the only thing recorded --
+ * no identifiers, no personal data, nothing about the visitor.
+ */
+function track(name, title) {
+  try {
+    if (!window.goatcounter || typeof window.goatcounter.count !== 'function') return;
+    window.goatcounter.count({ path: name, title: title || name, event: true });
+  } catch (e) { /* analytics is never worth an exception */ }
+}
+
 function fmtDuration(sec) {
   if (!isNum(sec)) return '-';
   if (sec < 90) return sec.toFixed(0) + ' s';
@@ -812,6 +832,7 @@ function elementBars(perElement, perDefect, crashed, barKey = 'overall') {
 function modelCard(anchor, slug) {
   const m = MODELS.find((x) => x.slug === slug);
   if (!m) return;
+  track(`model/${slug}`, `model card: ${m.label}`);
   const row = VIEW.find((r) => r.m.slug === slug);
   const env = m.environment || {};
   const dsChips = (m.training_set || []).map((k) =>
@@ -919,6 +940,8 @@ function modelCard(anchor, slug) {
     sub: `${esc(m.family)} &middot; <span class="mono">${esc(m.slug)}</span>`,
     body: staticHtml, wide: true
   });
+  /* lets the delegated outbound-click listener say which model a link came from */
+  pop.dataset.cardSlug = slug;
   perElem.then((html) => {
     const slot = pop.querySelector('[data-slot="elements"]');
     if (slot && document.body.contains(pop)) { slot.innerHTML = html; placePop(); }
@@ -981,6 +1004,7 @@ function cellCard(anchor, slug, probeName) {
 
 /** Probe documentation mini-window, with the leaders and laggards. */
 function probeCard(anchor, probeName) {
+  track(`probe/${probeName}`, `probe doc: ${probeName}`);
   const p = PROBES.find((x) => x.name === probeName);
   const doc = (PROBEDOC.probes || {})[probeName] || {};
   if (!p) return;
@@ -1478,6 +1502,7 @@ function syncSegs() {
  * ========================================================================== */
 
 function setSort(key) {
+  track(`sort/${key}`, `sort by ${key}`);
   if (S.sortKey === key) {
     S.sortDir = -S.sortDir;
   } else {
@@ -1504,6 +1529,7 @@ function wire() {
   };
   $('#theme').onclick = () => {
     const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+    track(`theme/${next}`, `theme = ${next}`);
     document.documentElement.dataset.theme = next;
     try { localStorage.setItem('pescert-theme', next); } catch (e) {}
     paintTheme();
@@ -1516,12 +1542,27 @@ function wire() {
     const b = e.target.closest('button[data-v]');
     if (!b) return;
     S[key] = b.dataset.v;
+    track(`${key}:${b.dataset.v}`, `${key} = ${b.dataset.v}`);
     (after || refresh)();
   });
   seg('#seg-mean', 'mean');
   seg('#seg-value', 'value');
   seg('#seg-color', 'color');
   seg('#seg-chart', 'chart', () => { syncSegs(); writeHash(); renderScatter(); });
+
+  /* Outbound clicks, delegated once rather than wired per link: the link rows are
+     re-rendered constantly, and a listener per anchor would leak with them.  Records
+     the destination host and the model it belonged to, never the visitor. */
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a[href^="http"]');
+    if (!a) return;
+    let host;
+    try { host = new URL(a.href).hostname.replace(/^www\./, ''); } catch (_) { return; }
+    if (host === location.hostname) return;          /* internal, not an exit */
+    const card = a.closest('[data-card-slug]');
+    const slug = card ? card.dataset.cardSlug : '';
+    track(`out/${host}`, slug ? `outbound: ${host} (from ${slug})` : `outbound: ${host}`);
+  }, true);
 
   /* --- search ----------------------------------------------------------- */
   let tmr;
@@ -1929,10 +1970,18 @@ function renderMeta() {
     gen ? `<span class="chip" title="${esc(DATA.generated)}">run ${gen.toISOString().slice(0, 10)}</span>` : ''
   ].filter(Boolean).join('');
 
+  const analytics = (window.PESCERT_GC || {}).enabled
+    ? `<p style="color:var(--fg-faint)">Anonymous usage counts (page views and which
+       models, probes and charts get opened) are collected with
+       <a href="https://www.goatcounter.com" target="_blank" rel="noopener noreferrer">GoatCounter</a>:
+       no cookies, no identifiers, nothing personal, and nothing that can be traced back
+       to you.</p>`
+    : '';
   $('#footer').innerHTML = `
     <p>Scores come from <span class="mono">index.json</span>, generated ${esc(DATA.generated || '')}.
     Per-element values are read on demand from each model's <span class="mono">report_full.json</span>.
     Averaged over ${esc(MODELS[0] ? MODELS[0].elements : '')} on small in-domain substrates, one seed.</p>
+    ${analytics}
 `;
 }
 
