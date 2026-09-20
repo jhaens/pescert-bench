@@ -5,9 +5,7 @@
  * column per certification probe).  Per-element breakdowns are pulled lazily
  * from each model's `report_full.json` only when a cell is opened.
  *
- * Data root defaults to the page's own directory: `publish.sh` writes index.json and
- * the per-model folders next to this file, so the published tree is self-contained
- * and needs no server config.  Override with `?root=<url>` to point at another run.
+ * Data root defaults to the page's own directory; override with `?root=<url>`.
  * ========================================================================== */
 
 'use strict';
@@ -76,17 +74,6 @@ function fmtRate(x) {
 
 /* ------------------------------------------------------------------ analytics */
 
-/**
- * Send one custom event to GoatCounter.
- *
- * A no-op unless the published site loaded the counter (index.html only injects it
- * on the hostnames listed there), so local previews, file:// opens and any fork
- * report nothing and need no configuration.  Never throws: analytics must not be
- * able to break the page, so every call is wrapped.
- *
- * `name` becomes the event path in GoatCounter and is the only thing recorded --
- * no identifiers, no personal data, nothing about the visitor.
- */
 function track(name, title) {
   try {
     if (!window.goatcounter || typeof window.goatcounter.count !== 'function') return;
@@ -1971,11 +1958,7 @@ function renderMeta() {
   ].filter(Boolean).join('');
 
   const analytics = (window.PESCERT_GC || {}).enabled
-    ? `<p style="color:var(--fg-faint)">Anonymous usage counts (page views and which
-       models, probes and charts get opened) are collected with
-       <a href="https://www.goatcounter.com" target="_blank" rel="noopener noreferrer">GoatCounter</a>:
-       no cookies, no identifiers, nothing personal, and nothing that can be traced back
-       to you.</p>`
+    ? `<p style="color:var(--fg-faint)">Anonymous usage counts (page views) are collected with GoatCounter; nothing that can be traced back to you.</p>`
     : '';
   $('#footer').innerHTML = `
     <p>Scores come from <span class="mono">index.json</span>, generated ${esc(DATA.generated || '')}.

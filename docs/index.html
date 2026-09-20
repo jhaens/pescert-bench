@@ -115,8 +115,14 @@
     <div class="legend" id="scatter-legend"></div>
   </section>
 
-  <div class="tablewrap" id="tablewrap">
-    <table class="bench" id="table"></table>
+  <!-- The frame rounds and clips; the wrap inside only scrolls.  They cannot be one
+       element: every thead th is position:sticky, and a sticky element is not clipped
+       by an ancestor's border-radius, so a rounded scroll container gets its corners
+       painted over by the header's own background. -->
+  <div class="tableframe">
+    <div class="tablewrap" id="tablewrap">
+      <table class="bench" id="table"></table>
+    </div>
   </div>
 
   <section class="panel related">
