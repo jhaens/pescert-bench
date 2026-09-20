@@ -5,7 +5,9 @@
  * column per certification probe).  Per-element breakdowns are pulled lazily
  * from each model's `report_full.json` only when a cell is opened.
  *
- * Data root defaults to the page's own directory; override with `?root=<url>`.
+ * Data root defaults to the page's own directory: `publish.sh` writes index.json and
+ * the per-model folders next to this file, so the published tree is self-contained
+ * and needs no server config.  Override with `?root=<url>` to point at another run.
  * ========================================================================== */
 
 'use strict';
@@ -74,6 +76,17 @@ function fmtRate(x) {
 
 /* ------------------------------------------------------------------ analytics */
 
+/**
+ * Send one custom event to GoatCounter.
+ *
+ * A no-op unless the published site loaded the counter (index.html only injects it
+ * on the hostnames listed there), so local previews, file:// opens and any fork
+ * report nothing and need no configuration.  Never throws: analytics must not be
+ * able to break the page, so every call is wrapped.
+ *
+ * `name` becomes the event path in GoatCounter and is the only thing recorded --
+ * no identifiers, no personal data, nothing about the visitor.
+ */
 function track(name, title) {
   try {
     if (!window.goatcounter || typeof window.goatcounter.count !== 'function') return;
