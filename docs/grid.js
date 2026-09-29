@@ -1,26 +1,11 @@
-/* =============================================================================
- * Background lattice
- *
- * The 32px CSS grid in `styles.css`, redrawn on a canvas with every node displaced
- * by a superposition of eight plane waves.  Progressive enhancement: drop the
- * <script> tag and the CSS grid underneath is what renders.
- * ========================================================================== */
-
 (function () {
-  'use strnict';
+  'use strict';
 
-  const SPACING = 32;    // lattice constant, matching the CSS fallback
-  const FADE_PX = 680;   // ... and the distance over which it fades out
+  const SPACING = 32;    // px, same as the CSS grid
   const FPS     = 30;
-
-  /* One knob for how alive the lattice is.  The per-wave amplitudes below are
-     relative; this scales all of them.  0 freezes it, 2 is distracting. */
   const AMPLITUDE = 1.3;
 
-  /* Wavelength (px), period (s), direction (rad), amplitude (px), polarisation and
-     phase are the readable parameters; k, omega and the polarisation vector are
-     derived from them once, here.  `period` is signed: a negative one runs the wave
-     backwards, so the set does not drift one way on average. */
+  // lambda px, period s (sign = direction), angle rad, amp px
   const WAVES = [
     { lambda: 310, period:  6.5, angle:  0.35, amp: 0.85, pol: 'L', phase: 0.0 },
     { lambda: 190, period: -4.4, angle:  2.10, amp: 0.60, pol: 'T', phase: 1.7 },
@@ -47,7 +32,7 @@
 
   const cv = document.createElement('canvas');
   const ctx = cv.getContext && cv.getContext('2d');
-  if (!ctx) return;                          /* no canvas: keep the CSS grid */
+  if (!ctx) return;
   cv.className = 'gridfield';
   cv.setAttribute('aria-hidden', 'true');
 
@@ -58,7 +43,7 @@
     const cs = getComputedStyle(document.documentElement);
     alpha = parseFloat(cs.getPropertyValue('--grid-strength')) || 0.13;
     const stop = (n, fallback) => (cs.getPropertyValue(n).trim() || fallback);
-    /* CSS angles run clockwise from "to top", hence (sin, -cos) */
+    /* CSS angle: clockwise from "to top" */
     const a = 118 * Math.PI / 180, ux = Math.sin(a), uy = -Math.cos(a);
     const L = Math.abs(W * ux) + Math.abs(H * uy);
     const g = ctx.createLinearGradient(W / 2 - ux * L / 2, H / 2 - uy * L / 2,
@@ -75,7 +60,6 @@
     cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
     cv.style.width = W + 'px'; cv.style.height = H + 'px';
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    /* one ring of nodes beyond each edge, so a displaced line never ends in view */
     cols = Math.ceil(W / SPACING) + 3;
     rows = Math.ceil(H / SPACING) + 3;
     nx = new Float32Array(cols * rows);
@@ -84,7 +68,6 @@
   }
 
   function draw(t) {
-    /* 1. where every node is now */
     for (let j = 0; j < rows; j++) {
       const y0 = (j - 1) * SPACING + 0.5;
       for (let i = 0; i < cols; i++) {
@@ -100,7 +83,6 @@
       }
     }
 
-    /* 2. the mesh: one polyline per row, one per column, all in a single path */
     ctx.clearRect(0, 0, W, H);
     ctx.globalAlpha = alpha;
     ctx.strokeStyle = stroke;
@@ -120,11 +102,9 @@
     }
     ctx.stroke();
 
-    /* 3. fade it out down the page, as the CSS grid does.  Past FADE_PX the
-          gradient holds its last stop, so one rect erases the whole lower page. */
     ctx.globalAlpha = 1;
     ctx.globalCompositeOperation = 'destination-out';
-    const f = ctx.createLinearGradient(0, 0, 0, FADE_PX);
+    const f = ctx.createLinearGradient(0, H / 3, 0, H);
     f.addColorStop(0, 'rgba(0,0,0,0)');
     f.addColorStop(1, 'rgba(0,0,0,1)');
     ctx.fillStyle = f;
@@ -152,12 +132,11 @@
   }
 
   document.body.insertBefore(cv, document.body.firstChild);
-  document.documentElement.classList.add('grid-live');   /* hides the CSS grid */
+  document.documentElement.classList.add('grid-live');
   resize();
   draw(0);
   if (!still.matches) start();
 
-  /* a resize reallocates the node arrays, so coalesce bursts into one frame */
   let pending = 0;
   addEventListener('resize', () => {
     if (pending) return;
@@ -166,7 +145,6 @@
 
   addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
   still.addEventListener('change', () => { stop(); draw(0); if (!still.matches) start(); });
-  /* the theme toggle only rewrites data-theme on <html> */
   new MutationObserver(() => { readTheme(); draw(last); })
     .observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 })();

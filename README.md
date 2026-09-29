@@ -1,14 +1,14 @@
-# pescert-bench
+<p align="center">
+  <img src="docs/pescert.svg" width="68" alt="pescert">
+</p>
+<h1 align="center">pescert-bench</h1>
+<p align="center"><b>Reference-free certification benchmark for universal machine-learning interatomic potentials.</b></p>
 
-Ground-truth-free certification of universal machine-learning interatomic potentials:
-every probe compares a model against a value the exact Born–Oppenheimer surface
-satisfies by construction, so no DFT reference is needed.
+**→ [jhaens.github.io/pescert-bench](https://jhaens.github.io/pescert-bench)**
 
-### → **[jhaens.github.io/pescert-bench](https://jhaens.github.io/pescert-bench)**
+Every model is scored with [pescert](https://github.com/jhaens/pescert): 14 probes, each
+checking an identity the exact Born–Oppenheimer surface satisfies, so no DFT reference is
+needed.
 
-56 checkpoints across 20 families, plus an analytic reference that marks the
-suite's own numerical floor · 14 exact-identity probes · one sortable table.
-
-`docs/` is the whole site: `index.json` carries every run and every per-probe score, with
-one folder per checkpoint beside it. The suite that produces them is
-[pescert](https://github.com/jhaens/pescert).
+`docs/` is the site. `index.json` holds every run and per-probe score, with one folder per
+checkpoint.

@@ -1,15 +1,3 @@
-/* =============================================================================
- * pescert certification dashboard
- *
- * A single-page, dependency-free view over `index.json` (one row per model, one
- * column per certification probe).  Per-element breakdowns are pulled lazily
- * from each model's `report_full.json` only when a cell is opened.
- *
- * Data root defaults to the page's own directory: `publish.sh` writes index.json and
- * the per-model folders next to this file, so the published tree is self-contained
- * and needs no server config.  Override with `?root=<url>` to point at another run.
- * ========================================================================== */
-
 'use strict';
 
 const QS   = new URLSearchParams(location.search);
@@ -22,7 +10,6 @@ const $$ = (sel, el = document) => Array.from(el.querySelectorAll(sel));
 const clamp = (x, lo, hi) => (x < lo ? lo : x > hi ? hi : x);
 const isNum = (x) => typeof x === 'number' && isFinite(x);
 
-/** HTML-escape for anything interpolated into a template string. */
 function esc(s) {
   return String(s == null ? '' : s).replace(/[&<>"']/g, (c) => (
     { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
@@ -35,12 +22,11 @@ function sci(x, digits = 1) {
   if (x === 0) return '0';
   let e = Math.floor(Math.log10(Math.abs(x)));
   let m = x / Math.pow(10, e);
-  /* the mantissa can round up to 10 (9.99e-12 -> 1.0e-11); carry the exponent */
+  // 9.99e-12 -> 1.0e-11, not 10.0e-12
   if (Math.abs(Number(m.toFixed(digits))) >= 10) { m /= 10; e += 1; }
   return `${m.toFixed(digits)}e${e}`;
 }
 
-/** Score in [0,1] -> short string that never rounds a near-perfect score to 1. */
 function fmtScore(s) {
   if (!isNum(s)) return '-';
   if (s >= 1) return '1.0000';
@@ -48,8 +34,6 @@ function fmtScore(s) {
   return (Math.floor(s * 1e4) / 1e4).toFixed(4);
 }
 
-/** -log10(1 - score); gives bars and colour scales a usable dynamic range.
- *  Never shown as a number. */
 function nines(s) {
   if (!isNum(s)) return NaN;
   if (s <= 0) return 0;
@@ -76,22 +60,11 @@ function fmtRate(x) {
 
 /* ------------------------------------------------------------------ analytics */
 
-/**
- * Send one custom event to GoatCounter.
- *
- * A no-op unless the published site loaded the counter (index.html only injects it
- * on the hostnames listed there), so local previews, file:// opens and any fork
- * report nothing and need no configuration.  Never throws: analytics must not be
- * able to break the page, so every call is wrapped.
- *
- * `name` becomes the event path in GoatCounter and is the only thing recorded --
- * no identifiers, no personal data, nothing about the visitor.
- */
 function track(name, title) {
   try {
     if (!window.goatcounter || typeof window.goatcounter.count !== 'function') return;
     window.goatcounter.count({ path: name, title: title || name, event: true });
-  } catch (e) { /* analytics is never worth an exception */ }
+  } catch (e) {}
 }
 
 function fmtDuration(sec) {
@@ -101,7 +74,7 @@ function fmtDuration(sec) {
   return (sec / 3600).toFixed(1) + ' h';
 }
 
-/** Combine per-probe scores exactly as pescert.result.combine_scores does. */
+/* mirrors pescert.result.combine_scores */
 function combine(scores, method) {
   const s = scores.filter(isNum);
   if (!s.length) return NaN;
@@ -116,12 +89,9 @@ function combine(scores, method) {
   throw new Error('unknown mean ' + method);
 }
 
-/* ------------------------------------------------------------ colour ramps */
+/* ------------------------------------------------------------------ colours */
 
-/* ----------------------------------------------------------- colour palette */
-
-/* Lifted from `_scripts/plot_heatmap.py` so the page and the paper figure agree.
- * Probe columns take their section's ramp; the overall column uses plasma. */
+/* same ramps as the paper figure */
 const SECTION_RAMP = {
   "Symmetry & invariance": { base: '#2F6DB0', light: ['#f0f1f2', '#2f6db0'], dark: ['#24262a', '#2f6db0'] },
   "Self-consistency": { base: '#E07B1A', light: ['#f3f0ef', '#e07b1a'], dark: ['#2b2422', '#e07b1a'] },
@@ -157,14 +127,12 @@ function sectionOf(probeName) {
   return (PROBES.find((p) => p.name === probeName) || {}).section;
 }
 
-/** Section ramp for a probe column, theme-aware. */
 function rampFor(section) {
   const r = SECTION_RAMP[section] || DEFAULT_RAMP;
   const pair = isDark() ? (r.dark || DEFAULT_RAMP.dark) : (r.light || DEFAULT_RAMP.light);
   return [hexRGB(pair[0]), hexRGB(pair[1])];
 }
 
-/** plasma(t), linear between the stored anchors. */
 function plasmaAt(t) {
   t = clamp(t, 0, 1) * (PLASMA.length - 1);
   const i = Math.floor(t);
@@ -173,10 +141,6 @@ function plasmaAt(t) {
   return lerp3(a, hexRGB(PLASMA[i + 1]), t - i);
 }
 
-/**
- * Fill for one cell. `key` is a probe name (tinted by its section) or 'overall'
- * (plasma). Returns the rgb string and the text colour that stays readable on it.
- */
 function cellColor(t, key) {
   if (!isNum(t)) return null;
   let c;
@@ -190,13 +154,11 @@ function cellColor(t, key) {
   return { bg: `rgb(${c[0]},${c[1]},${c[2]})`, fg: lum > 0.6 ? '#0d1117' : '#f0f3f6' };
 }
 
-/** Opaque colour for bars, taking the same ramp as the column it belongs to. */
 function barColor(t, key) {
   const c = cellColor(t, key);
   return c ? c.bg : 'var(--border-strong)';
 }
 
-/* Categorical palette for architecture families (scatter + chips). */
 const FAM_COLORS = [
   '#4c78a8', '#f58518', '#54a24b', '#e45756', '#72b7b2', '#b279a2',
   '#ff9da6', '#9d755d', '#bab0ac', '#8c6bb1', '#2f8f9d', '#d4a017',
@@ -208,7 +170,6 @@ const famColor = (fam) => FAM_COLORS[FAMILIES.indexOf(fam) % FAM_COLORS.length];
 /* ------------------------------------------------------------------- state */
 
 const DEFAULT_OFF_META = ['family', 'params', 'dataset', 'nstruct', 'precision', 'calls', 'wall', 'speed'];
-/* What the button turns on, rather than everything at once. */
 const META_ON_DEFAULT = ['params', 'dataset', 'precision'];
 
 const S = {
@@ -256,15 +217,11 @@ const META_COLS = [
 
 /* ------------------------------------------------------------- data loading */
 
-/**
- * JSON.parse, tolerating the bare `Infinity` / `-Infinity` / `NaN` literals that
- * Python's json.dump writes.  They become `null`, which every consumer here reads
- * as "not measured".
- */
+/* accepts the bare Infinity / NaN that Python's json.dump writes */
 function parseLooseJSON(text) {
   try {
     return JSON.parse(text);
-  } catch (e) { /* fall through to the tolerant scan */ }
+  } catch (e) {}
   let out = '', i = 0, inStr = false;
   while (i < text.length) {
     const c = text[i];
@@ -302,7 +259,6 @@ async function loadJSON(url, optional = false) {
 
 const reportCache = new Map();
 
-/** Lazily fetch (and cache) one model's full report, for per-element numbers. */
 function getReport(slug) {
   if (!reportCache.has(slug)) {
     reportCache.set(slug, loadJSON(`${ROOT}/${encodeURIComponent(slug)}/report_full.json`)
@@ -330,13 +286,11 @@ function prepare() {
   }
 }
 
-/** Overall score over the *enabled* probes, with the selected mean. */
 function overallOf(m, mean = S.mean) {
   const on = PROBES.filter((p) => !S.offProbes.has(p.name)).map((p) => m.scores[p.name]);
   return combine(on, mean);
 }
 
-/** Merge family-level and model-level curated links. */
 function linksFor(m) {
   const fam = (LINKS.families || {})[m.family] || {};
   const own = (LINKS.models || {})[m.slug] || {};
@@ -383,7 +337,6 @@ function buildView() {
     .sort((a, b) => (b.overall - a.overall) || a.m.label.localeCompare(b.m.label));
   byOverall.forEach((r, i) => { r.rank = i + 1; });
 
-  /* Column statistics, for the "rank" and "range" colour scales. */
   const stats = {};
   for (const p of PROBES) {
     const vals = rows.map((r) => r.m.scores[p.name]).filter(isNum).slice().sort((a, b) => a - b);
@@ -419,7 +372,6 @@ function buildView() {
     return dir * (x - y) || a.m.label.localeCompare(b.m.label);
   });
 
-  /* Pinned models float to the top, keeping their relative order. */
   if (S.pinned.size) {
     rows.sort((a, b) => (S.pinned.has(b.m.slug) ? 1 : 0) - (S.pinned.has(a.m.slug) ? 1 : 0));
   }
@@ -429,7 +381,6 @@ function buildView() {
   return rows;
 }
 
-/** Colour weight in [0,1] for one score inside one column. */
 function colorT(score, colKey) {
   if (S.color === 'off' || !isNum(score)) return NaN;
   if (S.color === 'score') return clamp(score, 0, 1);
@@ -439,7 +390,6 @@ function colorT(score, colKey) {
     const n = nines(score);
     return st.hi > st.lo ? clamp((n - st.lo) / (st.hi - st.lo), 0, 1) : 0.75;
   }
-  /* rank: fraction of the column this score is at least as good as */
   const arr = st.sorted;
   if (arr.length < 2) return 0.75;
   let lo = 0, hi = arr.length;
@@ -618,8 +568,7 @@ function applyTableWidth() {
 }
 
 /* ============================================================================
- * Floating mini-windows (popovers).  One element, re-used; anchored to whatever
- * was clicked, flipped and clamped so it always stays on screen.
+ * Popovers
  * ========================================================================== */
 
 let popEl = null, popAnchor = null;
@@ -646,10 +595,6 @@ function placePop() {
   popEl.style.top = top + 'px';
 }
 
-/**
- * Open a mini-window.  `body` may be an HTML string or a promise resolving to
- * one (a spinner is shown while it settles).
- */
 function openPop(anchor, { title, sub, body, wide = false, id = '' }) {
   closePop();
   popEl = document.createElement('div');
@@ -684,7 +629,6 @@ function openPop(anchor, { title, sub, body, wide = false, id = '' }) {
 
 /* ------------------------------------------------------------ card builders */
 
-/* Inline 14px icons, so there is no icon font and no emoji fallback. */
 const _svg = (d) => `<svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor"
   stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
 const ICON = {
@@ -699,23 +643,13 @@ const ICON = {
 };
 
 /* ============================================================================
- * Reproducing a row's calculator on an ``ase.Atoms``, from the run's own spec
+ * Calculator snippet
  * ========================================================================== */
 
-/**
- * Replace absolute filesystem paths inside a calculator expression with just the file
- * name. The run needs the full path on the machine it ran on; a reader does not, and
- * publishing it exposes a directory layout for no benefit. URLs are left alone.
- */
 function stripPaths(expr) {
   return String(expr).replace(/(['"])(\/[^'"\s]*\/)([^'"\/\s]+)\1/g, (all, q, dir, file) => q + file + q);
 }
 
-/**
- * Split requirement pins into an installable list and notes for the ones that point at a
- * file on the machine the run happened on. A `pkg@file:///abs/path/pkg.whl` pin would
- * otherwise print that path verbatim.
- */
 function splitPins(pins) {
   const out = [], notes = [];
   for (const pin of pins) {
@@ -740,7 +674,6 @@ function calcSnippet(m) {
   const el = (m.elements || 'Si').split(',')[0].trim();
   const split = splitPins(['ase==3.28.0'].concat(m.packages || []));
   const pins = split.pins;
-  /* `import a.b` already binds `a`, so a bare root import would be redundant */
   const imports = (m.imports || []).slice().sort();
   const lines = [`# pip install ${pins.join(' ')}`];
   if (m.python) lines.push(`# python ${m.python}`);
@@ -763,11 +696,6 @@ function calcSnippet(m) {
   return lines.join('\n');
 }
 
-/**
- * `lhs = expr`, wrapped over several lines when the call is long.
- * Splits only at top-level commas -- never inside a nested call or a string -- so the
- * result is still the same expression, and still pastes.
- */
 function assignLines(lhs, expr) {
   const one = `${lhs} = ${expr}`;
   if (one.length <= 78) return [one];
@@ -828,7 +756,6 @@ function elementBars(perElement, perDefect, crashed, barKey = 'overall') {
     <p class="tiny">Bar length is logarithmic in the defect, so near-perfect values stay distinguishable.</p>`;
 }
 
-/** Model mini-window. */
 function modelCard(anchor, slug) {
   const m = MODELS.find((x) => x.slug === slug);
   if (!m) return;
@@ -940,7 +867,6 @@ function modelCard(anchor, slug) {
     sub: `${esc(m.family)} &middot; <span class="mono">${esc(m.slug)}</span>`,
     body: staticHtml, wide: true
   });
-  /* lets the delegated outbound-click listener say which model a link came from */
   pop.dataset.cardSlug = slug;
   perElem.then((html) => {
     const slot = pop.querySelector('[data-slot="elements"]');
@@ -948,7 +874,6 @@ function modelCard(anchor, slug) {
   });
 }
 
-/** Single-cell mini-window: one probe, one model, with the per-element split. */
 function cellCard(anchor, slug, probeName) {
   const m = MODELS.find((x) => x.slug === slug);
   const p = PROBES.find((x) => x.name === probeName);
@@ -1002,7 +927,6 @@ function cellCard(anchor, slug, probeName) {
   });
 }
 
-/** Probe documentation mini-window, with the leaders and laggards. */
 function probeCard(anchor, probeName) {
   track(`probe/${probeName}`, `probe doc: ${probeName}`);
   const p = PROBES.find((x) => x.name === probeName);
@@ -1127,6 +1051,17 @@ function helpCard(anchor) {
   });
 }
 
+function legalCard(anchor) {
+  const mail = contactAddress();
+  openPop(anchor, {
+    title: 'Legal notice',
+    sub: 'Information pursuant to § 18(1) MStV (German Interstate Media Treaty)',
+    body: `
+      <p class="fg">Jonas Hänseroth, Weimarer Straße 32, 98693 Ilmenau, Germany</p>
+      <p>Email: <a href="mailto:${esc(mail)}">${esc(mail)}</a></p>`
+  });
+}
+
 /* ============================================================================
  * Dropdown menus
  * ========================================================================== */
@@ -1153,9 +1088,13 @@ function toggleMenu(btn, build) {
   btn.parentElement.appendChild(el);
   btn.setAttribute('aria-expanded', 'true');
   openMenu = el;
-  /* keep the menu inside the viewport */
-  const r = el.getBoundingClientRect();
-  if (r.right > innerWidth - 8) el.classList.add('right');
+  let r = el.getBoundingClientRect();
+  if (r.right > innerWidth - 8) {
+    el.classList.add('right');
+    r = el.getBoundingClientRect();
+    if (r.left < 8) el.style.right = `${r.left - 8}px`;
+  }
+  if (r.bottom > innerHeight - 8) el.style.maxHeight = `${Math.max(120, innerHeight - r.top - 8)}px`;
 }
 
 function rebuildOpenMenu() {
@@ -1277,8 +1216,6 @@ const SC_LABELS = {
   atom_steps_per_s: 'throughput (atom-steps/s)'
 };
 
-/* "size" is score against parameter count; "data" is score against training-set
-   size, with circle *area* proportional to the parameter count. */
 const CHARTS = {
   size: { x: 'n_parameters', r: null },
   data: { x: 'n_training_structures', r: 'n_parameters' },
@@ -1327,7 +1264,6 @@ function renderScatter() {
   g += `<text class="axlabel" x="${(W + pad.l) / 2}" y="${H - 6}" text-anchor="middle">${esc(SC_LABELS[xf])} (log)</text>`;
   g += `<text class="axlabel" x="${-H / 2}" y="14" transform="rotate(-90)" text-anchor="middle">overall score (${esc(S.mean)})</text>`;
 
-  /* circle area, not radius, carries the parameter count: area is what the eye reads */
   let radius = () => 5.5;
   if (rf) {
     const rs = pts.map((p) => p.m[rf]).filter((v) => isNum(v) && v > 0);
@@ -1404,7 +1340,6 @@ function exportCSV() {
   toast(`${VIEW.length} rows exported`);
 }
 
-/** clipboard fallback for pages served without a secure context */
 function fallbackCopy(text, done) {
   const ta = document.createElement('textarea');
   ta.value = text;
@@ -1424,7 +1359,7 @@ function toast(msg) {
 }
 
 /* ============================================================================
- * URL state: the whole view is shareable
+ * URL state
  * ========================================================================== */
 
 let hashLock = false;
@@ -1507,7 +1442,6 @@ function setSort(key) {
     S.sortDir = -S.sortDir;
   } else {
     S.sortKey = key;
-    /* text sorts read best A→Z; numeric ones best-first */
     const meta = META_COLS.find((c) => c.key === key);
     S.sortDir = (key === 'model' || (meta && meta.type === 'text')) ? 1 : -1;
   }
@@ -1533,7 +1467,7 @@ function wire() {
     document.documentElement.dataset.theme = next;
     try { localStorage.setItem('pescert-theme', next); } catch (e) {}
     paintTheme();
-    refresh();            /* the heat ramp alpha differs per theme */
+    refresh();
   };
   paintTheme();
 
@@ -1550,15 +1484,13 @@ function wire() {
   seg('#seg-color', 'color');
   seg('#seg-chart', 'chart', () => { syncSegs(); writeHash(); renderScatter(); });
 
-  /* Outbound clicks, delegated once rather than wired per link: the link rows are
-     re-rendered constantly, and a listener per anchor would leak with them.  Records
-     the destination host and the model it belonged to, never the visitor. */
+  /* --- outbound clicks ------------------------------------------------- */
   document.addEventListener('click', (e) => {
     const a = e.target.closest('a[href^="http"]');
     if (!a) return;
     let host;
     try { host = new URL(a.href).hostname.replace(/^www\./, ''); } catch (_) { return; }
-    if (host === location.hostname) return;          /* internal, not an exit */
+    if (host === location.hostname) return;
     const card = a.closest('[data-card-slug]');
     const slug = card ? card.dataset.cardSlug : '';
     track(`out/${host}`, slug ? `outbound: ${host} (from ${slug})` : `outbound: ${host}`);
@@ -1590,6 +1522,12 @@ function wire() {
     if (S.scatter) $('#scatter-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
   $('#help').onclick = (e) => helpCard(e.currentTarget);
+  $('#footer').addEventListener('click', (e) => {
+    const a = e.target.closest('#legal-link');
+    if (!a) return;
+    e.preventDefault();
+    legalCard(a);
+  });
   $('#btn-reset').onclick = () => {
     S.search = ''; $('#search').value = '';
     S.offProbes = new Set();
@@ -1807,7 +1745,7 @@ function wire() {
   });
 
   /* --- global ------------------------------------------------------------ */
-  const OPENERS = '[data-cell],[data-model],[data-overall],[data-dataset],[data-probe],[data-pop],th.grp,#help,#btn-request';
+  const OPENERS = '[data-cell],[data-model],[data-overall],[data-dataset],[data-probe],[data-pop],th.grp,#help,#btn-request,#legal-link';
   document.addEventListener('click', (e) => {
     e._inMenu = !!(e.target.closest && (e.target.closest('.menu') || e.target.closest('.menu-host')));
     e._inPop  = !!(e.target.closest && (e.target.closest('.pop') || e.target.closest(OPENERS)));
@@ -1830,7 +1768,15 @@ function wire() {
       e.preventDefault(); $('#search').focus(); $('#search').select();
     }
   });
-  addEventListener('resize', () => { applyTableWidth(); placePop(); if (S.scatter) renderScatter(); });
+  /* ignore the height-only resizes of mobile URL bars */
+  let lastW = innerWidth;
+  addEventListener('resize', () => {
+    placePop();
+    if (innerWidth === lastW) return;
+    lastW = innerWidth;
+    applyTableWidth();
+    if (S.scatter) renderScatter();
+  });
   addEventListener('scroll', () => {
     $('#tablewrap').classList.toggle('scrolled', (window.scrollX || 0) > 2);
     placePop();
@@ -1849,19 +1795,9 @@ function trackToolbarHeight() {
 }
 
 /* ============================================================================
- * Boot
+ * Contact and model requests
  * ========================================================================== */
 
-/* ============================================================================
- * Contact, and the "benchmark my model" request form
- * ========================================================================== */
-
-/* Edit these two lines to change where requests go. The address is assembled at
-   runtime from parts and never appears as a literal mailto: in the served HTML, which
-   is enough to defeat the scrapers that read markup but do not run scripts. */
-/* Both repositories below are private today, so those two buttons 404 for a visitor.
-   Make them public, or drop the entry, before announcing the page -- see
-   INSTRUCTION_JONAS.md, "Before you announce the page". */
 const CONTACT = {
   user: 'jonas.haenseroth',
   host: 'tu-ilmenau.de',
@@ -1872,7 +1808,6 @@ const CONTACT = {
 
 const contactAddress = () => `${CONTACT.user}@${CONTACT.host}`;
 
-/** Fields the request form asks for. `req` marks the ones needed to submit. */
 const REQUEST_FIELDS = [
   { k: 'model', label: 'Model name', req: true, ph: 'MACE-MP-0 (medium)' },
   { k: 'repo', label: 'Code repository', req: true, ph: 'https://github.com/...' },
@@ -1911,7 +1846,6 @@ function requestForm(anchor) {
   });
 }
 
-/** Collect the form into a subject and body. Returns null when required fields are empty. */
 function requestMessage(pop) {
   const val = (k) => {
     const el = pop.querySelector(`[data-f="${k}"]`);
@@ -1945,7 +1879,6 @@ function renderContact() {
     `<button class="cbtn primary" id="btn-request">${ICON.plus} Benchmark my UMLIP</button>`
   ].join('');
 
-  /* href is written on interaction, so the address is not sitting in the markup */
   const link = $('#mail-link');
   link.addEventListener('click', (e) => {
     e.preventDefault();
@@ -1956,6 +1889,10 @@ function renderContact() {
     'Model metadata here is curated by hand, so parameter counts, training sets and links '
     + 'can be wrong. If you spot something, or want an entry changed, please get in touch.';
 }
+
+/* ============================================================================
+ * Boot
+ * ========================================================================== */
 
 function renderMeta() {
   const gen = DATA.generated ? new Date(DATA.generated) : null;
@@ -1971,14 +1908,12 @@ function renderMeta() {
   ].filter(Boolean).join('');
 
   const analytics = (window.PESCERT_GC || {}).enabled
-    ? `<p style="color:var(--fg-faint)">Anonymous usage counts (page views) are collected with GoatCounter; nothing that can be traced back to you.</p>`
+    ? 'Page views are counted anonymously with GoatCounter &middot; '
     : '';
   $('#footer').innerHTML = `
-    <p>Scores come from <span class="mono">index.json</span>, generated ${esc(DATA.generated || '')}.
-    Per-element values are read on demand from each model's <span class="mono">report_full.json</span>.
-    Averaged over ${esc(MODELS[0] ? MODELS[0].elements : '')} on small in-domain substrates, one seed.</p>
-    ${analytics}
-`;
+    <p>Averaged over ${esc(MODELS[0] ? MODELS[0].elements : '')} on small in-domain substrates, one seed
+    &middot; <a href="${esc(ROOT)}/index.json">raw data</a></p>
+    <p>${analytics}<a href="#" id="legal-link">Legal notice</a></p>`;
 }
 
 async function main() {

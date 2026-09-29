@@ -2,21 +2,22 @@
 <html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
 <title>pescert &middot; MLIP certification benchmark</title>
 <meta name="description" content="Ground-truth-free certification of universal machine-learning interatomic potentials: 14 exact-identity probes, no DFT reference.">
-<!-- Logo: a hexagonal certification seal with a potential-energy well cut out of it.
-     The curve is the object the suite probes, the seal is what it issues. The white
-     knockout keeps it readable down to 16px, where an outline mark closes up. -->
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%235b9cf5'/%3E%3Cstop offset='.55' stop-color='%237b6ef0'/%3E%3Cstop offset='1' stop-color='%23a061ee'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M16 2.2l12 6.9v13.8l-12 6.9-12-6.9V9.1z' fill='url(%23g)'/%3E%3Cpath d='M10.4 9.2c2.3 0 2.1 11.9 5.3 11.9 3.4 0 3.1-6.8 8.5-6.8' fill='none' stroke='%23fff' stroke-width='3.2' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="styles.css">
 <script>
-  /* set the theme before first paint so there is no flash */
   (function () {
     var t = null;
     try { t = localStorage.getItem('pescert-theme'); } catch (e) {}
     if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     document.documentElement.dataset.theme = t;
+    /* iOS zooms into inputs under 16px on focus; pinch-zoom keeps working */
+    if (/iP(hone|od|ad)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) {
+      var vp = document.querySelector('meta[name=viewport]');
+      vp.content += ', maximum-scale=1';
+    }
   })();
 </script>
 </head>
@@ -115,14 +116,8 @@
     <div class="legend" id="scatter-legend"></div>
   </section>
 
-  <!-- The frame rounds and clips; the wrap inside only scrolls.  They cannot be one
-       element: every thead th is position:sticky, and a sticky element is not clipped
-       by an ancestor's border-radius, so a rounded scroll container gets its corners
-       painted over by the header's own background. -->
-  <div class="tableframe">
-    <div class="tablewrap" id="tablewrap">
-      <table class="bench" id="table"></table>
-    </div>
+  <div class="tablewrap" id="tablewrap">
+    <table class="bench" id="table"></table>
   </div>
 
   <section class="panel related">
@@ -141,6 +136,10 @@
       <a href="https://huggingface.co/spaces/facebook/fairchem_leaderboard" target="_blank" rel="noopener noreferrer">
         <b>FAIR Chemistry Leaderboard</b>
         <span>Energy and force errors across the OMol25 and OC20 tasks, from ligand strain to spin gaps.</span>
+      </a>
+      <a href="https://huggingface.co/spaces/InstaDeepAI/mlipaudit-leaderboard" target="_blank" rel="noopener noreferrer">
+        <b>MLIPAudit</b>
+        <span>Molecular and biomolecular systems: conformers, torsions, tautomers, reactivity and MD stability.</span>
       </a>
       <a href="https://pages.nist.gov/jarvis_leaderboard/" target="_blank" rel="noopener noreferrer">
         <b>JARVIS Leaderboard</b>
