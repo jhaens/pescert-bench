@@ -1,6 +1,8 @@
 (function () {
   'use strict';
 
+  if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;   // desktop only
+
   const SPACING = 32;    // px, same as the CSS grid
   const FPS     = 30;
   const AMPLITUDE = 1.3;
@@ -104,7 +106,7 @@
 
     ctx.globalAlpha = 1;
     ctx.globalCompositeOperation = 'destination-out';
-    const f = ctx.createLinearGradient(0, H / 3, 0, H);
+    const f = ctx.createLinearGradient(0, H * 0.15, 0, H * 0.8);
     f.addColorStop(0, 'rgba(0,0,0,0)');
     f.addColorStop(1, 'rgba(0,0,0,1)');
     ctx.fillStyle = f;

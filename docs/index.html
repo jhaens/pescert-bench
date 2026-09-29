@@ -13,6 +13,15 @@
     try { t = localStorage.getItem('pescert-theme'); } catch (e) {}
     if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     document.documentElement.dataset.theme = t;
+    /* viewport width without scrollbar, for the blocks pinned while the table scrolls sideways */
+    var root = document.documentElement, lastW = -1;
+    var fit = function () {
+      var w = root.clientWidth;
+      if (w !== lastW) { lastW = w; root.style.setProperty('--vw', w + 'px'); }
+    };
+    fit();
+    if (window.ResizeObserver) new ResizeObserver(fit).observe(root);
+    else addEventListener('resize', fit);
     /* iOS zooms into inputs under 16px on focus; pinch-zoom keeps working */
     if (/iP(hone|od|ad)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) {
       var vp = document.querySelector('meta[name=viewport]');
@@ -158,6 +167,7 @@
 </div>
 
 <script src="app.js"></script>
+<script src="grid.js"></script>
 
 <script>
   window.PESCERT_GC = {

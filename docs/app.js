@@ -564,7 +564,7 @@ function applyTableWidth() {
        : c.contains('w-meta')         ? px('--w-meta')
        :                                px('--w-pcol');
   }
-  wrap.style.setProperty('--table-w', `${w}px`);
+  document.documentElement.style.setProperty('--table-w', `${w}px`);
 }
 
 /* ============================================================================
