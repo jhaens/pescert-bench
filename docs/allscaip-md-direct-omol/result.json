@@ -59,23 +59,23 @@
     "wall_seconds": 1182.65
   },
   "aggregate": {
-    "overall": 0.3545498489293886,
+    "overall": 0.3748365418563471,
     "overall_method": "arithmetic",
     "sub_scores": {
       "conservativeness": 0.08062148654661735,
       "equivariance": 6.772682680542902e-32,
       "smoothness": 0.4792310318118324,
-      "stress_consistency": NaN,
-      "parity": NaN,
+      "stress_consistency": null,
+      "parity": null,
       "representation": 0.0013922858678765547,
-      "cross_maxwell": NaN,
+      "cross_maxwell": null,
       "betti": 0.10298900392531256,
       "zero_modes": 0.17205396471231577,
       "trimer": 0.015209699582691676,
       "reversibility": 0.9105564964184143,
-      "config_temperature": 0.9216117938872426,
-      "equipartition": 0.512228343649525,
-      "virial": 0.7041542318214471
+      "config_temperature": 0.9568353661469529,
+      "equipartition": 0.5969786775670786,
+      "virial": 0.8073339478407258
     },
     "gates": {
       "conservativeness": false,
@@ -88,7 +88,7 @@
     },
     "gates_passed": 1,
     "gates_total": 7,
-    "n_total_calls": 35228
+    "n_total_calls": 35230
   },
   "metadata": {
     "elements": [
@@ -104,18 +104,18 @@
       "S"
     ],
     "per_element_overall": {
-      "Li": 0.4335373725115874,
-      "Be": 0.18826241883686137,
-      "B": 0.35808967383371637,
-      "C": 0.36217496488017525,
-      "Na": 0.37003792882501957,
-      "Mg": 0.30779196624583044,
-      "Al": 0.34148761668186484,
-      "Si": 0.2635269420109315,
-      "P": 0.4897250745473843,
-      "S": 0.4308645309205154
+      "Li": 0.4422683222655955,
+      "Be": 0.24273539167450198,
+      "B": 0.3802101769016812,
+      "C": 0.4220317138016435,
+      "Na": 0.3647991503566912,
+      "Mg": 0.334725145933576,
+      "Al": 0.35709397364204504,
+      "Si": 0.26904242950197443,
+      "P": 0.49626498057858404,
+      "S": 0.4391941339071776
     },
-    "mean_of_element_overalls": 0.3545498489293887,
+    "mean_of_element_overalls": 0.374836541856347,
     "evals": [
       "conservativeness",
       "equivariance",
@@ -132,7 +132,7 @@
       "equipartition",
       "virial"
     ],
-    "n_total_calls": 35228
+    "n_total_calls": 35230
   },
   "results": [
     {
@@ -169,8 +169,8 @@
       "name": "stress_consistency",
       "section": "Self-consistency",
       "target": 0.0,
-      "raw_defect": NaN,
-      "score": NaN,
+      "raw_defect": null,
+      "score": null,
       "n_model_calls": 10,
       "gate": null,
       "crashed": {}
@@ -179,8 +179,8 @@
       "name": "parity",
       "section": "Symmetry & invariance",
       "target": 0.0,
-      "raw_defect": NaN,
-      "score": NaN,
+      "raw_defect": null,
+      "score": null,
       "n_model_calls": 10,
       "gate": null,
       "crashed": {}
@@ -199,8 +199,8 @@
       "name": "cross_maxwell",
       "section": "Self-consistency",
       "target": 0.0,
-      "raw_defect": NaN,
-      "score": NaN,
+      "raw_defect": null,
+      "score": null,
       "n_model_calls": 10,
       "gate": null,
       "crashed": {}
@@ -249,9 +249,9 @@
       "name": "config_temperature",
       "section": "Statistical mechanics",
       "target": 1.0,
-      "raw_defect": 0.0828777512549381,
-      "score": 0.9216117938872426,
-      "n_model_calls": 26808,
+      "raw_defect": 0.044388652106602686,
+      "score": 0.9568353661469529,
+      "n_model_calls": 26810,
       "gate": null,
       "crashed": {}
     },
@@ -259,8 +259,8 @@
       "name": "equipartition",
       "section": "Statistical mechanics",
       "target": 1.0,
-      "raw_defect": 4.843314755577606,
-      "score": 0.512228343649525,
+      "raw_defect": 3.954040969924563,
+      "score": 0.5969786775670786,
       "n_model_calls": 780,
       "gate": null,
       "crashed": {}
@@ -269,8 +269,8 @@
       "name": "virial",
       "section": "Statistical mechanics",
       "target": 1.0,
-      "raw_defect": 0.5265549129818561,
-      "score": 0.7041542318214471,
+      "raw_defect": 0.2540774503602633,
+      "score": 0.8073339478407258,
       "n_model_calls": 0,
       "gate": null,
       "crashed": {}

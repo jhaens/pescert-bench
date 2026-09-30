@@ -9,7 +9,8 @@
       "matscipy==1.2.0",
       "torch-geometric==2.8.0",
       "scipy",
-      "numpy"
+      "numpy",
+      "openequivariance>=0.6.8"
     ],
     "calculator": "prophet.KairosCalculator(model_path=\"prophet-oame-mbd.pt\", use_kernel=False, device=\"cuda\")",
     "notes": "Prophet-V1-MBD, the Matbench Discovery submission checkpoint (F1 0.9275, kappa_SRME 0.0648): 62.3M parameters, 10 layers, lmax 4, nested cutoffs 3/7 A, thermal-conductivity fine-tuned.  Multi-Cutoff Spectral Decomposition recombines nested cutoff scales linearly, which the report claims keeps E(3) equivariance exact and the energy twice continuously differentiable -- the equivariance and conservativity probes test exactly that claim.  Weights are CC-BY-4.0 and ungated; the checkpoint is staged by hand next to the others because KairosCalculator takes a filesystem path, not a hub id (hf download kairosmaterial/prophet prophet-oame-mbd.pt).  The magnetic sibling Prophet-V1-Mag ships in the same package behind prophet_spin.SpinCalculator and is not certified here: it needs an explicit magnetic state as input.",
@@ -106,7 +107,7 @@
     "wall_seconds": 20935.93
   },
   "aggregate": {
-    "overall": 0.8709239950281331,
+    "overall": 0.8777889397789881,
     "overall_method": "arithmetic",
     "sub_scores": {
       "conservativeness": 0.9911848943366396,
@@ -120,9 +121,9 @@
       "zero_modes": 0.7973056571110085,
       "trimer": 0.7733759407053,
       "reversibility": 0.9951729888755606,
-      "config_temperature": 0.9109481898976698,
-      "equipartition": 0.8682137323911527,
-      "virial": 0.9377276153576968
+      "config_temperature": 0.9751665775099159,
+      "equipartition": 0.8963067735033127,
+      "virial": 0.9415254131452608
     },
     "gates": {
       "conservativeness": true,
@@ -138,7 +139,7 @@
     },
     "gates_passed": 8,
     "gates_total": 10,
-    "n_total_calls": 35941
+    "n_total_calls": 35980
   },
   "metadata": {
     "elements": [
@@ -154,18 +155,18 @@
       "S"
     ],
     "per_element_overall": {
-      "Li": 0.9205181849179567,
-      "Be": 0.831464327966175,
-      "B": 0.8218374770974537,
-      "C": 0.8246181394387714,
-      "Na": 0.9075041725120843,
-      "Mg": 0.8463388752653883,
-      "Al": 0.8151024146086729,
-      "Si": 0.9063602334552953,
-      "P": 0.8847203063006405,
-      "S": 0.8099952741965077
+      "Li": 0.9173909442820397,
+      "Be": 0.8426627796330549,
+      "B": 0.90446831881027,
+      "C": 0.906306870128165,
+      "Na": 0.9097013897344758,
+      "Mg": 0.8460746643868554,
+      "Al": 0.8292957698628687,
+      "Si": 0.9175463160344036,
+      "P": 0.8957213849503018,
+      "S": 0.8087209599674464
     },
-    "mean_of_element_overalls": 0.8568459405758946,
+    "mean_of_element_overalls": 0.8777889397789881,
     "evals": [
       "conservativeness",
       "equivariance",
@@ -182,7 +183,7 @@
       "equipartition",
       "virial"
     ],
-    "n_total_calls": 35901
+    "n_total_calls": 35980
   },
   "results": [
     {
@@ -299,9 +300,9 @@
       "name": "config_temperature",
       "section": "Statistical mechanics",
       "target": 1.0,
-      "raw_defect": 0.09399383084029186,
-      "score": 0.9109481898976698,
-      "n_model_calls": 25060,
+      "raw_defect": 0.0253458380352811,
+      "score": 0.9751665775099159,
+      "n_model_calls": 25099,
       "gate": null,
       "crashed": {}
     },
@@ -309,8 +310,8 @@
       "name": "equipartition",
       "section": "Statistical mechanics",
       "target": 1.0,
-      "raw_defect": 0.1474772951046358,
-      "score": 0.8682137323911527,
+      "raw_defect": 0.11332635200387178,
+      "score": 0.8963067735033127,
       "n_model_calls": 780,
       "gate": null,
       "crashed": {}
@@ -319,8 +320,8 @@
       "name": "virial",
       "section": "Statistical mechanics",
       "target": 1.0,
-      "raw_defect": 0.06720935946743307,
-      "score": 0.9377276153576968,
+      "raw_defect": 0.06285737020268632,
+      "score": 0.9415254131452608,
       "n_model_calls": 0,
       "gate": null,
       "crashed": {}

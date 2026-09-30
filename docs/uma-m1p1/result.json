@@ -68,7 +68,7 @@
     "wall_seconds": 5398.43
   },
   "aggregate": {
-    "overall": 0.6799834200259128,
+    "overall": 0.6865680272040989,
     "overall_method": "arithmetic",
     "sub_scores": {
       "conservativeness": 0.8375016922183549,
@@ -82,9 +82,9 @@
       "zero_modes": 0.6559445027502393,
       "trimer": 0.06709580918912898,
       "reversibility": 0.7419115495952299,
-      "config_temperature": 0.9085086925419399,
-      "equipartition": 0.8402698178943819,
-      "virial": 0.9386185400592449
+      "config_temperature": 0.9620692275688011,
+      "equipartition": 0.8948360466684775,
+      "virial": 0.9226762767528947
     },
     "gates": {
       "conservativeness": true,
@@ -100,7 +100,7 @@
     },
     "gates_passed": 2,
     "gates_total": 10,
-    "n_total_calls": 36747
+    "n_total_calls": 36767
   },
   "metadata": {
     "elements": [
@@ -116,18 +116,18 @@
       "S"
     ],
     "per_element_overall": {
-      "Li": 0.4981377779219872,
-      "Be": 0.7077915850961477,
-      "B": 0.7243232677402531,
-      "C": 0.7760716136082486,
-      "Na": 0.7429958805092356,
-      "Mg": 0.44570818391345707,
-      "Al": 0.700458430071045,
-      "Si": 0.7443167486904975,
-      "P": 0.7524105326866187,
-      "S": 0.7076201800216377
+      "Li": 0.4976479620900089,
+      "Be": 0.7108692264427091,
+      "B": 0.7356725370153836,
+      "C": 0.7866999055828955,
+      "Na": 0.7470691067051792,
+      "Mg": 0.45694569339199764,
+      "Al": 0.7119393151636736,
+      "Si": 0.7557551209732202,
+      "P": 0.7549600491024387,
+      "S": 0.7081213555734834
     },
-    "mean_of_element_overalls": 0.6799834200259129,
+    "mean_of_element_overalls": 0.686568027204099,
     "evals": [
       "conservativeness",
       "equivariance",
@@ -144,7 +144,7 @@
       "equipartition",
       "virial"
     ],
-    "n_total_calls": 36747
+    "n_total_calls": 36767
   },
   "results": [
     {
@@ -261,9 +261,9 @@
       "name": "config_temperature",
       "section": "Statistical mechanics",
       "target": 1.0,
-      "raw_defect": 0.0972003422632198,
-      "score": 0.9085086925419399,
-      "n_model_calls": 25168,
+      "raw_defect": 0.039034228910991696,
+      "score": 0.9620692275688011,
+      "n_model_calls": 25188,
       "gate": null,
       "crashed": {}
     },
@@ -271,8 +271,8 @@
       "name": "equipartition",
       "section": "Statistical mechanics",
       "target": 1.0,
-      "raw_defect": 0.18225073438288514,
-      "score": 0.8402698178943819,
+      "raw_defect": 0.11534748614942418,
+      "score": 0.8948360466684775,
       "n_model_calls": 780,
       "gate": null,
       "crashed": {}
@@ -281,8 +281,8 @@
       "name": "virial",
       "section": "Statistical mechanics",
       "target": 1.0,
-      "raw_defect": 0.06632230134066872,
-      "score": 0.9386185400592449,
+      "raw_defect": 0.08788484164339017,
+      "score": 0.9226762767528947,
       "n_model_calls": 0,
       "gate": null,
       "crashed": {}

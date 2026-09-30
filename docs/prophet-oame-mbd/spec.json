@@ -31,7 +31,7 @@
   "find_links": [],
   "n_parameters_hint": null,
   "packages_no_deps": [
-    "prophet-mlip[kernel]@git+https://github.com/kairosmaterial/prophet.git"
+    "prophet-mlip[kernel]@git+https://github.com/kairosmaterial/prophet.git@dcfdc0b143978652d573630f1d2a6ce09e0c610a"
   ],
   "training_set": [
     "OMat24",
